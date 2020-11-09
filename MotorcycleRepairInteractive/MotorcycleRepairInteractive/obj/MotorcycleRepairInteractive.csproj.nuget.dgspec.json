@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj": {}
+    "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleManual\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj": {}
   },
   "projects": {
-    "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj": {
+    "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleManual\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj",
+        "projectUniqueName": "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleManual\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj",
         "projectName": "MotorcycleRepairInteractive",
-        "projectPath": "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj",
+        "projectPath": "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleManual\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive.csproj",
         "packagesPath": "C:\\Users\\546wi\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\obj\\",
+        "outputPath": "D:\\source\\repos\\GitHubTeamRepos\\MotorcycleManual\\MotorcycleRepairInteractive\\MotorcycleRepairInteractive\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
