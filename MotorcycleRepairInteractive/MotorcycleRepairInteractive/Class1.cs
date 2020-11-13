@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace MotorcycleRepairInteractive
+namespace MRILibrary
+
 {
     public class Class1
     {
