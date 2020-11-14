@@ -10,7 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Documentation.txt = Documentation.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.AssignCoord", "MRI\MRI.AssignCoord.csproj", "{FB89D335-2712-4A3B-B5A8-2921EA1084CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.AssignCoord", "MRI\MRI.AssignCoord.csproj", "{FB89D335-2712-4A3B-B5A8-2921EA1084CD}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EntityFrameworkConsoleApp", "EntityFrameworkConsoleApp\EntityFrameworkConsoleApp.fsproj", "{F586F1C6-B6AA-476E-B7D9-525A16C7A687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpEntityFrameworkConsoleApp", "CSharpEntityFrameworkConsoleApp\CSharpEntityFrameworkConsoleApp.csproj", "{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +30,14 @@ Global
 		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

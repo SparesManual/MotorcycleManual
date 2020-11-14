@@ -65,7 +65,7 @@ namespace MRI.Core
         /// 
         /// Some pages cover only the parts used for one of the models
         /// </summary>
-        public SpecificToModel MotorcycleModelType { get; set; }
+        public SpecificToModelEnum MotorcycleModelType { get; set; }
 
     }
 }

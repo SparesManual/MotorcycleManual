@@ -31,16 +31,40 @@ namespace MRI.Core
         public int PageNumber { get; set; }
 
         /// <summary>
+        /// The starting page number in the page sequence
+        /// This is used to map the page item to the page it 
+        /// belongs to.... the index of this page item will 
+        /// be represented in the image indicating where the 
+        /// part belongs on the bike
         /// 
         /// </summary>
         public int StartPageNumber_FKey { get; set; }
-
+        
+        /// <summary>
+        /// This is the description of the part.  This should not be 
+        /// here, the page item should get the description from the 
+        /// Part table.
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Additional information regarding how the part is used 
+        /// in this application in regard to the page image
+        /// </summary>
         public string Additional_Info { get; set; }
 
+        /// <summary>
+        /// The quantity of a part that is used on a page
+        /// This isn't the total number of times that a single
+        /// part is used on the entire motorcycle, just how many 
+        /// times it is used on this page
+        /// </summary>
         public int Quantity { get; set; }
 
+        /// <summary>
+        /// Additional Remarks relating to the part and how it
+        /// is  used on this page
+        /// </summary>
         public string Remarks { get; set; }
     }
 }
