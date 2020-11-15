@@ -1,4 +1,6 @@
-﻿namespace Db.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Db.Core.Entities
 {
   /// <summary>
   /// Entity representing a manual
@@ -9,6 +11,7 @@
     /// <summary>
     /// Book title
     /// </summary>
+    [Required]
     public string Title { get; set; } = string.Empty;
   }
 }
