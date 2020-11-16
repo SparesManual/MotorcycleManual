@@ -9,11 +9,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="5" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="{Binding Text}" />
+
+        <DataGrid  ItemsSource="{Binding IndexPoints}" />
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+        
+        <DataGrid Grid.Column="2" ItemsSource="{Binding}" 
+                 DataContext="{Binding PageItemsDV}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                  AlternatingRowBackground="Azure"/>
 
     </Grid>
 </mah:MetroWindow>

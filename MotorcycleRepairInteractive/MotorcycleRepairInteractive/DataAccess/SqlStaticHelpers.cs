@@ -25,15 +25,21 @@ namespace MRI.Core
         /// <returns>DataTable that is the same as the SQL table</returns>
         public static DataTable ReadTableData(string tableName)
         {
+            
             // Check to see if a tableName was passed in
             if (tableName.Length == 0) throw new Exception();
 
             // Create a new blank DataTable
-            DataTable table = new DataTable();
+            //DataTable table = new DataTable();
 
             // Create the query string from the passed in table name
-            var queryString = string.Format("SELECT * FROM dbo.{0}", tableName);
+            //var queryString = string.Format("SELECT * FROM dbo.{0}", tableName);
 
+            // Create the query string from the passed in table name
+            var queryString = string.Format("select * from dbo.{0} " , tableName);
+
+
+            DataTable PageItemsDT = new DataTable("PageItems");
             // Create the connection to the SQL instance (uses the private property at 
             // the top of this class
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -43,11 +49,14 @@ namespace MRI.Core
                 using (var da = new SqlDataAdapter(queryString, connection))
                 {
                     // Fills the DataTable from the SQL table
-                    da.Fill(table);
+                    //da.FillSchema(PageItemsDV, SchemaType.Source, "PageItems");
+                    //da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                    //da.Fill(PageItemsDS, "PageItems");
+                    da.Fill(PageItemsDT);
                 }
             }
             // returns the DataTable
-            return table;
+            return PageItemsDT;
         }
     }
 }

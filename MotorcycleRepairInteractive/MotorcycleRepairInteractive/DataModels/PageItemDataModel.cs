@@ -15,20 +15,16 @@ namespace MRI.Core
         public int Id { get; set; }
 
         /// <summary>
-        /// The index number used to point the part in the list to the 
-        /// location on the image.
+        /// The combination of the Page Number and the Index Number
+        /// PageIndexId = PageNumber * 100 + IndexNumber
         /// </summary>
-        public int IndexNumber { get; set; }
+        public int PageIndexId { get; set; }
 
         /// <summary>
         /// The unique part number for the page item
+        /// Used as a foreign key for the Parts table
         /// </summary>
         public string PartNumber { get; set; }
-
-        /// <summary>
-        /// The page number that the list of parts came from
-        /// </summary>
-        public int PageNumber { get; set; }
 
         /// <summary>
         /// The starting page number in the page sequence
@@ -66,5 +62,10 @@ namespace MRI.Core
         /// is  used on this page
         /// </summary>
         public string Remarks { get; set; }
+
+        /// <summary>
+        /// The PageIndexID group that this child belongs to, if it has one
+        /// </summary>
+        public string ParentPageIndxID { get; set; }
     }
 }

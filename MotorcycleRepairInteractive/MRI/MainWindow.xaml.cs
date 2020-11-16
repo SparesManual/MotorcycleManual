@@ -24,8 +24,10 @@ namespace MRI.AssignCoord
         public MainWindow()
         {
             InitializeComponent();
-
+            
+            
             DataContext = new MainWindowViewModel();
+            
         }
     }
 }
