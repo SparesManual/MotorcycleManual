@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Debug/Db.API.xml</DocumentationFile>
-    <OutputPath>../../bin/Debug</OutputPath>
+    <DocumentationFile>../../bin/Db/Debug/Db.API.xml</DocumentationFile>
+    <OutputPath>../../bin/Db/Debug</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release</OutputPath>
+    <OutputPath>../../bin/Db/Release</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,11 +22,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.33.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Db.Infrastructure\Db.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

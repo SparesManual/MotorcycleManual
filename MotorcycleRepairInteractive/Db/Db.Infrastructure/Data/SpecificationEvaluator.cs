@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using Db.Core.Entities;
-using Db.Core.Specifications;
+using Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Db.Infrastructure.Data

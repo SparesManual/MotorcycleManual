@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 using System;
-using Db.Core.Entities;
+using Db.Interfaces;
 
 namespace Db.Core.Specifications
 {

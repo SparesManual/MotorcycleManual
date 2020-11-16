@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Db.Infrastructure.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,12 +14,28 @@ namespace Db.API
   /// </summary>
   public class Startup
   {
+    #region Fields
+
+    private readonly IConfiguration m_configuration;
+
+    #endregion
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="configuration">Injected configuration</param>
+    public Startup(IConfiguration configuration)
+      => m_configuration = configuration;
+
     /// <summary>
     /// Configures the API server injected services
     /// </summary>
     /// <param name="services">Injected services library</param>
     public void ConfigureServices(IServiceCollection services)
-      => services.AddGrpc();
+    {
+      services.AddGrpc();
+      services.AddDbContext<ManualContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultConnection"), migration => migration.MigrationsAssembly("Db.API")));
+    }
 
     /// <summary>
     /// Configures the API server application functionality

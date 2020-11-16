@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Db.Core.Entities;
-using Db.Core.Specifications;
 
-namespace Db.Core.Repositories
+namespace Db.Interfaces
 {
   /// <summary>
   /// Interface for generic repositories

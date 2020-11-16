@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Db.Core.Entities;
-using Db.Core.Repositories;
-using Db.Core.Specifications;
+using Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Db.Infrastructure.Data
@@ -53,9 +51,9 @@ namespace Db.Infrastructure.Data
 
     private IQueryable<T> ApplySpecification(ISpecification<T> specification)
       => m_context
-          .Set<T>()
-          .AsQueryable()
-          .GetQuery(specification);
+        .Set<T>()
+        .AsQueryable()
+        .GetQuery(specification);
 
     #endregion
   }

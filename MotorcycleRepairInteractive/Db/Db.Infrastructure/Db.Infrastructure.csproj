@@ -9,19 +9,22 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Debug/Db.Infrastructure.xml</DocumentationFile>
-    <OutputPath>../../bin/Debug</OutputPath>
+    <DocumentationFile>../../bin/Db/Debug/Db.Infrastructure.xml</DocumentationFile>
+    <OutputPath>../../bin/Db/Debug</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release</OutputPath>
+    <OutputPath>../../bin/Db/Release</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
     <ProjectReference Include="..\Db.Core\Db.Core.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Db.Interfaces;
 
 namespace Db.Core.Entities
 {
@@ -8,7 +9,9 @@ namespace Db.Core.Entities
   public abstract class BaseEntity
     : IEntity
   {
-    /// <inheritdoc />
+    /// <summary>
+    /// Id of the given entity
+    /// </summary>
     [Required]
     public int Id { get; set; }
   }

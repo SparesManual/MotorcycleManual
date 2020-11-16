@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Db.Core.Entities;
+using Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -34,7 +34,7 @@ namespace Db.Infrastructure.Data
 
       try
       {
-        await Populate(c => c.Books!, "books.csv").ConfigureAwait(false);
+        await Populate(c => c.Manuals!, "books.csv").ConfigureAwait(false);
       }
       catch (Exception e)
       {

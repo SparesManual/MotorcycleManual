@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Db.Core.Entities;
 
-namespace Db.Core.Specifications
+namespace Db.Interfaces
 {
   /// <summary>
   /// Interface for search query specifications

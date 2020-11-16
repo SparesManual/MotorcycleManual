@@ -14,8 +14,8 @@ namespace Db.API
     /// <param name="args">Console arguments</param>
     public static void Main(string[] args)
       => CreateHostBuilder(args)
-          .Build()
-          .Run();
+        .Build()
+        .Run();
 
     /// <summary>
     /// Creates the API host
@@ -24,7 +24,7 @@ namespace Db.API
     // ReSharper disable once MemberCanBePrivate.Global
     public static IHostBuilder CreateHostBuilder(string[] args)
       => Host
-          .CreateDefaultBuilder(args)
-          .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+        .CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
   }
 }
