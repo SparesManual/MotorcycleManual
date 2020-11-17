@@ -34,7 +34,7 @@ namespace Db.Infrastructure.Data
 
       try
       {
-        await Populate(c => c.Manuals!, "books.csv").ConfigureAwait(false);
+        await Populate(c => c.Books!, "books.csv").ConfigureAwait(false);
       }
       catch (Exception e)
       {

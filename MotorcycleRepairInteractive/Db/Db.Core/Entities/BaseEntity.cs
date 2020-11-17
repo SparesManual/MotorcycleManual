@@ -12,6 +12,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Id of the given entity
     /// </summary>
+    [Key]
     [Required]
     public int Id { get; set; }
   }

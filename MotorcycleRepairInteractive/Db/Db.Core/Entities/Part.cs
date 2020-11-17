@@ -1,35 +1,47 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Db.Core.Entities
 {
   /// <summary>
-  /// <see cref="Part"/> model type
+  /// Specific part
   /// </summary>
   /// <remarks>
-  /// Specific type of <see cref="Model"/> that can have properties but no other models grouped inside it
+  /// Can occur in a <see cref="Section"/> entity via the <see cref="SectionParts"/> mapping table
   /// </remarks>
-  [Table(nameof(Part))]
   // ReSharper disable once ClassNeverInstantiated.Global
   public class Part
-    : Model
+    : BaseEntity
   {
     /// <summary>
-    /// <see cref="Part"/> makers number
+    /// Part number
     /// </summary>
-    [MaxLength(32)]
-    public string MakersNumber { get; set; } = string.Empty;
+    [Required]
+    [MaxLength(64)]
+    public string PartNumber { get; set; } = string.Empty;
 
     /// <summary>
-    /// Description of the <see cref="Part"/>
+    /// Makers part number
     /// </summary>
+    [MaxLength(64)]
+    public string? MakersPartNumber { get; set; }
+
+    /// <summary>
+    /// Description of the part
+    /// </summary>
+    [Required]
     [MaxLength(128)]
     public string Description { get; set; } = string.Empty;
 
     /// <summary>
-    /// References to parent <see cref="Assembly"/> instances
+    /// Description of the part by the maker
     /// </summary>
-    public List<AssemblyParts> ParentAssemblies { get; set; } = new List<AssemblyParts>();
+    [MaxLength(128)]
+    public string? MakersDescription { get; set; }
+
+    /// <summary>
+    /// <see cref="Section"/> entities have this given part
+    /// </summary>
+    public List<SectionParts> PartSections { get; set; } = new List<SectionParts>();
   }
 }
