@@ -1,4 +1,5 @@
 ﻿using Db.Infrastructure.Data;
+using Db.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +36,7 @@ namespace Db.API
     {
       services.AddGrpc();
       services.AddDbContext<ManualContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultConnection"), migration => migration.MigrationsAssembly("Db.API")));
+      services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     }
 
     /// <summary>
@@ -51,7 +53,7 @@ namespace Db.API
 
       app.UseEndpoints(endpoints =>
       {
-        endpoints.MapGrpcService<GreeterService>();
+        endpoints.MapGrpcService<ProviderService>();
 
         endpoints.MapGet("/", async context =>
         {

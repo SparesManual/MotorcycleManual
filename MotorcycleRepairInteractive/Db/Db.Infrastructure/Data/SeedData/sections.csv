@@ -1,5 +1,4 @@
 Id,BookID,StartPageNumber,EndPageNumber,PageHeader,FigureNumber,FigureDescription,SpecificToModel
-Id,BookID,StartPageNumber,EndPageNumber,PageHeader,FigureNumber,FigureDescription,SpecificToModel
 1,1,8,9,Crankshaft and Connecting Rods,1,Crankshaft and Connecting Rods,""
 2,1,10,13,Crankcase,2,Crankcase,""
 3,1,14,15,Oil Pump and Release Valve,3,Oil Pump and Release Valve,""

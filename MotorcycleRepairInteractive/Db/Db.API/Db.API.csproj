@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
@@ -9,16 +9,17 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Db/Debug/Db.API.xml</DocumentationFile>
-    <OutputPath>../../bin/Db/Debug</OutputPath>
+    <DocumentationFile>../../bin/Debug/Db/Db.API.xml</DocumentationFile>
+    <OutputPath>../../bin/Debug/Db</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Db/Release</OutputPath>
+    <OutputPath>../../bin/Release/Db/</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\provide.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

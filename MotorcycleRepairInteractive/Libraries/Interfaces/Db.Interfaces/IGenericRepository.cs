@@ -21,7 +21,7 @@ namespace Db.Interfaces
     /// Gets all known <see cref="IEntity"/> entries
     /// </summary>
     /// <returns>Collection of <see cref="IEntity"/></returns>
-    Task<IReadOnlyCollection<T>> GetAllAsync();
+    IAsyncEnumerable<T> GetAllAsync();
 
     /// <summary>
     /// Gets an <see cref="IEntity"/> using a query <paramref name="specification"/>
@@ -35,7 +35,7 @@ namespace Db.Interfaces
     /// </summary>
     /// <param name="specification">Query specification</param>
     /// <returns>Collection of <see cref="IEntity"/></returns>
-    Task<IReadOnlyCollection<T>> GetAllAsync(ISpecification<T> specification);
+    IAsyncEnumerable<T> GetAllAsync(ISpecification<T> specification);
 
     /// <summary>
     /// Counts the number of results found with the given <paramref name="specification"/>
