@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MRI.AssignCoord
+namespace MRI.Core
 {
-    class RelayCommand
+    class Class1
     {
     }
 }

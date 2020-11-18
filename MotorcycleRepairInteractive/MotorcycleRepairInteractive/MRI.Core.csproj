@@ -4,14 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../bin/Debug/Libraries/Interfaces</OutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Libraries/Interfaces</OutputPath>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Spire.PDF" Version="6.11.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
