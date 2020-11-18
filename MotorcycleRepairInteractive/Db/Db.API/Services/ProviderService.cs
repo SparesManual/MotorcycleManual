@@ -11,6 +11,7 @@ namespace Db.API
   /// <summary>
   /// Database provider API service
   /// </summary>
+  // ReSharper disable once ClassNeverInstantiated.Global
   public class ProviderService
     : Provider.ProviderBase
   {
@@ -22,7 +23,7 @@ namespace Db.API
     private readonly IGenericRepository<SectionParts> m_sectionPartsRepository;
     private readonly IGenericRepository<Part> m_partRepository;
     private readonly IGenericRepository<Property> m_propertyRepository;
-    private readonly IGenericRepository<Core.Entities.PropertyType> m_propertyTypeRepository;
+    private readonly IGenericRepository<PropertyType> m_propertyTypeRepository;
 
     #endregion
 
