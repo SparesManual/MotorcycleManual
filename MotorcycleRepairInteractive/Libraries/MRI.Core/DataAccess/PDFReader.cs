@@ -30,10 +30,6 @@ namespace MRI.Core
 
             }
             return IndexPoints;
-
-            
         }
-
-        
     }
 }

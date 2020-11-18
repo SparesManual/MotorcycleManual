@@ -7,81 +7,103 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace MRI.AssignCoord
 {
     public class MainWindowViewModel : BaseViewModel
     {
         public string Text { get; private set; } = "this is set";
-        public ObservableCollection<BookDataModel> Books { get; private set; } =
-            new ObservableCollection<BookDataModel>();
 
-        public ObservableCollection<PageDataModel> Pages { get; private set; } =
-            new ObservableCollection<PageDataModel>();
+        public DataSet BookTable { get; private set; } = new DataSet();
 
-        public ObservableCollection<PageItemDataModel> PageItems { get; private set; } =
-            new ObservableCollection<PageItemDataModel>();
+        public DataSet PageTable { get; private set; } = new DataSet();
 
-        public ObservableCollection<PartDataModel> Parts { get; private set; } =
-            new ObservableCollection<PartDataModel>();
+        private DataSet pageItemsDS = new DataSet();
+        public DataSet PageItemsDS
+        {
+            get
+            {
+                return pageItemsDS;
+            }
 
-        public List<ImagePointDataModel> IndexPoints { get; private set; } =
-            new List<ImagePointDataModel>();
+            set
+            {
+                pageItemsDS = value;
+                PageItemsDV = pageItemsDS.Tables["PageItems"].AsDataView();
+            }
+        }      
 
+        public DataTable DataTableDT { get; private set; } = new DataTable();
 
-        public Image Image { get; private set; }
+        public DataView PageItemsDV { get; set; } = new DataView();
 
-        public BitmapImage BitmapImage { get; set; }
+        //public DataView PageItemsDV { get; set; }
 
-        public ICommand Button1Command { get; set; }
+        public ObservableCollection<PageItemDataModel> PageItems { get; private set; }
+
+        public List<ImagePointDataModel> IndexPoints { get; private set; }
+
+        private DataRow selectedItem;
+        public DataRow SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+
+            }
+            set
+            {
+                selectedItem = value;
+            }
+        }
+
+        private DataRow selectedIndex;
+        public DataRow SelectedIndex
+        {
+            get
+            {
+                return selectedIndex;
+
+            }
+            set
+            {
+                selectedIndex = value;
+            }
+        }
 
         public MainWindowViewModel()
         {
-            CreateObservableCollectionsFromSql();
-
-            var bitmap = new BaseImage("").BitmapImage;
-
-            Image = new BaseImage("").Image;
+            LoadTablesFromSql();
 
             IndexPoints = PDFReader.GetIndexPoints(8);
 
-            Button1Command = new RelayCommand(Button1Method);
+            
         }
 
-        public void Button1Method()
+        private void LoadTablesFromSql()
         {
-            //var t = "";
+            //BookTable = SqlStaticHelpers.ReadTableData("Books");
+            //PageTable = SqlStaticHelpers.ReadTableData("Pages");
+            DataTableDT = SqlStaticHelpers.ReadTableData("Pages");
+            //PartTable = SqlStaticHelpers.ReadTableData("Parts");
+
+            //PageItemsDS = PageItemTable.AsDataView();
+
+            IList<string> PageLines = 
+                DataTableDT.AsEnumerable().Select(item =>
+                string.Format("{0}, {1}", item["PageHeader"], item["FigureDescription"])).ToList();
+
+            foreach (var p in DataTableDT.AsEnumerable())
+            {
+                //PageDataModel page = new PageDataModel(
+                //    )
+                var q = p.ItemArray;
+            }
         }
 
-        private void CreateObservableCollectionsFromSql()
-        {
-            var BooksTable = SqlStaticHelpers.ReadTableData("Books");
-            var PagesTable = SqlStaticHelpers.ReadTableData("Pages");
-            var PageItemsTable = SqlStaticHelpers.ReadTableData("PageItems");
-            var PartsTable = SqlStaticHelpers.ReadTableData("Parts");
-
-            Books = new ObservableCollection<BookDataModel>(
-                new BookListDataModel(BooksTable).Items);
-
-            Pages = new ObservableCollection<PageDataModel>(
-                new PageListDataModel(PagesTable).Items);
-
-
-            PageItems = new ObservableCollection<PageItemDataModel>(
-                new PageItemListDataModel(PageItemsTable).Items);
-
-            Parts = new ObservableCollection<PartDataModel>(
-                new PartListDataModel(PartsTable).Items);
-
-
-
-        }
 
     }
 }

@@ -39,7 +39,7 @@ namespace MRI.Core
             var queryString = string.Format("select * from dbo.{0} " , tableName);
 
 
-            DataTable table = new DataTable(tableName);
+            DataTable PageItemsDT = new DataTable("PageItems");
             // Create the connection to the SQL instance (uses the private property at 
             // the top of this class
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -52,11 +52,11 @@ namespace MRI.Core
                     //da.FillSchema(PageItemsDV, SchemaType.Source, "PageItems");
                     //da.MissingSchemaAction = MissingSchemaAction.AddWithKey;
                     //da.Fill(PageItemsDS, "PageItems");
-                    da.Fill(table);
+                    da.Fill(PageItemsDT);
                 }
             }
             // returns the DataTable
-            return table;
+            return PageItemsDT;
         }
     }
 }
