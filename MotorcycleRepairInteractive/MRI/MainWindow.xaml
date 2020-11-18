@@ -10,20 +10,88 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="5" />
+            <!-- Column 0 -->
+            <ColumnDefinition Width="*" MinWidth="60" />
+            <!-- Column 1 -->
+            <ColumnDefinition Width="auto" />
+            <!-- Column 2 -->
+            <ColumnDefinition Width="*" MinWidth="60" />
+            <!-- Column 3 -->
+            <ColumnDefinition Width="auto" />
+            <!-- Column 4 -->
+            <ColumnDefinition Width="*" MinWidth="60" />
+            <!-- Column 5 -->
+            <ColumnDefinition Width="auto" />
+            <!-- Column 6 -->
+            <ColumnDefinition Width="*" MinWidth="60" />
+            <!-- Column 7-->
+            <ColumnDefinition Width="auto" />
+            <!-- Column 8 -->
             <ColumnDefinition Width="*" />
+            <!-- Column 9 -->
+            <ColumnDefinition Width="auto" />
+            <!-- Column 10 -->
+
+
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
 
-        <DataGrid  ItemsSource="{Binding IndexPoints}" />
 
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-        
-        <DataGrid Grid.Column="2" ItemsSource="{Binding}" 
-                 DataContext="{Binding PageItemsDV}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+
+        <Border Background="Blue" Width="12"/>
+
+        <!--<DataGrid Grid.Column="1" ItemsSource="{Binding IndexPoints}" 
+                  MinColumnWidth="20"/>-->
+
+        <GridSplitter Grid.Column="2" Width="7" HorizontalAlignment="Stretch" 
+                      Background="DarkRed"/>
+
+        <DataGrid Grid.Column="3" ItemsSource="{Binding}" 
+                 DataContext="{Binding Pages}"
                   AlternatingRowBackground="Azure"/>
 
+        <GridSplitter Grid.Column="4" Width="7" HorizontalAlignment="Stretch" 
+                      Background="DarkRed" />
+
+        <DataGrid Grid.Column="5" ItemsSource="{Binding}" 
+                 DataContext="{Binding PageItems}"
+                  AlternatingRowBackground="Azure"/>
+
+        <GridSplitter Grid.Column="6" Width="7" HorizontalAlignment="Stretch" 
+                      Background="DarkRed" />
+
+        <DataGrid Grid.Column="7" ItemsSource="{Binding}" 
+                 DataContext="{Binding Parts}" 
+                  AlternatingRowBackground="Azure"/>
+
+        <GridSplitter Grid.Column="8" Width="7" HorizontalAlignment="Stretch" 
+                      Background="DarkRed" />
+        
+        <!--<ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+            
+            <Image Source="{Binding BitmapImage}"  
+               Stretch="Fill"  HorizontalAlignment="Left" />
+            
+        </ScrollViewer>-->
+        <Image Width="300" Grid.Row="1" Source="C:\Windows\WinSxS\x86_netfx4-aspnet_webadmin_images_b03f5f7f11d50a3a_4.0.15805.0_none_7ab11546ceb3decd" />
+       
+
+
+
+        <Border Grid.Column="10" Background="Blue" Width="12" />
+
+        <StackPanel Grid.Row ="1">
+
+            <Button Content="Button 1" Command="{Binding Button1Command}" 
+                    Background="Aqua"/>
+
+        </StackPanel>
+
+        <!--SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"-->
     </Grid>
 </mah:MetroWindow>

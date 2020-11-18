@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Models\" />
     <Folder Include="Pages\" />
   </ItemGroup>
 
@@ -18,7 +19,7 @@
     </PackageReference>
     <PackageReference Include="MahApps.Metro" Version="2.3.4" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.3.1" />
-    <PackageReference Include="Spire.PDF" Version="6.11.0" />
+    <PackageReference Include="Spire.PDF" Version="6.11.6" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
