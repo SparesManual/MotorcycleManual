@@ -1,0 +1,53 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Db.API";
+
+package provide;
+
+service Provider {
+  rpc GetBook (IdRequest) returns (BookReply);
+  rpc GetBooks (Empty) returns (stream BookReply);
+  
+  rpc GetPart (IdRequest) returns (PartReply);
+  rpc GetAllParts (Empty) returns (stream PartReply);
+  rpc GetPartsFromBook (IdRequest) returns (stream PartReply);
+  rpc GetPartsFromSection (IdRequest) returns (stream PartReply);
+  
+  rpc GetPartProperties (IdRequest) returns (stream PartPropertyReply);
+  rpc GetPropertyTypes (Empty) returns (stream PropertyTypeReply);
+}
+
+message Empty {
+
+}
+
+message IdRequest {
+  int32 id = 1;
+}
+
+message BookReply {
+  int32 id = 1;
+  string title = 2;
+}
+
+message PartReply {
+  int32 id = 1;
+  string partNumber = 2;
+  string makersPartNumber = 3;
+  string description = 4;
+  string makersDescription = 5;
+}
+
+message PropertyTypeReply {
+  int32 id = 1;
+  string unit = 2;
+  string name = 3;
+}
+
+message PartPropertyReply {
+  int32 typeId = 1;
+  string type = 2;
+  string unit = 3;
+  string name = 4;
+  string value = 5;
+}
