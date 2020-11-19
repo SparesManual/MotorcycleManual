@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Core.Entities;
 using Db.Core.Specifications;
 using Db.Interfaces;
 using Grpc.Core;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Db.API
@@ -115,23 +114,22 @@ namespace Db.API
 
     private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, ISpecification<T> specification, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
       where T : class, IEntity
-    {
-      // For every item of requested type..
-      await foreach (var item in repository.GetAllAsync(specification).AsAsyncEnumerable().WithCancellation(ct).ConfigureAwait(false))
-        // write it to the response
-        await responseStream.WriteAsync(converter(item)).ConfigureAwait(false);
-
-      // If the operation was cancelled..
-      if (ct.IsCancellationRequested)
-        // log a warning
-        m_logger.LogWarning($"Request for all entries of '{typeof(T).Name}' has been cancelled");
-    }
+      => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
 
     private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
       where T : class, IEntity
+      => await GetAllProcessorAsync(repository.GetAllAsync(), responseStream, converter, ct).ConfigureAwait(false);
+
+    private async Task GetAllAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, IAsyncStreamWriter<TReply> responseStream, Func<TChild?, TReply> converter, CancellationToken ct)
+      where TParent : class, IEntity
+      where TChild : class, IEntity
+      => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
+
+    private async Task GetAllProcessorAsync<T, TReply>(IAsyncEnumerable<T> items, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
+      where T : class, IEntity
     {
       // For every item of requested type..
-      await foreach (var item in repository.GetAllAsync().AsAsyncEnumerable().WithCancellation(ct).ConfigureAwait(false))
+      await foreach (var item in items.WithCancellation(ct).ConfigureAwait(false))
         // write it to the response
         await responseStream.WriteAsync(converter(item)).ConfigureAwait(false);
 
@@ -141,12 +139,12 @@ namespace Db.API
         m_logger.LogWarning($"Request for all entries of '{typeof(T).Name}' has been cancelled");
     }
 
-    private static Metadata GeneratePagingMetadata()
+    private static Metadata GeneratePagingMetadata(int total, int size, int index)
       => new Metadata
       {
-        { "PageSize", 0.ToString() },
-        { "PageIndex", 0.ToString() },
-        { "TotalSize", 0.ToString() }
+        { "PageSize", size.ToString() },
+        { "PageIndex", index.ToString() },
+        { "TotalSize", total.ToString() }
       };
 
     #endregion
@@ -160,7 +158,8 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task GetBooks(PageParams pageParams, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
     {
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      // TODO
+      //await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
       await GetAllAsync(m_bookRepository, responseStream, ToBookReply, context.CancellationToken).ConfigureAwait(false);
     }
@@ -168,34 +167,23 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task GetPartsFromSection(IdAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      var count = await m_sectionPartsRepository.CountAsync(specification).ConfigureAwait(false);
 
-      var parts = m_sectionPartsRepository.GetAllAsync()
-        .Where(sp => sp.SectionId == pageRequest.Id)
-        .Include(sp => sp.Part!)
-        .Select(sp => sp.Part)
-        .Where(part => part != null);
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
 
-      await foreach (var part in parts.AsAsyncEnumerable().WithCancellation(context.CancellationToken).ConfigureAwait(false))
-        await responseStream.WriteAsync(ToPartReply(part)).ConfigureAwait(false);
+      await GetAllAsync(m_sectionPartsRepository, specification, responseStream, ToPartReply, context.CancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
     public override async Task GetPartsFromBook(IdAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      var specification = new BookPartsSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      var count = await m_sectionRepository.CountAsync(specification).ConfigureAwait(false);
 
-      var sectionParts = m_sectionRepository.GetAllAsync()
-        .Where(section => section.BookId.Equals(pageRequest.Id))
-        .Include(section => section.SectionParts)
-        .Select(section => section.SectionParts)
-        .SelectMany(mapList => mapList.Select(sp => sp))
-        .Include(sp => sp.Part)
-        .Select(sp => sp.Part)
-        .Where(part => part != null);
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
 
-      await foreach (var part in sectionParts.AsAsyncEnumerable().WithCancellation(context.CancellationToken).ConfigureAwait(false))
-        await responseStream.WriteAsync(ToPartReply(part)).ConfigureAwait(false);
+      await GetAllAsync(m_sectionRepository, specification, responseStream, ToPartReply, context.CancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
@@ -205,15 +193,19 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task GetPartProperties(IdAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
     {
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      var specification = new PartPropertiesSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      var count = await m_propertyRepository.CountAsync(specification).ConfigureAwait(false);
 
-      await GetAllAsync(m_propertyRepository, new PartPropertySpec(pageRequest.Id, pageRequest.Size, pageRequest.Index), responseStream, ToPropertyReply, context.CancellationToken).ConfigureAwait(false);
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
+
+      await GetAllAsync(m_propertyRepository, specification, responseStream, ToPropertyReply, context.CancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
     public override async Task GetPropertyTypes(PageParams paging, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
     {
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      // TODO
+      //await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
       await GetAllAsync(m_propertyTypeRepository, responseStream, ToPropertyTypeReply, context.CancellationToken).ConfigureAwait(false);
     }

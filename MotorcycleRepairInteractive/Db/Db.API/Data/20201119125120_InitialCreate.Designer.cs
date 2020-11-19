@@ -6,14 +6,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Db.API.Data
 {
     [DbContext(typeof(ManualContext))]
     [Migration("20201119125120_InitialCreate")]
     partial class InitialCreate
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
+    {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0");

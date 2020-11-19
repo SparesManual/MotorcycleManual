@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -71,6 +72,9 @@ namespace Db.Infrastructure.Data
       where TParent : class, IEntity
       where TEntity : class, IEntity
     {
+      if (specification.Extractor is null)
+        throw new ArgumentNullException(nameof(specification.Extractor));
+
       // Extract the required entities
       var query = specification.Extractor(inputQuery);
 

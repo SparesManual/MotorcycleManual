@@ -16,6 +16,6 @@ namespace Db.Interfaces
     /// <summary>
     /// Expression for extracting the <typeparamref name="TOutput"/> from the <typeparamref name="TInput"/>
     /// </summary>
-    Func<IQueryable<TInput>, IQueryable<TOutput>> Extractor { get; }
+    Func<IQueryable<TInput>, IQueryable<TOutput>>? Extractor { get; }
   }
 }

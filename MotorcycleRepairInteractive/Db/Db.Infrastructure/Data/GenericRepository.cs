@@ -34,8 +34,8 @@ namespace Db.Infrastructure.Data
       => await m_context.Set<T?>().FindAsync(id).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public IQueryable<T> GetAllAsync()
-      => m_context.Set<T>();
+    public IAsyncEnumerable<T> GetAllAsync()
+      => m_context.Set<T>().AsAsyncEnumerable();
 
     /// <inheritdoc />
     public async Task<T?> GetEntityWithSpecificationAsync(ISpecification<T> specification)
@@ -47,8 +47,8 @@ namespace Db.Infrastructure.Data
       => await ApplySpecification(specification).FirstOrDefaultAsync().ConfigureAwait(false);
 
     /// <inheritdoc />
-    public IQueryable<T> GetAllAsync(ISpecification<T> specification)
-      => ApplySpecification(specification);
+    public IAsyncEnumerable<T> GetAllAsync(ISpecification<T> specification)
+      => ApplySpecification(specification).AsAsyncEnumerable();
 
     /// <inheritdoc />
     public IAsyncEnumerable<TChild> GetAllAsync<TChild>(ISpecificationEx<T, TChild> specification)

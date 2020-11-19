@@ -5,7 +5,7 @@ namespace Db.Core.Specifications
   /// <summary>
   /// Specification for querying part <see cref="Property"/> instances
   /// </summary>
-  public class PartPropertySpec
+  public class PartPropertiesSpec
     : BaseSpecification<Property>
   {
     /// <summary>
@@ -14,7 +14,7 @@ namespace Db.Core.Specifications
     /// <param name="id">Id of the <see cref="Part"/></param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
-    public PartPropertySpec(int id, int size, int index)
+    public PartPropertiesSpec(int id, int size, int index)
       : base(property => property.PartId.Equals(id))
     {
       AddInclude(property => property.PropertyType!);
