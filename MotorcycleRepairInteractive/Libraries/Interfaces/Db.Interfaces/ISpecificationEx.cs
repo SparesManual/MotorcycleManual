@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Db.Interfaces
 {
@@ -9,7 +8,7 @@ namespace Db.Interfaces
   /// </summary>
   /// <typeparam name="TInput">Input type</typeparam>
   /// <typeparam name="TOutput">Extracted type from the <typeparamref name="TInput"/> type</typeparam>
-  public interface ISpecificationEx<TInput, TOutput>
+  public interface ISpecificationEx<in TInput, TOutput>
     : ISpecification<TOutput>
     where TInput : IEntity
     where TOutput : IEntity

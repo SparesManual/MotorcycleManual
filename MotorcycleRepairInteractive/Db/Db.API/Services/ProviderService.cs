@@ -207,7 +207,7 @@ namespace Db.API
     {
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
-      await GetAllAsync(m_propertyRepository, new PartPropertySpec(pageRequest.Id, 50, 0), responseStream, ToPropertyReply, context.CancellationToken).ConfigureAwait(false);
+      await GetAllAsync(m_propertyRepository, new PartPropertySpec(pageRequest.Id, pageRequest.Size, pageRequest.Index), responseStream, ToPropertyReply, context.CancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
