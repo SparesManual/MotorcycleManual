@@ -24,12 +24,12 @@ namespace Db.Infrastructure.Data
     /// <param name="loggerFactory">Logger provider</param>
     public static async Task SeedAsync(this ManualContext context, ILoggerFactory loggerFactory)
     {
-      var csvParserOptions = new CsvParserOptions(true, ',');
+      var csvParserOptions = new CsvParserOptions(true, ';');
 
       async Task Populate<T>(Func<ManualContext, DbSet<T>> extractor, string path, ICsvMapping<T> mapping)
         where T : class, IEntity
       {
-        const string root = @"..\..\..\Db\Db.Infrastructure\Data\SeedData";
+        const string root = @"..\..\Db\Db.Infrastructure\Data\SeedData";
         var extracted = extractor(context);
 
         if (extracted.Any())
@@ -40,9 +40,11 @@ namespace Db.Infrastructure.Data
         var result = parser
           .ReadFromFile(Path.Combine(root, path), Encoding.Default)
           .Where(mapped => mapped.IsValid)
-          .Select(mapped => mapped.Result);
+          .Select(mapped => mapped.Result)
+          .ToArray();
 
-        await extracted.AddRangeAsync(result).ConfigureAwait(false);
+        foreach (var item in result)
+          await extracted.AddAsync(item).ConfigureAwait(false);
 
         await context.SaveChangesAsync().ConfigureAwait(false);
       }
@@ -52,6 +54,7 @@ namespace Db.Infrastructure.Data
         await Populate(c => c.Books!, "books.csv", new CsvBookMapping()).ConfigureAwait(false);
         await Populate(c => c.Parts!, "parts.csv", new CsvPartMapping()).ConfigureAwait(false);
         await Populate(c => c.Sections!, "sections.csv", new CsvSectionMapping()).ConfigureAwait(false);
+        await Populate(c => c.SectionParts!, "sectionParts.csv", new CsvSectionPartsMapping()).ConfigureAwait(false);
       }
       catch (Exception e)
       {

@@ -1,840 +1,1384 @@
-Id,PartNumber,MakersPartNumber,Description,MakersDescription,OtherPartNumber,OtherPartDescription,LocalPartNumber,LocalPartDescription
-1,06-5638,SSM4003/00,Speedometer head,,,,,
-2,06-8019,410,Main bulb,,,,,
-3,06-8020,411,Main bulb,,,,,
-4,06-8024,34660,Light switch,,,,,
-5,06-8029,56515,STOP TAIL LAMP (complete),,,,,
-6,06-8048,54522680,Light unit,,,,,
-7,06-8058,54585314,Lens,,,,,
-8,12/033,"",Spring washer,,,,,
-9,12/556,"",Lever,,,,,
-10,12/606,"",Cap,,,,,
-11,12/607,"",Bolt,,,,,
-12,14-0107,"",Screw,,,,,
-13,14-0113,"",Bolt,,,,,
-14,14-0115,"",Bolt,,,,,
-15,14-0116,"",Bolt,,,,,
-16,14-0129,"",Bolt,,,,,
-17,14-0201,"",Bolt,,,,,
-18,14-0206,"",Bolt,,,,,
-19,14-0208,"",Bolt,,,,,
-20,14-0216,"",Bolt,,,,,
-21,14-0217,"",Bolt,,,,,
-22,14-0218,"",Bolt,,,,,
-23,14-0219,"",Bolt,,,,,
-24,14-0220,"",Bolt,,,,,
-25,14-0230,"",Bolt,,,,,
-26,14-0232,"",Bolt,,,,,
-27,14-0235,"",Bolt,,,,,
-28,14-0237,"",Pinch bolt,,,,,
-29,14-0254,"",Bolt,,,,,
-30,14-0259,"",Footrest bolt,,,,,
-31,14-0261,"",Footrest bolt,,,,,
-32,14-0304,"",Nut,,,,,
-33,14-0403,"",Nut,,,,,
-34,14-0404,"",Nut,,,,,
-35,14-0702,"",Self-locking nut,,,,,
-36,14-1019,"",Cap screw,,,,,
-37,14-1034,"",Cap screw,,,,,
-38,14-1203,"",Nut,,,,,
-39,14-1305,"",Footrest bolt nut,,,,,
-40,14-1445,"",Stud,,,,,
-41,14-1901,"",Nut,,,,,
-42,144921,"",Screw,,,,,
-43,14-6101,"",Bolt (7/16 in. U. H.),,,,,
-44,14-6114,"",Bolt,,,,,
-45,14-6220,"",Bolt,,,,,
-46,14-6223,"",Bolt,,,,,
-47,14-6242,"",Bolt,,,,,
-48,14-6620,"",Screw,,,,,
-49,14-7019,"","SCREWS-5/16"" X 7/8"" UNC-Socket head-Hex. Socket",,,,,
-50,14-7023,"",Screw,,,,,
-51,14-7024,"","SCREWS-5/16"" X 2"" UNC-Socket head-Hex. Socket",,,,,
-52,14-7804,"",Screw support plate to carrier,,,,,
-53,16/008,"",Friction spring,,,,,
-54,16/009,"",Screw,,,,,
-55,16/010,"",Locknut,,,,,
-56,16/328,"",Body,,,,,
-57,16/329,"",Body,,,,,
-58,19-1191,54581638,Lens,,,,,
-59,19-1284,60513,Headlamp (complete),,,,,
-60,19-1377,56559,Flasher lamp,,,,,
-61,19-1961,30781,Handlebar switch,,,,,
-62,19-1962,54962258A,Main Wiring harness,,,,,
-63,19-1963,60600269,Stanchion,,,,,
-64,19-1964,45223,Ignition coil (17-M-12),,,,,
-65,19-1965,30447,Handlebar switch,,,,,
-66,19-2452,L930/93,Carburetor,,,,,
-67,19-2453,R930/92,Carburetor,,,,,
-68,19-2454,R930/94,Carburetor,,,,,
-69,21 -0501,"",Nut,,,,,
-70,21-0541,"",Pedal bolt,,,,,
-71,21-0543,"",Level plug,,,,,
-72,21-0547,"",Guide plate stud,,,,,
-73,21-0550,"",Nut,,,,,
-74,21-0578,"",Grub screw,,,,,
-75,21-0586,"",Clutch securing nut,,,,,
-76,21-0589,"",Bolt,,,,,
-77,21-0594,"",Nut,,,,,
-78,21-0648,"",WASHERS,,,,,
-79,21-0669,"",Stud,,,,,
-80,21-1822,"","BOLTS-5/16"" X 1/2"" UNF-MLT 27/64""-HAF 0.500""",,,,,
-81,21-1823,"",Bolt,,,,,
-82,21-1852,"","NUTS-5/16"" UNF-HAF 0.330""-Thick 0.437"" Philidas",,,,,
-83,21-1863,"",Oil pipe stud,,,,,
-84,21-1864,"",Oil pump stud,,,,,
-85,21-1865,"",Cylinder stud,,,,,
-86,21-1870,"",Bolt,,,,,
-87,21-1871,"",Tachometer drive plug (L.H. thread) ,,,,,
-88,21-1872,"",Plug,,,,,
-89,21-1876,"",Stud,,,,,
-90,21-1877,"",Nut ,,,,,
-91,21-1879,"",Countersunk screw,,,,,
-92,21-1906,"",Nut,,,,,
-93,21-1907,"",Bolt,,,,,
-94,21-1908,"",Nut,,,,,
-95,21-1910,"","Bolt-3/8"" X 13/16"" UNF-MLT 13/16""-HAF 0.565""",,,,,
-96,21-1914,"","Nut-3/4"" UNEF-HAF 0.250""-Thick 1.125"" Plain",,,,,
-97,21-1916,"","Screw-1/4"" X 1 1/8"" UNC-Cheese head-Cross Recess",,,,,
-98,21-1917,"","Screw-1/4"" X 2 5/8"" UNC-Cheese head-Cross Recess",,,,,
-99,21-1918,"","Screw-1/4"" X 2 3/8"" UNC-Cheese head-Cross Recess",,,,,
-100,21-1919,"","Bolt-5/16"" X 1 5/8"" UNC-MLT 7/8""-HAF 0.500""",,,,,
-101,21-1920,"","Screw-1/4"" X 21/64"" UNC-Hex. Head",,,,,
-102,21-1929,"","Screw-1/4"" X 17/32"" UNC-Countersunk (82"")-Slot",,,,,
-103,21-1996,"",Stud,,,,,
-104,21-1998,"",Screw,,,,,
-105,21-2010,"","Bolt-1/4"" X 13/16"" UNF-MLT 3/8""-HAF 0.375""",,,,,
-106,21-2012,"","Nut-7/8"" UNEF-HAF 0.438""-Thick 1.313"" Plain",,,,,
-107,21-2013,"","Nut-3"" UNEF-HAF 0.313""-Thick 1.313"" Plain",,,,,
-108,21-2014,"","Nut-3/4"" UNEF-HAF 0.438""-Thick 1.313"" Plain",,,,,
-109,21-2064,"",Screw,,,,,
-110,21-2077,"",Pivot bolt,,,,,
-111,21-2087,"",Pivot bolt,,,,,
-112,21-2095,"",Attachment bolt,,,,,
-113,21-2102,"",Stud,,,,,
-114,21-2109,"",Stud,,,,,
-115,21-2112,"",Bolt,,,,,
-116,21-2149,"",Stud,,,,,
-117,21-2157,"",Bolt,,,,,
-118,21-2162,"",Screw,,,,,
-119,21-2182,"",Nut,,,,,
-120,21-2183,"",Crankshaft stud (1 3/8 in. O.A.),,,,,
-121,21-2189,"",Stud,,,,,
-122,21-2191,"",Pivot screw,,,,,
-123,21-2192,"",Screw,,,,,
-124,21-2194,"",Screw,,,,,
-125,21-2196,"",Screw,,,,,
-126,21-2198,"",Stator stud,,,,,
-127,21-2199,"",Stator stud,,,,,
-128,21-2207,"",Bolt,,,,,
-129,21-2225,"",Stud,,,,,
-130,21-2230,"",Screw,,,,,
-131,21-7001,"",Anchor bolt,,,,,
-132,21-7002,"",Anchor bolt,,,,,
-133,21-7004,"",Bolt,,,,,
-134,21-7005,"",Bolt,,,,,
-135,21-7006,"",Adjuster nut,,,,,
-136,21-7007,"",Bolt,,,,,
-137,21-7008,"",Washer,,,,,
-138,21-7010,"",Screw,,,,,
-139,28696,"",Bleed nipple,,,,,
-140,3468-229,"",Bleed nipple,,,,,
-141,3528-441,"",Spiral pin,,,,,
-142,37-0653,"",Bearing,,,,,
-143,37-1237,"",Dust cover,,,,,
-144,37-2331,"",Serrated washer,,,,,
-145,37-3468,"",Security bolt,,,,,
-146,37-3742,"",Adjuster,,,,,
-147,37-3965,"",Spindle,,,,,
-148,37-4126,"",Hub,,,,,
-149,37-4127,"",Hub,,,,,
-150,37-4129,"",Rim,,,,,
-151,37-4130,"",Spoke,,,,,
-152,37-4131,"",Spoke,,,,,
-153,37-4132,"",Spindle,,,,,
-154,37-4133,"",Nut,,,,,
-155,37-4141,"",FRONT WHEEL (complete),,,,,
-156,37-4143,"",FRONT RIM,,,,,
-157,37-4263,"",Caliper cover attachment,,,,,
-158,3761-270,"",Piston,,,,,
-159,37-7001,"",Hub,,,,,
-160,37-7002,"",Hub,,,,,
-161,37-7003,"",Spacer,,,,,
-162,37-7004,"",Driving ring,,,,,
-163,37-7005,"",Spacer tube,,,,,
-164,37-7006,"",Spacer,,,,,
-165,37-7007,"",Spoke,,,,,
-166,37-7008,"",Spoke,,,,,
-167,37-7009,"",Spoke,,,,,
-168,37-7010,"",Centre spacer- rear hub,,,,,
-169,37-7016,"",Sprocket,,,,,
-170,37-7017,"",REAR RIM,,,,,
-171,37-7018,"",Rim -W.M.3,,,,,
-172,37-7019,"",REAR WHEEL ASSEMBLY (complete),,,,,
-173,37-7020,"",Rear caliper mounting plate,,,,,
-174,37-7021,"",Washer,,,,,
-175,51271406,"",Bulb holder,,,,,
-176,534296,"",Plate,,,,,
-177,54130041,"",Nut,,,,,
-178,54580300,"",Gasket,,,,,
-179,54580322,"",Bulbholder,,,,,
-180,54583924,"",Gasket,,,,,
-181,54584931,"",Base assembly,,,,,
-182,553783,"",Bulbholder,,,,,
-183,554602,"",Bulbholder,,,,,
-184,57-0031,"",Kickstarter return spring,,,,,
-185,57-0045,"",Kickstart stop,,,,,
-186,57-0047,"",Kickstarter spring anchor pin,,,,,
-187,57-0280,"",Circlip,,,,,
-188,57-0394,"",Roller,,,,,
-189,57-0404,"",Quadrant return spring,,,,,
-190,57-0405,"",Plunger spring,,,,,
-191,57-0407,"",Guide plate,,,,,
-192,57-0730,"",Kickstart pinion,,,,,
-193,57-0731,"",Kickstart ratchet,,,,,
-194,57-0912,"",Locating peg,,,,,
-195,57-1167,"",Pedal locating spring,,,,,
-196,57-1250,"",Pinion spring,,,,,
-197,57-1257,"",Fibre washer,,,,,
-198,57-1363,"",Driven plate,,,,,
-199,57-1606,"",Needle roller bearing,,,,,
-200,57-1607,"",Thrust washer,,,,,
-201,57-1614,"",Layshaft bearing,,,,,
-202,57-1646,"",Rubber cover,,,,,
-203,57-1710,"",Lever shaft,,,,,
-204,57-1712,"",Return spring,,,,,
-205,57-1722,"",Drive rubber (large),,,,,
-206,57-1723,"",Rebound rubber (small),,,,,
-207,57-1736,"",Clutch operating rod,,,,,
-208,57-1920,"",Blanking plug,,,,,
-209,57-1931,"",Spring cup,,,,,
-210,57-1955,"",Oil seal housing,,,,,
-211,57-1956,"",Oil seal,,,,,
-212,57-1962,"",Washer,,,,,
-213,57-1963,"",Pinion sleeve,,,,,
-214,57-2159,"",Adjuster pin,,,,,
-215,57-2167,"",Drain plug (with level tube),,,,,
-216,57-2173,"",Kickstarter crank,,,,,
-217,57-2240,"",Tab washer,,,,,
-218,57-2259,"",Drain and adjuster plug,,,,,
-219,57-2330,"",Pedal rubber,,,,,
-220,57-2331,"",Pedal rubber,,,,,
-221,57-2450,"",Pedal rubber,,,,,
-222,57-2526,"",Pressure nut,,,,,
-223,57-3673,"",Plain washer,,,,,
-224,57-3762,"",Abutment for clutch cable,,,,,
-225,573832,"",Interior assembly,,,,,
-226,57-3929,"",Hub,,,,,
-227,57-3931,"",Thrust washer,,,,,
-228,57-3978,"",Washer,,,,,
-229,57-3988,"",Bush,,,,,
-230,57-3989,"",Selector fork rod,,,,,
-231,57-4113,"",Circlip,,,,,
-232,57-4117,"",Kickstarter quadrant,,,,,
-233,57-4356,"",Cotter pin c/w nut and washer,,,,,
-234,57-4364,"",Selector fork - mainshaft 4th gear,,,,,
-235,57-4366,"",Selector fork - layshaft 3rd gear,,,,,
-236,57-4376,"",Mainshaft 4th gear,,,,,
-237,57-4377,"",MAINSHAFT 3rd GEAR,,,,,
-238,57-4379,"",Bush,,,,,
-239,57-4396,"",Locknut,,,,,
-240,57-4400,"","Housing, index plunger",,,,,
-241,57-4403,"",Gearchange quadrant plunger,,,,,
-242,57-4432,"",MAINSHAFT,,,,,
-243,57-4435,"",Clutch shock absorber assembly (complete),,,,,
-244,57-4436,"",Inner plate,,,,,
-245,57-4437,"",Outer plate,,,,,
-246,57-4438,"",Centre,,,,,
-247,57-4459,"",Plunger spring,,,,,
-248,57-4587,"",CLUTCH LEVER ASSEMBLY (complete),,,,,
-249,57-4588,"",Clutch lever,,,,,
-250,57-4589,"",Thrust plate,,,,,
-251,57-4590,"",Pressure plate,,,,,
-252,57-4636,"",Shock absorber spider,,,,,
-253,57-4640,"",Sprocket and housing,,,,,
-254,57-4644,"",Spring,,,,,
-255,57-4647,"",Layshaft 3rd gear,,,,,
-256,57-4653,"",Mainshaft 1st and 2nd gear,,,,,
-257,57-4654,"",LAYSHAFT 1st GEAR,,,,,
-258,57-4656,"",Bush,,,,,
-259,57-4657,"",LAYSHAFT 2nd GEAR,,,,,
-260,57-4659,"",Bush,,,,,
-261,57-4660,"",Selector fork - layshaft 1st gear,,,,,
-262,57-4661,"",Driving dog,,,,,
-263,57-4754,"",Screwed pin,,,,,
-264,57-4756,"",Kickstarter axle,,,,,
-265,57-4763,"",Driving plate (bonded),,,,,
-266,57-4781,"",MAINSHAFT HIGH GEAR ASSEMBLY (C/W HIGH GEAR BEARING),,,,,
-267,57-4782,"",Gearbox sprocket,,,,,
-268,57-4787,"",Layshaft 4th gear,,,,,
-269,57-4791,"",Layshaft high gear,,,,,
-270,57-4794,"",Washer,,,,,
-271,57-4889,"",Camplate,,,,,
-272,57-4900,"",LAYSHAFT,,,,,
-273,57-4903,"",Clutch assembly complete,,,,,
-274,57-4909,"",Lock washer,,,,,
-275,57-7001,"",GEARBOX INNER COVER (complete),,,,,
-276,57-7003,"",Foot change spindle,,,,,
-277,57-7008,"",Gearchange spindle bush,,,,,
-278,57-7010,"",Gearchange pedal,,,,,
-279,57-7011,"",Quadrant spindle,,,,,
-280,57-7012,"",Joint washer,,,,,
-281,57-7014,"",GEARBOX OUTER COVER (complete),,,,,
-282,57-7015,"",Plug,,,,,
-283,57-7016,"",Retainer,,,,,
-284,57-7017,"",Kickstarter pedal,,,,,
-285,57-7018,"",FOLDING KICKSTARTER ASSEMBLY (complete),,,,,
-286,57-7019,"",Operating quadrant,,,,,
-287,57-7020,"",Index plunger,,,,,
-288,57-7021,"",Gearchange quadrant assembly,,,,,
-289,60-0262,WC200,Plug cover,,,,,
-290,60-0291,"",Tool roll,,,,,
-291,60-0494,"",Circlip,,,,,
-292,60-0622,"",Ignition key,,,,,
-293,60-0623,"",Key (state serial no.),,,,,
-294,60-0683,"",Throttle cable,,,,,
-295,60-0685,"",Junction box throttle and air control,,,,,
-296,60-0732,"",Throttle cable complete,,,,,
-297,60-0746,"",Throttle cable complete,,,,,
-298,60-0767,"",Screw driver,,,,,
-299,60-0777,"",Cable clip,,,,,
-300,60-0911,N3,Sparking plug,,,,,
-301,60-0971,"",Box spanner,,,,,
-302,60-0974,"",Tire valve key,,,,,
-303,60-0978,"",Cable clip,,,,,
-304,60-1050,"",Plug spanner,,,,,
-305,60-1806,"",Throttle cable complete,,,,,
-306,60-1841,"",Grease nipple,,,,,
-307,60-1907,"",Ring spanner,,,,,
-308,60-2084,"",Spanner,,,,,
-309,60-2087,"",Check wire,,,,,
-310,60-2118,"",Rear chain,,,,,
-311,60-2138,"",Timing label for C.B. cover,,,,,
-312,60-2184,"",Damper unit spanner,,,,,
-313,60-2252,"",Clip,,,,,
-314,60-2320,"",Washer,,,,,
-315,60-2333,"",Washer,,,,,
-316,60-2363,"",Valve ball (7/32 in. dia.),,,,,
-317,60-2364,"",Steel ball,,,,,
-318,60-2368,"",Ball,,,,,
-319,60-2381,"",Screw,,,,,
-320,60-2417,"",Washer,,,,,
-321,60-2419,"",Washer,,,,,
-322,60-2438,"",Washer,,,,,
-323,60-2569,"",Tank badge,,,,,
-324,60-2599,"",Licence holder,,,,,
-325,60-2600,"",Rubber cup,,,,,
-326,60-2640,"",O' ring shift spindle,,,,,
-327,60-2701,"",Split pin (5/64 in. x 1/2 in.),,,,,
-328,60-2720,"",Split pin (3/32 in. x 1/2 in.),,,,,
-329,60-3161,"",Grommet,,,,,
-330,60-3213,"",Speedometer drive unit,,,,,
-331,60-3361,"","Transfer ""Made in England""",,,,,
-332,60-3494,"",Circlip,,,,,
-333,60-3511,"",Needle roller bearing,,,,,
-334,60-3512,"",Oil seal,,,,,
-335,60-3539,"",Screw,,,,,
-336,60-3552,"",Mainshaft bearing,,,,,
-337,60-3567,"",Air control lever,,,,,
-338,60-3585,"",Adjuster,,,,,
-339,60-3586,"",Lockring,,,,,
-340,60-3614,54386637,Spring,,,,,
-341,60-3616,"",O-ring,,,,,
-342,60-3719,"",Oil pressure switch,,,,,
-343,60-3748,"",Decal '5 speed',,,,,
-344,60-3761,"",Self locking nut,,,,,
-345,60-3891,MW1/10/51/10,Plug cover,,,,,
-346,60-3896,"",Screw,,,,,
-347,60-3925,"",Clutch cable complete,,,,,
-348,60-3957,"",SUSPENSION UNIT (complete),,,,,
-349,60-3975,"",Clip,,,,,
-350,60-4102,4222-979,Master cylinder   ,,,,,
-351,60-4103,"",Grommet,,,,,
-352,60-4125,"",Primary chain,,,,,
-353,60-4126,"",Air control cable complete,,,,,
-354,60-4127,"",Air cable,,,,,
-355,60-4128,"",Air cable,,,,,
-356,60-4150,"",Name plate,,,,,
-357,60-4152,"",Rubber plug,,,,,
-358,60-4153,"",Rubber bush,,,,,
-359,60-4154,"",Spire nut,,,,,
-360,60-4156,"",Caliper cover decal,,,,,
-361,60-4167,"",Main bearing,,,,,
-362,60-4168,"",Clutch cable complete,,,,,
-363,60-4175,KL56612,Hose,,,,,
-364,60-4176,KL58505,Hose,,,,,
-365,60-4178,ZTA2070N,Pipe,,,,,
-366,60-4179,ZT2071N,Pipe,,,,,
-367,60-4183,AP40320,Banjo bolt,,,,,
-368,60-4184,KL44518,Sealing washer,,,,,
-369,60-4186,AP3187/810,Rubber boot,,,,,
-370,60-4194,"",Air control cable complete,,,,,
-371,60-4245,"",Washer,,,,,
-372,60-4251,"",Washer,,,,,
-373,60-4253,"",Key,,,,,
-374,60-4254,"",Cable clip,,,,,
-375,60-4255,"",Hammer-drive screw,,,,,
-376,60-4258,"",Cable clip,,,,,
-377,60-4260,"",Spring washer,,,,,
-378,60-4265,"",Element,,,,,
-379,60-4374,3855/814,O-ring,,,,,
-380,60-4384,"","Motif ""Tiger 750""",,,,,
-381,60-4385,"","Motif ""Bonneville 750""",,,,,
-382,60-4397,3251/796,Body,,,,,
-383,60-4398,3517/221,Distance piece,,,,,
-384,60-4399,3512/305,Washer,,,,,
-385,60-4401,4211-127,MASTER CYLINDER COMPLETE,,,,,
-386,60-4409,9206-2050,Hose,,,,,
-387,60-4428,"",Ear clamp,,,,,
-388,60-4429,"",Ear clamp,,,,,
-389,60-4440,"",Grommet,,,,,
-390,60-4511,"",Gas tap-main,,,,,
-391,60-4512,"",Gas tap-reserve,,,,,
-392,60-4619,KL563,Hose,,,,,
-393,60-7001,"",Throttle cable,,,,,
-394,60-7002,"",Throttle cable complete,,,,,
-395,60-7003,"",Decal - ignition switch,,,,,
-396,60-7004,"",Decal - warning lights,,,,,
-397,60-7005,"",Decal - light switch,,,,,
-398,60-7007,ZTA2281,Pipe,,,,,
-399,60-7010,RSM3006/00,Tachometer head,,,,,
-400,60-7011,41-118-126-47,Trip control,,,,,
-401,60-7012,DF9110/00,Speedometer cable,,,,,
-402,60-7013,DF9111/03,Tachometer cable,,,,,
-403,60-7014,364/18,Twist grip ,,,,,
-404,60-7016,"",Sealing washer,,,,,
-405,60-7018,54420128,Condenser,,,,,
-406,60-7019,"",TOOKLIT (complete),,,,,
-407,60-7020,"",Tommy bar,,,,,
-408,60-7021,"",Clutch lever assembly complete,,,,,
-409,60-7022,"",Handlebar bracket for clutch lever,,,,,
-410,60-7023,"",Clutch lever blade,,,,,
-411,60-7024,"",Handlebar clamp for bracket,,,,,
-412,60-7025,"",Screw,,,,,
-413,60-7026,"",Pivot pin,,,,,
-414,60-7027,SSM4003/01,Speedometer head,,,,,
-415,60-7028,"",Hose,,,,,
-416,60-7030,"",Clip,,,,,
-417,6405263,"",Damper unit,,,,,
-418,643,"",Bulb,,,,,
-419,70-0375,"",Intermediate wheel spindle,,,,,
-420,70-0400,"",Intermediate wheel bush,,,,,
-421,70-0403,"",Valve spring,,,,,
-422,70-0489,"",Circlip,,,,,
-423,70-0495,"",Drive block,,,,,
-424,70-1532,"",Hollow dowel,,,,,
-425,70-1558,"",Camshaft key,,,,,
-426,70-1580,"",Key,,,,,
-427,70-2360,"",Screwed plug,,,,,
-428,70-2879,"",Main bearing,,,,,
-429,70-3300,"",Clamping washer,,,,,
-430,70-3586,"",Big end bearing (Available in -.010 in. and,,,,,
-431,70-3789,"",Cover plate,,,,,
-432,70-3821,"",Countersunk screw,,,,,
-433,70-3887,"",Serrated washer,,,,,
-434,70-3902,"",Plug,,,,,
-435,70-3903,"",Oil tube,,,,,
-436,70-3975,"",Tab washer,,,,,
-437,70-4016,"",Patent plate,,,,,
-438,70-4152,"",Tie rod,,,,,
-439,70-4538,"",Scavenge pipe,,,,,
-440,70-4564,"",Timing pinion,,,,,
-441,70-4568,"",Oil seal,,,,,
-442,70-4569,"",Circlip,,,,,
-443,70-4705,"",Clip,,,,,
-444,70-4707,"",Rubber grommet,,,,,
-445,70-5085,"",Chain tensioner blade,,,,,
-446,70-5087,"",Trunnion,,,,,
-447,70-5155,"",Flanged bush,,,,,
-448,70-5156,"",Bush,,,,,
-449,70-5157,"",Driving gear,,,,,
-450,70-5660,"",Joint washer,,,,,
-451,70-5874,"",Clip,,,,,
-452,70-6159,"",INTERMEDIATE WHEEL (complete),,,,,
-453,70-6386,"",Locating peg (at oil pipes),,,,,
-454,70-6387,"",Oil seal (0.020 in. undersize),,,,,
-455,70-6523,"",Exhaust camshaft nut,,,,,
-456,70-6596,"",Cap,,,,,
-457,70-6681,"",Scavenger plunger,,,,,
-458,70-6857,"",Exhaust pipe stay,,,,,
-459,70-7512,"",Clip,,,,,
-460,70-7554,"",Rubber washer,,,,,
-461,70-7563,"",O-ring,,,,,
-462,70-7590,"",Body,,,,,
-463,70-7591,"",Spring,,,,,
-464,70-7680,"",Pillar bolt,,,,,
-465,70-8038,"",Shim (0.010 in.),,,,,
-466,70-8163,"",Plain washer,,,,,
-467,70-8737,"",Cover,,,,,
-468,70-8751,"",Hollow dowel,,,,,
-469,70-8752,"",Piston,,,,,
-470,70-8754,"",Joint washer,,,,,
-471,70-8801,"",Exhaust tappet,,,,,
-472,70-9246,"",Timing cover,,,,,
-473,70-9269,"",Feed plunger,,,,,
-474,70-9330,"",Oilway plug,,,,,
-475,70-9332,"",Securing screw,,,,,
-476,70-9336,"",Crankcase filter,,,,,
-477,70-9352,"",Inlet tappet guide block,,,,,
-478,70-9353,"",Exhaust tappet guide block,,,,,
-479,70-9360,"",Sleeve nut,,,,,
-480,70-9421 ,"",OIL PUMP,,,,,
-481,70-9703,"",Adjuster sleeve nut,,,,,
-482,70-9888,"",Coupling pipe,,,,,
-483,70-9914,"",Connecting rod bolt,,,,,
-484,70-9988,"",Tachometer drive plug,,,,,
-485,71 -1707,"",Sleeve,,,,,
-486,71 -2501,"",Washer,,,,,
-487,71 -2599,"",Rocker box gasket,,,,,
-488,71 -2813,"",Stud,,,,,
-489,71 -2930,"",Cover pressure switch,,,,,
-490,71 -3294,"",Inlet valve guide,,,,,
-491,71 -3295,"",Exhaust valve guide,,,,,
-492,71 -3668,"",Inlet rocker box,,,,,
-493,71 -3896,"",O' ring,,,,,
-494,71-0082,"",Rotor key,,,,,
-495,71-0286,"",Camshaft bush,,,,,
-496,71-0287,"",Camshaft bush,,,,,
-497,71-1003,"",Washer,,,,,
-498,71-1007,"",Inlet camshaft nut,,,,,
-499,71-1070,"",O-ring,,,,,
-500,71-1072,"",Breather cover plate assembly,,,,,
-501,71-1075,"",Screw,,,,,
-502,71-1078,"",Tube,,,,,
-503,71-1345,"",Grommet,,,,,
-504,71-1419,"",Joint washer,,,,,
-505,71-1460,"",Joint washer,,,,,
-506,71-1462,"",Joint washer,,,,,
-507,71-1707,"",Sleeve,,,,,
-508,71-1860,"",Carburetor adaptor,,,,,
-509,71-2349,"",Oil vent pipe,,,,,
-510,71-2425,"",Flywheel,,,,,
-511,71-2465,"",Finned clip,,,,,
-512,71-2480,"",End cup,,,,,
-513,71-2481,"",Welch washer,,,,,
-514,71-2482,"",Thrust washer,,,,,
-515,71-2501,"",Fibre washer,,,,,
-516,71-2599,"",Rocker box gasket,,,,,
-517,71-2653,"",Driven gear,,,,,
-518,71-2660,"",Shim (0 .030 in.),,,,,
-519,71-2663,"",Spacer,,,,,
-520,71-2800,"",Screwed plug,,,,,
-521,71-2877,"",Nut,,,,,
-522,71-3006,"",CONNECTING ROD (complete),,,,,
-523,71-3013,"",Cylinder stud,,,,,
-524,71-3030,"",CRANKSHAFT AND FLYWHEEL ASSEMBLY (complete),,,,,
-525,71-3294,"",Inlet valve guide,,,,,
-526,71-3295,"",Exhaust valve guide,,,,,
-527,71-3298,"",CRANKSHAFT C/W. OIL TUBE (complete),,,,,
-528,71-3313,"",Connector,,,,,
-529,71-3316,"",Sump plate,,,,,
-530,71-3338,"",Inlet manifold,,,,,
-531,71-3339,"",Inlet manifold,,,,,
-532,71-3354,"",Gudgeon pin,,,,,
-533,71-3447,"",OIL PRESSURE RELEASE VALVE (complete),,,,,
-534,71-3463,"",Oil Filler cap,,,,,
-535,71-3542,"",Motor sprocket,,,,,
-536,71-3544,"",Distance piece,,,,,
-537,71-3550,"",Rocker oil pipe,,,,,
-538,71-3551,"",Rocker feed pipe,,,,,
-539,71-3552,"",Flywheel bolt,,,,,
-540,71-3556,"",Inlet manifold,,,,,
-541,71-3573,"",Joint washer,,,,,
-542,71-3577,"",Connector pipe,,,,,
-543,71-3666,"",Camshaft pinion,,,,,
-544,71-3668,"",Inlet rocker box,,,,,
-545,71-3676,"",PISTON (complete) (8.6 : 1),,,,,
-546,71-3690,"",Taper compression ring,,,,,
-547,71-3695,"",Oil control ring,,,,,
-548,71-3700,"",Circlip,,,,,
-549,71-3749,"",Washer,,,,,
-550,71-3754,"",Joint washer,,,,,
-551,71-3755,"",Exhaust pipe,,,,,
-552,71-3758,"",Exhaust pipe,,,,,
-553,71-3778,"",PISTON (complete) (7.9 : 1),,,,,
-554,71-3892,"",Timing pointer,,,,,
-555,71-3895,"",Inspection plug vg.,,,,,
-556,71-3910,"",Joint washer,,,,,
-557,71-3989,"",Hollow dowel,,,,,
-558,71-4020,"",CYLINDER HEAD (complete),,,,,
-559,71-4044,"",Outlet stub,,,,,
-560,71-4159,"",Muffler,,,,,
-561,71-7001,"",CRANKCASE DRIVE SIDE (complete),,,,,
-562,71-7002,"",CRANKCASE TIMING SIDE (complete),,,,,
-563,71-7003,"",Chaincase,,,,,
-564,71-7004,"",CRANKCASE TS/DS *,,,,,
-565,71-7007,"",CYLINDER HEAD,,,,,
-566,71-7008,"",Inlet tappet,,,,,
-567,71-7009,"",Joint washer,,,,,
-568,71-7011,"",Tachometer gearbox,,,,,
-569,71-7012,"",Thrust cap,,,,,
-570,71-7013,"",Oil junction block,,,,,
-571,71-7014,"",Oil return pipe,,,,,
-572,71-7015,"",Oil feed pipe,,,,,
-573,71-7016,"",Inlet camshaft,,,,,
-574,71-7017,"",EXHAUST CAMSHAFT (complete),,,,,
-575,71-7018,"",Clip,,,,,
-576,71-7019,"",Connector pipe,,,,,
-577,82-1335,"",Washer,,,,,
-578,82-3799,"",Nut,,,,,
-579,82-4048,"",Joint washer,,,,,
-580,82-4129,"",Screw (rear),,,,,
-581,82-4228,"",Spring,,,,,
-582,82-5338,"",Nut,,,,,
-583,82-5343,"",Drain plug,,,,,
-584,82-6039,"",Rubber bush,,,,,
-585,82-6673,"",Panel grommet,,,,,
-586,82-6738,"",Lock c/w 2 keys,,,,,
-587,82-6850,"",Rear No. plate bracket,,,,,
-588,82-6981,"",Ignition lock with key,,,,,
-589,82-7021,"",Bolt,,,,,
-590,82-7380,"",Protective strip,,,,,
-591,82-7560,"",Seat plunger and knob,,,,,
-592,82-7888,"",Screw,,,,,
-593,82-8091,"",Battery tray moulding,,,,,
-594,82-8382,"",Spring,,,,,
-595,82-9054,"",Footrest rubber,,,,,
-596,82-9063,"",Distance tube,,,,,
-597,82-9073,"",Clip,,,,,
-598,82-9089,"",Washer,,,,,
-599,82-9093,"",Rubber buffer,,,,,
-600,82-9279,"",Footrest rubber (alternative 82-9630),,,,,
-601,82-9353,"",Retaining strap,,,,,
-602,82-9355,"",Buckle,,,,,
-603,82-9561,"",Coil grommet,,,,,
-604,82-9700,"",Tank motif,,,,,
-605,82-9701,"",Tank motif,,,,,
-606,83-0002,"",Washer,,,,,
-607,83-1339,"",Screw,,,,,
-608,83-1560,"",Prop stand,,,,,
-609,83-1615,"",Clip,,,,,
-610,83-2007,"",Abutment ring,,,,,
-611,83205,"",Diode,,,,,
-612,83-2508,"",Shoulder screw,,,,,
-613,83-2521,"",Bush,,,,,
-614,83-2641,"",Chainguard,,,,,
-615,83-2689,"",Distance piece left hand side,,,,,
-616,83-2690,"",Distance piece right hand side,,,,,
-617,83-2691,"",Sleeve,,,,,
-618,83-2692,"",Dirt excluder,,,,,
-619,83-2726,"",Rear number plate,,,,,
-620,83-2796,"",Lower front bracket,,,,,
-621,83-2829,"",Gasket,,,,,
-622,83-2846,"",Distance piece,,,,,
-623,83-2847,"",Distance piece,,,,,
-624,83-2848,"",Distance piece,,,,,
-625,83-2849,"",Distance piece,,,,,
-626,83-3082,"",Cover plate,,,,,
-627,83-3329,"",Distance piece,,,,,
-628,83-3522,"",Mounting Rubber,,,,,
-629,83-3537,"",Steady bracket motor to frame,,,,,
-630,83-3602,"",Distance piece left footrest,,,,,
-631,83-3764,"",Reflector bracket,,,,,
-632,83-3793,"",Spring,,,,,
-633,83-3814,"",Washer,,,,,
-634,83-3875,"",Filler cap,,,,,
-635,83-3927,"",Petrol pipe,,,,,
-636,83-4086,"",Attachment plate,,,,,
-637,83-4118,"",Tie strap,,,,,
-638,83-4299,"",Plain washer,,,,,
-639,83-4355,"",Knee grip,,,,,
-640,83-4356,"",Knee grip,,,,,
-641,83-4395,"",Tie strap,,,,,
-642,83-4600,"",Bridge,,,,,
-643,83-4606,"",Body,,,,,
-644,83-4607,"",Body,,,,,
-645,83-4609,"",Body,,,,,
-646,83-4610,"",Battery carrier assembly,,,,,
-647,83-4763,"",Grommet,,,,,
-648,83-4774,"",Tail lamp carrier,,,,,
-649,83-4776,"",Badge,,,,,
-650,83-4782,"",Hinge,,,,,
-651,83-4783,"",Oil filter,,,,,
-652,83-4784,"",Rear No. plate bracket,,,,,
-653,83-4800,"",Sleeve nut,,,,,
-654,83-4803,"",Side panel,,,,,
-655,83-4806,"",Wiring protector,,,,,
-656,83-4807,"",Cover,,,,,
-657,83-4808,"",Cover,,,,,
-658,83-4813,"",Crankcase breather pipe,,,,,
-659,83-4845,"",Body,,,,,
-660,83-4854,"",Side panel,,,,,
-661,83-4887,"",Petrol pipe,,,,,
-662,83-4898,"",Bracket,,,,,
-663,83-4930,"",Centre fixing bolt,,,,,
-664,83-4931,"",Steady rubber,,,,,
-665,83-4932,"",Mounting rubber,,,,,
-666,83-4933,"",Mounting rubber,,,,,
-667,83-4934,"",Mounting rubber,,,,,
-668,83-4941,"",Centre stand,,,,,
-669,83-5001,"",Support plate,,,,,
-670,83-5105,"",U-grommet,,,,,
-671,83-5145,"",Grab rail,,,,,
-672,83-5161,"",Connector pipe,,,,,
-673,83-5285,"",Crankcase breather pipe,,,,,
-674,83-5290,"",T-piece,,,,,
-675,83-5413,"",Gas tank (3.6 U.S. galls.),,,,,
-676,83-5414,"",Gas tank (3.6 U.S. galls.),,,,,
-677,83-5448,"",Air intake tube,,,,,
-678,83-5449,"",Air intake tube,,,,,
-679,83-5465,"",Reservoir assembly,,,,,
-680,83-6209,"",Petrol pipe,,,,,
-681,83-7003,"",Trunnion lever,,,,,
-682,83-7009,"",Rear motor plate left,,,,,
-683,83-7011,"",Rear motor plate right,,,,,
-684,83-7016,"",Return spring,,,,,
-685,83-7018,"",Mounting plate,,,,,
-686,83-7021,"",Hanger,,,,,
-687,83-7022,"",Hanger muffler left,,,,,
-688,83-7024,"",Trunnion,,,,,
-689,83-7025,"",PILLION FOOTREST ASSEMBLY LEFT (complete),,,,,
-690,83-7026,"",PILLION FOOTREST ASSEMBLY RIGHT (complete),,,,,
-691,83-7028,"",Brake torque stay,,,,,
-692,83-7031,"",Rear fender,,,,,
-693,83-7032,"",Frame,,,,,
-694,83-7035,"",SWINGING ARM (complete),,,,,
-695,83-7040,"",Footrest,,,,,
-696,83-7041,"",Coil and tool tray assembly,,,,,
-697,83-7044,"",Brake pedal,,,,,
-698,83-7046,"",Spindle,,,,,
-699,83-7049,"",Clip,,,,,
-700,83-7053,"",Pivot bolt assembly with bushes,,,,,
-701,83-7054,"",Pivot bolt bush,,,,,
-702,83-7055,"",Outlet stub,,,,,
-703,83-7056,"",Mounting,,,,,
-704,83-7057,"",Circlip,,,,,
-705,83-7058,"",Screw,,,,,
-706,83-7059,"",Pedal,,,,,
-707,83-7060,"",Rubber washer,,,,,
-708,83-7061,"",Petrol tank (4 imp galls.) SEA JADE,,,,,
-709,83-7062,"",Petrol tank (4 imp galls.) POLY RED,,,,,
-710,83-7063,"",Petrol tank (4 imp galls) blue,,,,,
-711,83-7064,"",Bracket,,,,,
-712,83-7065,"",Twinseat,,,,,
-713,83-7066,"",Twinseat cover,,,,,
-714,83-7067,"",Cover,,,,,
-715,83-7068,"",Cover,,,,,
-716,83-7069,"",Clip,,,,,
-717,930/005,"",Carburettor body,,,,,
-718,97-0200,"",Set bolt,,,,,
-719,97-0430,"",Fibre washer,,,,,
-720,97-0961,"",Grommet,,,,,
-721,97-1425,"",Sleeve,,,,,
-722,97-1510,"",Gaiter,,,,,
-723,97-1527,"",Metalastik bush,,,,,
-724,97-1529,"",Hemispherical washer,,,,,
-725,97-1580,"",Rubber washer,,,,,
-726,97-1581,"",Distance piece,,,,,
-727,97-2125,"",Grip,,,,,
-728,97-2142,"",Grip,,,,,
-729,97-2208,"",Rubber mounting,,,,,
-730,97-2209,"",Rubber buffer,,,,,
-731,97-2210,"",Backing washer,,,,,
-732,97-2221,"",Cup,,,,,
-733,97-2262,"",Cover,,,,,
-734,97-2266,"",Sealing washer,,,,,
-735,97-2291,"",Handlebar eyebolt,,,,,
-736,97-3893,"",Washer,,,,,
-737,97-4001,"",Oil seal,,,,,
-738,97-4002,"",Scraper sleeve,,,,,
-739,97-4003,"",O-ring,,,,,
-740,97-4004,"",Cap screw seal,,,,,
-741,97-4009,"",Recoil spring,,,,,
-742,97-4011,"",Main spring,,,,,
-743,97-4012,"",Nut,,,,,
-744,97-4026,"",Mounting bracket,,,,,
-745,97-4028,"",Dust cover,,,,,
-746,97-4031,"",Taper roller bearing,,,,,
-747,97-4076,"",End plug,,,,,
-748,97-4112,"",Handlebar clip,,,,,
-749,97-4121,"",Headlamp bracket,,,,,
-750,97-4125,"",Distance piece,,,,,
-751,97-4166,"",Washer,,,,,
-752,97-4203,"",Headlamp bracket,,,,,
-753,97-4317,"",Steering stem nut,,,,,
-754,97-4325,"",Damper tube and valve assembly,,,,,
-755,97-4380,"",Stanchion,,,,,
-756,97-4381,"",Top Yoke,,,,,
-757,97-4385,"",Bottom yoke and stem,,,,,
-758,97-4387,"",Top nut,,,,,
-759,97-4395,"",Cap screw,,,,,
-760,97-4396,"",FORK ASSEMBLY (complete),,,,,
-761,97-4399,"",OUTER MEMBER,,,,,
-762,97-4406,"",Outer cover,,,,,
-763,97-4407,"",Outer cover,,,,,
-764,97-4456,"",Cap,,,,,
-765,97-4457,"",Cap,,,,,
-766,97-4461,"",Rubber ring,,,,,
-767,97-4476,"",Eye bolt,,,,,
-768,97-4480,"",Outer cover,,,,,
-769,97-4481,"",Outer cover,,,,,
-770,97-4552,"",Rear stay,,,,,
-771,97-4579,"",OUTER MEMBER,,,,,
-772,97-4616,"",FORK ASSEMBLY (complete),,,,,
-773,97-7001,"",Handlebar,,,,,
-774,97-7002,"",Handlebar,,,,,
-775,97-7003,"",Front fender,,,,,
-776,97-7004,"",Bridge piece assembly,,,,,
-777,99-0107,"",Spring retainer,,,,,
-778,99-0122,"",Bonded bush,,,,,
-779,99-0173,31-371-398,Spade,,,,,
-780,99-0225,11/013,Screw,,,,,
-781,99-0241,16/011,Cable stop,,,,,
-782,99-0248,364/16,Twist grip,,,,,
-783,99-0446,376/100,Main jet (190),,,,,
-784,99-0454,376/100,Main jet (270),,,,,
-785,99-0537,281,Bulb,,,,,
-786,99-0542,380,Bulb,,,,,
-787,99-0548,989,Pilot bulb,,,,,
-788,99-0558,54531899 S45,Ignition switch,,,,,
-789,99-0589,49072,Rectifier,,,,,
-790,99-0590,49345,Zener diode,,,,,
-791,99-0683,504665,Fixing wire,,,,,
-792,99-0692,553248,Headlamp rim,,,,,
-793,99-0719,54027029,Battery PUZ5A,,,,,
-794,99-0739,"",Rotor,,,,,
-795,99-0769,"",Pin,,,,,
-796,99-1006,"",Stator - RM21,,,,,
-797,99-1028,34815A,Rear stop light switch 118SA,,,,,
-798,99-1048,"",Spring,,,,,
-799,99-1161,57183,Reflector,,,,,
-800,99-1192,382,Bulb,,,,,
-801,99-1193,54123401,Screw,,,,,
-802,99-1201,35048,Flasher unit,,,,,
-803,99-1204,54385091,Clip,,,,,
-804,99-1207,54363453,Warning light,,,,,
-805,99-1208,54363454,Warning light,,,,,
-806,99-1209,54363455,Warning light,,,,,
-807,99-1210,54140331,Sealing washer,,,,,
-808,99-1213,54573590,Pilot bulbholder,,,,,
-809,99-1214,370,Main bulb,,,,,
-810,99-1223,54115106,Screw,,,,,
-811,99-1224,143086,Washer,,,,,
-812,99-1245,70228,Horn,,,,,
-813,99-1246,60600091,Stanchion,,,,,
-814,99-1249,54525927,Light unit,,,,,
-815,99-1251,34419,Light switch,,,,,
-816,99-1263,"",AUTO ADVANCE UNIT (complete),,,,,
-817,99-1264,"",Spring set,,,,,
-818,99-1265,"",CONTACT BREAKER PLATE ASSEMBLY (complete),,,,,
-819,99-1266,"",Contact set,,,,,
-820,99-1267,60512,Headlamp (complete),,,,,
-821,99-12765,3275-428,Piston,,,,,
-822,99-2753,3338-901,Switch housing,,,,,
-823,99-2754,4312-318,Trap valve,,,,,
-824,99-2755,3118-234,Spring,,,,,
-825,99-2756,3675-216,Spring retainer,,,,,
-826,99-2757,3842-424,Primary cup,,,,,
-827,99-2758,106418,Piston washer,,,,,
-828,99-2759,3261-542,Piston,,,,,
-829,99-2760,3871-473,Secondary cup,,,,,
-830,99-2761,K29103,Circlip,,,,,
-831,99-2762,3811-420,Rubber boot,,,,,
-832,99-2763,3476-209,Grub screw,,,,,
-833,99-2765,3275-428,Piston,,,,,
-834,99-2770,4221-072,Barrel and tank assembly,,,,,
-835,L930,"",Carburettor body,,,,,
-836,NoPart#1,"",Pump body,,,,,
-837,NoPart#2,"",Rotor,,,,,
-838,NoPart#3,"",Split pin (5/64 in. x 1 3/8 in.),,,,,
-839,R930,"",Carburetor body,,,,,
+Id;PartNumber;MakersPartNumber;Description;MakersDescription
+1;06-5638;SSM4003/00;Speedometer head - MPH;
+2;06-8019;41;Main bulb;
+3;06-8020;411;Main bulb;
+4;06-8024;3466;Light switch;
+5;06-8029;56515;STOP TAIL LAMP (complete);
+6;06-8048;54522680;Light unit;
+7;06-8058;54585314;Lens;
+8;12/033;;Spring washer;
+9;12/033;Amal;Spring washer;
+10;12/556;;Lever;
+11;12/556;Amal;Lever;
+12;12/606;;Cap;
+13;12/606;Amal;Cap;
+14;12/607;;Bolt;
+15;12/607;Amal;Bolt;
+16;14-0101;;"BOLT-1/4"" X 1/2"" UNF-HAF 0.438""";
+17;14-0102;;"BOLTS-1/4"" X 5/8"" UNF-HAF 0.438""";
+18;14-0103;;"BOLTS-1/4"" X 3/4"" UNF-HAF 0.438""";
+19;14-0107;;"Screw - chain adjuster (1/4"" UNF x 1 1/2"" UH)";
+20;14-0113;;"BOLTS-5/16"" X 5/8"" UNF-HAF 0.500""";
+21;14-0114;;"BOLTS-5/16"" X 3/4"" UNF-HAF 0.500""";
+22;14-0115;;"BOLTS-5/16"" X 7/8"" UNF-HAF 0.500""";
+23;14-0116;;Bolt (Rear motor plates to frame);
+24;14-0128;;"BOLTS-3/8"" X  UNF-HAF 0.563""";
+25;14-0129;;Bolt (Bracket to frame);
+26;14-0201;;Bolt;
+27;14-0206;;Bolt;chainguard fixing front
+28;14-0208;;"BOLTS-1/4"" X 2 1/4"" UNF-MLT 3/4""-HAF 0.438""";
+29;14-0216;;Bolt ( Footrest swivel);
+30;14-0216;;"BOLTS-5/16"" X 1 1/8"" UNF-MLT 7/8""-HAF 0.500""";
+31;14-0217;;Bolt;
+32;14-0217;;Bolt (Exhaust pipes to coupling pipe);
+33;14-0217;;"BOLTS-5/16"" X 1 1/4"" UNF-MLT 7/8""-HAF 0.500""";
+34;14-0218;;Bolt;
+35;14-0218;;Bolt (All models - left assy to right assy);
+36;14-0219;;Bolt;
+37;14-0219;;Bolt (Exhaust pipes to mufflers);
+38;14-0219;;"BOLTS-5/16"" X 1 1/2"" UNF-MLT 7/8""-HAF 0.500""";
+39;14-0220;;Bolt;
+40;14-0220;;Bolt (Motor to motor plates);
+41;14-0220;;"BOLTS-5/16"" X 1 3/4"" UNF-MLT 7/8""-HAF 0.500""";
+42;14-0221;;Bolt;
+43;14-0225;;"BOLTS-5/16"" X 3"" UNF-MLT 7/8""-HAF 0.500""";
+44;14-0228;;"BOLTS-5/16"" X 4"" UNF-MLT 7/8""-HAF 0.500""";
+45;14-0230;;Bolt;long - crankcase halves
+46;14-0232;;Bolt;caliper to mounting
+47;14-0234;;"BOLTS-3/8"" X 1 3/4"" UNF-MLT 1""-HAF 0.563""";damper - lower
+48;14-0235;;Bolt;damper - top
+49;14-0236;;"BOLTS-3/8"" X 2 1/4"" UNF-MLT 1""-HAF 0.563""";
+50;14-0237;;Pinch bolt;
+51;14-0237;;Pinch bolt;RIGHT
+52;14-0239;;"BOLTS-3/8"" X 3"" UNF-MLT 1""-HAF 0.563""";
+53;14-0240;;"BOLTS-3/8"" X 3 1/4"" UNF-MLT 1""-HAF 0.563""";
+54;14-0241;;Bolt - cylinder head;
+55;14-0241;;"BOLTS-3/8"" X 4"" UNF-MLT 1""-HAF 0.563""";
+56;14-0242;;"BOLTS-3/8"" X 4"" UNF-MLT 1""-HAF 0.563""";
+57;14-0251;;"BOLTS-7/16"" X 2 3/4"" UNF-MLT 1 1/4""-HAF 0.625""";
+58;14-0254;;Bolt;
+59;14-0254;;Bolt (Motor fixing front);
+60;14-0259;;Footrest bolt;
+61;14-0259;;Footrest bolt;left
+62;14-0261;;Footrest bolt;
+63;14-0261;;Footrest bolt;right
+64;14-0301;;"NUTS-1/4"" UNF-HAF 0.224""-Thick 0.438"" Plain";
+65;14-0302;;"NUTS-5/16"" UNF-HAF 0.271""-Thick 0.500"" Plain";
+66;14-0304;;Nut;
+67;14-0304;;Nut (Motor to frame centre bottom);
+68;14-0401;;"NUTS-1/4"" UNF-HAF 0.161""-Thick 0.438"" ";
+69;14-0402;;"NUTS-5/16"" UNF-HAF 0.192""-Thick 0.500"" Lock";
+70;14-0403;;"NUTS-3/8"" UNF-HAF 0.224""-Thick 0.563"" Lock";
+71;14-0404;;Nut;
+72;14-0604;;"SCREWS-1/4"" X 1/2"" UNF-Cheese head-Cross Recess";
+73;14-0701;;"NUTS-1/4"" UNF-HAF 0.203""-Thick 0.438"" ";
+74;14-0702;;Self-locking nut;
+75;14-0702;;"NUTS-5/16"" UNF-HAF 0.246""-Thick 0.500"" Philidas";
+76;14-0703;;"NUTS-3/8"" UNF-HAF 0.296""-Thick 0.563"" Philidas";
+77;14-1019;;Cap screw;
+78;14-1034;;Cap screw;
+79;14-1201;;"NUTS-1/4"" UNF-HAF 0.285""-Thick 0.438"" Stiffnut.";
+80;14-1202;;"NUTS-5/16"" UNF-HAF 0.335""-Thick 0.500"" Stiffnut.";
+81;14-1203;;Nut;
+82;14-1203;;Nut;caliper to mounting plate bolt
+83;14-1301;;"NUTS-1/4"" UNF-HAF 0.245""-Thick 0.438"" Stiffnut.";
+84;14-1302;;"NUTS-5/16"" UNF-HAF 0.290""-Thick 0.500"" Stiffnut.";
+85;14-1303;;"NUTS-3/8"" UNF-HAF 0.320""-Thick 0.563"" Stiffnut.";
+86;14-1304;;"NUTS-7/16"" UNF-HAF 0.275""-Thick 0.688"" Stiffnut.";
+87;14-1305;;Footrest bolt nut;
+88;14-1305;;"NUTS-1/2"" UNF-HAF 0.435""-Thick 0.750"" Stiffnut.";
+89;14-1307;;"Nut (5/8"" UNF self locking)";
+90;14-1401;;Stud - rocker box;
+91;14-1445;;Stud;
+92;14-1445;;Stud;rear
+93;14-1901;;Nut;
+94;14-1901;;Nut;pivot pin
+95;14-1902;;"NUTS-5/16"" UNF-HAF 0.361""-Thick 0.500"" Nyloc";
+96;14-1903;;"NUTS-3/8"" UNF-HAF 0.375""-Thick 0.563"" Nyloc";
+97;14-2205;;Screw;
+98;144921;Lucas;Screw;
+99;14-6101;;Bolt (7/16 in. U. H.);
+100;14-6102;;"BOLTS-1/4"" X 5/8"" UNC-HAF 0.438""";
+101;14-6103;;Set screw;
+102;14-6113;;Bolt;
+103;14-6114;;Bolt;
+104;14-6114;;Bolt;stay to spindle cap
+105;14-6115;;"BOLTS-5/16"" X 7/8"" UNC-HAF 0.500""";
+106;14-6220;;Bolt;
+107;14-6220;;Bolt;top rear
+108;14-6223;;Bolt;
+109;14-6223;;Bolt;top front
+110;14-6242;;Bolt;
+111;14-6242;;Bolt;rear - crankcase halves
+112;14-6505;;"SCREWS-1/4"" X 7/8"" UNC-Countersunk (82"")-Slot";
+113;14-6606;;Set screw;
+114;14-6607;;"SCREWS-1/4"" X 7/8"" UNC-Cheese head-Cross Recess";
+115;14-6608;;"SCREWS-1/4"" X 1"" UNC-Cheese head-Cross Recess";
+116;14-6609;;"SCREWS-1/4"" X 1 1/4"" UNC-Cheese head-Cross Recess";
+117;14-6620;;Screw;
+118;14-7019;;"SCREWS-5/16"" X 7/8"" UNC-Socket head-Hex. Socket";
+119;14-7023;;Screw;
+120;14-7024;;"SCREWS-5/16"" X 2"" UNC-Socket head-Hex. Socket";
+121;14-7804;;Screw support plate to carrier;
+122;16/008;;Friction spring;
+123;16/008;Amal;Friction spring;
+124;16/009;;Screw;
+125;16/009;Amal;Screw;
+126;16/010;;Locknut;
+127;16/010;Amal;Locknut;
+128;16/328;;Body;
+129;16/328;Amal;Body;top half
+130;16/329;;Body;
+131;16/329;Amal;Body;bottom half
+132;19-1191;54581638;Lens;
+133;19-1284;60513;HEADLAMP COMPLETE;
+134;19-1377;56559;Flasher lamp;
+135;19-1961;30781;Handlebar switch;
+136;19-1961;30781;Handlebar switch;right hand
+137;19-1962;54962258A;Main Wiring harness;
+138;19-1963;60600269;Stanchion;
+139;19-1963;60600269;Stanchion;flasher lamp rear
+140;19-1964;45223;Ignition coil (17-M-12);
+141;19-1965;30447;Handlebar switch;
+142;19-1965;3 447;HANDLEBAR SWITCH;LEFT HAND
+143;19-2452;L930/93;Carburetor;
+144;19-2452;L93 /93;CARBURETTOR;LEFT
+145;19-2453;R930/92;Carburetor;
+146;19-2453;R93 /92;CARBURETTOR;RIGHT
+147;19-2454;R930/94;Carburetor;
+148;19-6901;1 2799;Fluid seal;
+149;21 -0501;;Nut;
+150;21 -0501;;Nut (All models - left assy to right assy);
+151;21-0541;;Pedal bolt;
+152;21-0543;;Level plug;
+153;21-0544;;Domed nut;
+154;21-0547;;Guide plate stud;
+155;21-0550;;Nut;
+156;21-0578;;Grub screw;
+157;21-0586;;Clutch securing nut;
+158;21-0589;;Bolt;
+159;21-0594;;Nut;
+160;21-0648;;"WASHERS - SPRING-Thick 0.080""-i/d 5/16"" clearance-o/d 1/2""-o/a height 5/32""";
+161;21-0669;;Stud;
+162;21-0669;;Stud;crankcase halves
+163;21-0692;;Cylinder base nut (12 point);
+164;21-0778;;"NUTS-No.10 UNF-HAF 0.225""-Thick 0.375"" Clevelock";
+165;21-1822;;"BOLTS-5/16"" X 1/2"" UNF-MLT 27/64""-HAF 0.500""";
+166;21-1823;;Bolt;
+167;21-1823;;Bolt;short - crankcase halves
+168;21-1852;;"NUTS-5/16"" UNF-HAF 0.330""-Thick 0.437"" Philidas";
+169;21-1863;;Oil pipe stud;
+170;21-1864;;Oil pump stud;
+171;21-1865;;Cylinder stud;
+172;21-1870;;Bolt;
+173;21-1870;;Bolt;rear
+174;21-1871;;Tachometer drive plug (L.H. thread) ;
+175;21-1872;;Plug;
+176;21-1872;;Plug;timing hole
+177;21-1875;;Bolt - rocker box;
+178;21-1876;;Stud;
+179;21-1876;;Stud (TR7RV);
+180;21-1877;;Nut ;
+181;21-1877;;Nut . (TR7RV);
+182;21-1879;;Countersunk screw;
+183;21-1906;;"NUTS-1/4"" UNF-HAF 0.188""-Thick 0.438"" Plain";
+184;21-1907;;Bolt;
+185;21-1908;;"NUTS-5/16"" UNF-HAF 0.313""-Thick 0.438"" Plain";
+186;21-1910;;"BOLTS-3/8"" X 13/16"" UNF-MLT 13/16""-HAF 0.565""";
+187;21-1914;;"NUTS-3/4"" UNEF-HAF 0.250""-Thick 1.125"" Plain";
+188;21-1916;;"SCREWS-1/4"" X 1 1/8"" UNC-Cheese head-Cross Recess";
+189;21-1917;;"SCREWS-1/4"" X 2 5/8"" UNC-Cheese head-Cross Recess";
+190;21-1918;;"SCREWS-1/4"" X 2 3/8"" UNC-Cheese head-Cross Recess";
+191;21-1919;;"BOLTS-5/16"" X 1 5/8"" UNC-MLT 7/8""-HAF 0.500""";
+192;21-1920;;"SCREWS-1/4"" X 21/64"" UNC-Hex. Head";
+193;21-1929;;"SCREWS-1/4"" X 17/32"" UNC-Countersunk (82"")-Slot";
+194;21-1996;;Stud;
+195;21-1996;;Stud  (Carb. to manifold) (TR7RV);
+196;21-1998;;Screw;
+197;21-1998;;Screw;stop switch to lever body
+198;21-2010;;"BOLTS-1/4"" X 13/16"" UNF-MLT 3/8""-HAF 0.375""";
+199;21-2012;;"NUTS-7/8"" UNEF-HAF 0.438""-Thick 1.313"" Plain";
+200;21-2013;;"NUTS-3"" UNEF-HAF 0.313""-Thick 1.313"" Plain";
+201;21-2014;;"NUTS-3/4"" UNEF-HAF 0.438""-Thick 1.313"" Plain";
+202;21-2064;;Screw;
+203;21-2064;;Screw - tank badge;
+204;21-2077;;Pivot bolt;
+205;21-2079;;"SCREWS-No.10 X 1/2"" UNF-Cheese head-PoziDrive";
+206;21-2087;;Pivot bolt;
+207;21-2087;;Pivot bolt - swinging arm;
+208;21-2095;;Attachment bolt;
+209;21-2102;;Stud;
+210;21-2109;;Stud;
+211;21-2109;;Stud (Sump plate to frame);
+212;21-2112;;Bolt;
+213;21-2112;;Bolt (Motor to frame centre bottom);
+214;21-2120;;Bolt;
+215;21-2149;;Stud;
+216;21-2157;;Bolt;
+217;21-2162;;Screw;
+218;21-2177;;Cylinder base nut;
+219;21-2182;;Nut;
+220;21-2183;;Crankshaft stud (1 3/8 in. O.A.);
+221;21-2189;;Stud;
+222;21-2189;;Stud;caliper to outer member
+223;21-2191;;Pivot screw;
+224;21-2192;;Screw;
+225;21-2192;;Screw;short
+226;21-2194;;Screw;
+227;21-2194;;Screw;long
+228;21-2196;;Screw;
+229;21-2196;;Cover;Attachment screw
+230;21-2197;;Stud (Torque stay);
+231;21-2198;;Stator stud;
+232;21-2199;;Stator stud;
+233;21-2200;;Stud - cylinder head (5/16 in.);
+234;21-2201;;Stud- cylinder head (3/8 in.);
+235;21-2204;;Socket nut (3/8 in.);
+236;21-2205;;Socket nut (5/16 in.);
+237;21-2206;;Bolt - rocker box;
+238;21-2207;;Bolt;
+239;21-2225;;Stud;
+240;21-2225;;Stud (Tail lamp support to fender);
+241;21-2230;;Screw;
+242;21-7001;;Anchor bolt;
+243;21-7001;;Anchor bolt;left
+244;21-7002;;Anchor bolt;
+245;21-7002;;Anchor bolt;right
+246;21-7004;;Bolt;
+247;21-7004;;Bolt;torque stay to swinging arm
+248;21-7005;;Bolt;
+249;21-7005;;Bolt - disc to sprocket;
+250;21-7006;;Adjuster nut;
+251;21-7006;;Adjuster nut;"push rod (5/16"" UNF shouldered)"
+252;21-7007;;Bolt;
+253;21-7007;;Bolt;master cylinder fixing
+254;21-7008;;Washer;
+255;21-7009;;Nut;
+256;21-7010;;Screw;
+257;21-7010;;Screw;rear stop switch
+258;28696;;Bleed nipple;
+259;28696;AP.LTD;Bleed nipple;
+260;3437-307;AP.LTD;Bolt;
+261;3437-307;AP.LTD;Bolt;caliper halves
+262;3468-229;;Bleed nipple;
+263;3468-229;AP.LTD;Bleed nipple;
+264;3528-441;;Spiral pin;
+265;3528-441;AP.LTD;Spiral pin;
+266;37-0653;;Bearing;
+267;37-0653;;Bearing - right (metric 120);
+268;37-1237;;Dust cover;
+269;37-1237;;Dust cover - right;
+270;37-2027;;"WASHERS - PLAIN-Thick 0.092""-i/d 0.531""-o/d 1.031""";
+271;37-2294;;Spoke nipple;
+272;37-2331;;Serrated washer;
+273;37-2331;;Serrated washer (Flasher lamp stanchion);
+274;37-2338;;Distance piece (Torque stay);
+275;37-3468;;Security bolt;
+276;37-3742;;Adjuster;
+277;37-3742;;Adjuster - chain;
+278;37-3761;;O' ring;ignition timing hole plug
+279;37-3965;;Spindle;
+280;37-3965;;Spindle;
+281;37-3969;;Balance weight - short (As required);
+282;37-3970;;Balance weight - long (As required);
+283;37-4126;;Hub;
+284;37-4126;;Hub - left half;
+285;37-4127;;Hub;
+286;37-4127;;Hub - right half;
+287;37-4129;;Rim;
+288;37-4130;;Spoke;
+289;37-4130;;Spoke - inner;
+290;37-4131;;Spoke;
+291;37-4131;;Spoke - outer;
+292;37-4132;;Spindle;
+293;37-4133;;Nut;
+294;37-4133;;Nut;wheel spindle
+295;37-4134;;Lock ring;
+296;37-4135;;Grease retainer;
+297;37-4141;;FRONT WHEEL COMPLETE;
+298;37-4143;;FRONT RIM;
+299;37-4143;;RIM;SPOKES AND HUB ASSEMBLY
+300;37-4263;;Caliper cover attachment;
+301;37-4263;;Caliper cover;
+302;37-4275;;Disc;
+303;3761-270;;Piston;
+304;3761-270;AP.LTD;Piston;
+305;37-7001;;Hub;
+306;37-7001;;Hub - Ieft half;
+307;37-7002;;Hub;
+308;37-7002;;Hub - right half;
+309;37-7003;;Spacer;
+310;37-7003;;Spacer;- right bearing
+311;37-7004;;Driving ring;
+312;37-7004;;Driving ring - speedometer unit;
+313;37-7005;;Spacer tube;
+314;37-7005;;Spacer tube - bearings;
+315;37-7006;;Spacer;
+316;37-7006;;Spacer - left bearing;
+317;37-7007;;Spoke;
+318;37-7007;;Spoke;outer - right
+319;37-7008;;Spoke;
+320;37-7008;;Spoke;outer - left
+321;37-7009;;Spoke;
+322;37-7009;;Spoke;inner - right and left
+323;37-7010;;Centre spacer- rear hub;
+324;37-7016;;Sprocket;
+325;37-7016;;Sprocket - rear wheel 47T;
+326;37-7017;;REAR RIM;
+327;37-7017;;RIM;SPOKES AND HUB ASSEMBLY
+328;37-7018;;Rim -W.M.3;
+329;37-7018;;Rim -W.M.3 - 19;
+330;37-7019;;REAR WHEEL ASSEMBLY (complete);
+331;37-7020;;Rear caliper mounting plate;
+332;37-7020;;Rear caliper mounting plate (Replaces 37-7014. Order kit 00-4409 when servicing earlier machines);
+333;37-7021;;Washer;
+334;37-7021;;Washer - speedometer drive gearbox * (* Used only with latest caliper plate 37-7020);
+335;4741-570;AP.LTD;Brake pad ( Order kit Part No. 99-2769);
+336;4741-570;AP.LTD;Brake pad (Order kit;Part No.99-2769)
+337;51271406;;Bulb holder;
+338;51271406;Lucas;Bulb holder;
+339;534296;;Plate;
+340;534296;Lucas;Plate;
+341;54130041;;Nut;
+342;54130041;Lucas;Nut;
+343;54580300;;Gasket;
+344;54580300;Lucas;Gasket;
+345;54580322;;Bulbholder;
+346;54580322;Lucas;Bulbholder;
+347;54583924;;Gasket;
+348;54583924;Lucas;Gasket;
+349;54584931;;Base assembly;
+350;54584931;Lucas;Base assembly;
+351;553783;;Bulbholder;
+352;553783;Lucas;Bulbholder (Europe);
+353;554602;;Bulbholder;
+354;554602;Lucas;Bulbholder (UK-USA-Canada);
+355;57-0023;;Bushing;
+356;57-0031;;Kickstarter return spring;
+357;57-0045;;Kickstart stop;
+358;57-0047;;Kickstarter spring anchor pin;
+359;57-0280;;Circlip;
+360;57-0280;;Circlip - right;
+361;57-0394;;Roller;
+362;57-0404;;Quadrant return spring;
+363;57-0405;;Plunger spring;
+364;57-0407;;Guide plate;
+365;57-0730;;Kickstart pinion;
+366;57-0731;;Kickstart ratchet;
+367;57-0912;;Locating peg;
+368;57-0912;;Locating peg (L/S at thrust washer);
+369;57-0989;;Hollow dowel;
+370;57-1070;;Bearing (metric 125);
+371;57-1167;;Pedal locating spring;
+372;57-1250;;Pinion spring;
+373;57-1257;;Fibre washer;
+374;57-1363;;Driven plate;
+375;57-1606;;Needle roller bearing;
+376;57-1606;;Needle roller bearing;layshaft
+377;57-1607;;Thrust washer;
+378;57-1614;;Layshaft Bearing;
+379;57-1646;;Rubber cover;
+380;57-1710;;Lever shaft;
+381;57-1712;;Return spring;
+382;57-1722;;Drive rubber (large);
+383;57-1723;;Rebound rubber (small);
+384;57-1736;;Clutch operating rod;
+385;57-1920;;Blanking plug;
+386;57-1920;;Blanking plug (Reference only);
+387;57-1931;;Spring cup;
+388;57-1955;;Oil seal housing;
+389;57-1956;;Oil seal;
+390;57-1962;;Washer;
+391;57-1963;;Pinion sleeve;
+392;57-2159;;Adjuster pin;
+393;57-2166;;Filler plug;
+394;57-2167;;Drain plug (with level tube);
+395;57-2173;;Kickstarter crank;
+396;57-2240;;Tab washer;
+397;57-2259;;Drain and adjuster plug;
+398;57-2330;;Pedal rubber;
+399;57-2331;;Pedal rubber;
+400;57-2331;;Pedal rubber;centre stand
+401;57-2450;;Pedal rubber;
+402;57-2526;;Pressure nut;
+403;57-3673;;Plain washer;
+404;57-3762;;Abutment for clutch cable;
+405;573832;;Interior assembly;
+406;573832;Lucas;Interior assembly;
+407;57-3929;;Hub;
+408;57-3931;;Thrust washer;
+409;57-3978;;Washer;
+410;57-3988;;Bush;
+411;57-3989;;Selector ford rod;
+412;57-4113;;Circlip;
+413;57-4117;;Kickstarter quadrant;
+414;57-4356;;Cotter pin c/w nut and washer;
+415;57-4364;;Selector fork - mainshaft 4th gear;
+416;57-4366;;Selector fork - layshaft 3rd gear;
+417;57-4376;;Mainshaft 4th gear;
+418;57-4377;;MAINSHAFT 3rd GEAR;
+419;57-4379;;Bush;
+420;57-4379;;Bush (Reference only);
+421;57-4396;;Locknut;
+422;57-4400;;Housing,index plunger;
+423;57-4403;;Gearchange quadrant plunger;
+424;57-4432;;MAINSHAFT;
+425;57-4435;;Clutch shock absorber assembly (complete);
+426;57-4436;;Inner plate;
+427;57-4437;;Outer plate;
+428;57-4438;;Centre;
+429;57-4459;;Plunger spring;
+430;57-4587;;CLUTCH LEVER ASSEMBLY (complete);
+431;57-4587;;CLUTCH LEVER ASSEMBLY (18-24 inclusive);
+432;57-4588;;Clutch lever;
+433;57-4589;;Thrust plate;
+434;57-4590;;Pressure plate;
+435;57-4636;;Shock absorber spider;
+436;57-4640;;Sprocket and housing;
+437;57-4644;;Spring;
+438;57-4647;;Layshaft 3rd gear;
+439;57-4653;;Mainshaft 1st and 2nd gear;
+440;57-4654;;LAYSHAFT 1st GEAR;
+441;57-4656;;Bush;
+442;57-4657;;LAYSHAFT 2nd GEAR;
+443;57-4659;;Bush;
+444;57-4660;;Selector fork - Layshaft 1st gear;
+445;57-4661;;Driving dog;
+446;57-4754;;Screwed pin;
+447;57-4756;;Kickstarter axle;
+448;57-4763;;Driving plate (bonded);
+449;57-4781;;MAINSHAFT HIGH GEAR ASSEMBLY (C/W HIGH GEAR BEARING);
+450;57-4782;;Gearbox sprocket;
+451;57-4782;;Gearbox sprocket - 20T;
+452;57-4787;;Layshaft 4th gear;
+453;57-4787;;Layshaft 4th gear (Reference only);
+454;57-4791;;Layshaft high gear;
+455;57-4791;;Layshaft high gear (Reference only);
+456;57-4794;;Washer;
+457;57-4889;;Camplate;
+458;57-4900;;LAYSHAFT;
+459;57-4903;;Clutch assembly complete;
+460;57-4909;;Lock washer;
+461;57-7001;;Gearbox Inner Cover;
+462;57-7003;;Foot change spindle;
+463;57-7008;;Gearchange spindle bush;
+464;57-7009;;Bushing;
+465;57-7010;;Gearchange pedal;
+466;57-7011;;Quadrant spindle;
+467;57-7012;;Joint washer;
+468;57-7012;;Joint washer;inner cover to crankcase
+469;57-7014;;GEARBOX OUTER COVER (complete);
+470;57-7015;;Plug;
+471;57-7016;;Retainer;
+472;57-7017;;Kickstarter pedal;
+473;57-7018;;FOLDING KICKSTARTER ASSEMBLY (complete);
+474;57-7019;;Operating quadrant;
+475;57-7020;;Index plunger;
+476;57-7021;;Gearchange quadrant assembly;
+477;60-0262;WC200;Plug cover;
+478;60-0291;;Tool roll;
+479;60-0494;;Circlip;
+480;60-0622;;Ignition key (state serial number);
+481;60-0623;;Key (state serial no.);
+482;60-0683;;Throttle cable;
+483;60-0683;;Throttle cable (twist grip to junction block) (T140V - LOW BAR);
+484;60-0685;;Junction box throttle and air control;
+485;60-0685;;Junction box throttle and air control (T140V - UNIVERSAL);
+486;60-0732;;Throttle cable complete;
+487;60-0732;;Throttle cable COMPLETE (T140V - LOW BAR);
+488;60-0733;;Throttle cable (junction block to carburetor);
+489;60-0746;;Throttle cable complete;
+490;60-0746;;Throttle cable COMPLETE (TR7RV - LOW BAR);
+491;60-0767;;Screw driver;
+492;60-0777;;Cable clip;
+493;60-0911;N3;Sparking plug (CHAMPION);
+494;60-0971;;Box spanner;
+495;60-0974;;Tire valve key;
+496;60-0978;;Cable clip;
+497;60-1050;;Plug spanner;
+498;60-1806;;Throttle cable complete;
+499;60-1806;;Throttle cable COMPLETE (TR7RV - HIGH BAR);
+500;60-1841;;Grease nipple;
+501;60-1907;;Ring spanner;
+502;60-2084;;Spanner;
+503;60-2084;;Spanner - open ended;
+504;60-2087;;Check wire;
+505;60-2118;;Rear chain;
+506;60-2118;;Rear chain;5/8 in. x 3/8 in. x 107 links
+507;60-2138;;Timing label for C.B. cover;
+508;60-2184;;Damper unit spanner;
+509;60-2252;;Clip;
+510;60-2252;;Clip - breather pipe - front and rear;
+511;60-2320;;Washer;
+512;60-2321;;Plain washer;
+513;60-2329;;Plain washer;
+514;60-2330;;Plain washer;
+515;60-2331;;Washer;
+516;60-2332;;Plain washer;
+517;60-2333;;Washer;
+518;60-2347;;Washer;
+519;60-2363;;Valve ball (7/32 in. dia.);
+520;60-2364;;Steel ball;
+521;60-2364;;Steel ball;1/4 in. diam.
+522;60-2368;;Ball;
+523;60-2368;;Ball;3/8 in. diam.
+524;60-2381;;Screw;
+525;60-2381;;Screw - self tapping;
+526;60-2391;;Washer;
+527;60-2416;;Washer;
+528;60-2417;;Washer;
+529;60-2417;;Washer (Hinge Attachment);
+530;60-2419;;Washer;
+531;60-2419;;Washer (Bracket to frame);
+532;60-2427;;Spring washer for bolt;
+533;60-2428;;Spring washer;
+534;60-2438;;Washer;
+535;60-2438;;Washer (All models - Cover to body);
+536;60-2569;;Tank badge;
+537;60-2599;;Licence holder;
+538;60-2599;;Licence holder (Available);
+539;60-2600;;Rubber cup;
+540;60-2640;;O' ring shift spindle;
+541;60-2701;;Split pin (5/64 in. x 1/2 in.);
+542;60-2701;;Split pin (5/64 in. x 1/2 in.) (Reference only);
+543;60-2720;;Split pin (3/32 in. x 1/2 in.);
+544;60-2720;;Split pin (3/32 in. x 1/2 in.) (Reference only);
+545;60-3161;;Grommet;
+546;60-3161;;Grommet (Horn attachment);
+547;60-3213;;Speedometer drive unit;
+548;60-3355;;O-ring;
+549;60-3361;;"Transfer ""Made in England""";
+550;60-3494;;Circlip;
+551;60-3500;;Oil seal;
+552;60-3511;;Needle roller bearing;
+553;60-3512;;Oil seal;
+554;60-3512;;Oil seal;gearbox sprocket
+555;60-3539;;Screw;
+556;60-3539;;Screw (All models - left assy to right assy);
+557;60-3548;;Sealing ring;
+558;60-3552;;Mainshaft bearing;
+559;60-3552;;Mainshaft bearing (Hoffman LS8 2 SPOT);
+560;60-3567;;Air control lever;
+561;60-3585;;Adjuster;
+562;60-3586;;Lockring;
+563;60-3614;54386637;Spring;
+564;60-3614;54386637;Spring (Flasher unit attach.);
+565;60-3616;;O-ring;
+566;60-3719;;Oil pressure switch;
+567;60-3748;;Decal '5 speed';
+568;60-3748;;Decal '5 speed' (Not illus.);
+569;60-3761;;Self locking nut;
+570;60-3891;MW1/10/51/10;Plug cover;
+571;60-3891;MW1/1 /51/1 ;Plug cover;suppressed (FRANCE) (MERIT-WORKE)
+572;60-3896;;Screw;
+573;60-3925;;Clutch cable complete;
+574;60-3925;;Clutch cable COMPLETE ( HIGH BAR);
+575;60-3957;;SUSPENSION UNIT (complete);
+576;60-3957;;SUSPENSION UNIT (Girling 64052564);
+577;60-3963;;Washer;
+578;60-3975;;Clip;
+579;60-3975;;Clip (TR7RV);
+580;60-4101;4823432;CALIPER;
+581;60-4102;4222-979;Master cylinder ;
+582;60-4102;4222979;MASTER CYLINDER;
+583;60-4103;;Grommet;
+584;60-4103;;Grommet;flasher wire (Not illus.)
+585;60-4125;;Primary chain;
+586;60-4125;;Primary chain;3/8 in. Triplex x 84 links
+587;60-4126;;Air control cable complete;
+588;60-4126;;AIR CONTROL CABLE COMPLETE (T140V - UNIVERSAL);
+589;60-4127;;Air cable;
+590;60-4127;;Air cable;lever to junction box (T140V - UNIVERSAL)
+591;60-4128;;Air cable;
+592;60-4128;;Air cable;junction box to carburetor (T140V - UNIVERSAL)
+593;60-4150;;Name plate;
+594;60-4152;;Rubber plug;
+595;60-4153;;Rubber bush;
+596;60-4154;;Spire nut;
+597;60-4154;;Spire nut (Name plate attachment);
+598;60-4156;;Caliper cover decal;
+599;60-4156;;Caliper cover decal;
+600;60-4167;;Main bearing;
+601;60-4167;;Main bearing;right (RHP5/6306)
+602;60-4168;;Clutch cable complete;
+603;60-4168;;Clutch cable COMPLETE (LOW BAR);
+604;60-4175;KL56612;Hose;
+605;60-4175;KL56612;Hose;bottom yoke/fork leg
+606;60-4176;KL58505;Hose;master cylinder/top yoke (For high handlebar)
+607;60-4178;ZTA2070N;Pipe;fork leg/caliper
+608;60-4179;ZT2071N;Pipe;top yoke/bottom yoke
+609;60-4180;K241 3;Locknut;
+610;60-4182;;Copper gasket;
+611;60-4183;AP40320;Banjo bolt;
+612;60-4184;KL44518;Sealing washer;
+613;60-4186;AP3187/810;Rubber boot;
+614;60-4194;;Air control cable complete;
+615;60-4194;;Air control cable COMPLETE (TR7RV - UNIVERSAL);
+616;60-4206;;Front brake lever assembly;
+617;60-4245;;Washer;
+618;60-4246;;Plain washer;
+619;60-4247;;Plain washer;
+620;60-4248;;Washer;
+621;60-4250;;Spring washer;
+622;60-4251;;Washer;
+623;60-4251;;Washer (Motor to frame centre bottom);
+624;60-4253;;Key;
+625;60-4254;;Cable clip;
+626;60-4255;;Hammer-drive screw;
+627;60-4258;;Cable clip;
+628;60-4260;;Spring washer;
+629;60-4260;;Spring;washer
+630;60-4265;;Element;
+631;60-4265;;Element (All models);
+632;60-4266;3634;Cover;bleed nipple (GIRLING PART)
+633;60-4328;;Washer;paper
+634;60-4365;384724;Filler cap;
+635;60-4366;3818747;Diaphragm;
+636;60-4374;3855/814;O-ring;
+637;60-4384;;"Motif ""Tiger 750""";
+638;60-4384;;"Motif ""Tiger 750"" (TR7RV)";
+639;60-4385;;"Motif ""Bonneville 750""";
+640;60-4385;;"Motif ""Bonneville 750"" (T140V)";
+641;60-4397;3251/796;Body;
+642;60-4397;3251/796;Body;reservoir
+643;60-4398;3517/221;Distance piece;
+644;60-4399;3512/305;Washer;
+645;60-4401;4211-127;MASTER CYLINDER COMPLETE;
+646;60-4409;9206-2050;Hose;reservoir to master cylinder
+647;60-4428;;Ear clamp;
+648;60-4428;;Ear clamp;oil return pipe
+649;60-4429;;Ear clamp;
+650;60-4429;;Ear clamp;oil feed pipe
+651;60-4440;;Grommet;
+652;60-4440;;Grommet;flasher wires (Not illus.)
+653;60-4511;;Gas tap - main;
+654;60-4512;;Gas tap-reserve;
+655;60-4619;KL563;Hose;
+656;60-4619;KL563;Hose;master cylinder/top yoke (For low handlebar)
+657;60-7001;;Throttle cable;
+658;60-7001;;Throttle cable (twist grip to junction block) (T140V - HIGH BAR);
+659;60-7002;;Throttle cable complete;
+660;60-7002;;Throttle cable COMPLETE (T140V - HIGH BAR);
+661;60-7003;;Decal - ignition switch;
+662;60-7003;;Decal;ignition switch (Not illustrated)
+663;60-7004;;Decal - warning lights;
+664;60-7004;;Decal;warning lights (Not illustrated)
+665;60-7005;;Decal - light switch;
+666;60-7005;;Decal;light switch (Not illustrated)
+667;60-7007;ZTA2281;Pipe;
+668;60-7007;ZTA2281;Pipe;hose to caliper
+669;60-7010;RSM3006/00;Tachometer head;
+670;60-7011;41-118-126-47;Trip control;
+671;60-7012;DF9110/00;Speedometer cable;
+672;60-7013;DF9111/03;Tachometer cable;
+673;60-7014;364/18;Twist grip ;
+674;60-7014;364/18;TWIST GRIP (T140V);
+675;60-7016;;Sealing washer;
+676;60-7018;54420128;Condenser;
+677;60-7019;;TOOKLIT COMPLETE;
+678;60-7020;;Tommy bar;
+679;60-7020;;Tommy bar;for rear wheel and box spanner
+680;60-7021;;Clutch lever assembly complete;
+681;60-7022;;Handlebar bracket for clutch lever;
+682;60-7022;;Handlebar bracket;clutch lever
+683;60-7023;;Clutch lever blade;
+684;60-7024;;Handlebar clamp for bracket;
+685;60-7025;;Screw;
+686;60-7025;;Screw;"handlebar clamp 5/8"" x 1BA"
+687;60-7026;;Pivot pin;
+688;60-7027;SSM4003/01;Speedometer head;KPH
+689;60-7028;;Hose;
+690;60-7028;;Hose;master cylinder to pipe
+691;60-7030;;Clip;
+692;60-7030;;Clip;hose
+693;622/172;Amal;Tickler complete (Not illustrated);
+694;622/172;Amal.;Tickler complete;
+695;6405263;;Damper unit;
+696;6405263;Girling;Damper unit (Girling 6405263);
+697;643;;Bulb;
+698;643;Lucas;Bulb;
+699;70-0375;;Intermediate wheel spindle;
+700;70-0400;;Intermediate wheel bush;
+701;70-0403;;Valve spring;
+702;70-0470;;Lock nut;
+703;70-0489;;Circlip;
+704;70-0495;;Drive block;
+705;70-1330;;Thrust washer (3/8 in.);
+706;70-1335;;Copper washer;
+707;70-1457;;Rocker (right exhaust;left inlet)
+708;70-1458;;Rocker (left exhaust;right inlet)
+709;70-1513;;Adjusting pin;
+710;70-1532;;Hollow dowel;
+711;70-1532;;Hollow dowel;tappet oil feed
+712;70-1543;;Top collar;
+713;70-1558;;Camshaft key;
+714;70-1574;;Spring washer;
+715;70-1575;;Thrust washer (5 in.);
+716;70-1580;;Key;
+717;70-1612;;Serrated/Shakeproof washer;
+718;70-2288;;Serrated washer;hose to bracket
+719;70-2360;;Screwed plug;
+720;70-2441;;Copper washer;
+721;70-2879;;Main bearing;
+722;70-2879;;Main bearing;left (RM11L. )
+723;70-2904;;Exhaust valve;
+724;70-3135;;Rocker spindle bush;
+725;70-3300;;Clamping washer;
+726;70-3302;;Washer;
+727;70-3446;;Washer;
+728;70-3586;;Big end bearing (Available in -.010 in. and - .020 in. undersizes);
+729;70-3768;;D-washer (Exhaust pipes to mufflers);
+730;70-3768;;D-washer (Exhaust pipes to coupling pipe);
+731;70-3768;;D-washer;
+732;70-3789;;Cover plate;
+733;70-3821;;Countersunk screw;
+734;70-3887;;Serrated washer;
+735;70-3902;;Plug;
+736;70-3902;;Plug;crankshaft oilway
+737;70-3903;;Oil tube;
+738;70-3975;;Tab washer;
+739;70-4016;;Patent plate;
+740;70-4144;;Rubber grommet;
+741;70-4152;;Tie rod;
+742;70-4221;;Inner valve spring;
+743;70-4538;;Scavenge pipe;
+744;70-4538;;Scavenge pipe (Reference only);
+745;70-4564;;Timing pinion;
+746;70-4568;;Oil seal;
+747;70-4569;;Circlip;
+748;70-4603;;Inlet valve;
+749;70-4705;;Clip;
+750;70-4707;;Rubber grommet;
+751;70-4752;;Sealing ring (Cover tubes);
+752;70-5085;;Chain tensioner blade;
+753;70-5087;;Trunnion;
+754;70-5088;;Chain tensioner abutment;
+755;70-5155;;Flanged bush;
+756;70-5155;;Flanged bush (Reference only;not supplied separately. (Part of 70-9332))
+757;70-5156;;Bush;
+758;70-5156;;Bush (Reference only;not supplied separately. (Part of 70-9332))
+759;70-5157;;Driving gear;
+760;70-5660;;Joint washer;
+761;70-5660;;Joint washer (TR7RV);
+762;70-5874;;Clip;
+763;70-5874;;Clip (Exhaust pipes to mufflers);
+764;70-6159;;INTERMEDIATE WHEEL (complete);
+765;70-6309;;Cylinder base washer;
+766;70-6386;;Locating peg (at oil pipes);
+767;70-6386;;Locating peg (at oil pipes) (Reference only);
+768;70-6387;;Oil seal (0.020 in. undersize);
+769;70-6387;;Oil seal (0.020 in. undersize) (For reground crankshaft);
+770;70-6523;;Exhaust camshaft nut;
+771;70-6559;;Plain washer;
+772;70-6596;;Cap;
+773;70-6596;;Cap (Reference only);
+774;70-6681;;Scavenger plunger;
+775;70-6848;;Clip - rocker feed pipe or return pipe;
+776;70-6857;;Exhaust pipe stay;
+777;70-7310;;O' ring - bottom  (Cover tubes);
+778;70-7351;;Sealing washer;
+779;70-7354;;Screw;
+780;70-7400;;Outer valve spring;
+781;70-7431;;O' ring;
+782;70-7512;;Clip;
+783;70-7512;;Clip (Exhaust pipes to coupling pipe);
+784;70-7554;;Rubber washer;
+785;70-7554;;Rubber washer (Coil and tool tray attachment;rear.)
+786;70-7563;;O-ring;
+787;70-7573;;Rubber plug;
+788;70-7590;;Body;
+789;70-7590;;Body (Reference only);
+790;70-7591;;Spring;
+791;70-7591;;Spring (Reference only);
+792;70-7680;;Pillar bolt;
+793;70-8038;;Shim (0.010 in.);
+794;70-8038;;Shim (0.010 in.) -  Engine sprocket (As required (up to 4));
+795;70-8163;;Plain washer;
+796;70-8737;;Cover;
+797;70-8751;;Hollow dowel;
+798;70-8751;;Hollow dowel;cylinder base
+799;70-8752;;Piston;
+800;70-8752;;Piston (Reference only);
+801;70-8754;;Joint washer;
+802;70-8754;;Joint washer (cap to body);
+803;70-8770;;"Washer - disc/sprocket nut (.390""-.625""-.064"")";
+804;70-8782;;O' ring;
+805;70-8782;;joint washer is different;but o-ring on inspec. Covers
+806;70-8801;;Exhaust tappet;
+807;70-9246;;Timing cover;
+808;70-9269;;Feed plunger;
+809;70-9330;;Oilway plug;
+810;70-9332;;Securing screw;
+811;70-9336;;Crankcase filter;
+812;70-9352;;Inlet tappet guide block;
+813;70-9353;;Exhaust tappet guide block;
+814;70-9360;;Sleeve nut;
+815;70-9421;;OIL PUMP;
+816;70-9554;;Insulating ring (Carb. to manifold & head) ;
+817;70-9555;;Cup and head  (Carb. to manifold & head);
+818;70-9703;;Adjuster sleeve nut;
+819;70-9711;622/1 1;'O' ring for flange (Each carburettor);
+820;70-9888;;Coupling pipe;
+821;70-9914;;Connecting rod bolt;
+822;70-9988;;Tachometer drive plug;
+823;71 -1707;;Sleeve;
+824;71 -1707;;Sleeve (Cover tubes);
+825;71 -2501;;Washer;
+826;71 -2501;;Washer;grease nipple
+827;71 -2599;;Rocker box gasket;
+828;71 -2813;;Stud;
+829;71 -2813;;Stud  (Carb. to manifold & head) (T140V);
+830;71 -2930;;Cover pressure switch;
+831;71 -3294;;Inlet valve guide;
+832;71 -3295;;Exhaust valve guide;
+833;71 -3668;;Inlet rocker box;
+834;71 -3669;;Exhaust rocker box;
+835;71 -3896;;O' ring;
+836;71 -3896;;O' ring P;
+837;71-0070;;Ball pin;
+838;71-0082;;Rotor key;
+839;71-0286;;Camshaft bush;
+840;71-0286;;Camshaft bush R.H.;
+841;71-0287;;Camshaft bush;
+842;71-0287;;Camshaft bush L.H.;
+843;71-1003;;Washer;
+844;71-1007;;Inlet camshaft nut;
+845;71-1070;;O-ring;
+846;71-1070;;O' ring;gearbox sprocket
+847;71-1072;;Breather cover plate assembly;
+848;71-1075;;Screw;
+849;71-1078;;Tube;
+850;71-1078;;Tube;primary chain oiler
+851;71-1283;;O' ring - top (Cover tubes);
+852;71-1345;;Grommet;
+853;71-1345;;Grommet;alternator leads -
+854;71-1419;;Joint washer;
+855;71-1460;;Joint washer;
+856;71-1462;;Joint washer;
+857;71-1707;;Sleeve;
+858;71-1707;;Sleeve (Cover tubes);
+859;71-1860;;Carburetor adaptor;
+860;71-1860;;Carburetor adaptor (TR7RV);
+861;71-2349;;Oil vent pipe;
+862;71-2361;;Dowel;rocker box to head
+863;71-2425;;Flywheel;
+864;71-2465;;Finned clip;
+865;71-2480;;End cup;
+866;71-2481;;Welch washer;
+867;71-2482;;Thrust washer;
+868;71-2482;;Thrust washer (Before Engine No.XN65837);
+869;71-2501;;Fibre washer;
+870;71-2598;;Plain washer;
+871;71-2599;;Rocker box gasket;
+872;71-2653;;Driven gear;
+873;71-2660;;Shim (0 .030 in.);
+874;71-2660;;Shim (0 .030 in.) - Engine sprocket (As required (up to 4));
+875;71-2663;;Spacer;
+876;71-2663;;Spacer - Engine sprocket;
+877;71-2800;;Screwed plug;
+878;71-2877;;Nut;
+879;71-3006;;CONNECTING ROD (complete);
+880;71-3013;;Cylinder stud;
+881;71-3030;;CRANKSHAFT AND FLYWHEEL ASSEMBLY (complete);
+882;71-3294;;Inlet valve guide;
+883;71-3295;;Exhaust valve guide;
+884;71-3296;;Bottom cup;
+885;71-3298;;CRANKSHAFT C/W. OIL TUBE (complete);
+886;71-3313;;Connector;
+887;71-3313;;Connector (T140V);
+888;71-3316;;Sump plate;
+889;71-3329;;Push rod cover tube;
+890;71-3330;;Push rod;
+891;71-3338;;Inlet manifold;
+892;71-3338;;Inlet manifold - R. H. (T140V);
+893;71-3339;;Inlet manifold;
+894;71-3339;;Inlet manifold - L.H. (T140V);
+895;71-3354;;Gudgeon pin;
+896;71-3447;;OIL PRESSURE RELEASE VALVE (complete);
+897;71-3447;;OIL PRESSURE RELEASE VALVE;
+898;71-3463;;Oil Filler cap;
+899;71-3542;;Motor sprocket;
+900;71-3542;;Motor sprocket;29 teeth Triplex
+901;71-3544;;Distance piece;
+902;71-3549;;Rocker spindle;
+903;71-3550;;Rocker oil pipe;
+904;71-3551;;Rocker feed pipe;
+905;71-3552;;Flywheel bolt;
+906;71-3552;;Flywheel bolt (* Use 60-0524 Loctite Sealant);
+907;71-3553;;Bridge plate;
+908;71-3556;;Inlet manifold;
+909;71-3556;;Inlet manifold (TR7RV);
+910;71-3573;;Joint washer;
+911;71-3573;;Joint washer  (Carb. to manifold & head) (T140V);
+912;71-3577;;Connector pipe;
+913;71-3577;;Connector pipe (T140V);
+914;71-3666;;Camshaft pinion;
+915;71-3668;;Inlet rocker box;
+916;71-3671;;Tappet inspection cover;
+917;71-3673;;Gasket;
+918;71-3676;;PISTON COMPLETE (8.6 : 1);
+919;71-3681;;Cylinder head gasket;
+920;71-3690;;Taper compression ring;
+921;71-3695;;Oil control ring;
+922;71-3700;;Circlip;
+923;71-3748;;Split cotter;
+924;71-3749;;Washer;
+925;71-3754;;Joint washer;
+926;71-3755;;Exhaust pipe;
+927;71-3755;;Exhaust pipe - left;
+928;71-3758;;Exhaust pipe;
+929;71-3758;;Exhaust pipe - right;
+930;71-3778;;PISTON (complete) (7.9 : 1);
+931;71-3778;;PISTON COMPLETE (7.9 : 1);
+932;71-3892;;Timing pointer;
+933;71-3895;;Inspection plug vg.;
+934;71-3910;;Joint washer;
+935;71-3989;;Hollow dowel;crankcase joint
+936;71-4005;;Cylinder block;
+937;71-4020;;CYLINDER HEAD;
+938;71-4044;;Outlet stub;
+939;71-4159;;Muffler;
+940;71-7001;;CRANKCASE DRIVE SIDE (complete);
+941;71-7001;;CRANKCASE DRIVE SIDE * (Reference only);
+942;71-7002;;CRANKCASE TIMING SIDE (complete);
+943;71-7002;;CRANKCASE TIMING SIDE * (Reference only);
+944;71-7003;;Chaincase;
+945;71-7004;;CRANKCASE TS/DS *;
+946;71-7007;;CYLINDER HEAD;
+947;71-7008;;Inlet tappet;
+948;71-7009;;Joint washer;
+949;71-7011;;Tachometer gearbox;
+950;71-7012;;Thrust cap;
+951;71-7012;;Thrust cap (After Engine No.XN65837);
+952;71-7013;;Oil junction block;
+953;71-7014;;Oil return pipe;
+954;71-7015;;Oil feed pipe;
+955;71-7016;;Inlet camshaft;
+956;71-7017;;EXHAUST CAMSHAFT (complete);
+957;71-7018;;Clip;
+958;71-7018;;Clip (T140V);
+959;71-7019;;Connector pipe;
+960;71-7019;;Connector pipe (T140V - Air cleaner to frame);
+961;82-1335;;Washer;
+962;82-1880;;Copper washer;
+963;82-2184;;Washer;
+964;82-3799;;Nut;
+965;82-3799;;Nut (Reflector Mounting);
+966;82-4048;;Joint washer;
+967;82-4129;;Screw (rear);
+968;82-4129;;Screw (rear) (Name plate attachment);
+969;82-4228;;Spring;
+970;82-4717;;Nut;
+971;82-5338;;Nut;
+972;82-5343;;Drain plug;
+973;82-6039;;Rubber bush;
+974;82-6039;;Rubber bush (Battery carrier mounting);
+975;82-6673;;Panel grommet;
+976;82-6738;;Lock c/w 2 keys;
+977;82-6784;;Grommet;wiring harness  or Throttle cable
+978;82-6850;;Rear No. plate bracket;
+979;82-6850;;Rear No. plate bracket - bottom;
+980;82-6981;;Ignition lock with key;
+981;82-7021;;Bolt;
+982;82-7380;;Protective strip;
+983;82-7560;;Seat plunger and knob;
+984;82-7888;;Screw;
+985;82-7888;;Screw - rear - tank motif;
+986;82-8091;;Battery tray moulding;
+987;82-8382;;Spring;
+988;82-9054;;Footrest rubber;
+989;82-9063;;Distance tube;
+990;82-9073;;Clip;
+991;82-9073;;Clip - feed pipe;
+992;82-9089;;Washer;
+993;82-9089;;Washer ( Footrest swivel);
+994;82-9093;;Rubber buffer;
+995;82-9279;;Footrest rubber (alternative 82-9630);
+996;82-9353;;Retaining strap;
+997;82-9355;;Buckle;
+998;82-9561;;Coil grommet;
+999;82-9700;;Tank motif;
+1000;82-9700;;Tank motif - right;
+1001;82-9701;;Tank motif;
+1002;82-9701;;Tank motif - left;
+1003;83-0002;;Washer;
+1004;83-1339;;Screw;
+1005;83-1339;;Screw - front - tank motif;
+1006;83-1560;;Prop stand;
+1007;83-1615;;Clip;
+1008;83-1615;;Clip - breather pipe to fender;
+1009;83-2007;;Abutment ring;
+1010;83205;;Diode;
+1011;83205;Lucas;Diode;headlamp (CANADA ONLY) (Not illustrated)
+1012;83-2266;;"Washer - wheel spindle nut(.656""-l .000""-.092"")";
+1013;83-2508;;Shoulder screw;
+1014;83-2508;;Shoulder screw (Battery carrier mounting);
+1015;83-2521;;Bush;
+1016;83-2521;;Bush;pivot arm
+1017;83-2641;;Chainguard;
+1018;83-2689;;Distance piece left hand side;
+1019;83-2689;;Distance piece L. H.;
+1020;83-2690;;Distance piece right hand side;
+1021;83-2690;;Distance piece R.H.;
+1022;83-2691;;Sleeve;
+1023;83-2691;;Sleeve;swinging arm pivot
+1024;83-2692;;Dirt excluder;
+1025;83-2726;;Rear number plate;
+1026;83-2796;;Lower front bracket;
+1027;83-2829;;Gasket;
+1028;83-2846;;Distance piece;
+1029;83-2846;;Distance piece - left (Motor to frame centre bottom);
+1030;83-2847;;Distance piece;
+1031;83-2847;;Distance piece - right (Motor to frame centre bottom);
+1032;83-2848;;Distance piece;
+1033;83-2848;;Distance piece - left (Motor fixing front);
+1034;83-2849;;Distance piece;
+1035;83-2849;;Distance piece - right (Motor fixing front);
+1036;83-3082;;Cover plate;
+1037;83-3082;;Cover plate - fork end;
+1038;83-3329;;Distance piece;
+1039;83-3329;;Distance piece (Bracket to frame);
+1040;83-3522;;Mounting Rubber;
+1041;83-3522;;Mounting Rubber (Reflector Mounting);
+1042;83-3537;;Steady bracket motor to frame;
+1043;83-3602;;Distance piece left footrest;
+1044;83-3764;;Reflector bracket;
+1045;83-3793;;Spring;
+1046;83-3814;;Washer;
+1047;83-3875;;Filler cap;
+1048;83-3927;;Petrol pipe;
+1049;83-4086;;Attachment plate;
+1050;83-4118;;Tie strap;
+1051;83-4299;;Plain washer;
+1052;83-4299;;Plain washer (All models - Air cleaner to frame);
+1053;83-4355;;Knee grip;
+1054;83-4355;;Knee grip - left;
+1055;83-4356;;Knee grip;
+1056;83-4356;;Knee grip - right;
+1057;83-4395;;Tie strap;
+1058;83-4395;;Tie strap;
+1059;83-4600;;Bridge;
+1060;83-4600;;Bridge - rear fender;
+1061;83-4606;;Body;
+1062;83-4606;;Body - left (Twin Carb T140V);
+1063;83-4607;;Body;
+1064;83-4607;;Body - right (Twin Carb T140V);
+1065;83-4609;;Body;
+1066;83-4609;;Body - right (Single Carb TR7RV);
+1067;83-4610;;Battery carrier assembly;
+1068;83-4610;;Battery carrier assembly;
+1069;83-4763;;Grommet;
+1070;83-4774;;Tail lamp carrier;
+1071;83-4776;;Badge;
+1072;83-4776;;Badge - tank grommet;
+1073;83-4782;;Hinge;
+1074;83-4782;;Hinge - front and rear;
+1075;83-4783;;Oil filter;
+1076;83-4784;;Rear No. plate bracket;
+1077;83-4784;;Rear No. plate bracket - top;
+1078;83-4800;;Sleeve nut;
+1079;83-4800;;Sleeve nut;lamp to back plate
+1080;83-4803;;Side panel;
+1081;83-4803;;Side panel - right;
+1082;83-4806;;Wiring protector;
+1083;83-4806;;Wiring protector (Not illus.);
+1084;83-4807;;Cover;
+1085;83-4807;;Cover - left (Single Carb TR7RV);
+1086;83-4808;;Cover;
+1087;83-4808;;Cover - right (Single Carb TR7RV);
+1088;83-4813;;Crankcase breather pipe;
+1089;83-4813;;Crankcase breather pipe - rear;
+1090;83-4845;;Body;
+1091;83-4845;;Body - left (Single Carb TR7RV);
+1092;83-4854;;Side panel;
+1093;83-4854;;Side panel - left;
+1094;83-4887;;Petrol pipe;
+1095;83-4898;;Bracket;
+1096;83-4898;;Bracket - Air control lever (T140V);
+1097;83-4930;;Centre fixing bolt;
+1098;83-4931;;Steady rubber;
+1099;83-4932;;Mounting rubber;
+1100;83-4933;;Mounting rubber;
+1101;83-4934;;Mounting rubber;
+1102;83-4941;;Centre stand;
+1103;83-5001;;Support plate;
+1104;83-5105;;U-grommet;
+1105;83-5105;;U-grommet;lamp carrier (Not illus.)
+1106;83-5145;;Grab rail;
+1107;83-5161;;Connector pipe;
+1108;83-5161;;Connector pipe (TR7RV - Air cleaner to frame);
+1109;83-5285;;Crankcase breather pipe;
+1110;83-5285;;Crankcase breather pipe - front;
+1111;83-5290;;T-piece;
+1112;83-5413;;Gas tank (3.6 U.S. galls.);
+1113;83-5413;;Gas tank (3.6 U.S. galls.) (T140V);
+1114;83-5414;;Gas tank (3.6 U.S. galls.);
+1115;83-5414;;Gas tank (3.6 U.S. galls.) (TR7RV);
+1116;83-5448;;Air intake tube;
+1117;83-5448;;Air intake tube;left (All models)
+1118;83-5449;;Air intake tube;
+1119;83-5449;;Air intake tube;right (All models)
+1120;83-5465;;Reservoir assembly;
+1121;83-6209;;Petrol pipe;
+1122;83-6209;;Petrol pipe (1977 T140 4 gallon tanks only);
+1123;83-7003;;Trunnion lever;
+1124;83-7009;;Rear motor plate left;
+1125;83-7011;;Rear motor plate right;
+1126;83-7016;;Return spring;
+1127;83-7016;;Return spring;brake pedal
+1128;83-7018;;Mounting plate;
+1129;83-7018;;Mounting plate;master cylinder
+1130;83-7021;;Hanger;
+1131;83-7021;;Hanger - muffler right;
+1132;83-7022;;Hanger muffler left;
+1133;83-7024;;Trunnion;
+1134;83-7025;;PILLION FOOTREST ASSEMBLY LEFT (complete);
+1135;83-7025;;PILLION FOOTREST ASSEMBLY LEFT;
+1136;83-7026;;PILLION FOOTREST ASSEMBLY RIGHT (complete);
+1137;83-7026;;PILLION FOOTREST ASSEMBLY RIGHT;
+1138;83-7028;;Brake torque stay;
+1139;83-7031;;Rear fender;
+1140;83-7032;;Frame;
+1141;83-7035;;SWINGING ARM (complete);
+1142;83-7035;;SWINGING ARM;
+1143;83-7040;;Footrest;
+1144;83-7040;;Footrest - left and right;
+1145;83-7041;;Coil and tool tray assembly;
+1146;83-7041;;Coil and tool tray assembly (Coil and tool tray attachment;rear.)
+1147;83-7044;;Brake pedal;
+1148;83-7046;;Spindle;
+1149;83-7046;;Spindle;rear brake pedal
+1150;83-7049;;Clip;
+1151;83-7049;;Clip;hose
+1152;83-7053;;Pivot bolt assembly with bushes;
+1153;83-7054;;Pivot bolt bush;
+1154;83-7055;;Outlet stub;
+1155;83-7055;;Outlet stub;feed hose
+1156;83-7056;;Mounting;
+1157;83-7056;;Mounting;reservoir
+1158;83-7057;;Circlip;
+1159;83-7057;;Circlip (All models - Cover to body);
+1160;83-7058;;Screw;
+1161;83-7058;;Screw (front) (Name plate attachment);
+1162;83-7059;;Pedal;
+1163;83-7060;;Rubber washer;
+1164;83-7061;;Petrol tank (4 imp galls.) SEA JADE;
+1165;83-7061;;Petrol tank (4 imp galls.) SEA JADE (TR7RV);
+1166;83-7062;;Petrol tank (4 imp galls.) POLY RED;
+1167;83-7062;;Petrol tank (4 imp galls.) POLY RED (T140V);
+1168;83-7063;;Petrol tank (4 imp galls) blue;
+1169;83-7063;;Petrol tank (4 imp galls) blue (T140V);
+1170;83-7064;;Bracket;
+1171;83-7064;;Bracket - pipe support;
+1172;83-7065;;Twinseat;
+1173;83-7066;;Twinseat cover;
+1174;83-7067;;Cover;
+1175;83-7067;;Cover - left (Twin Carb T140V);
+1176;83-7068;;Cover;
+1177;83-7068;;Cover - right (Twin Carb T140V);
+1178;83-7069;;Clip;
+1179;83-7069;;Clip - vent pipe to T-piece;
+1180;928/098;Amal.;Mixing chamber top;
+1181;928/098;Amal.;Mixing chamber top (Each carburettor);
+1182;930/005;;Carburettor body;
+1183;930/005;Amal.;Carburettor body;
+1184;97-0200;;Set bolt;
+1185;97-0430;;Fibre washer;
+1186;97-0961;;Grommet;
+1187;97-0961;;Grommet;mudguard for wiring (Not illus.)
+1188;97-1388;;Plain washer;
+1189;97-1425;;Sleeve;
+1190;97-1425;;Sleeve;handlebar mounting
+1191;97-1510;;Gaiter;
+1192;97-1510;;Gaiter - fork outer cover;
+1193;97-1527;;Metalastik bush;
+1194;97-1529;;Hemispherical washer;
+1195;97-1580;;Rubber washer;
+1196;97-1581;;Distance piece;
+1197;97-2125;;Grip;
+1198;97-2125;;Grip;right hand
+1199;97-2142;;Grip;
+1200;97-2142;;Grip;left hand
+1201;97-2208;;Rubber mounting;
+1202;97-2209;;Rubber buffer;
+1203;97-2210;;Backing washer;
+1204;97-2221;;Cup;
+1205;97-2262;;Cover;
+1206;97-2262;;Cover;ignition switch
+1207;97-2266;;Sealing washer;
+1208;97-2291;;Handlebar eyebolt;
+1209;97-3893;;Washer;
+1210;97-3894;;Screw / Drain Plug;
+1211;97-4001;;Oil seal;
+1212;97-4002;;Scraper sleeve;
+1213;97-4003;;O-ring;
+1214;97-4004;;Cap screw seal;
+1215;97-4009;;Recoil spring;
+1216;97-4011;;Main spring;
+1217;97-4012;;Nut;
+1218;97-4012;;Nut;damper valve
+1219;97-4026;;Mounting bracket;
+1220;97-4028;;Dust cover;
+1221;97-4031;;Taper roller bearing;
+1222;97-4076;;End plug;
+1223;97-4112;;Handlebar clip;
+1224;97-4112;;Handlebar clip (As required);
+1225;97-4121;;Headlamp bracket;
+1226;97-4121;;Headlamp bracket - left;
+1227;97-4125;;Distance piece;
+1228;97-4125;;Distance piece;headlamp bolt
+1229;97-4166;;Washer;
+1230;97-4203;;Headlamp bracket;
+1231;97-4203;;Headlamp bracket - right;
+1232;97-4317;;Steering stem nut;
+1233;97-4325;;Damper tube and valve assembly;
+1234;97-4380;;Stanchion;
+1235;97-4381;;Top Yoke;
+1236;97-4385;;Bottom yoke and stem;
+1237;97-4387;;Top nut;
+1238;97-4395;;Cap screw;
+1239;97-4396;;FORK ASSEMBLY (complete);
+1240;97-4396;;FORK ASSEMBLY (U.S.A.);
+1241;97-4399;;OUTER MEMBER;
+1242;97-4399;;OUTER MEMBER - LEFT;
+1243;97-4406;;Outer cover;
+1244;97-4406;;Outer cover - left;
+1245;97-4407;;Outer cover;
+1246;97-4407;;Outer cover - right;
+1247;97-4456;;Cap;
+1248;97-4456;;Cap;wheel spindle - left
+1249;97-4457;;Cap;
+1250;97-4457;;Cap;wheel spindle - right
+1251;97-4461;;Rubber ring;
+1252;97-4461;;Rubber ring;outer cover
+1253;97-4476;;Eye bolt;
+1254;97-4476;;Eye bolt;LEFT
+1255;97-4480;;Outer cover;
+1256;97-4480;;Outer cover - left;
+1257;97-4481;;Outer cover;
+1258;97-4481;;Outer cover - right;
+1259;97-4552;;Rear stay;
+1260;97-4579;;OUTER MEMBER;
+1261;97-4579;;OUTER MEMBER - RIGHT;
+1262;97-4616;;FORK ASSEMBLY (complete);
+1263;97-4616;;FORK ASSEMBLY (General);
+1264;97-7001;;Handlebar;
+1265;97-7001;;Handlebar (USA specificatic);
+1266;97-7002;;Handlebar;
+1267;97-7002;;Handlebar (UK and General);
+1268;97-7003;;Front fender;
+1269;97-7004;;Bridge piece assembly;
+1270;99-0107;;Spring retainer;
+1271;99-0107;;Spring retainer (Girling 9054/1 71);
+1272;99-0122;;Bonded bush;
+1273;99-0122;;Bonded bush (Girling 64533645);
+1274;99-0173;31-371-398;Spade;
+1275;99-0225;11/013;Screw;
+1276;99-0241;16/011;Cable stop;
+1277;99-0248;364/16;Twist grip;
+1278;99-0248;364/16;TWIST GRIP (TR7RV);
+1279;99-0438;376/ 93;Filter;
+1280;99-0446;376/100;Main jet (190);
+1281;99-0446;376/1;Main jet (190) (Each carburettor);
+1282;99-0454;376/100;Main jet (270);
+1283;99-0506;622/ 55;Float chamber;
+1284;99-0510;622/ 67;Needle clip;
+1285;99-0511;622/ 68;Float needle;
+1286;99-0512;622/ 69;Float;
+1287;99-0513;622/ 71;Float spindle;
+1288;99-0514;622/ 73;Float chamber washer;
+1289;99-0515;622/ 76;Pilot air screw;
+1290;99-0516;622/ 77;Throttle stop screw;
+1291;99-0517;622/ 78;Banjo bolt;
+1292;99-0520;622/ 82;O' ring for air and throttle screws;
+1293;99-0521;622/ 86;Screw;float and mixing chamber tops
+1294;99-0527;928/ 6 ;Throttle valve (No. 3 cutaway);
+1295;99-0528;928/ 62;Air valve;
+1296;99-0537;281;Bulb;
+1297;99-0537;281;Bulb;warning light
+1298;99-0542;380;Bulb;
+1299;99-0548;989;Pilot bulb;
+1300;99-0558;54531899 S45;IGNITION SWITCH;
+1301;99-0589;49072;Rectifier;
+1302;99-0590;49345;Zener diode;
+1303;99-0683;504665;Fixing wire;
+1304;99-0692;553248;Headlamp rim;
+1305;99-0719;54027029;Battery PUZ5A;
+1306;99-0719;54 27 29;Battery PUZ5A;
+1307;99-0739;;Rotor;
+1308;99-0739;;Rotor (Lucas 54213901);
+1309;99-0769;;Pin;
+1310;99-0769;;Pin;adjustment (Lucas 54419220)
+1311;99-1006;;Stator - RM21;
+1312;99-1006;;Stator;RM21 (Lucas 47205)
+1313;99-1028;34815A;Rear stop light switch 118SA;
+1314;99-1028;34815A;Rear stop light switch 118SA;
+1315;99-1033;622/131;Throttle return spring;
+1316;99-1034;622/128;Jet holder;
+1317;99-1035;622/122;Needle jet (. 106);
+1318;99-1036;622/124;Needle;
+1319;99-1037;928/1 3;Air valve guide;
+1320;99-1038;622/129;Air valve spring;
+1321;99-1048;;Spring;110 lbs. chrome (Girling 64543708)
+1322;99-1124;13/163;Banjo washer;
+1323;99-1152;622/147;Drain plug;
+1324;99-1153;622/151;Drain plug washer;
+1325;99-1161;57183;Reflector;
+1326;99-1161;57183;Reflector - amber;
+1327;99-1192;382;Bulb;
+1328;99-1193;54123401;Screw;
+1329;99-1201;35048;Flasher unit;
+1330;99-1204;54385091;Clip;flasher unit
+1331;99-1207;54363453;Warning light;amber
+1332;99-1208;54363454;Warning light;red
+1333;99-1209;54363455;Warning light;green
+1334;99-1210;54140331;Sealing washer;
+1335;99-1213;54573590;Pilot bulbholder;
+1336;99-1214;370;Main bulb;45/35W (UK-USA-Canada)
+1337;99-1223;54115106;Screw;headlamp fixing
+1338;99-1224;143086;Washer;headlamp fixing
+1339;99-1245;70228;Horn;
+1340;99-1246;60600091;Stanchion;
+1341;99-1249;54525927;Light unit;
+1342;99-1249;54525927;Light unit (UK-USA-Canada);
+1343;99-1251;34419;Light switch;
+1344;99-1263;;AUTO ADVANCE UNIT (complete);
+1345;99-1263;;AUTO ADVANCE UNIT (Lucas 54425657);
+1346;99-1264;;Spring set;
+1347;99-1264;;Spring set (Lucas 54412229);
+1348;99-1265;;CONTACT BREAKER PLATE ASSEMBLY (complete);
+1349;99-1265;;CONTACT BREAKER PLATE ASSEMBLY (Lucas 54425160);
+1350;99-1266;;Contact set;
+1351;99-1266;;Contact set (Lucas 60600271);
+1352;99-1267;60512;Headlamp (complete);
+1353;99-1267;6 512;HEADLAMP COMPLETE (UK-USA-Canada);
+1354;99-12765;3275-428;Piston;
+1355;99-12765;;No Idea wrong code;
+1356;99-2753;3338-901;Switch housing;
+1357;99-2754;4312-318;Trap valve;
+1358;99-2755;3118-234;Spring;
+1359;99-2756;3675-216;Spring retainer;
+1360;99-2757;3842-424;Primary cup;
+1361;99-2758;106418;Piston washer;
+1362;99-2759;3261-542;Piston;
+1363;99-2760;3871-473;Secondary cup;
+1364;99-2761;K29103;Circlip;
+1365;99-2762;3811-420;Rubber boot;
+1366;99-2763;3476-209;Grub screw;
+1367;99-2765;3275-428;Piston;
+1368;99-2766;96498;Fluid seal;
+1369;99-2767;SSB72 75;Retainer;
+1370;99-2770;4221-072;Barrel and tank assembly;
+1371;K19866TP;AP.LTD;Retaining pin;
+1372;K19866TP;AP.LTD;Retaining pin (Order kit Part No.99-2769);
+1373;L930;;Carburettor body;
+1374;L930;Amal.;Carburettor body;LEFT
+1375;no code;Amal;Rotor;
+1376;NoPart#1;;Pump body;
+1377;NoPart#2;;Rotor;
+1378;NoPart#3;;Split pin (5/64 in. x 1 3/8 in.);
+1379;PumpBody;;Pump Body (reference only);
+1380;R930;;Carburetor body;
+1381;R930;Amal;Carburettor body;RIGHT
+1382;Rotor;;Rotor;
+1383;SplitPin;;"Split pin (5/64"" x 1 3/8"")";

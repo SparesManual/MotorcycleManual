@@ -12,6 +12,7 @@ namespace Db.API
   /// <summary>
   /// Main API Class
   /// </summary>
+  // ReSharper disable once ClassNeverInstantiated.Global
   public class Program
   {
     /// <summary>

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace Db.Core.Entities
 {
@@ -46,7 +47,8 @@ namespace Db.Core.Entities
     /// <summary>
     /// Foreign key reference to the parent <see cref="SectionParts"/> entity
     /// </summary>
-    public int ParentSectionPartsId { get; set; }
+    [AllowNull]
+    public int? ParentSectionPartsId { get; set; } = null;
 
     /// <summary>
     /// Reference to the parent <see cref="SectionParts"/> entity
