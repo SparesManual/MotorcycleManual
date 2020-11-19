@@ -34,16 +34,16 @@ namespace Db.Infrastructure.Data
       => await m_context.Set<T?>().FindAsync(id).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public IAsyncEnumerable<T> GetAllAsync()
-      => m_context.Set<T>().AsAsyncEnumerable();
+    public IQueryable<T> GetAllAsync()
+      => m_context.Set<T>();
 
     /// <inheritdoc />
     public async Task<T?> GetEntityWithSpecificationAsync(ISpecification<T> specification)
       => await ApplySpecification(specification).FirstOrDefaultAsync().ConfigureAwait(false);
 
     /// <inheritdoc />
-    public IAsyncEnumerable<T> GetAllAsync(ISpecification<T> specification)
-      => ApplySpecification(specification).AsAsyncEnumerable();
+    public IQueryable<T> GetAllAsync(ISpecification<T> specification)
+      => ApplySpecification(specification);
 
     /// <inheritdoc />
     public async ValueTask<int> CountAsync(ISpecification<T> specification)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Db.Interfaces
@@ -21,7 +22,7 @@ namespace Db.Interfaces
     /// Gets all known <see cref="IEntity"/> entries
     /// </summary>
     /// <returns>Collection of <see cref="IEntity"/></returns>
-    IAsyncEnumerable<T> GetAllAsync();
+    IQueryable<T> GetAllAsync();
 
     /// <summary>
     /// Gets an <see cref="IEntity"/> using a query <paramref name="specification"/>
@@ -34,8 +35,8 @@ namespace Db.Interfaces
     /// Gets all <see cref="IEntity"/> entries that match the supplied query <paramref name="specification"/>
     /// </summary>
     /// <param name="specification">Query specification</param>
-    /// <returns>Collection of <see cref="IEntity"/></returns>
-    IAsyncEnumerable<T> GetAllAsync(ISpecification<T> specification);
+    /// <returns>Query of <see cref="IEntity"/></returns>
+    IQueryable<T> GetAllAsync(ISpecification<T> specification);
 
     /// <summary>
     /// Counts the number of results found with the given <paramref name="specification"/>
