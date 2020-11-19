@@ -42,18 +42,40 @@ namespace Db.Infrastructure.Data
       => await ApplySpecification(specification).FirstOrDefaultAsync().ConfigureAwait(false);
 
     /// <inheritdoc />
+    public async Task<TChild?> GetEntityWithSpecificationAsync<TChild>(ISpecificationEx<T, TChild> specification)
+      where TChild : class, IEntity
+      => await ApplySpecification(specification).FirstOrDefaultAsync().ConfigureAwait(false);
+
+    /// <inheritdoc />
     public IQueryable<T> GetAllAsync(ISpecification<T> specification)
       => ApplySpecification(specification);
 
     /// <inheritdoc />
-    public async ValueTask<int> CountAsync(ISpecification<T> specification)
-      => await ApplySpecification(specification).CountAsync().ConfigureAwait(false);
+    public IAsyncEnumerable<TChild> GetAllAsync<TChild>(ISpecificationEx<T, TChild> specification)
+      where TChild : class, IEntity
+      => ApplySpecification(specification).AsAsyncEnumerable();
 
-    private IQueryable<T> ApplySpecification(ISpecification<T> specification)
+    /// <inheritdoc />
+    public async ValueTask<int> CountAsync(ISpecification<T> specification)
+      => await ApplySpecification(specification, true).CountAsync().ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async ValueTask<int> CountAsync<TChild>(ISpecificationEx<T, TChild> specification)
+      where TChild : class, IEntity
+      => await ApplySpecification(specification, true).CountAsync().ConfigureAwait(false);
+
+    private IQueryable<T> ApplySpecification(ISpecification<T> specification, bool countOnly = false)
       => m_context
         .Set<T>()
         .AsQueryable()
-        .GetQuery(specification);
+        .GetQuery(specification, countOnly);
+
+    private IQueryable<TChild> ApplySpecification<TChild>(ISpecificationEx<T, TChild> specification, bool countOnly = false)
+      where TChild : class, IEntity
+      => m_context
+        .Set<T>()
+        .AsQueryable()
+        .GetQuery(specification, countOnly);
 
     #endregion
   }

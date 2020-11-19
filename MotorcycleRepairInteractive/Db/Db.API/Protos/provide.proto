@@ -6,19 +6,28 @@ package provide;
 
 service Provider {
   rpc GetBook (IdRequest) returns (BookReply);
-  rpc GetBooks (Empty) returns (stream BookReply);
+  rpc GetBooks (PageParams) returns (stream BookReply);
   
   rpc GetPart (IdRequest) returns (PartReply);
-  rpc GetAllParts (Empty) returns (stream PartReply);
-  rpc GetPartsFromBook (IdRequest) returns (stream PartReply);
-  rpc GetPartsFromSection (IdRequest) returns (stream PartReply);
+  rpc GetAllParts (PageParams) returns (stream PartReply);
+  rpc GetPartsFromBook (IdAndPageParams) returns (stream PartReply);
+  rpc GetPartsFromSection (IdAndPageParams) returns (stream PartReply);
   
-  rpc GetPartProperties (IdRequest) returns (stream PartPropertyReply);
-  rpc GetPropertyTypes (Empty) returns (stream PropertyTypeReply);
+  rpc GetPartProperties (IdAndPageParams) returns (stream PartPropertyReply);
+  rpc GetPropertyTypes (PageParams) returns (stream PropertyTypeReply);
 }
 
-message Empty {
+message Empty { }
 
+message IdAndPageParams {
+  int32 id = 1;
+  int32 size = 2;
+  int32 index = 3;
+}
+
+message PageParams {
+  int32 size = 1;
+  int32 index = 2;
 }
 
 message IdRequest {

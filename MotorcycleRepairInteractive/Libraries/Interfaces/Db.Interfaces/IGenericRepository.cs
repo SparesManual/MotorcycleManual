@@ -32,6 +32,13 @@ namespace Db.Interfaces
     Task<T?> GetEntityWithSpecificationAsync(ISpecification<T> specification);
 
     /// <summary>
+    /// Gets an <see cref="IEntity"/> using a query <paramref name="specification"/>
+    /// </summary>
+    /// <param name="specification">Query specification</param>
+    /// <returns>The retrieved <see cref="IEntity"/> using a query <paramref name="specification"/> or null of not found</returns>
+    Task<TChild?> GetEntityWithSpecificationAsync<TChild>(ISpecificationEx<T, TChild> specification) where TChild : class, IEntity;
+
+    /// <summary>
     /// Gets all <see cref="IEntity"/> entries that match the supplied query <paramref name="specification"/>
     /// </summary>
     /// <param name="specification">Query specification</param>
@@ -39,10 +46,24 @@ namespace Db.Interfaces
     IQueryable<T> GetAllAsync(ISpecification<T> specification);
 
     /// <summary>
+    /// Gets all <see cref="IEntity"/> entries that match the supplied query <paramref name="specification"/>
+    /// </summary>
+    /// <param name="specification">Query specification</param>
+    /// <returns>Query of <see cref="IEntity"/></returns>
+    IAsyncEnumerable<TChild> GetAllAsync<TChild>(ISpecificationEx<T, TChild> specification) where TChild : class, IEntity;
+
+    /// <summary>
     /// Counts the number of results found with the given <paramref name="specification"/>
     /// </summary>
     /// <param name="specification">Query specification</param>
     /// <returns>Number of results</returns>
     ValueTask<int> CountAsync(ISpecification<T> specification);
+
+    /// <summary>
+    /// Counts the number of results found with the given <paramref name="specification"/>
+    /// </summary>
+    /// <param name="specification">Query specification</param>
+    /// <returns>Number of results</returns>
+    ValueTask<int> CountAsync<TChild>(ISpecificationEx<T, TChild> specification) where TChild : class, IEntity;
   }
 }

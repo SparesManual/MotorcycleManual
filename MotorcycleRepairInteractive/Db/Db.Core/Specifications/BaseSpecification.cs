@@ -86,12 +86,14 @@ namespace Db.Core.Specifications
     /// <summary>
     /// Applies paging settings
     /// </summary>
-    /// <param name="skip">Items to skip</param>
-    /// <param name="take">Items to take</param>
-    protected void ApplyPaging(int skip, int take)
+    /// <param name="pageSize">Maximum number of items per page</param>
+    /// <param name="pageIndex">Index of query result batch to take</param>
+    protected void ApplyPaging(int pageSize, int pageIndex)
     {
-      Skip = skip;
-      Take = take;
+      Skip = pageSize * (pageIndex - 1);
+      Take = pageSize > 50
+        ? 50
+        : pageIndex;
       IsPagingEnabled = true;
     }
 

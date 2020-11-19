@@ -158,7 +158,7 @@ namespace Db.API
       => await GetById(request.Id, m_bookRepository, ToBookReply);
 
     /// <inheritdoc />
-    public override async Task GetBooks(Empty request, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
+    public override async Task GetBooks(PageParams pageParams, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
     {
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
@@ -166,12 +166,12 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task GetPartsFromSection(IdRequest request, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    public override async Task GetPartsFromSection(IdAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
       var parts = m_sectionPartsRepository.GetAllAsync()
-        .Where(sp => sp.SectionId == request.Id)
+        .Where(sp => sp.SectionId == pageRequest.Id)
         .Include(sp => sp.Part!)
         .Select(sp => sp.Part)
         .Where(part => part != null);
@@ -181,12 +181,12 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task GetPartsFromBook(IdRequest request, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    public override async Task GetPartsFromBook(IdAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
       var sectionParts = m_sectionRepository.GetAllAsync()
-        .Where(section => section.BookId.Equals(request.Id))
+        .Where(section => section.BookId.Equals(pageRequest.Id))
         .Include(section => section.SectionParts)
         .Select(section => section.SectionParts)
         .SelectMany(mapList => mapList.Select(sp => sp))
@@ -203,15 +203,15 @@ namespace Db.API
       => await GetById(request.Id, m_partRepository, ToPartReply);
 
     /// <inheritdoc />
-    public override async Task GetPartProperties(IdRequest request, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
+    public override async Task GetPartProperties(IdAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
     {
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
-      await GetAllAsync(m_propertyRepository, new PartPropertySpec(request.Id, 50, 0), responseStream, ToPropertyReply, context.CancellationToken).ConfigureAwait(false);
+      await GetAllAsync(m_propertyRepository, new PartPropertySpec(pageRequest.Id, 50, 0), responseStream, ToPropertyReply, context.CancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public override async Task GetPropertyTypes(Empty request, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
+    public override async Task GetPropertyTypes(PageParams paging, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
     {
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
 
