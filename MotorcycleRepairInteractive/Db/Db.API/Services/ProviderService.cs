@@ -116,11 +116,7 @@ namespace Db.API
       where T : class, IEntity
       => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
 
-    private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
-      where T : class, IEntity
-      => await GetAllProcessorAsync(repository.GetAllAsync(), responseStream, converter, ct).ConfigureAwait(false);
-
-    private async Task GetAllAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, IAsyncStreamWriter<TReply> responseStream, Func<TChild?, TReply> converter, CancellationToken ct)
+    private async Task GetAllExAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, IAsyncStreamWriter<TReply> responseStream, Func<TChild?, TReply> converter, CancellationToken ct)
       where TParent : class, IEntity
       where TChild : class, IEntity
       => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
@@ -147,6 +143,43 @@ namespace Db.API
         { "TotalSize", total.ToString() }
       };
 
+    private static async Task ProcessPagedStream<TParent, TChild, TReply>(
+      int size,
+      int index,
+      IGenericRepository<TParent> repository,
+      ISpecificationEx<TParent, TChild> specification,
+      IAsyncStreamWriter<TReply> responseStream,
+      Func<IGenericRepository<TParent>, ISpecificationEx<TParent, TChild>, IAsyncStreamWriter<TReply>, Func<TChild?, TReply>, CancellationToken, Task> processor,
+      Func<TChild?, TReply> converter,
+      ServerCallContext context)
+      where TParent : class, IEntity
+      where TChild : class, IEntity
+    {
+      var count = await repository.CountAsync(specification).ConfigureAwait(false);
+
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, size, index)).ConfigureAwait(false);
+
+      await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task ProcessPagedStream<TChild, TReply>(
+      int size,
+      int index,
+      IGenericRepository<TChild> repository,
+      ISpecification<TChild> specification,
+      IAsyncStreamWriter<TReply> responseStream,
+      Func<IGenericRepository<TChild>, ISpecification<TChild>, IAsyncStreamWriter<TReply>, Func<TChild?, TReply>, CancellationToken, Task> processor,
+      Func<TChild?, TReply> converter,
+      ServerCallContext context)
+      where TChild : class, IEntity
+    {
+      var count = await repository.CountAsync(specification).ConfigureAwait(false);
+
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, size, index)).ConfigureAwait(false);
+
+      await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
+    }
+
     #endregion
 
     #region API Calls
@@ -159,44 +192,28 @@ namespace Db.API
     public override async Task GetBooks(SearchAndPageParams pageParams, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
     {
       var specification = new BooksSpec(pageParams.Search, pageParams.Size, pageParams.Index);
-      var count = await m_bookRepository.CountAsync(specification).ConfigureAwait(false);
-
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageParams.Size, pageParams.Index)).ConfigureAwait(false);
-
-      await GetAllAsync(m_bookRepository, specification, responseStream, ToBookReply, context.CancellationToken).ConfigureAwait(false);
+      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_bookRepository, specification, responseStream, GetAllAsync, ToBookReply, context);
     }
 
     /// <inheritdoc />
     public override async Task GetAllParts(SearchAndPageParams pageParams, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       var specification = new PartsSpec(pageParams.Search, pageParams.Size, pageParams.Index);
-      var count = await m_partRepository.CountAsync(specification).ConfigureAwait(false);
-
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageParams.Size, pageParams.Index)).ConfigureAwait(false);
-
-      await GetAllAsync(m_partRepository, specification, responseStream, ToPartReply, context.CancellationToken).ConfigureAwait(false);
+      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_partRepository, specification, responseStream, GetAllAsync, ToPartReply, context);
     }
 
     /// <inheritdoc />
     public override async Task GetPartsFromSection(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
-      var count = await m_sectionPartsRepository.CountAsync(specification).ConfigureAwait(false);
-
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
-
-      await GetAllAsync(m_sectionPartsRepository, specification, responseStream, ToPartReply, context.CancellationToken).ConfigureAwait(false);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartsRepository, specification, responseStream, GetAllExAsync, ToPartReply, context);
     }
 
     /// <inheritdoc />
     public override async Task GetPartsFromBook(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       var specification = new BookPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
-      var count = await m_sectionRepository.CountAsync(specification).ConfigureAwait(false);
-
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
-
-      await GetAllAsync(m_sectionRepository, specification, responseStream, ToPartReply, context.CancellationToken).ConfigureAwait(false);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionRepository, specification, responseStream, GetAllExAsync, ToPartReply, context);
     }
 
     /// <inheritdoc />
@@ -207,22 +224,14 @@ namespace Db.API
     public override async Task GetPartProperties(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
     {
       var specification = new PartPropertiesSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
-      var count = await m_propertyRepository.CountAsync(specification).ConfigureAwait(false);
-
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
-
-      await GetAllAsync(m_propertyRepository, specification, responseStream, ToPropertyReply, context.CancellationToken).ConfigureAwait(false);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_propertyRepository, specification, responseStream, GetAllAsync, ToPropertyReply, context);
     }
 
     /// <inheritdoc />
     public override async Task GetPropertyTypes(PageParams paging, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
     {
       var specification = new PropertyTypesSpec(paging.Size, paging.Index);
-      var count = await m_propertyTypeRepository.CountAsync(specification).ConfigureAwait(false);
-
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, paging.Size, paging.Index)).ConfigureAwait(false);
-
-      await GetAllAsync(m_propertyTypeRepository, responseStream, ToPropertyTypeReply, context.CancellationToken).ConfigureAwait(false);
+      await ProcessPagedStream(paging.Size, paging.Index, m_propertyTypeRepository, specification, responseStream, GetAllAsync, ToPropertyTypeReply, context);
     }
 
     #endregion
