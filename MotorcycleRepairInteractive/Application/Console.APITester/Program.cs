@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Db.API;
-using Grpc.Net.Client;
+using MRI.Db;
 
 namespace Console.APITester
 {
@@ -8,11 +7,20 @@ namespace Console.APITester
   {
     private static async Task Main()
     {
-      using var channel = GrpcChannel.ForAddress("https://localhost:5001");
-      var client = new Provider.ProviderClient(channel);
-      var reply = await client.GetPartAsync(new IdRequest { Id = 1 });
+      const int pageSize = 10;
+      const int pageIndex = 1;
 
-      System.Console.WriteLine($"{reply.PartNumber}\t{reply.MakersPartNumber}\t{reply.Description}\t{reply.MakersDescription}");
+      using var provider = new APIProvider();
+
+      var parts = await provider.GetPartsFromSectionAsync(1, pageSize, pageIndex).ConfigureAwait(false);
+
+      System.Console.WriteLine($"{parts.PageIndex}: {parts.PageItems}/{parts.TotalItems}");
+
+      var index = pageSize * (pageIndex - 1);
+      await foreach (var part in parts.ReadAll().ConfigureAwait(false))
+        System.Console.WriteLine($" {++index}\t{part.PartNumber}\t{part.MakersPartNumber}\t{part.Description}\t{part.MakersDescription}");
+
+      System.Console.WriteLine("END");
     }
   }
 }

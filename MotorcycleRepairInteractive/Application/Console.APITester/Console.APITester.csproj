@@ -27,9 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\..\Db\Db.API\Protos\provide.proto" GrpcServices="Client">
-      <Link>Protos\provide.proto</Link>
-    </Protobuf>
+    <ProjectReference Include="..\..\Libraries\MRI.Db\MRI.Db.csproj" />
   </ItemGroup>
 
 </Project>

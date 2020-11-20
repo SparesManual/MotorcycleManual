@@ -94,7 +94,7 @@ namespace Db.Core.Specifications
       Skip = pageSize * (pageIndex - 1);
       Take = pageSize > 50
         ? 50
-        : pageIndex;
+        : pageSize;
       IsPagingEnabled = true;
     }
 

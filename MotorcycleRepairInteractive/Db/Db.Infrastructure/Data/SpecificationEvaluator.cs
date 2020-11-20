@@ -45,12 +45,17 @@ namespace Db.Infrastructure.Data
 
       // If paging is enabled..
       if (specification.IsPagingEnabled)
+      {
         // select a batch from the query
         query = query
           // skip a set of results
           .Skip(specification.Skip)
           // take a set of results
           .Take(specification.Take);
+
+        if (specification.OrderBy is null && specification.OrderByDescending is null)
+          throw new NotSupportedException("Cannot enable pagination without ordering specified");
+      }
 
       // Include referenced entities
       query = specification.Includes.Aggregate(query, (current, include) => current.Include(include));

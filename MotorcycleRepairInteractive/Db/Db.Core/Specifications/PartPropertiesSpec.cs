@@ -18,6 +18,7 @@ namespace Db.Core.Specifications
       : base(property => property.PartId.Equals(id))
     {
       AddInclude(property => property.PropertyType!);
+      SetOrderBy(property => property.PropertyName);
       ApplyPaging(size, index);
     }
   }
