@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Debug/Db/Db.API.xml</DocumentationFile>
-    <OutputPath>../../bin/Debug/Db</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Libraries/Db/Db.API.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Db/</OutputPath>
+    <OutputPath>../../../bin/Release/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,11 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Db.Infrastructure\Db.Infrastructure.csproj" />
+    <Folder Include="Data" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data" />
+    <ProjectReference Include="..\Db.Infrastructure\Db.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

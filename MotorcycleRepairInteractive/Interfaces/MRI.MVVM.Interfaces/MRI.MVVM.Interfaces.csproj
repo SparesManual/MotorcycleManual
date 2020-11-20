@@ -3,18 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>9</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../bin/Debug/Libraries</OutputPath>
-    <DocumentationFile>../../bin/Debug/Libraries/MRI.Helpers.xml</DocumentationFile>
+    <DocumentationFile>../../bin/Debug/Interfaces/MRI.MVVM.Interfaces.xml</DocumentationFile>
+    <OutputPath>../../bin/Debug/Interfaces</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Libraries</OutputPath>
+    <OutputPath>../../bin/Release/Interfaces</OutputPath>
   </PropertyGroup>
 
 </Project>

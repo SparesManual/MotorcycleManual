@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Debug/Db/Db.Core.xml</DocumentationFile>
-    <OutputPath>../../bin/Debug/Db</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Libraries/Db/Db.Core.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Db</OutputPath>
+    <OutputPath>../../../bin/Release/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

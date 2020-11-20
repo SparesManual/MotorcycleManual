@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Libraries/Interfaces/Debug/Db.Interfaces.xml</DocumentationFile>
-    <OutputPath>../../bin/Libraries/Interfaces/Debug</OutputPath>
+    <DocumentationFile>../../bin/Debug/Interfaces/Db.Interfaces.xml</DocumentationFile>
+    <OutputPath>../../bin/Debug/Interfaces</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Libraries/Interfaces/Release</OutputPath>
+    <OutputPath>../../bin/Release/Interfaces</OutputPath>
   </PropertyGroup>
 
 </Project>

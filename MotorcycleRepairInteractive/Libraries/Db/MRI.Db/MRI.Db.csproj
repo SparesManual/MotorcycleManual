@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../bin/Debug/Libraries</OutputPath>
-    <DocumentationFile>../../bin/Debug/Libraries\MRI.Db.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Libraries/Db</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Libraries/Db/MRI.Db.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Libraries</OutputPath>
+    <OutputPath>../../../bin/Release/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,11 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\..\Db\Db.API\Protos\provide.proto" GrpcServices="Client">
+    <Protobuf Include="..\Db.API\Protos\provide.proto" GrpcServices="Client">
       <Link>Protos\provide.proto</Link>
     </Protobuf>
   </ItemGroup>

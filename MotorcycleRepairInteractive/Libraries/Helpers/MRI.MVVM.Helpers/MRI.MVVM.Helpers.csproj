@@ -9,16 +9,16 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../bin/Debug/Libraries</OutputPath>
-    <DocumentationFile>../../bin/Debug/Libraries/MRI.MVVM.Helpers.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Libraries/Helpers</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Libraries/Helpers/MRI.MVVM.Helpers.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Libraries</OutputPath>
+    <OutputPath>../../../bin/Release/Libraries/Helpers</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Interfaces\MRI.MVVM.Interfaces\MRI.MVVM.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\MRI.MVVM.Interfaces\MRI.MVVM.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
