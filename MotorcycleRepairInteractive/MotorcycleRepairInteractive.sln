@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.Core", "MotorcycleRepairInteractive\MRI.Core.csproj", "{02AC437D-33D9-4FD4-A397-FC720EC65FE3}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{5E79D870-AD74-4363-B7E7-3FBF27426330}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A766BB6A-8A96-4C08-90A2-BC1412C498EC}"
@@ -22,13 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Db.Interfaces", "Libraries\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console.APITester", "Application\Console.APITester\Console.APITester.csproj", "{6515CC0B-8EA2-4A89-A74B-FF32B9614B4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Db", "Libraries\MRI.Db\MRI.Db.csproj", "{AE42C90E-1192-4F1A-93E9-CA1D4A0BBB7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.Db", "Libraries\MRI.Db\MRI.Db.csproj", "{AE42C90E-1192-4F1A-93E9-CA1D4A0BBB7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.AssignCoord", "MRI\MRI.AssignCoord.csproj", "{FB89D335-2712-4A3B-B5A8-2921EA1084CD}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "EntityFrameworkConsoleApp", "EntityFrameworkConsoleApp\EntityFrameworkConsoleApp.fsproj", "{F586F1C6-B6AA-476E-B7D9-525A16C7A687}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpEntityFrameworkConsoleApp", "CSharpEntityFrameworkConsoleApp\CSharpEntityFrameworkConsoleApp.csproj", "{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,18 +37,6 @@ Global
 		{02AC437D-33D9-4FD4-A397-FC720EC65FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02AC437D-33D9-4FD4-A397-FC720EC65FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02AC437D-33D9-4FD4-A397-FC720EC65FE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F586F1C6-B6AA-476E-B7D9-525A16C7A687}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4EC74D9-41D6-4F7F-A17F-D770D62A84FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACD2BAA9-D8C1-4A3E-9653-542E3C90E02E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACD2BAA9-D8C1-4A3E-9653-542E3C90E02E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD2BAA9-D8C1-4A3E-9653-542E3C90E02E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,6 +61,10 @@ Global
 		{AE42C90E-1192-4F1A-93E9-CA1D4A0BBB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE42C90E-1192-4F1A-93E9-CA1D4A0BBB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE42C90E-1192-4F1A-93E9-CA1D4A0BBB7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB89D335-2712-4A3B-B5A8-2921EA1084CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

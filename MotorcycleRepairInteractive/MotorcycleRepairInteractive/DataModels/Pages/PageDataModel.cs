@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Text;
 
@@ -67,5 +68,10 @@ namespace MRI.Core
         /// </summary>
         public SpecificToModelEnum MotorcycleModelType { get; set; }
 
+
+        public PageDataModel(DataRow row)
+        {
+          
+        }
     }
 }

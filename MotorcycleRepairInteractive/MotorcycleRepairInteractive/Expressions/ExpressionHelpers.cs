@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MRI.Core
-{ 
+{
     /// <summary>
     /// A helper for expressions
     /// </summary>
@@ -46,7 +42,7 @@ namespace MRI.Core
         public static void SetPropertyValue<T>(this Expression<Func<T>> lambda, T value)
         {
             // Converts a lambda () => some.Property, to some.Property
-            var expression = (lambda as LambdaExpression).Body as MemberExpression;
+            var expression = lambda.Body as MemberExpression;
 
             // Get the property information so we can set it
             var propertyInfo = (PropertyInfo)expression.Member;
@@ -55,7 +51,6 @@ namespace MRI.Core
             // Set the property value
             propertyInfo.SetValue(target, value);
         }
-
 
         /// <summary>
         /// Sets the underlying properties value to the given value
@@ -68,7 +63,7 @@ namespace MRI.Core
         public static void SetPropertyValue<In, T>(this Expression<Func<In, T>> lambda, T value, In input)
         {
             // Converts a lambda () => some.Property, to some.Property
-            var expression = (lambda as LambdaExpression).Body as MemberExpression;
+            var expression = lambda.Body as MemberExpression;
 
             // Get the property information so we can set it
             var propertyInfo = (PropertyInfo)expression.Member;

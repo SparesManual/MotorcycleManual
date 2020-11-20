@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace MRI.Core
 {
@@ -23,12 +21,7 @@ namespace MRI.Core
         {
             foreach (var row in table.AsEnumerable())
             {
-                Items.Add(new PartDataModel(
-                    row.ItemArray[0].ToString(),
-                    row.ItemArray[1].ToString(),
-                    row.ItemArray[2].ToString(),
-                    row.ItemArray[3].ToString()
-                    ));
+                Items.Add(new PartDataModel(row));
             }
         }
         #endregion

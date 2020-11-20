@@ -23,7 +23,7 @@ namespace MRI.Core
         /// </summary>
         public string BookTitle { get; private set; }
 
-        public BookDataModel(DataTable table)
+        public BookDataModel(DataRow table)
         {
             
         }

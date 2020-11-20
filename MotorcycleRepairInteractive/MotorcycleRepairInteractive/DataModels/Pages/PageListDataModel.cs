@@ -23,16 +23,7 @@ namespace MRI.Core
         {
             foreach (var row in table.AsEnumerable())
             {
-                Items.Add(new PageDataModel(
-                    row.ItemArray[0].ToString(),
-                    row.ItemArray[1].ToString(),
-                    row.ItemArray[2].ToString(),
-                    row.ItemArray[3].ToString(),
-                    row.ItemArray[4].ToString(),
-                    row.ItemArray[5].ToString(),
-                    row.ItemArray[6].ToString(),
-                    row.ItemArray[7].ToString()
-                    ));
+                Items.Add(new PageDataModel(row));
             }
         }
         #endregion

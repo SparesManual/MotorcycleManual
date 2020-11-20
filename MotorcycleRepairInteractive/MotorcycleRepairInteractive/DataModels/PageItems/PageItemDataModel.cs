@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace MRI.Core
@@ -67,5 +68,10 @@ namespace MRI.Core
         /// The PageIndexID group that this child belongs to, if it has one
         /// </summary>
         public string ParentPageIndxID { get; set; }
+
+        public PageItemDataModel(DataRow row)
+        {
+          
+        }
     }
 }

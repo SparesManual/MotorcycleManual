@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Data;
 
 namespace MRI.Core
 {
@@ -16,7 +14,7 @@ namespace MRI.Core
         public string PartNumber { get; private set; }
 
         /// <summary>
-        /// A second part number, used for some parts that have a 
+        /// A second part number, used for some parts that have a
         /// part number from the maker that is different from the original
         /// part number
         /// </summary>
@@ -31,15 +29,18 @@ namespace MRI.Core
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="partNumber" - Required></param>
-        /// <param name="makersPartNumber" - Required></param>
-        /// <param name="description" - Required></param>
+        /// <param name="partNumber">Required</param>
+        /// <param name="makersPartNumber">Required</param>
+        /// <param name="description">Required</param>
         public PartDataModel(string partNumber, string makersPartNumber, string description)
-
         {
             PartNumber = partNumber;
             MakersPartNumber = makersPartNumber;
             Description = description;
+        }
+
+        public PartDataModel(DataRow row)
+        {
         }
     }
 }

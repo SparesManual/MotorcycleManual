@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace MRI.Core
 {
     /// <summary>
     /// Represents a list of Book Data Models
     /// </summary>
-    public class BookListDataModel 
+    public class BookListDataModel
     {
         #region Public Properties
 
@@ -27,9 +24,7 @@ namespace MRI.Core
         {
             foreach (var row in table.AsEnumerable())
             {
-                Items.Add(new BookDataModel(
-                    row.ItemArray[0].ToString(),
-                    row.ItemArray[1].ToString()));
+                Items.Add(new BookDataModel(row));
             }
         } 
         #endregion

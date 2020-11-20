@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MRI.Core
+﻿namespace MRI.Core
 {
     public enum SpecificToModelEnum
     {
