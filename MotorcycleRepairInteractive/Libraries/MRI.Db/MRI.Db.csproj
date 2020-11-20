@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
@@ -10,11 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../bin/Debug/Application</OutputPath>
+    <OutputPath>../../bin/Debug/Libraries</OutputPath>
+    <DocumentationFile>../../bin/Debug/Libraries\MRI.Db.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Application</OutputPath>
+    <OutputPath>../../bin/Release/Libraries</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\MRI.Db\MRI.Db.csproj" />
+    <ProjectReference Include="..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\Db\Db.API\Protos\provide.proto" GrpcServices="Client">
+      <Link>Protos\provide.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

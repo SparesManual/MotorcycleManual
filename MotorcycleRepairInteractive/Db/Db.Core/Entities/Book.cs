@@ -15,5 +15,14 @@ namespace Db.Core.Entities
     [Required]
     [MaxLength(128)]
     public string Title { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Validates whether the <paramref name="book"/> matches the <paramref name="search"/> specification
+    /// </summary>
+    /// <param name="search">Fuzzy search string</param>
+    /// <param name="book">Entity to validate</param>
+    /// <returns>True if this <paramref name="book"/> is a match</returns>
+    public static bool StringSearch(string? search, Book book)
+      => string.IsNullOrEmpty(search?.Trim()) || book.Title.Contains(search);
   }
 }

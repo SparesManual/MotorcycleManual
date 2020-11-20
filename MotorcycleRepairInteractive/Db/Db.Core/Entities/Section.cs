@@ -49,7 +49,9 @@ namespace Db.Core.Entities
     [MaxLength(128)]
     public string? FigureDescription { get; set; }
 
-    // TODO: Comment
+    /// <summary>
+    /// Name of the model to which this section is specifically dedicated to
+    /// </summary>
     [MaxLength(64)]
     public string? SpecificToModel { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 #pragma warning disable 1591
 
-namespace Db.API.Data.Migrations
+namespace Db.API.Data
 {
     public partial class InitialCreate : Migration
     {
@@ -108,7 +108,7 @@ namespace Db.API.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     SectionId = table.Column<int>(type: "INTEGER", nullable: false),
                     PartId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ParentSectionPartsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ParentSectionPartsId = table.Column<int>(type: "INTEGER", nullable: true),
                     PageNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     AdditionalInfo = table.Column<string>(type: "TEXT", nullable: true),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),

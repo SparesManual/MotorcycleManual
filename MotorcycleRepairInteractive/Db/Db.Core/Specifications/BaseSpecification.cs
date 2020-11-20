@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System;
 using Db.Interfaces;
+using System.Linq;
 
 namespace Db.Core.Specifications
 {
@@ -49,13 +50,13 @@ namespace Db.Core.Specifications
     /// <summary>
     /// Default constructor
     /// </summary>
-    public BaseSpecification() { }
+    protected BaseSpecification() { }
 
     /// <summary>
     /// Constructor with <paramref name="criteria"/>
     /// </summary>
-    /// <param name="criteria"></param>
-    public BaseSpecification(Expression<Func<T, bool>> criteria)
+    /// <param name="criteria">Filtering criteria</param>
+    protected BaseSpecification(Expression<Func<T, bool>> criteria)
       => Criteria = criteria;
 
     #endregion
@@ -86,15 +87,53 @@ namespace Db.Core.Specifications
     /// <summary>
     /// Applies paging settings
     /// </summary>
-    /// <param name="skip">Items to skip</param>
-    /// <param name="take">Items to take</param>
-    protected void ApplyPaging(int skip, int take)
+    /// <param name="pageSize">Maximum number of items per page</param>
+    /// <param name="pageIndex">Index of query result batch to take</param>
+    protected void ApplyPaging(int pageSize, int pageIndex)
     {
-      Skip = skip;
-      Take = take;
+      Skip = pageSize * (pageIndex - 1);
+      Take = pageSize > 50
+        ? 50
+        : pageSize;
       IsPagingEnabled = true;
     }
 
     #endregion
+  }
+
+  /// <summary>
+  /// Base class for extended entity query search specifications
+  /// </summary>
+  /// <typeparam name="TParent">Parent entity</typeparam>
+  /// <typeparam name="TChild">Extracted child entity from the parent entity</typeparam>
+  public class BaseSpecification<TParent, TChild>
+    : BaseSpecification<TChild>,
+      ISpecificationEx<TParent, TChild>
+    where TParent : IEntity
+    where TChild : class, IEntity
+  {
+    /// <inheritdoc />
+    public Func<IQueryable<TParent>, IQueryable<TChild>>? Extractor { get; private set;  }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="criteria">Filtering criteria</param>
+    protected BaseSpecification(Expression<Func<TChild, bool>> criteria)
+      : base(criteria) { }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    protected BaseSpecification()
+    {
+    }
+
+    /// <summary>
+    /// Set the <typeparamref name="TChild"/> extractor from the <typeparamref name="TParent"/>
+    /// </summary>
+    /// <param name="extractor">Extractor to set</param>
+    protected void SetExtractor(Func<IQueryable<TParent>, IQueryable<TChild>> extractor)
+      => Extractor = extractor;
   }
 }

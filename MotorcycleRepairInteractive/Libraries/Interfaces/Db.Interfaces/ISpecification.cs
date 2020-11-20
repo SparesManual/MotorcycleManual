@@ -5,10 +5,38 @@ using System.Linq.Expressions;
 namespace Db.Interfaces
 {
   /// <summary>
+  /// Base interface for search query specifications
+  /// </summary>
+  public interface ISpecification
+  {
+    /// <summary>
+    /// Number of items to take from the query
+    /// </summary>
+    /// <remarks>
+    /// Used for paging
+    /// </remarks>
+    int Take { get; }
+
+    /// <summary>
+    /// Number of items to skip from the query
+    /// </summary>
+    /// <remarks>
+    /// Used for paging
+    /// </remarks>
+    int Skip { get; }
+
+    /// <summary>
+    /// Determines whether paging is enabled
+    /// </summary>
+    bool IsPagingEnabled { get; }
+  }
+
+  /// <summary>
   /// Interface for search query specifications
   /// </summary>
   /// <typeparam name="T">Entity type</typeparam>
   public interface ISpecification<T>
+    : ISpecification
     where T : IEntity
   {
     /// <summary>
@@ -33,26 +61,5 @@ namespace Db.Interfaces
     /// Query result sorting expression by descending
     /// </summary>
     Expression<Func<T, object>>? OrderByDescending { get; }
-
-    /// <summary>
-    /// Number of items to take from the query
-    /// </summary>
-    /// <remarks>
-    /// Used for paging
-    /// </remarks>
-    int Take { get; }
-
-    /// <summary>
-    /// Number of items to skip from the query
-    /// </summary>
-    /// <remarks>
-    /// Used for paging
-    /// </remarks>
-    int Skip { get; }
-
-    /// <summary>
-    /// Determines whether paging is enabled
-    /// </summary>
-    bool IsPagingEnabled { get; }
   }
 }

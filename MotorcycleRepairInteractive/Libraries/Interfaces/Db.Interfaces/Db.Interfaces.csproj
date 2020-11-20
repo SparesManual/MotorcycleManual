@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Libraries/Interfaces/Debug\Db.Interfaces.xml</DocumentationFile>
+    <DocumentationFile>../../bin/Libraries/Interfaces/Debug/Db.Interfaces.xml</DocumentationFile>
     <OutputPath>../../bin/Libraries/Interfaces/Debug</OutputPath>
   </PropertyGroup>
 

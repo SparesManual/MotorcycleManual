@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Core.Entities;
+using Db.Core.Specifications;
 using Db.Interfaces;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
@@ -73,6 +75,16 @@ namespace Db.API
         MakersDescription = part?.MakersDescription ?? string.Empty
       };
 
+    private static PartPropertyReply ToPropertyReply(Property? property)
+      => new PartPropertyReply
+      {
+        Name = property?.PropertyName ?? string.Empty,
+        Type = property?.PropertyType?.Name ?? string.Empty,
+        TypeId = property?.PropertyTypeId ?? -1,
+        Unit = property?.PropertyType?.Unit ?? string.Empty,
+        Value = property?.PropertyValue ?? string.Empty
+      };
+
     private static PropertyTypeReply ToPropertyTypeReply(PropertyType? propertyType)
       => new PropertyTypeReply
       {
@@ -100,11 +112,20 @@ namespace Db.API
       return converter(item);
     }
 
-    private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
+    private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, ISpecification<T> specification, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
+      where T : class, IEntity
+      => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
+
+    private async Task GetAllExAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, IAsyncStreamWriter<TReply> responseStream, Func<TChild?, TReply> converter, CancellationToken ct)
+      where TParent : class, IEntity
+      where TChild : class, IEntity
+      => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
+
+    private async Task GetAllProcessorAsync<T, TReply>(IAsyncEnumerable<T> items, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
       where T : class, IEntity
     {
       // For every item of requested type..
-      await foreach (var item in repository.GetAllAsync().WithCancellation(ct).ConfigureAwait(false))
+      await foreach (var item in items.WithCancellation(ct).ConfigureAwait(false))
         // write it to the response
         await responseStream.WriteAsync(converter(item)).ConfigureAwait(false);
 
@@ -114,11 +135,50 @@ namespace Db.API
         m_logger.LogWarning($"Request for all entries of '{typeof(T).Name}' has been cancelled");
     }
 
-    private static Metadata GeneratePagingMetadata()
+    private static Metadata GeneratePagingMetadata(int total, int size, int index)
       => new Metadata
       {
-        { "Page", 0.ToString() }
+        { "PageSize", size.ToString() },
+        { "PageIndex", index.ToString() },
+        { "TotalSize", total.ToString() }
       };
+
+    private static async Task ProcessPagedStream<TParent, TChild, TReply>(
+      int size,
+      int index,
+      IGenericRepository<TParent> repository,
+      ISpecificationEx<TParent, TChild> specification,
+      IAsyncStreamWriter<TReply> responseStream,
+      Func<IGenericRepository<TParent>, ISpecificationEx<TParent, TChild>, IAsyncStreamWriter<TReply>, Func<TChild?, TReply>, CancellationToken, Task> processor,
+      Func<TChild?, TReply> converter,
+      ServerCallContext context)
+      where TParent : class, IEntity
+      where TChild : class, IEntity
+    {
+      var count = await repository.CountAsync(specification).ConfigureAwait(false);
+
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, size, index)).ConfigureAwait(false);
+
+      await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task ProcessPagedStream<TChild, TReply>(
+      int size,
+      int index,
+      IGenericRepository<TChild> repository,
+      ISpecification<TChild> specification,
+      IAsyncStreamWriter<TReply> responseStream,
+      Func<IGenericRepository<TChild>, ISpecification<TChild>, IAsyncStreamWriter<TReply>, Func<TChild?, TReply>, CancellationToken, Task> processor,
+      Func<TChild?, TReply> converter,
+      ServerCallContext context)
+      where TChild : class, IEntity
+    {
+      var count = await repository.CountAsync(specification).ConfigureAwait(false);
+
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, size, index)).ConfigureAwait(false);
+
+      await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
+    }
 
     #endregion
 
@@ -129,11 +189,31 @@ namespace Db.API
       => await GetById(request.Id, m_bookRepository, ToBookReply);
 
     /// <inheritdoc />
-    public override async Task GetBooks(Empty request, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
+    public override async Task GetBooks(SearchAndPageParams pageParams, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
     {
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      var specification = new BooksSpec(pageParams.Search, pageParams.Size, pageParams.Index);
+      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_bookRepository, specification, responseStream, GetAllAsync, ToBookReply, context);
+    }
 
-      await GetAllAsync(m_bookRepository, responseStream, ToBookReply, context.CancellationToken).ConfigureAwait(false);
+    /// <inheritdoc />
+    public override async Task GetAllParts(SearchAndPageParams pageParams, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    {
+      var specification = new PartsSpec(pageParams.Search, pageParams.Size, pageParams.Index);
+      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_partRepository, specification, responseStream, GetAllAsync, ToPartReply, context);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetPartsFromSection(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    {
+      var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartsRepository, specification, responseStream, GetAllExAsync, ToPartReply, context);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetPartsFromBook(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    {
+      var specification = new BookPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionRepository, specification, responseStream, GetAllExAsync, ToPartReply, context);
     }
 
     /// <inheritdoc />
@@ -141,11 +221,17 @@ namespace Db.API
       => await GetById(request.Id, m_partRepository, ToPartReply);
 
     /// <inheritdoc />
-    public override async Task GetPropertyTypes(Empty request, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
+    public override async Task GetPartProperties(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
     {
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      var specification = new PartPropertiesSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_propertyRepository, specification, responseStream, GetAllAsync, ToPropertyReply, context);
+    }
 
-      await GetAllAsync(m_propertyTypeRepository, responseStream, ToPropertyTypeReply, context.CancellationToken).ConfigureAwait(false);
+    /// <inheritdoc />
+    public override async Task GetPropertyTypes(PageParams paging, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
+    {
+      var specification = new PropertyTypesSpec(paging.Size, paging.Index);
+      await ProcessPagedStream(paging.Size, paging.Index, m_propertyTypeRepository, specification, responseStream, GetAllAsync, ToPropertyTypeReply, context);
     }
 
     #endregion

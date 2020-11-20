@@ -46,7 +46,8 @@ namespace Db.Core.Entities
     /// <summary>
     /// Foreign key reference to the parent <see cref="SectionParts"/> entity
     /// </summary>
-    public int ParentSectionPartsId { get; set; }
+    [AllowNull]
+    public int? ParentSectionPartsId { get; set; } = null;
 
     /// <summary>
     /// Reference to the parent <see cref="SectionParts"/> entity
