@@ -11,7 +11,7 @@ namespace MRI.MVVM.Helpers
     : INotifyPropertyChanged
   {
     /// <inheritdoc />
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// Notify the View of changes to a given <paramref name="property"/> value

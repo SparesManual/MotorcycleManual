@@ -17,4 +17,8 @@
     <OutputPath>../../bin/Release/Libraries</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Interfaces\MRI.MVVM.Interfaces\MRI.MVVM.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>
