@@ -156,18 +156,31 @@ namespace Db.API
       => await GetById(request.Id, m_bookRepository, ToBookReply);
 
     /// <inheritdoc />
-    public override async Task GetBooks(PageParams pageParams, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
+    public override async Task GetBooks(SearchAndPageParams pageParams, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
     {
-      // TODO
-      //await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      var specification = new BooksSpec(pageParams.Search, pageParams.Size, pageParams.Index);
+      var count = await m_bookRepository.CountAsync(specification).ConfigureAwait(false);
 
-      await GetAllAsync(m_bookRepository, responseStream, ToBookReply, context.CancellationToken).ConfigureAwait(false);
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageParams.Size, pageParams.Index)).ConfigureAwait(false);
+
+      await GetAllAsync(m_bookRepository, specification, responseStream, ToBookReply, context.CancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
-    public override async Task GetPartsFromSection(IdAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    public override async Task GetAllParts(SearchAndPageParams pageParams, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
-      var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      var specification = new PartsSpec(pageParams.Search, pageParams.Size, pageParams.Index);
+      var count = await m_partRepository.CountAsync(specification).ConfigureAwait(false);
+
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageParams.Size, pageParams.Index)).ConfigureAwait(false);
+
+      await GetAllAsync(m_partRepository, specification, responseStream, ToPartReply, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetPartsFromSection(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    {
+      var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
       var count = await m_sectionPartsRepository.CountAsync(specification).ConfigureAwait(false);
 
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
@@ -176,9 +189,9 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task GetPartsFromBook(IdAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    public override async Task GetPartsFromBook(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
-      var specification = new BookPartsSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      var specification = new BookPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
       var count = await m_sectionRepository.CountAsync(specification).ConfigureAwait(false);
 
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
@@ -191,9 +204,9 @@ namespace Db.API
       => await GetById(request.Id, m_partRepository, ToPartReply);
 
     /// <inheritdoc />
-    public override async Task GetPartProperties(IdAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
+    public override async Task GetPartProperties(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
     {
-      var specification = new PartPropertiesSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      var specification = new PartPropertiesSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
       var count = await m_propertyRepository.CountAsync(specification).ConfigureAwait(false);
 
       await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, pageRequest.Size, pageRequest.Index)).ConfigureAwait(false);
@@ -204,8 +217,10 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task GetPropertyTypes(PageParams paging, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
     {
-      // TODO
-      //await context.WriteResponseHeadersAsync(GeneratePagingMetadata()).ConfigureAwait(false);
+      var specification = new PropertyTypesSpec(paging.Size, paging.Index);
+      var count = await m_propertyTypeRepository.CountAsync(specification).ConfigureAwait(false);
+
+      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, paging.Size, paging.Index)).ConfigureAwait(false);
 
       await GetAllAsync(m_propertyTypeRepository, responseStream, ToPropertyTypeReply, context.CancellationToken).ConfigureAwait(false);
     }

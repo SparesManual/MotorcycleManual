@@ -14,9 +14,11 @@ namespace Db.Core.Specifications
     /// Default constructor
     /// </summary>
     /// <param name="id">Id of the <see cref="Book"/></param>
+    /// <param name="search">Fuzzy book search</param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
-    public BookPartsSpec(int id, int size, int index)
+    public BookPartsSpec(int id, string? search, int size, int index)
+      : base(book => Part.StringSearch(book, search))
     {
       SetExtractor(sections =>
         sections
@@ -29,7 +31,7 @@ namespace Db.Core.Specifications
           .Where(part => part != null)
       );
 
-      SetOrderBy(part => part.Description);
+      SetOrderBy(part => part.PartNumber);
       ApplyPaging(size, index);
     }
   }

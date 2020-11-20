@@ -45,12 +45,21 @@ namespace MRI.Db
         Size = size
       };
 
-    private static IdAndPageParams ToIdAndPageParams(int id, int size, int index)
-      => new IdAndPageParams
+    private static IdSearchAndPageParams ToIdSearchAndPageParams(int id, string? search, int size, int index)
+      => new IdSearchAndPageParams
       {
         Id = id,
-        Size = size,
-        Index = index
+        Index = index,
+        Search = search ?? string.Empty,
+        Size = size
+      };
+
+    private static SearchAndPageParams ToSearchAndPageParams(string? search, int size, int index)
+      => new SearchAndPageParams
+      {
+        Index = index,
+        Search = search ?? string.Empty,
+        Size = size
       };
 
     private async Task<IPaging<T>> GetPagingAsync<T>(Func<Provider.ProviderClient, AsyncServerStreamingCall<T>> extractor)
@@ -83,10 +92,11 @@ namespace MRI.Db
     /// </summary>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
+    /// <param name="search">Book fuzzy search</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of books</returns>
-    public async Task<IPaging<BookReply>> GetBooksAsync(int size, int index, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetBooks(ToPageParams(size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
+    public async Task<IPaging<BookReply>> GetBooksAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetBooks(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
 
     /// <summary>
     /// Get a part based on the given <paramref name="id"/>
@@ -102,10 +112,11 @@ namespace MRI.Db
     /// </summary>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
+    /// <param name="search">Part fuzzy search</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of parts</returns>
-    public async Task<IPaging<PartReply>> GetPartsAsync(int size, int index, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetAllParts(ToPageParams(size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
+    public async Task<IPaging<PartReply>> GetPartsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllParts(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
 
     /// <summary>
     /// Get all parts belonging to a book with the given <paramref name="bookId"/>
@@ -113,10 +124,11 @@ namespace MRI.Db
     /// <param name="bookId">Id of the parent book</param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
+    /// <param name="search">Part fuzzy search</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of parts</returns>
-    public async Task<IPaging<PartReply>> GetPartsFromBookAsync(int bookId, int size, int index, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPartsFromBook(ToIdAndPageParams(bookId, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
+    public async Task<IPaging<PartReply>> GetPartsFromBookAsync(int bookId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPartsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
 
     /// <summary>
     /// Get all parts belonging to a section with the given <paramref name="sectionId"/>
@@ -124,10 +136,11 @@ namespace MRI.Db
     /// <param name="sectionId">Id of the parent section</param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
+    /// <param name="search">Part fuzzy search</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of parts</returns>
-    public async Task<IPaging<PartReply>> GetPartsFromSectionAsync(int sectionId, int size, int index, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPartsFromSection(ToIdAndPageParams(sectionId, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
+    public async Task<IPaging<PartReply>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPartsFromSection(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
 
     /// <summary>
     /// Get all properties for a part with the given <paramref name="partId"/>
@@ -135,10 +148,11 @@ namespace MRI.Db
     /// <param name="partId">Id of the part</param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
+    /// <param name="search">Part fuzzy search</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of properties</returns>
-    public async Task<IPaging<PartPropertyReply>> GetPartPropertiesAsync(int partId, int size, int index, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPartProperties(ToIdAndPageParams(partId, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
+    public async Task<IPaging<PartPropertyReply>> GetPartPropertiesAsync(int partId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPartProperties(ToIdSearchAndPageParams(partId, search, size, index), cancellationToken: cancellationToken)).ConfigureAwait(false);
 
     /// <summary>
     /// Get all property types

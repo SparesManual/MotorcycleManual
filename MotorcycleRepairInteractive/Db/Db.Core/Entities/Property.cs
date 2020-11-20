@@ -45,5 +45,14 @@ namespace Db.Core.Entities
     [Required]
     [MaxLength(256)]
     public string PropertyValue { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Validates whether the <paramref name="property"/> matches the <paramref name="search"/> specification
+    /// </summary>
+    /// <param name="search">Fuzzy search string</param>
+    /// <param name="property">Entity to validate</param>
+    /// <returns>True if this <paramref name="property"/> is a match</returns>
+    public static bool StringSearch(Property property, string? search)
+      => string.IsNullOrEmpty(search?.Trim()) || property.PropertyName.Contains(search);
   }
 }
