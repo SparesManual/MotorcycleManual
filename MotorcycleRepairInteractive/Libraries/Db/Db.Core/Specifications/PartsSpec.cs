@@ -15,7 +15,12 @@ namespace Db.Core.Specifications
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
     public PartsSpec(string? search, int size, int index)
-      : base(part => Part.StringSearch(part, search))
+      : base(part => string.IsNullOrEmpty(search)
+              || part.Description.Contains(search)
+              || part.PartNumber.Contains(search)
+              || !string.IsNullOrEmpty(part.MakersDescription) && part.MakersDescription.Contains(search)
+              || !string.IsNullOrEmpty(part.MakersPartNumber) && part.MakersPartNumber.Contains(search)
+            )
     {
       ApplyPaging(size, index);
       SetOrderBy(part => part.PartNumber);

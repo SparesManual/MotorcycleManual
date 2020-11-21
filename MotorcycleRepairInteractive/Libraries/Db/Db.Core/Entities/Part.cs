@@ -44,22 +44,5 @@ namespace Db.Core.Entities
     /// </summary>
     // ReSharper disable once CollectionNeverUpdated.Global
     public List<SectionParts> PartSections { get; set; } = new List<SectionParts>();
-
-    /// <summary>
-    /// Validates whether the <paramref name="part"/> matches the <paramref name="search"/> specification
-    /// </summary>
-    /// <param name="search">Fuzzy search string</param>
-    /// <param name="part">Entity to validate</param>
-    /// <returns>True if this <paramref name="part"/> is a match</returns>
-    public static bool StringSearch(Part part, string? search)
-    {
-      if (string.IsNullOrEmpty(search?.Trim()))
-        return true;
-
-      return part.Description.Contains(search)
-             || (part.PartNumber.Contains(search))
-             || (part.MakersDescription?.Contains(search) ?? false)
-             || (part.MakersPartNumber?.Contains(search) ?? false);
-    }
   }
 }

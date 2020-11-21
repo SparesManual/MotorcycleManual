@@ -18,7 +18,12 @@ namespace Db.Core.Specifications
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
     public BookPartsSpec(int id, string? search, int size, int index)
-      : base(book => Part.StringSearch(book, search))
+      : base(part => string.IsNullOrEmpty(search)
+              || part.Description.Contains(search)
+              || part.PartNumber.Contains(search)
+              || !string.IsNullOrEmpty(part.MakersDescription) && part.MakersDescription.Contains(search)
+              || !string.IsNullOrEmpty(part.MakersPartNumber) && part.MakersPartNumber.Contains(search)
+            )
     {
       SetExtractor(sections =>
         sections
