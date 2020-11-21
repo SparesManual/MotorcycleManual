@@ -15,7 +15,7 @@ namespace Db.Core.Specifications
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
     public BooksSpec(string? search, int size, int index)
-      : base(book => Book.StringSearch(search, book))
+      : base(book => string.IsNullOrEmpty(search) || book.Title.Contains(search))
     {
       ApplyPaging(size, index);
       SetOrderBy(book => book.Title);

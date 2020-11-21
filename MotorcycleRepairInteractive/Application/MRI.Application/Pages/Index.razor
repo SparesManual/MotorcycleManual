@@ -1,14 +1,16 @@
 ﻿@page "/"
+@using MRI.Db
+@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Queries.BooksViewModel>
 
 <style>
   .demo-mat-card {
     max-width: 400px;
   }
- 
+
   .demo-mat-card-content {
     padding: 1rem;
   }
- 
+
   .demo-mat-card-clean-margin {
     margin: 0px;
   }
@@ -17,35 +19,47 @@
 <h1>Hello, world!</h1>
 
 <div>
-  <MatPaginator Length="totalItems" PageSize="@pageSize" Page="@OnPage"/>
- </div>
+  @*<MatStringField OnInput="Callback" Label="Standard"></MatStringField>*@
+  
+  @*<MatAutocompleteList Icon="@MatIconNames.Search" Items="ViewModel.AutocompleteBooks" TItem="string" OnTextChanged="@ViewModel.ReloadAutocomplete"></MatAutocompleteList>*@
+</div>
+
+<div>
+  <MatPaginator Length="@ViewModel.TotalItems" PageSize="@ViewModel.PageItems" Page="@ViewModel.LoadBooks" />
+</div>
 
 <div class="mat-layout-grid">
   <div class="mat-layout-grid-inner">
-    <MatCard class="demo-mat-card mat-layout-grid-cell">
-      <MatCardContent>
-        <MatCardMedia Wide="true" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg"></MatCardMedia>
-        <div class="demo-mat-card-content">
-          <MatHeadline6 class="demo-mat-card-clean-margin">
-            Book title placeholder
-          </MatHeadline6>
-        </div>
-      </MatCardContent>
-      <MatCardActions>
-        <MatButton>Open</MatButton>
-      </MatCardActions>
-    </MatCard>
+    @foreach (var book in ViewModel.Books)
+    {
+      <MatCard class="demo-mat-card mat-layout-grid-cell">
+        <MatCardContent>
+          <MatCardMedia Wide="true" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg"></MatCardMedia>
+          <div class="demo-mat-card-content">
+            <MatHeadline6 class="demo-mat-card-clean-margin">
+              @book.Title
+            </MatHeadline6>
+          </div>
+        </MatCardContent>
+        <MatCardActions>
+          <MatButton>Open</MatButton>
+        </MatCardActions>
+      </MatCard>
+    }
   </div>
 </div>
 
-@code {
-  int totalItems = 43;
-  int pageSize = 25;
-  int pageIndex = 0;
+@code
+{
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+    => await ViewModel.LoadBooks().ConfigureAwait(false);
 
-  void OnPage(MatPaginatorPageEvent e)
+  /// <inheritdoc />
+  protected override void OnInitialized()
   {
-    pageSize = e.PageSize;
-    pageIndex = e.PageIndex;
+    base.OnInitialized();
+
+    ViewModel.AutocompleteBooks.CollectionChanged += (sender, args) => StateHasChanged();
   }
 }

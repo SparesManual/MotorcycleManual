@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MRI.Db;
+using ViewModels.Queries;
 
 namespace MRI.Application
 {
@@ -28,6 +30,8 @@ namespace MRI.Application
     {
       services.AddRazorPages();
       services.AddMatBlazor();
+      services.AddSingleton<APIProvider>();
+      services.AddScoped<BooksViewModel>();
       services.AddServerSideBlazor();
     }
 

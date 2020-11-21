@@ -3,18 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>9</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../bin/Debug/Libraries/Pages</OutputPath>
-    <DocumentationFile>../../../bin/Debug/Libraries/Pages\Pages.Queries.Web.xml</DocumentationFile>
+    <DocumentationFile>../../../bin/Debug/Interfaces/Pages/Pages.Queries.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Interfaces/Pages</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Libraries/Pages</OutputPath>
+    <OutputPath>../../../bin/Release/Interfaces/Pages</OutputPath>
   </PropertyGroup>
 
 </Project>

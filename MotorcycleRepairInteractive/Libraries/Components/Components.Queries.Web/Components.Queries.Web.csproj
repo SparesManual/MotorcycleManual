@@ -9,12 +9,16 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../bin/Debug/Libraries/Pages</OutputPath>
-    <DocumentationFile>../../../bin/Debug/Libraries/Pages\Pages.Queries.Web.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Libraries/Components</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Libraries/Components/Components.Queries.Web.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Libraries/Pages</OutputPath>
+    <OutputPath>../../../bin/Release/Libraries/Components</OutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
 
 </Project>
