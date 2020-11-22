@@ -43,13 +43,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components.Queries", "Inter
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{6CCCFE74-4126-409A-B3E0-D5B933DA8B90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.Queries.Web", "Libraries\Components\Components.Queries.Web\Components.Queries.Web.csproj", "{E4183525-8BD2-41B1-853C-86A950488C05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components.Queries.Web", "Libraries\Components\Components.Queries.Web\Components.Queries.Web.csproj", "{E4183525-8BD2-41B1-853C-86A950488C05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.MVVM.Web.Helpers", "Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj", "{5A1BF903-9D67-49B9-AFEA-498686D43DFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.MVVM.Web.Helpers", "Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj", "{5A1BF903-9D67-49B9-AFEA-498686D43DFA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{05A93E85-50AE-4004-BA30-90EA900215CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Queries", "Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj", "{3803A9D3-E624-4B06-B6FA-D9CBD08F4531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels.Queries", "Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj", "{3803A9D3-E624-4B06-B6FA-D9CBD08F4531}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{C54A3983-3803-4678-BAFF-D72B9F90D43E}"
 EndProject

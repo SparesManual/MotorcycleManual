@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\MRI.MVVM.Interfaces\MRI.MVVM.Interfaces.csproj" />
+    <ProjectReference Include="..\MRI.Helpers\MRI.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

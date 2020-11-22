@@ -1,0 +1,44 @@
+﻿@page "/partsall"
+@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Queries.PartsAllViewModel>
+
+<MatH3>PartsAll</MatH3>
+
+<div>
+  <MatPaginator Length="@ViewModel.TotalItems" PageSize="ViewModel.PageSize" Page="@Callback" />
+</div>
+
+<MatTable Items="ViewModel.Items" class="mat-elevation-z5" ShowPaging="false" PageSize="ViewModel.PageSize">
+  <MatTableHeader>
+    <th>Part number</th>
+    <th>Makers number</th>
+    <th>Description</th>
+    <th>Makers description</th>
+  </MatTableHeader>
+  <MatTableRow>
+    <td>@context.PartNumber</td>
+    <td>@context.MakersPartNumber</td>
+    <td>@context.Description</td>
+    <td>@context.MakersDescription</td>
+  </MatTableRow>
+</MatTable>
+
+<div>
+  <MatPaginator Length="@ViewModel.TotalItems" PageSize="ViewModel.PageSize" Page="@Callback" />
+</div>
+
+@code
+{
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await ViewModel.LoadItems().ConfigureAwait(true);
+  }
+
+  private async void Callback(MatPaginatorPageEvent obj)
+  {
+    ViewModel.PageIndex = obj.PageIndex + 1;
+    ViewModel.PageSize = obj.PageSize;
+
+    await ViewModel.LoadItems().ConfigureAwait(false);
+  }
+}

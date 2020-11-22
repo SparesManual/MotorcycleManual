@@ -1,5 +1,8 @@
 ﻿using MRI.MVVM.Interfaces;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using Microsoft.AspNetCore.Components;
 
 namespace MRI.MVVM.Web.Helpers
@@ -19,11 +22,32 @@ namespace MRI.MVVM.Web.Helpers
     /// <inheritdoc />
     protected override void OnInitialized()
     {
+      static bool IsObservable(Type? type)
+      {
+        if (type is null || !type.IsGenericType || !type.IsClass)
+          return false;
+
+        var observable = typeof(ObservableCollection<object>);
+        return type.Name.Equals(observable.Name);
+      }
+
       base.OnInitialized();
       if (ViewModel == null)
         throw new Exception("Invalidly configured ViewModel");
 
-      ViewModel.PropertyChanged += (o, e) => StateHasChanged();
+      ViewModel.PropertyChanged += ViewModelOnPropertyChanged;
+      var properties = ViewModel
+        .GetType()
+        .GetProperties()
+        .Where(x => x.PropertyType.Name.Equals(typeof(ObservableCollection<object>).Name))
+        .Select(x => x.GetValue(ViewModel))
+        .OfType<INotifyPropertyChanged>();
+
+      foreach (var property in properties)
+        property.PropertyChanged += ViewModelOnPropertyChanged;
     }
+
+    private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+      => StateHasChanged();
   }
 }

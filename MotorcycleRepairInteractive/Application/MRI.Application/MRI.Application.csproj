@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web\Components.Queries.Web.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Db\MRI.Db.csproj" />
     <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
