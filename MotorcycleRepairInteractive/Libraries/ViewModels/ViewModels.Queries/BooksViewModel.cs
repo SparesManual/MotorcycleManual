@@ -8,6 +8,9 @@ using MRI.MVVM.Helpers;
 
 namespace ViewModels.Queries
 {
+  /// <summary>
+  /// View model for paging all books
+  /// </summary>
   public class BooksViewModel
     : BasePagedViewModel<BookReply>
   {
@@ -15,10 +18,17 @@ namespace ViewModels.Queries
 
     #region Properties
 
+    /// <summary>
+    /// Search autocomplete collection
+    /// </summary>
     public ObservableCollection<string> AutocompleteBooks { get; } = new ObservableCollection<string>();
 
     #endregion
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider</param>
     public BooksViewModel(APIProvider provider)
       => m_provider = provider;
 

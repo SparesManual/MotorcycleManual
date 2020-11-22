@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
@@ -7,17 +6,28 @@ using MRI.MVVM.Interfaces;
 
 namespace MRI.MVVM.Helpers
 {
+  /// <summary>
+  /// Base View model with paging support
+  /// </summary>
+  /// <typeparam name="T">Paged item type</typeparam>
   public abstract class BasePagedViewModel<T>
     : BasePropertyChanged, IViewModel
   {
+    #region Fields
+
     private int m_pageIndex = 1;
     private int m_pageSize = 10;
     private int m_pageItems;
     private int m_totalItems;
     private bool m_loading;
 
+    #endregion
+
     #region Properties
 
+    /// <summary>
+    /// Index of the current page
+    /// </summary>
     public int PageIndex
     {
       get => m_pageIndex;
@@ -28,6 +38,9 @@ namespace MRI.MVVM.Helpers
       }
     }
 
+    /// <summary>
+    /// Number of maximum items to query
+    /// </summary>
     public int PageSize
     {
       get => m_pageSize;
@@ -38,6 +51,9 @@ namespace MRI.MVVM.Helpers
       }
     }
 
+    /// <summary>
+    /// Number of currently displayed items
+    /// </summary>
     public int PageItems
     {
       get => m_pageItems;
@@ -48,6 +64,9 @@ namespace MRI.MVVM.Helpers
       }
     }
 
+    /// <summary>
+    /// Total items available for paging
+    /// </summary>
     public int TotalItems
     {
       get => m_totalItems;
@@ -58,6 +77,9 @@ namespace MRI.MVVM.Helpers
       }
     }
 
+    /// <summary>
+    /// Is paging loading
+    /// </summary>
     public bool Loading
     {
       get => m_loading;
@@ -68,12 +90,25 @@ namespace MRI.MVVM.Helpers
       }
     }
 
+    /// <summary>
+    /// Paged items to display
+    /// </summary>
     public ObservableCollection<T> Items { get; } = new ObservableCollection<T>();
 
     #endregion
 
+    /// <summary>
+    /// Queries the items
+    /// </summary>
+    /// <param name="pageSize">Maximum number of items to return</param>
+    /// <param name="pageIndex">Index of batch</param>
+    /// <param name="cancellationToken">Process cancellation</param>
+    /// <returns>Queried items</returns>
     protected abstract Task<IPaging<T>> GetItems(int pageSize, int pageIndex, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// Loads items
+    /// </summary>
     public async Task LoadItems()
     {
       Items.Clear();

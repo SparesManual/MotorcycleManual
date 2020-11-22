@@ -39,7 +39,7 @@ namespace MRI.MVVM.Web.Helpers
       var properties = ViewModel
         .GetType()
         .GetProperties()
-        .Where(x => x.PropertyType.Name.Equals(typeof(ObservableCollection<object>).Name))
+        .Where(x => IsObservable(x.PropertyType))
         .Select(x => x.GetValue(ViewModel))
         .OfType<INotifyPropertyChanged>();
 

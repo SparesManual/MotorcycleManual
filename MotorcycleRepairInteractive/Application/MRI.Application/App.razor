@@ -1,6 +1,6 @@
 ﻿@using System.Reflection
 <Router AppAssembly="@typeof(Program).Assembly"
-        AdditionalAssemblies="ComponentAssemblies">
+        AdditionalAssemblies="m_componentAssemblies">
   <Found Context="routeData">
     <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
   </Found>
@@ -13,7 +13,7 @@
 
 @code
 {
-  private readonly Assembly[] ComponentAssemblies = {
+  private readonly Assembly[] m_componentAssemblies = {
     typeof(Components.Queries.Web.Component).Assembly
   };
 }

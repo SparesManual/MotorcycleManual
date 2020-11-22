@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Components.Queries.Web
+﻿namespace Components.Queries.Web
 {
+#pragma warning disable 1591
   public class Component
   {
   }

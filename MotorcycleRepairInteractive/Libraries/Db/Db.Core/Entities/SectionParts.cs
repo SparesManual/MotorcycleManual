@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Db.Core.Entities
 {
@@ -11,8 +12,6 @@ namespace Db.Core.Entities
   /// <remarks>
   /// Adds additional attributes alongside this relationship
   /// </remarks>
-  [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-  [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
   public class SectionParts
     : BaseEntity
   {
