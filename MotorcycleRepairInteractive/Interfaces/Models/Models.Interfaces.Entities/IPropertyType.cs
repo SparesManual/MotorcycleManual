@@ -1,8 +1,14 @@
 ﻿namespace Models.Interfaces.Entities
 {
+  /// <summary>
+  /// Interface for property type replies
+  /// </summary>
   public interface IPropertyType
     : IReply
   {
+    /// <summary>
+    /// Property type id
+    /// </summary>
     int Id { get; }
 
     /// <summary>

@@ -40,6 +40,11 @@ namespace MRI.MVVM.Interfaces
     bool Loading { get; set; }
 
     /// <summary>
+    /// Search filter
+    /// </summary>
+    string Search { get; set; }
+
+    /// <summary>
     /// Paged items to display
     /// </summary>
     ObservableCollection<T> Items { get; }

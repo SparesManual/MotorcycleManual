@@ -19,18 +19,18 @@ namespace Db.Core.Specifications
     /// <param name="index">Page index</param>
     public SectionPartsSpec(int id, string search, int size, int index)
       : base(part => string.IsNullOrEmpty(search)
-              || part.Description.Contains(search)
-              || part.PartNumber.Contains(search)
-              || !string.IsNullOrEmpty(part.MakersDescription) && part.MakersDescription.Contains(search)
-              || !string.IsNullOrEmpty(part.MakersPartNumber) && part.MakersPartNumber.Contains(search)
-            )
+                     || part.Description.Contains(search)
+                     || part.PartNumber.Contains(search)
+                     || !string.IsNullOrEmpty(part.MakersDescription) && part.MakersDescription.Contains(search)
+                     || !string.IsNullOrEmpty(part.MakersPartNumber) && part.MakersPartNumber.Contains(search)
+      )
     {
       SetExtractor(sections =>
-       sections
-        .Where(sp => sp.SectionId == id)
-        .Include(sp => sp.Part!)
-        .Select(sp => sp.Part!)
-        .Where(part => part != null)
+        sections
+          .Where(sp => sp.SectionId == id)
+          .Include(sp => sp.Part!)
+          .Select(sp => sp.Part!)
+          .Where(part => part != null)
       );
 
       SetOrderBy(part => part.PartNumber);

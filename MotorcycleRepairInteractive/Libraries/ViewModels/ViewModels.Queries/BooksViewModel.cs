@@ -23,7 +23,7 @@ namespace ViewModels.Queries
       => m_provider = provider;
 
     /// <inheritdoc />
-    protected override async Task<IPaging<IBook>> GetItems(int pageSize, int pageIndex, CancellationToken cancellationToken = default)
-      => await m_provider.GetBooksAsync(pageSize, pageIndex, cancellationToken: cancellationToken).ConfigureAwait(true);
+    protected override async Task<IPaging<IBook>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
+      => await m_provider.GetBooksAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(true);
   }
 }

@@ -2,43 +2,39 @@
 @page "/partsall"
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IAllPartsViewModel>
 
-<MatH3>PartsAll</MatH3>
+<h1>PartsAll</h1>
 
 <div>
-  <MatPaginator Length="@ViewModel.TotalItems" PageSize="ViewModel.PageSize" Page="@Callback" />
+  <RadzenAutoComplete Data="ViewModel.Autocomplete" LoadData="LoadAutocompleteData" Placeholder="Search..."/>
 </div>
 
-<MatTable Items="ViewModel.Items" class="mat-elevation-z5" ShowPaging="false" PageSize="ViewModel.PageSize">
-  <MatTableHeader>
-    <th>Part number</th>
-    <th>Makers number</th>
-    <th>Description</th>
-    <th>Makers description</th>
-  </MatTableHeader>
-  <MatTableRow>
-    <td>@context.PartNumber</td>
-    <td>@context.MakersPartNumber</td>
-    <td>@context.Description</td>
-    <td>@context.MakersDescription</td>
-  </MatTableRow>
-</MatTable>
-
-<div>
-  <MatPaginator Length="@ViewModel.TotalItems" PageSize="ViewModel.PageSize" Page="@Callback" />
-</div>
+<RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="LoadTableData" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IPart">
+  <Columns>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="PartNumber" Title="Part number">
+      <FooterTemplate>
+        Displayed parts: <b>@ViewModel.PageItems</b> of <b>@ViewModel.TotalItems</b>
+      </FooterTemplate>
+    </RadzenGridColumn>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="MakersPartNumber" Title="Makers number"/>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="Description" Title="Description"/>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="MakersDescription" Title="Makers description"/>
+  </Columns>
+</RadzenGrid>
 
 @code
 {
   /// <inheritdoc />
   protected override async Task OnInitializedAsync()
-  {
-    await ViewModel.LoadItems().ConfigureAwait(true);
-  }
+    => await ViewModel.LoadItems().ConfigureAwait(true);
 
-  private async void Callback(MatPaginatorPageEvent obj)
+  private async void LoadAutocompleteData(LoadDataArgs obj)
+    => await ViewModel.UpdateAutocomplete(obj.Filter).ConfigureAwait(false);
+
+  private async void LoadTableData(LoadDataArgs obj)
   {
-    ViewModel.PageIndex = obj.PageIndex + 1;
-    ViewModel.PageSize = obj.PageSize;
+    ViewModel.Search = obj.Filter;
+
+    ViewModel.PageIndex = obj.Skip!.Value / ViewModel.PageSize + 1;
 
     await ViewModel.LoadItems().ConfigureAwait(false);
   }

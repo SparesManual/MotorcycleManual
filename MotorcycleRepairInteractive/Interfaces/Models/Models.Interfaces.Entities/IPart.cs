@@ -1,11 +1,14 @@
 ﻿namespace Models.Interfaces.Entities
 {
   /// <summary>
-  /// Interface for parts
+  /// Interface for part reply
   /// </summary>
   public interface IPart
     : IReply
   {
+    /// <summary>
+    /// Part id
+    /// </summary>
     int Id { get; }
 
     /// <summary>

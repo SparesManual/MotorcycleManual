@@ -20,6 +20,7 @@ namespace MRI.MVVM.Helpers
     private int m_pageItems;
     private int m_totalItems;
     private bool m_loading;
+    private string m_search = string.Empty;
 
     #endregion
 
@@ -91,6 +92,19 @@ namespace MRI.MVVM.Helpers
     }
 
     /// <summary>
+    /// Filter search expression
+    /// </summary>
+    public string Search
+    {
+      get => m_search;
+      set
+      {
+        m_search = value;
+        OnPropertyChanged();
+      }
+    }
+
+    /// <summary>
     /// Paged items to display
     /// </summary>
     public ObservableCollection<T> Items { get; } = new ObservableCollection<T>();
@@ -102,9 +116,10 @@ namespace MRI.MVVM.Helpers
     /// </summary>
     /// <param name="pageSize">Maximum number of items to return</param>
     /// <param name="pageIndex">Index of batch</param>
+    /// <param name="search">Optional search filter</param>
     /// <param name="cancellationToken">Process cancellation</param>
     /// <returns>Queried items</returns>
-    protected abstract Task<IPaging<T>> GetItems(int pageSize, int pageIndex, CancellationToken cancellationToken = default);
+    protected abstract Task<IPaging<T>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Loads items
@@ -115,7 +130,7 @@ namespace MRI.MVVM.Helpers
 
       Loading = true;
 
-      var result = await GetItems(PageSize, PageIndex).ConfigureAwait(true);
+      var result = await GetItems(PageSize, PageIndex, Search).ConfigureAwait(true);
 
       PageItems = result.PageItems;
       PageIndex = result.PageIndex;

@@ -1,5 +1,8 @@
 ﻿namespace Models.Interfaces.Entities
 {
+  /// <summary>
+  /// Interface for property replies
+  /// </summary>
   public interface IProperty
     : IReply
   {

@@ -2,54 +2,35 @@
 @page "/books"
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBooksViewModel>
 
-<style>
-  .demo-mat-card {
-    max-width: 400px;
-  }
-
-  .demo-mat-card-content {
-    padding: 1rem;
-  }
-
-  .demo-mat-card-clean-margin {
-    margin: 0;
-  }
-</style>
-
 <h1>Books</h1>
 
-@*<div>
-  <MatAutocompleteList Icon="@MatIconNames.Search" Items="ViewModel.AutocompleteBooks" TItem="string" FullWidth="true" />
-</div>*@
-
-<div>
-  <MatPaginator Length="@ViewModel.TotalItems" PageSize="@ViewModel.PageItems" Page="@ViewModel.LoadItems" />
-</div>
-
-<div class="mat-layout-grid">
-  <div class="mat-layout-grid-inner">
-    @foreach (var book in ViewModel.Items)
-    {
-      <MatCard class="demo-mat-card mat-layout-grid-cell">
-        <MatCardContent>
-          <MatCardMedia Wide="true" ImageUrl="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg"></MatCardMedia>
-          <div class="demo-mat-card-content">
-            <MatHeadline6 class="demo-mat-card-clean-margin">
-              @book.Title
-            </MatHeadline6>
-          </div>
-        </MatCardContent>
-        <MatCardActions>
-          <MatButton>Open</MatButton>
-        </MatCardActions>
-      </MatCard>
-    }
-  </div>
-</div>
+<RadzenDataList WrapItems="true" LoadData="@LoadTableData" AllowPaging="true" Count="@ViewModel.TotalItems" PageSize="@ViewModel.PageSize" Data="@ViewModel.Items" TItem="Models.Interfaces.Entities.IBook">
+  <Template Context="book">
+    <RadzenCard Style="width:300px; padding-left: 25px; padding-top: 10px">
+      <div class="row mb-auto">
+        <div>
+          <b>@book.Title</b>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <RadzenButton Icon="assignment">Open</RadzenButton>
+      </div>
+    </RadzenCard>
+  </Template>
+</RadzenDataList>
 
 @code
 {
+  private async void LoadTableData(LoadDataArgs obj)
+  {
+    ViewModel.Search = obj.Filter;
+
+    ViewModel.PageIndex = obj.Skip!.Value / ViewModel.PageSize + 1;
+
+    await ViewModel.LoadItems().ConfigureAwait(false);
+  }
+
   /// <inheritdoc />
   protected override async Task OnInitializedAsync()
-    => await ViewModel.LoadItems().ConfigureAwait(false);
+      => await ViewModel.LoadItems().ConfigureAwait(false);
 }

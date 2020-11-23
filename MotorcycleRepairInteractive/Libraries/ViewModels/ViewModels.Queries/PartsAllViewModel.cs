@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
 using Models.Interfaces.Entities;
@@ -15,6 +16,9 @@ namespace ViewModels.Queries
   {
     private readonly IAPIProvider m_provider;
 
+    /// <inheritdoc />
+    public ObservableCollection<string> Autocomplete { get; set; } = new ObservableCollection<string>();
+
     /// <summary>
     /// Default constructor
     /// </summary>
@@ -23,7 +27,17 @@ namespace ViewModels.Queries
       => m_provider = provider;
 
     /// <inheritdoc />
-    protected override async Task<IPaging<IPart>> GetItems(int pageSize, int pageIndex, CancellationToken cancellationToken = default)
-      => await m_provider.GetPartsAsync(pageSize, pageIndex, cancellationToken: cancellationToken).ConfigureAwait(false);
+    public async Task UpdateAutocomplete(string? search)
+    {
+      Autocomplete.Clear();
+
+      var result = await m_provider.GetPartsAsync(5, 1, search).ConfigureAwait(true);
+      await foreach (var item in result.ReadAll().ConfigureAwait(true))
+        Autocomplete.Add($"{item.PartNumber} {item.Description}");
+    }
+
+    /// <inheritdoc />
+    protected override async Task<IPaging<IPart>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
+      => await m_provider.GetPartsAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(false);
   }
 }
