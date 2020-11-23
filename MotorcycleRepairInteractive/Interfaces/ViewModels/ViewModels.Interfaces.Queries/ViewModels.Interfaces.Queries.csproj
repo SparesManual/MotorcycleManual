@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,17 +8,17 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\MRI.MVVM.Interfaces\MRI.MVVM.Interfaces.csproj" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../bin/Debug/Interfaces/Db.Interfaces.xml</DocumentationFile>
-    <OutputPath>../../bin/Debug/Interfaces</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Interfaces/ViewModels/ViewModels.Interfaces.Queries.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Interfaces/ViewModels</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../bin/Release/Interfaces</OutputPath>
+    <OutputPath>../../../bin/Release/Interfaces/ViewModels</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
-  </ItemGroup>
 
 </Project>

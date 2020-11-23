@@ -1,6 +1,6 @@
 ﻿@* ReSharper disable UnknownCssClass *@
 @page "/books"
-@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Queries.BooksViewModel>
+@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBooksViewModel>
 
 <style>
   .demo-mat-card {
@@ -18,9 +18,9 @@
 
 <h1>Books</h1>
 
-<div>
+@*<div>
   <MatAutocompleteList Icon="@MatIconNames.Search" Items="ViewModel.AutocompleteBooks" TItem="string" FullWidth="true" />
-</div>
+</div>*@
 
 <div>
   <MatPaginator Length="@ViewModel.TotalItems" PageSize="@ViewModel.PageItems" Page="@ViewModel.LoadItems" />

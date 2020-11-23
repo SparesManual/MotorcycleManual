@@ -1,10 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Db.API;
 using Db.Interfaces;
-using MRI.Db;
+using Models.Interfaces.Entities;
 using MRI.MVVM.Helpers;
+using ViewModels.Interfaces.Queries;
 
 namespace ViewModels.Queries
 {
@@ -12,28 +11,19 @@ namespace ViewModels.Queries
   /// View model for paging all books
   /// </summary>
   public class BooksViewModel
-    : BasePagedViewModel<BookReply>
+    : BasePagedViewModel<IBook>, IBooksViewModel
   {
-    private readonly APIProvider m_provider;
-
-    #region Properties
-
-    /// <summary>
-    /// Search autocomplete collection
-    /// </summary>
-    public ObservableCollection<string> AutocompleteBooks { get; } = new ObservableCollection<string>();
-
-    #endregion
+    private readonly IAPIProvider m_provider;
 
     /// <summary>
     /// Default constructor
     /// </summary>
     /// <param name="provider">Injected API provider</param>
-    public BooksViewModel(APIProvider provider)
+    public BooksViewModel(IAPIProvider provider)
       => m_provider = provider;
 
     /// <inheritdoc />
-    protected override async Task<IPaging<BookReply>> GetItems(int pageSize, int pageIndex, CancellationToken cancellationToken = default)
+    protected override async Task<IPaging<IBook>> GetItems(int pageSize, int pageIndex, CancellationToken cancellationToken = default)
       => await m_provider.GetBooksAsync(pageSize, pageIndex, cancellationToken: cancellationToken).ConfigureAwait(true);
   }
 }

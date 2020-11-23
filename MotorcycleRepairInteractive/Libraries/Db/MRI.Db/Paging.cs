@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Db.Interfaces;
-using Grpc.Core;
 
 namespace MRI.Db
 {
   internal class Paging<T>
     : IPaging<T>
   {
-    private readonly IAsyncStreamReader<T> m_stream;
+    private readonly Func<CancellationToken, IAsyncEnumerable<T>> m_stream;
 
     #region Properties
 
@@ -30,7 +30,7 @@ namespace MRI.Db
     /// <param name="totalItems">Total number of times - sum of items in all batches</param>
     /// <param name="pageItems">Items in given batch</param>
     /// <param name="pageIndex">Index of given batch</param>
-    public Paging(IAsyncStreamReader<T> stream, int totalItems, int pageItems, int pageIndex)
+    public Paging(Func<CancellationToken, IAsyncEnumerable<T>> stream, int totalItems, int pageItems, int pageIndex)
     {
       m_stream = stream;
       TotalItems = totalItems;
@@ -40,6 +40,6 @@ namespace MRI.Db
 
     /// <inheritdoc />
     public IAsyncEnumerable<T> ReadAll(CancellationToken cancellationToken = default)
-      => m_stream.ReadAllAsync(cancellationToken);
+      => m_stream(cancellationToken);
   }
 }

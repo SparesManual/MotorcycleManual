@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\MRI.MVVM.Interfaces\MRI.MVVM.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Queries\ViewModels.Interfaces.Queries.csproj" />
     <ProjectReference Include="..\..\Db\Db.Core\Db.Core.csproj" />
     <ProjectReference Include="..\..\Db\MRI.Db\MRI.Db.csproj" />
     <ProjectReference Include="..\..\Helpers\MRI.MVVM.Helpers\MRI.MVVM.Helpers.csproj" />

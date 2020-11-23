@@ -17,4 +17,8 @@
     <OutputPath>../../bin/Release/Interfaces</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
