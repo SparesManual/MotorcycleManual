@@ -32,10 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Db.Infrastructure\Db.Infrastructure.csproj" />
   </ItemGroup>
 

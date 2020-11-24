@@ -21,6 +21,10 @@ namespace Db.API
 
     private readonly ILogger<ProviderService> m_logger;
     private readonly IGenericRepository<Book> m_bookRepository;
+    private readonly IGenericRepository<Make> m_makeRepository;
+    private readonly IGenericRepository<BookMakes> m_bookMakesRepository;
+    private readonly IGenericRepository<Model> m_modelRepository;
+    private readonly IGenericRepository<MakeModels> m_makeModelsRepository;
     private readonly IGenericRepository<Section> m_sectionRepository;
     private readonly IGenericRepository<SectionParts> m_sectionPartsRepository;
     private readonly IGenericRepository<Part> m_partRepository;
@@ -34,13 +38,21 @@ namespace Db.API
     /// </summary>
     /// <param name="logger">Injected logger instance</param>
     /// <param name="bookRepository">Injected book repository</param>
+    /// <param name="makeModelsRepository"></param>
     /// <param name="sectionRepository">Injected section repository</param>
     /// <param name="sectionPartsRepository">Injected section parts repository</param>
     /// <param name="partRepository">Injected parts repository</param>
     /// <param name="propertyRepository">Injected property repository</param>
     /// <param name="propertyTypeRepository">Injected property type repository</param>
+    /// <param name="makeRepository">Injected make repository</param>
+    /// <param name="bookMakesRepository"></param>
+    /// <param name="modelRepository">Injected model repository</param>
     public ProviderService(ILogger<ProviderService> logger,
       IGenericRepository<Book> bookRepository,
+      IGenericRepository<Make> makeRepository,
+      IGenericRepository<BookMakes> bookMakesRepository,
+      IGenericRepository<Model> modelRepository,
+      IGenericRepository<MakeModels> makeModelsRepository,
       IGenericRepository<Section> sectionRepository,
       IGenericRepository<SectionParts> sectionPartsRepository,
       IGenericRepository<Part> partRepository,
@@ -49,6 +61,10 @@ namespace Db.API
     {
       m_logger = logger;
       m_bookRepository = bookRepository;
+      m_makeRepository = makeRepository;
+      m_bookMakesRepository = bookMakesRepository;
+      m_modelRepository = modelRepository;
+      m_makeModelsRepository = makeModelsRepository;
       m_sectionRepository = sectionRepository;
       m_sectionPartsRepository = sectionPartsRepository;
       m_partRepository = partRepository;
@@ -63,6 +79,21 @@ namespace Db.API
       {
         Id = book?.Id ?? -1,
         Title = book?.Title ?? string.Empty
+      };
+
+    private static MakeReply ToMakeReply(Make? make)
+      => new MakeReply
+      {
+        Id = make?.Id ?? -1,
+        Name = make?.Name ?? string.Empty,
+        BookId = make?.ParentBook.BookId ?? -1,
+      };
+
+    private static ModelReply ToModelReply(Model? model)
+      => new ModelReply
+      {
+        Id = model?.Id ?? -1,
+        Name = model?.Name ?? string.Empty,
       };
 
     private static PartReply ToPartReply(Part? part)
@@ -186,52 +217,60 @@ namespace Db.API
 
     /// <inheritdoc />
     public override async Task<BookReply> GetBook(IdRequest request, ServerCallContext context)
-      => await GetById(request.Id, m_bookRepository, ToBookReply);
+      => await GetById(request.Id, m_bookRepository, ToBookReply).ConfigureAwait(false);
 
     /// <inheritdoc />
     public override async Task GetBooks(SearchAndPageParams pageParams, IServerStreamWriter<BookReply> responseStream, ServerCallContext context)
     {
       var specification = new BooksSpec(pageParams.Search, pageParams.Size, pageParams.Index);
-      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_bookRepository, specification, responseStream, GetAllAsync, ToBookReply, context);
+      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_bookRepository, specification, responseStream, GetAllAsync, ToBookReply, context).ConfigureAwait(false);
     }
+
+    /// <inheritdoc />
+    public override async Task<MakeReply> GetMake(IdRequest request, ServerCallContext context)
+      => await GetById(request.Id, m_makeRepository, ToMakeReply).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public override async Task<ModelReply> GetModel(IdRequest request, ServerCallContext context)
+      => await GetById(request.Id, m_modelRepository, ToModelReply).ConfigureAwait(false);
 
     /// <inheritdoc />
     public override async Task GetAllParts(SearchAndPageParams pageParams, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       var specification = new PartsSpec(pageParams.Search, pageParams.Size, pageParams.Index);
-      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_partRepository, specification, responseStream, GetAllAsync, ToPartReply, context);
+      await ProcessPagedStream(pageParams.Size, pageParams.Index, m_partRepository, specification, responseStream, GetAllAsync, ToPartReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
     public override async Task GetPartsFromSection(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
-      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartsRepository, specification, responseStream, GetAllExAsync, ToPartReply, context);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartsRepository, specification, responseStream, GetAllExAsync, ToPartReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
     public override async Task GetPartsFromBook(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
     {
       var specification = new BookPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
-      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionRepository, specification, responseStream, GetAllExAsync, ToPartReply, context);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionRepository, specification, responseStream, GetAllExAsync, ToPartReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
     public override async Task<PartReply> GetPart(IdRequest request, ServerCallContext context)
-      => await GetById(request.Id, m_partRepository, ToPartReply);
+      => await GetById(request.Id, m_partRepository, ToPartReply).ConfigureAwait(false);
 
     /// <inheritdoc />
     public override async Task GetPartProperties(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)
     {
       var specification = new PartPropertiesSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
-      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_propertyRepository, specification, responseStream, GetAllAsync, ToPropertyReply, context);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_propertyRepository, specification, responseStream, GetAllAsync, ToPropertyReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
     public override async Task GetPropertyTypes(PageParams paging, IServerStreamWriter<PropertyTypeReply> responseStream, ServerCallContext context)
     {
       var specification = new PropertyTypesSpec(paging.Size, paging.Index);
-      await ProcessPagedStream(paging.Size, paging.Index, m_propertyTypeRepository, specification, responseStream, GetAllAsync, ToPropertyTypeReply, context);
+      await ProcessPagedStream(paging.Size, paging.Index, m_propertyTypeRepository, specification, responseStream, GetAllAsync, ToPropertyTypeReply, context).ConfigureAwait(false);
     }
 
     #endregion

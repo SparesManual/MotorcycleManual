@@ -8,6 +8,12 @@ service Provider {
   rpc GetBook (IdRequest) returns (BookReply);
   rpc GetBooks (SearchAndPageParams) returns (stream BookReply);
   
+  rpc GetMake(IdRequest) returns (MakeReply);
+  rpc GetMakes(SearchAndPageParams) returns (stream MakeReply);
+  rpc GetMakesFromBook(IdSearchAndPageParams) returns (stream MakeReply);
+
+  rpc GetModel(IdRequest) returns (ModelReply);
+
   rpc GetPart (IdRequest) returns (PartReply);
   rpc GetAllParts (SearchAndPageParams) returns (stream PartReply);
   rpc GetPartsFromBook (IdSearchAndPageParams) returns (stream PartReply);
@@ -50,6 +56,17 @@ message IdRequest {
 message BookReply {
   int32 id = 1;
   string title = 2;
+}
+
+message MakeReply {
+  int32 id = 1;
+  string name = 2;
+  int32 bookId = 3;
+}
+
+message ModelReply {
+  int32 id = 1;
+  string name = 2;
 }
 
 message PartReply {

@@ -16,6 +16,26 @@ namespace Db.Infrastructure.Data
     public DbSet<Book>? Books { get; set; }
 
     /// <summary>
+    /// Collection of makes
+    /// </summary>
+    public DbSet<Make>? Makes { get; set; }
+
+    /// <summary>
+    /// Collection of mappings of <see cref="Books"/> to <see cref="Makes"/>
+    /// </summary>
+    public DbSet<BookMakes>? BookMakes { get; set; }
+
+    /// <summary>
+    /// Collection of models
+    /// </summary>
+    public DbSet<Model>? Models { get; set; }
+
+    /// <summary>
+    /// Collection of mappings of <see cref="Makes"/> to <see cref="Models"/>
+    /// </summary>
+    public DbSet<MakeModels>? MakeModels { get; set; }
+
+    /// <summary>
     /// Collection of sections covering <see cref="Book"/> pages
     /// </summary>
     public DbSet<Section>? Sections { get; set; }
@@ -86,6 +106,35 @@ namespace Db.Infrastructure.Data
         .WithMany(x => x!.ParentSectionPartsList!)
         .HasForeignKey(x => x.ParentSectionPartsId)
         .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+
+      #endregion
+
+      #region Many-to-one BookMakes
+
+      modelBuilder.Entity<BookMakes>()
+        .HasKey(bc => new { bc.BookId, bc.MakeId });
+      modelBuilder.Entity<BookMakes>()
+        .HasOne(bc => bc.Book)
+        .WithMany(b => b!.BookMakes)
+        .HasForeignKey(bc => bc.BookId);
+      modelBuilder.Entity<BookMakes>()
+        .HasOne(bc => bc.Make)
+        .WithOne(c => c!.ParentBook);
+
+      #endregion
+
+      #region Many-to-many MakeModels
+
+      modelBuilder.Entity<MakeModels>()
+        .HasKey(bc => new { bc.MakeId, bc.ModelId });
+      modelBuilder.Entity<MakeModels>()
+        .HasOne(bc => bc.Make)
+        .WithMany(b => b!.MakeModels)
+        .HasForeignKey(bc => bc.MakeId);
+      modelBuilder.Entity<MakeModels>()
+        .HasOne(bc => bc.Model)
+        .WithMany(c => c!.ParentMakes)
+        .HasForeignKey(bc => bc.ModelId);
 
       #endregion
 

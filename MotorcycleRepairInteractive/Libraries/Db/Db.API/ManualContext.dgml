@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+<Node Id="IModel" Label="ManualContext" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" PropertyAccessMode="PropertyAccessMode.Default" ProductVersion="5.0.0" Annotations="Relational:RelationalModel: Microsoft.EntityFrameworkCore.Metadata.Internal.RelationalModel" Category="Model" Group="Expanded" />
+<Node Id = "Book" Label="Book" Name="Book" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: Books
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "BookMakes" Label="BookMakes" Name="BookMakes" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: BookMakes
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "Book.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "Book.BookMakes" Label="BookMakes (*)" Name="BookMakes" Category="Navigation Collection" Type="List&lt;BookMakes&gt;"  Field="" Dependent="BookMakes" Principal="" Inverse="Book" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Book.EngineNumber" Label="EngineNumber" Name="EngineNumber" Category="Property Required" Type="string" MaxLength="(32)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 32
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Book.Title" Label="Title" Name="Title" Category="Property Required" Type="string" MaxLength="(128)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 128
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImagePoint" Label="ImagePoint" Name="ImagePoint" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: ImagePoints
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "BookMakes.BookId" Label="BookId" Name="BookId" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "BookMakes.Book" Label="Book (1)" Name="Book" Category="Navigation Property" Type="Book"  Field="" Dependent="" Principal="Book" Inverse="BookMakes" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "BookMakes.Make" Label="Make (1)" Name="Make" Category="Navigation Property" Type="Make"  Field="" Dependent="" Principal="Make" Inverse="ParentBook" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "BookMakes.MakeId" Label="MakeId" Name="MakeId" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Make" Label="Make" Name="Make" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: Makes
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "ImagePoint.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "ImagePoint.SectionParts" Label="SectionParts (1)" Name="SectionParts" Category="Navigation Property" Type="SectionParts"  Field="" Dependent="" Principal="SectionParts" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "ImagePoint.PositionX" Label="PositionX" Name="PositionX" Category="Property Required" Type="double" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImagePoint.PositionY" Label="PositionY" Name="PositionY" Category="Property Required" Type="double" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "ImagePoint.SectionPartsId" Label="SectionPartsId" Name="SectionPartsId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "MakeModels" Label="MakeModels" Name="MakeModels" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: MakeModels
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "Make.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "Make.MakeModels" Label="MakeModels (*)" Name="MakeModels" Category="Navigation Collection" Type="List&lt;MakeModels&gt;"  Field="" Dependent="MakeModels" Principal="" Inverse="Make" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Make.ParentBook" Label="ParentBook (1)" Name="ParentBook" Category="Navigation Property" Type="BookMakes"  Field="" Dependent="BookMakes" Principal="" Inverse="Make" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Make.Name" Label="Name" Name="Name" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Model" Label="Model" Name="Model" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: Models
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "MakeModels.MakeId" Label="MakeId" Name="MakeId" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "MakeModels.Make" Label="Make (1)" Name="Make" Category="Navigation Property" Type="Make"  Field="" Dependent="" Principal="Make" Inverse="MakeModels" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "MakeModels.Model" Label="Model (1)" Name="Model" Category="Navigation Property" Type="Model"  Field="" Dependent="" Principal="Model" Inverse="ParentMakes" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "MakeModels.ModelId" Label="ModelId" Name="ModelId" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "MakeModels.YearFrom" Label="YearFrom" Name="YearFrom" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "MakeModels.YearTo" Label="YearTo" Name="YearTo" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Part" Label="Part" Name="Part" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: Parts
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "Model.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "Model.ParentMakes" Label="ParentMakes (*)" Name="ParentMakes" Category="Navigation Collection" Type="List&lt;MakeModels&gt;"  Field="" Dependent="MakeModels" Principal="" Inverse="Model" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Model.Name" Label="Name" Name="Name" Category="Property Required" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Property" Label="Property" Name="Property" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: Properties
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "Part.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "Part.PartSections" Label="PartSections (*)" Name="PartSections" Category="Navigation Collection" Type="List&lt;SectionParts&gt;"  Field="" Dependent="SectionParts" Principal="" Inverse="Part" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Part.Description" Label="Description" Name="Description" Category="Property Required" Type="string" MaxLength="(128)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 128
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Part.MakersDescription" Label="MakersDescription" Name="MakersDescription" Category="Property Optional" Type="string" MaxLength="(128)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 128
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Part.MakersPartNumber" Label="MakersPartNumber" Name="MakersPartNumber" Category="Property Optional" Type="string" MaxLength="(64)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 64
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Part.PartNumber" Label="PartNumber" Name="PartNumber" Category="Property Required" Type="string" MaxLength="(64)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 64
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "PropertyType" Label="PropertyType" Name="PropertyType" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: PropertyTypes
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "Property.PartId" Label="PartId" Name="PartId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Property.Part" Label="Part (1)" Name="Part" Category="Navigation Property" Type="Part"  Field="" Dependent="" Principal="Part" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Property.PropertyType" Label="PropertyType (1)" Name="PropertyType" Category="Navigation Property" Type="PropertyType"  Field="" Dependent="" Principal="PropertyType" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Property.Property" Label="Property (1)" Name="Property" Category="Navigation Property" Type="{&apos;PartId&apos;}"  Field="" Dependent="" Principal="" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Property.Property" Label="Property (1)" Name="Property" Category="Navigation Property" Type="{&apos;PropertyTypeId&apos;}"  Field="" Dependent="" Principal="" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Property.PropertyName" Label="PropertyName" Name="PropertyName" Category="Property Required" Type="string" MaxLength="(80)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 80
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Property.PropertyTypeId" Label="PropertyTypeId" Name="PropertyTypeId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Property.PropertyValue" Label="PropertyValue" Name="PropertyValue" Category="Property Required" Type="string" MaxLength="(256)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 256
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Section" Label="Section" Name="Section" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: Sections
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "PropertyType.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "PropertyType.Name" Label="Name" Name="Name" Category="Property Required" Type="string" MaxLength="(32)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 32
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "PropertyType.Unit" Label="Unit" Name="Unit" Category="Property Required" Type="string" MaxLength="(16)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 16
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts" Label="SectionParts" Name="SectionParts" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
+Relational:DefaultMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMappingBase]
+Relational:TableMappings: System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.Internal.TableMapping]
+Relational:TableName: SectionParts
+ServiceOnlyConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding" Category="EntityType" Group="Expanded" />
+<Node Id = "Section.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "Section.Book" Label="Book (1)" Name="Book" Category="Navigation Property" Type="Book"  Field="" Dependent="" Principal="Book" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Section.SectionParts" Label="SectionParts (*)" Name="SectionParts" Category="Navigation Collection" Type="List&lt;SectionParts&gt;"  Field="" Dependent="SectionParts" Principal="" Inverse="Section" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "Section.BookId" Label="BookId" Name="BookId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Section.EndPage" Label="EndPage" Name="EndPage" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Section.FigureDescription" Label="FigureDescription" Name="FigureDescription" Category="Property Optional" Type="string" MaxLength="(128)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 128
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Section.FigureNumber" Label="FigureNumber" Name="FigureNumber" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Section.SectionHeader" Label="SectionHeader" Name="SectionHeader" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Section.SpecificToModel" Label="SpecificToModel" Name="SpecificToModel" Category="Property Optional" Type="string" MaxLength="(64)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 64
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Section.StartPage" Label="StartPage" Name="StartPage" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts" Label="SectionParts" Name="SectionParts" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="" Category="EntityType" Group="Expanded" />
+<Node Id = "SectionParts.Id" Label="Id" Name="Id" Category="Property Primary" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
+<Node Id = "SectionParts.ParentSectionParts" Label="ParentSectionParts (1)" Name="ParentSectionParts" Category="Navigation Property" Type="SectionParts"  Field="" Dependent="" Principal="SectionParts" Inverse="ParentSectionPartsList" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "SectionParts.ParentSectionPartsList" Label="ParentSectionPartsList (*)" Name="ParentSectionPartsList" Category="Navigation Collection" Type="List&lt;SectionParts&gt;"  Field="" Dependent="SectionParts" Principal="" Inverse="ParentSectionParts" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "SectionParts.Part" Label="Part (1)" Name="Part" Category="Navigation Property" Type="Part"  Field="" Dependent="" Principal="Part" Inverse="PartSections" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "SectionParts.Section" Label="Section (1)" Name="Section" Category="Navigation Property" Type="Section"  Field="" Dependent="" Principal="Section" Inverse="SectionParts" PropertyAccessMode="PropertyAccessMode.Default" />
+<Node Id = "SectionParts.AdditionalInfo" Label="AdditionalInfo" Name="AdditionalInfo" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts.PageNumber" Label="PageNumber" Name="PageNumber" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts.ParentSectionPartsId" Label="ParentSectionPartsId" Name="ParentSectionPartsId" Category="Property Foreign" Type="Nullable&lt;int&gt;" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="True" IsRequired="False" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts.PartId" Label="PartId" Name="PartId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts.Quantity" Label="Quantity" Name="Quantity" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts.Remarks" Label="Remarks" Name="Remarks" Category="Property Optional" Type="string" MaxLength="(128)" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 128
+Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "SectionParts.SectionId" Label="SectionId" Name="SectionId" Category="Property Foreign" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:DefaultColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMappingBase]
+Relational:TableColumnMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ColumnMapping]" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+  </Nodes>
+  <Links>
+<Link Source = "IModel" Target="Book" Category="Contains" />
+<Link Source = "IModel" Target="BookMakes" Category="Contains" />
+<Link Source = "Book" Target="Book.BookMakes" Category="Contains" />
+<Link Source = "Book" Target="Book.Id" Category="Contains" />
+<Link Source = "Book" Target="Book.EngineNumber" Category="Contains" />
+<Link Source = "Book" Target="Book.Title" Category="Contains" />
+<Link Source = "IModel" Target="ImagePoint" Category="Contains" />
+<Link Source = "BookMakes" Target="BookMakes.Book" Category="Contains" />
+<Link Source = "BookMakes" Target="BookMakes.Make" Category="Contains" />
+<Link Source = "BookMakes" Target="BookMakes.BookId" Category="Contains" />
+<Link Source="BookMakes" Target="Book" From="BookMakes.BookId" To="Book.Id" Name="BookMakes -> Book" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="BookMakes" Target="Make" From="BookMakes.MakeId" To="Make.Id" Name="BookMakes -> Make" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="True" Label="1:1" Category="Foreign Key" />
+<Link Source = "BookMakes" Target="BookMakes.MakeId" Category="Contains" />
+<Link Source = "IModel" Target="Make" Category="Contains" />
+<Link Source = "ImagePoint" Target="ImagePoint.SectionParts" Category="Contains" />
+<Link Source = "ImagePoint" Target="ImagePoint.Id" Category="Contains" />
+<Link Source="ImagePoint" Target="SectionParts" From="ImagePoint.SectionPartsId" To="SectionParts.Id" Name="ImagePoint -> SectionParts" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "ImagePoint" Target="ImagePoint.PositionX" Category="Contains" />
+<Link Source = "ImagePoint" Target="ImagePoint.PositionY" Category="Contains" />
+<Link Source = "ImagePoint" Target="ImagePoint.SectionPartsId" Category="Contains" />
+<Link Source = "IModel" Target="MakeModels" Category="Contains" />
+<Link Source = "Make" Target="Make.MakeModels" Category="Contains" />
+<Link Source = "Make" Target="Make.ParentBook" Category="Contains" />
+<Link Source = "Make" Target="Make.Id" Category="Contains" />
+<Link Source = "Make" Target="Make.Name" Category="Contains" />
+<Link Source = "IModel" Target="Model" Category="Contains" />
+<Link Source = "MakeModels" Target="MakeModels.Make" Category="Contains" />
+<Link Source = "MakeModels" Target="MakeModels.Model" Category="Contains" />
+<Link Source = "MakeModels" Target="MakeModels.MakeId" Category="Contains" />
+<Link Source="MakeModels" Target="Make" From="MakeModels.MakeId" To="Make.Id" Name="MakeModels -> Make" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="MakeModels" Target="Model" From="MakeModels.ModelId" To="Model.Id" Name="MakeModels -> Model" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "MakeModels" Target="MakeModels.ModelId" Category="Contains" />
+<Link Source = "MakeModels" Target="MakeModels.YearFrom" Category="Contains" />
+<Link Source = "MakeModels" Target="MakeModels.YearTo" Category="Contains" />
+<Link Source = "IModel" Target="Part" Category="Contains" />
+<Link Source = "Model" Target="Model.ParentMakes" Category="Contains" />
+<Link Source = "Model" Target="Model.Id" Category="Contains" />
+<Link Source = "Model" Target="Model.Name" Category="Contains" />
+<Link Source = "IModel" Target="Property" Category="Contains" />
+<Link Source = "Part" Target="Part.PartSections" Category="Contains" />
+<Link Source = "Part" Target="Part.Id" Category="Contains" />
+<Link Source = "Part" Target="Part.Description" Category="Contains" />
+<Link Source = "Part" Target="Part.MakersDescription" Category="Contains" />
+<Link Source = "Part" Target="Part.MakersPartNumber" Category="Contains" />
+<Link Source = "Part" Target="Part.PartNumber" Category="Contains" />
+<Link Source = "IModel" Target="PropertyType" Category="Contains" />
+<Link Source = "Property" Target="Property.Part" Category="Contains" />
+<Link Source = "Property" Target="Property.PropertyType" Category="Contains" />
+<Link Source = "Property" Target="Property.Property" Category="Contains" />
+<Link Source = "Property" Target="Property.PartId" Category="Contains" />
+<Link Source="Property" Target="Part" From="Property.PartId" To="Part.Id" Name="Property -> Part" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="Property" Target="PropertyType" From="Property.PropertyTypeId" To="PropertyType.Id" Name="Property -> PropertyType" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "Property" Target="Property.PropertyName" Category="Contains" />
+<Link Source = "Property" Target="Property.PropertyTypeId" Category="Contains" />
+<Link Source = "Property" Target="Property.PropertyValue" Category="Contains" />
+<Link Source = "IModel" Target="Section" Category="Contains" />
+<Link Source = "PropertyType" Target="PropertyType.Id" Category="Contains" />
+<Link Source = "PropertyType" Target="PropertyType.Name" Category="Contains" />
+<Link Source = "PropertyType" Target="PropertyType.Unit" Category="Contains" />
+<Link Source = "IModel" Target="SectionParts" Category="Contains" />
+<Link Source = "Section" Target="Section.Book" Category="Contains" />
+<Link Source = "Section" Target="Section.SectionParts" Category="Contains" />
+<Link Source = "Section" Target="Section.Id" Category="Contains" />
+<Link Source="Section" Target="Book" From="Section.BookId" To="Book.Id" Name="Section -> Book" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "Section" Target="Section.BookId" Category="Contains" />
+<Link Source = "Section" Target="Section.EndPage" Category="Contains" />
+<Link Source = "Section" Target="Section.FigureDescription" Category="Contains" />
+<Link Source = "Section" Target="Section.FigureNumber" Category="Contains" />
+<Link Source = "Section" Target="Section.SectionHeader" Category="Contains" />
+<Link Source = "Section" Target="Section.SpecificToModel" Category="Contains" />
+<Link Source = "Section" Target="Section.StartPage" Category="Contains" />
+<Link Source = "IModel" Target="SectionParts" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.ParentSectionParts" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.ParentSectionPartsList" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.Part" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.Section" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.Id" Category="Contains" />
+<Link Source="SectionParts" Target="SectionParts" From="SectionParts.ParentSectionPartsId" To="SectionParts.Id" Name="SectionParts -> SectionParts" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="SectionParts" Target="Part" From="SectionParts.PartId" To="Part.Id" Name="SectionParts -> Part" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source="SectionParts" Target="Section" From="SectionParts.SectionId" To="Section.Id" Name="SectionParts -> Section" Annotations="Relational:ForeignKeyMappings: System.Collections.Generic.SortedSet`1[Microsoft.EntityFrameworkCore.Metadata.Internal.ForeignKeyConstraint]" IsUnique="False" Label="1:*" Category="Foreign Key" />
+<Link Source = "SectionParts" Target="SectionParts.AdditionalInfo" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.PageNumber" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.ParentSectionPartsId" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.PartId" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.Quantity" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.Remarks" Category="Contains" />
+<Link Source = "SectionParts" Target="SectionParts.SectionId" Category="Contains" />
+  </Links>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="EntityType" ValueLabel="True">
+      <Condition Expression="HasCategory('EntityType')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Required" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Required')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Property" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Property')" />
+      <Setter Property="Background" Value="#FF990000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Collection" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Collection')" />
+      <Setter Property="Background" Value="#FFFF3232" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Model" ValueLabel="True">
+      <Condition Expression="HasCategory('Model')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+  <Properties>
+    <Property Id="Name" Group="Model Properties" DataType="System.String" />
+    <Property Id="Field"  Description="Backing field" Group="Model Properties" DataType="System.String" />
+    <Property Id="Type"  Description="CLR data type" Group="Model Properties" DataType="System.String" />
+    <Property Id="To" Description="Source property" Group="Model Properties" DataType="System.String" />
+    <Property Id="From" Description="Target property" Group="Model Properties" DataType="System.String" />
+    <Property Id="Dependent" Description="Dependent entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="Inverse" Description="Inverse entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="Principal" Description="Principal entity" Group="Model Properties" DataType="System.String" />    
+    <Property Id="Annotations" Description="Annotations" Group="Model Properties" DataType="System.String" />
+    <Property Id="BaseClass"  Description="Base class" Group="Model Properties" DataType="System.String" />
+    <Property Id="ChangeTrackingStrategy" Description="Change tracking strategy" Group="Model Properties" DataType="System.String" />
+    <Property Id="IsUnique" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="IsAbstract" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="ProductVersion" Label="Product Version" Description="EF Core product version" Group="Model Properties" DataType="System.String" />
+    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsRequired" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsPrimaryKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsForeignKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsShadow" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsAlternateKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsConcurrencyToken" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnicode" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="ValueGenerated" Group="Property Flags" DataType="System.String" />
+    <Property Id="BeforeSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="AfterSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="PropertyAccessMode" Group="Property Flags" DataType="System.String" />
+  </Properties>
+</DirectedGraph>

@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+// ReSharper disable All
 #pragma warning disable 1591
 
-namespace Db.API.Data
+namespace Db.API.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -13,11 +14,38 @@ namespace Db.API.Data
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false)
+                    Title = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    EngineNumber = table.Column<string>(type: "TEXT", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Makes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Makes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Models",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Models", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,6 +99,56 @@ namespace Db.API.Data
                         name: "FK_Sections_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookMakes",
+                columns: table => new
+                {
+                    BookId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MakeId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookMakes", x => new { x.BookId, x.MakeId });
+                    table.ForeignKey(
+                        name: "FK_BookMakes_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookMakes_Makes_MakeId",
+                        column: x => x.MakeId,
+                        principalTable: "Makes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MakeModels",
+                columns: table => new
+                {
+                    MakeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ModelId = table.Column<int>(type: "INTEGER", nullable: false),
+                    YearFrom = table.Column<int>(type: "INTEGER", nullable: false),
+                    YearTo = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MakeModels", x => new { x.MakeId, x.ModelId });
+                    table.ForeignKey(
+                        name: "FK_MakeModels_Makes_MakeId",
+                        column: x => x.MakeId,
+                        principalTable: "Makes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MakeModels_Models_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "Models",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -159,9 +237,20 @@ namespace Db.API.Data
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookMakes_MakeId",
+                table: "BookMakes",
+                column: "MakeId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ImagePoints_SectionPartsId",
                 table: "ImagePoints",
                 column: "SectionPartsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MakeModels_ModelId",
+                table: "MakeModels",
+                column: "ModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Properties_PartId",
@@ -197,13 +286,25 @@ namespace Db.API.Data
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BookMakes");
+
+            migrationBuilder.DropTable(
                 name: "ImagePoints");
+
+            migrationBuilder.DropTable(
+                name: "MakeModels");
 
             migrationBuilder.DropTable(
                 name: "Properties");
 
             migrationBuilder.DropTable(
                 name: "SectionParts");
+
+            migrationBuilder.DropTable(
+                name: "Makes");
+
+            migrationBuilder.DropTable(
+                name: "Models");
 
             migrationBuilder.DropTable(
                 name: "PropertyTypes");
