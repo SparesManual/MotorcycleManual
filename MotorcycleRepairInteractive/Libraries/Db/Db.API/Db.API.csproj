@@ -35,4 +35,8 @@
     <ProjectReference Include="..\Db.Infrastructure\Db.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>

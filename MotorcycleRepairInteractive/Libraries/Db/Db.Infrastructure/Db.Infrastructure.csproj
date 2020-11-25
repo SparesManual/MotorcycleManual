@@ -28,8 +28,4 @@
     <ProjectReference Include="..\Db.Core\Db.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\SeedData\" />
-  </ItemGroup>
-
 </Project>

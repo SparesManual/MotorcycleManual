@@ -1,6 +1,5 @@
 using System.Net.Http;
 using Db.Interfaces;
-using MatBlazor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +15,6 @@ namespace MRI.Application
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddRazorPages();
-      services.AddMatBlazor();
       services.AddSingleton<IAPIProvider, APIProvider>();
       services.AddScoped<HttpClient>();
       services.AddScoped<IBooksViewModel, BooksViewModel>();

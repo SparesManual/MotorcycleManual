@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-// ReSharper disable All
-#pragma warning disable 1591
 
-namespace Db.API.Migrations
+namespace Db.API.Data
 {
     public partial class InitialCreate : Migration
     {
