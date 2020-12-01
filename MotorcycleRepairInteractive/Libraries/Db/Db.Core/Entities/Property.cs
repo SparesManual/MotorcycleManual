@@ -33,6 +33,17 @@ namespace Db.Core.Entities
     public int PropertyTypeId { get; set; }
 
     /// <summary>
+    /// Reference to the property value format type
+    /// </summary>
+    public FormatType? FormatType { get; set; }
+
+    /// <summary>
+    /// Foreign key of the property value format type
+    /// </summary>
+    [Required]
+    public int FormatTypeId { get; set; }
+
+    /// <summary>
     /// Property name
     /// </summary>
     [Required]

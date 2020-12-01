@@ -18,16 +18,12 @@ namespace Models.Entities
     public string Description { get; }
 
     /// <inheritdoc />
-    public string MakersDescription { get; }
-
-    /// <inheritdoc />
-    public PartModel(int id, string partNumber, string makersPartNumber, string description, string makersDescription)
+    public PartModel(int id, string partNumber, string makersPartNumber, string description)
     {
       Id = id;
       PartNumber = partNumber;
       MakersPartNumber = makersPartNumber;
       Description = description;
-      MakersDescription = makersDescription;
     }
   }
 }

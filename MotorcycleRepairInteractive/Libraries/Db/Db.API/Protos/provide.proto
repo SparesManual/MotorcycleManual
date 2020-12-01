@@ -74,7 +74,6 @@ message PartReply {
   string partNumber = 2;
   string makersPartNumber = 3;
   string description = 4;
-  string makersDescription = 5;
 }
 
 message PropertyTypeReply {

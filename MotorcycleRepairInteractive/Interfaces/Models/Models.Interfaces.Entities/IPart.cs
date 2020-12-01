@@ -25,10 +25,5 @@
     /// Description of the part
     /// </summary>
     string Description { get; }
-
-    /// <summary>
-    /// Description of the part by the maker
-    /// </summary>
-    string MakersDescription { get; }
   }
 }

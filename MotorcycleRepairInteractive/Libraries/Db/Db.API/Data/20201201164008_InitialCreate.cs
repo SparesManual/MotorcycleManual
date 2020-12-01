@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+#pragma warning disable 1591
 
 namespace Db.API.Data
 {
@@ -18,6 +19,19 @@ namespace Db.API.Data
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormatTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 32, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormatTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,8 +68,7 @@ namespace Db.API.Data
                         .Annotation("Sqlite:Autoincrement", true),
                     PartNumber = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
                     MakersPartNumber = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    MakersDescription = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true)
+                    Description = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,12 +169,20 @@ namespace Db.API.Data
                 columns: table => new
                 {
                     PartId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PropertyTypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     PropertyName = table.Column<string>(type: "TEXT", maxLength: 80, nullable: false),
+                    PropertyTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    FormatTypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     PropertyValue = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Properties", x => new { x.PartId, x.PropertyName });
+                    table.ForeignKey(
+                        name: "FK_Properties_FormatTypes_FormatTypeId",
+                        column: x => x.FormatTypeId,
+                        principalTable: "FormatTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Properties_Parts_PartId",
                         column: x => x.PartId,
@@ -251,9 +272,9 @@ namespace Db.API.Data
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Properties_PartId",
+                name: "IX_Properties_FormatTypeId",
                 table: "Properties",
-                column: "PartId");
+                column: "FormatTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Properties_PropertyTypeId",
@@ -303,6 +324,9 @@ namespace Db.API.Data
 
             migrationBuilder.DropTable(
                 name: "Models");
+
+            migrationBuilder.DropTable(
+                name: "FormatTypes");
 
             migrationBuilder.DropTable(
                 name: "PropertyTypes");

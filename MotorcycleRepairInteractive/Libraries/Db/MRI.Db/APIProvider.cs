@@ -90,7 +90,7 @@ namespace MRI.Db
       => new BookModel(reply.Id, reply.Title);
 
     private static IPart ToPart(PartReply reply)
-      => new PartModel(reply.Id, reply.PartNumber, reply.MakersPartNumber, reply.Description, reply.MakersDescription);
+      => new PartModel(reply.Id, reply.PartNumber, reply.MakersPartNumber, reply.Description);
 
     private static IProperty ToProperty(PartPropertyReply reply)
       => new PropertyModel(reply.TypeId, reply.Name, reply.Value, reply.Type, reply.Unit);

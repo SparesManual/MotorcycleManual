@@ -44,15 +44,20 @@ namespace Db.Infrastructure.Data
           .ToArray();
 
         foreach (var item in result)
+        {
           await extracted.AddAsync(item).ConfigureAwait(false);
 
-        await context.SaveChangesAsync().ConfigureAwait(false);
+          await context.SaveChangesAsync().ConfigureAwait(false);
+        }
       }
 
       try
       {
         await Populate(c => c.Books!, "books.csv", new CsvBookMapping()).ConfigureAwait(false);
         await Populate(c => c.Parts!, "parts.csv", new CsvPartMapping()).ConfigureAwait(false);
+        await Populate(c => c.PropertyTypes!, "propertyTypes.csv", new CsvPropertyTypeMapping()).ConfigureAwait(false);
+        await Populate(c => c.FormatTypes!, "formatTypes.csv", new CsvFormatTypeMapping()).ConfigureAwait(false);
+        await Populate(c => c.Properties!, "properties.csv", new CsvPropertyMapping()).ConfigureAwait(false);
         await Populate(c => c.Sections!, "sections.csv", new CsvSectionMapping()).ConfigureAwait(false);
         await Populate(c => c.SectionParts!, "sectionParts.csv", new CsvSectionPartsMapping()).ConfigureAwait(false);
         await Populate(c => c.ImagePoints!, "imagePoints.csv", new CsvImagePointsMapping()).ConfigureAwait(false);

@@ -34,12 +34,6 @@ namespace Db.Core.Entities
     public string Description { get; set; } = string.Empty;
 
     /// <summary>
-    /// Description of the part by the maker
-    /// </summary>
-    [MaxLength(128)]
-    public string? MakersDescription { get; set; }
-
-    /// <summary>
     /// <see cref="Section"/> entities have this given part
     /// </summary>
     // ReSharper disable once CollectionNeverUpdated.Global

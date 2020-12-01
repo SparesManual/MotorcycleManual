@@ -31,6 +31,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Foreign key reference to the child <see cref="Entities.Part"/> entity
     /// </summary>
+    [Required]
     public int PartId { get; set; }
 
     /// <summary>

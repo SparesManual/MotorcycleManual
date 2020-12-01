@@ -61,6 +61,11 @@ namespace Db.Infrastructure.Data
     public DbSet<Property>? Properties { get; set; }
 
     /// <summary>
+    /// Table of property format types
+    /// </summary>
+    public DbSet<FormatType>? FormatTypes { get; set; }
+
+    /// <summary>
     /// Table of property types
     /// </summary>
     public DbSet<PropertyType>? PropertyTypes { get; set; }
@@ -85,8 +90,6 @@ namespace Db.Infrastructure.Data
       #region Many-to-many SectionParts
 
       modelBuilder.Entity<SectionParts>()
-        .HasKey(bc => new { bc.SectionId, bc.PartId });
-      modelBuilder.Entity<SectionParts>()
         .HasOne(bc => bc.Section)
         .WithMany(b => b!.SectionParts)
         .HasForeignKey(bc => bc.SectionId);
@@ -94,18 +97,6 @@ namespace Db.Infrastructure.Data
         .HasOne(bc => bc.Part)
         .WithMany(c => c!.PartSections)
         .HasForeignKey(bc => bc.PartId);
-
-      #endregion
-
-      #region Self-reference SectionParts
-
-      modelBuilder.Entity<SectionParts>()
-        .HasKey(x => x.Id);
-      modelBuilder.Entity<SectionParts>()
-        .HasOne(x => x.ParentSectionParts)
-        .WithMany(x => x!.ParentSectionPartsList!)
-        .HasForeignKey(x => x.ParentSectionPartsId)
-        .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
 
       #endregion
 
@@ -140,7 +131,7 @@ namespace Db.Infrastructure.Data
 
       base.OnModelCreating(modelBuilder);
       modelBuilder.ApplyConfigurationsFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
-      modelBuilder.Entity<Property>().HasNoKey();
+      modelBuilder.Entity<Property>().HasKey(prop => new {prop.PartId, prop.PropertyName});
 
       // If the current provider is not SQLite..
       if (!Database.ProviderName.Equals("Microsoft.EntityFrameworkCore.Sqlite"))

@@ -103,7 +103,6 @@ namespace Db.API
         PartNumber = part?.PartNumber ?? string.Empty,
         MakersPartNumber = part?.MakersPartNumber ?? string.Empty,
         Description = part?.Description ?? string.Empty,
-        MakersDescription = part?.MakersDescription ?? string.Empty
       };
 
     private static PartPropertyReply ToPropertyReply(Property? property)

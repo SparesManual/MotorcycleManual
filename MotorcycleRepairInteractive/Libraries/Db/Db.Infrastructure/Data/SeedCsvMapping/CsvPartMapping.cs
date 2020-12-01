@@ -12,7 +12,6 @@ namespace Db.Infrastructure.Data.SeedCsvMapping
       MapProperty(1, x => x.PartNumber);
       MapProperty(2, x => x.MakersPartNumber);
       MapProperty(3, x => x.Description);
-      MapProperty(4, x => x.MakersDescription);
     }
   }
 }

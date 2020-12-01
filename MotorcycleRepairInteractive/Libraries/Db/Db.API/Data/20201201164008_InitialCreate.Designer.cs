@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Db.API.Data
 {
     [DbContext(typeof(ManualContext))]
-    [Migration("20201125171614_InitialCreate")]
+    [Migration("20201201164008_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,22 @@ namespace Db.API.Data
                         .IsUnique();
 
                     b.ToTable("BookMakes");
+                });
+
+            modelBuilder.Entity("Db.Core.Entities.FormatType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FormatTypes");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.ImagePoint", b =>
@@ -139,10 +155,6 @@ namespace Db.API.Data
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("MakersDescription")
-                        .HasMaxLength(128)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("MakersPartNumber")
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
@@ -163,9 +175,11 @@ namespace Db.API.Data
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PropertyName")
-                        .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("FormatTypeId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("PropertyTypeId")
                         .HasColumnType("INTEGER");
@@ -175,7 +189,9 @@ namespace Db.API.Data
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.HasIndex("PartId");
+                    b.HasKey("PartId", "PropertyName");
+
+                    b.HasIndex("FormatTypeId");
 
                     b.HasIndex("PropertyTypeId");
 
@@ -329,6 +345,12 @@ namespace Db.API.Data
 
             modelBuilder.Entity("Db.Core.Entities.Property", b =>
                 {
+                    b.HasOne("Db.Core.Entities.FormatType", "FormatType")
+                        .WithMany()
+                        .HasForeignKey("FormatTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Db.Core.Entities.Part", "Part")
                         .WithMany()
                         .HasForeignKey("PartId")
@@ -340,6 +362,8 @@ namespace Db.API.Data
                         .HasForeignKey("PropertyTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("FormatType");
 
                     b.Navigation("Part");
 
@@ -361,8 +385,7 @@ namespace Db.API.Data
                 {
                     b.HasOne("Db.Core.Entities.SectionParts", "ParentSectionParts")
                         .WithMany("ParentSectionPartsList")
-                        .HasForeignKey("ParentSectionPartsId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ParentSectionPartsId");
 
                     b.HasOne("Db.Core.Entities.Part", "Part")
                         .WithMany("PartSections")

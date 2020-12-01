@@ -18,7 +18,7 @@ namespace Console.APITester
 
       var index = pageSize * (pageIndex - 1);
       await foreach (var part in parts.ReadAll().ConfigureAwait(false))
-        System.Console.WriteLine($" {++index}\t{part.PartNumber}\t{part.MakersPartNumber}\t{part.Description}\t{part.MakersDescription}");
+        System.Console.WriteLine($" {++index}\t{part.PartNumber}\t{part.MakersPartNumber}\t{part.Description}");
 
       System.Console.WriteLine("END");
     }
