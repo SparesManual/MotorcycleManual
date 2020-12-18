@@ -37,20 +37,20 @@ namespace MRI.Db
     #region Helpers
 
     private static IdRequest ToIdRequest(int id)
-      => new IdRequest
+      => new()
       {
         Id = id
       };
 
     private static PageParams ToPageParams(int size, int index)
-      => new PageParams
+      => new()
       {
         Index = index,
         Size = size
       };
 
     private static IdSearchAndPageParams ToIdSearchAndPageParams(int id, string? search, int size, int index)
-      => new IdSearchAndPageParams
+      => new()
       {
         Id = id,
         Index = index,
@@ -59,7 +59,7 @@ namespace MRI.Db
       };
 
     private static SearchAndPageParams ToSearchAndPageParams(string? search, int size, int index)
-      => new SearchAndPageParams
+      => new()
       {
         Index = index,
         Search = search ?? string.Empty,

@@ -27,6 +27,7 @@ namespace Db.API
     private readonly IGenericRepository<MakeModels> m_makeModelsRepository;
     private readonly IGenericRepository<Section> m_sectionRepository;
     private readonly IGenericRepository<SectionParts> m_sectionPartsRepository;
+    private readonly IGenericRepository<SectionPartParents> m_sectionPartParentsRepository;
     private readonly IGenericRepository<Part> m_partRepository;
     private readonly IGenericRepository<Property> m_propertyRepository;
     private readonly IGenericRepository<PropertyType> m_propertyTypeRepository;
@@ -41,6 +42,7 @@ namespace Db.API
     /// <param name="makeModelsRepository"></param>
     /// <param name="sectionRepository">Injected section repository</param>
     /// <param name="sectionPartsRepository">Injected section parts repository</param>
+    /// <param name="sectionPartParentsRepository">Injected section part parents repository</param>
     /// <param name="partRepository">Injected parts repository</param>
     /// <param name="propertyRepository">Injected property repository</param>
     /// <param name="propertyTypeRepository">Injected property type repository</param>
@@ -55,6 +57,7 @@ namespace Db.API
       IGenericRepository<MakeModels> makeModelsRepository,
       IGenericRepository<Section> sectionRepository,
       IGenericRepository<SectionParts> sectionPartsRepository,
+      IGenericRepository<SectionPartParents> sectionPartParentsRepository,
       IGenericRepository<Part> partRepository,
       IGenericRepository<Property> propertyRepository,
       IGenericRepository<PropertyType> propertyTypeRepository)
@@ -67,6 +70,7 @@ namespace Db.API
       m_makeModelsRepository = makeModelsRepository;
       m_sectionRepository = sectionRepository;
       m_sectionPartsRepository = sectionPartsRepository;
+      m_sectionPartParentsRepository = sectionPartParentsRepository;
       m_partRepository = partRepository;
       m_propertyRepository = propertyRepository;
       m_propertyTypeRepository = propertyTypeRepository;
@@ -75,29 +79,29 @@ namespace Db.API
     #region Converters
 
     private static BookReply ToBookReply(Book? book)
-      => new BookReply
+      => new()
       {
         Id = book?.Id ?? -1,
         Title = book?.Title ?? string.Empty
       };
 
     private static MakeReply ToMakeReply(Make? make)
-      => new MakeReply
+      => new()
       {
         Id = make?.Id ?? -1,
         Name = make?.Name ?? string.Empty,
-        BookId = make?.ParentBook.BookId ?? -1,
+        BookId = make?.ParentBook.BookId ?? -1
       };
 
     private static ModelReply ToModelReply(Model? model)
-      => new ModelReply
+      => new()
       {
         Id = model?.Id ?? -1,
         Name = model?.Name ?? string.Empty,
       };
 
     private static PartReply ToPartReply(Part? part)
-      => new PartReply
+      => new()
       {
         Id = part?.Id ?? -1,
         PartNumber = part?.PartNumber ?? string.Empty,
@@ -106,7 +110,7 @@ namespace Db.API
       };
 
     private static PartPropertyReply ToPropertyReply(Property? property)
-      => new PartPropertyReply
+      => new()
       {
         Name = property?.PropertyName ?? string.Empty,
         Type = property?.PropertyType?.Name ?? string.Empty,
@@ -116,7 +120,7 @@ namespace Db.API
       };
 
     private static PropertyTypeReply ToPropertyTypeReply(PropertyType? propertyType)
-      => new PropertyTypeReply
+      => new()
       {
         Id = propertyType?.Id ?? -1,
         Name = propertyType?.Name ?? string.Empty,
@@ -166,7 +170,7 @@ namespace Db.API
     }
 
     private static Metadata GeneratePagingMetadata(int total, int size, int index)
-      => new Metadata
+      => new()
       {
         { "PageSize", size.ToString() },
         { "PageIndex", index.ToString() },

@@ -5,87 +5,145 @@ option csharp_namespace = "Db.API";
 package provide;
 
 service Provider {
+  // Gets a book by its id
   rpc GetBook (IdRequest) returns (BookReply);
+  // Gets books using full-text search with paging settings
   rpc GetBooks (SearchAndPageParams) returns (stream BookReply);
-  
+
+  // Gets a make by its id
   rpc GetMake(IdRequest) returns (MakeReply);
+  // Gets makes using full-text search with paging settings
   rpc GetMakes(SearchAndPageParams) returns (stream MakeReply);
+  // Gets makes using full-text search with paging settings from a book of a given id
   rpc GetMakesFromBook(IdSearchAndPageParams) returns (stream MakeReply);
 
+  // Gets a model by its id
   rpc GetModel(IdRequest) returns (ModelReply);
+  // Gets models using full-text search with paging settings
+  rpc GetAllModel(SearchAndPageParams) returns (stream ModelReply);
 
+  // Gets a part by its id
   rpc GetPart (IdRequest) returns (PartReply);
+  // Gets parts using full-text search with paging settings
   rpc GetAllParts (SearchAndPageParams) returns (stream PartReply);
+  // Gets parts using full-text search with paging settings from a book of a given id
   rpc GetPartsFromBook (IdSearchAndPageParams) returns (stream PartReply);
+  // Gets parts using full-text search with paging settings from a section of a given id
   rpc GetPartsFromSection (IdSearchAndPageParams) returns (stream PartReply);
   
+  // Gets properties using full-text search with paging settings for a part of a given id
   rpc GetPartProperties (IdSearchAndPageParams) returns (stream PartPropertyReply);
+  // Gets properties types with paging settings
   rpc GetPropertyTypes (PageParams) returns (stream PropertyTypeReply);
 }
 
+// Empty argument type
 message Empty { }
 
+// Parent entity id with paging settings
 message IdAndPageParams {
+  // Parent entity id
   int32 id = 1;
+  // Page size - number of items on page
   int32 size = 2;
+  // Page index
   int32 index = 3;
 }
 
+// Search query request with paging settings
 message SearchAndPageParams {
+  // Search query text
   string search = 1;
+  // Page size - number of items on page
   int32 size = 2;
+  // Page index
   int32 index = 3;
 }
 
+// Parent entity id and search query request with paging settings
 message IdSearchAndPageParams {
+  // Parent entity id
   int32 id = 1;
+  // Search query text
   string search = 2;
+  // Page size - number of items on page
   int32 size = 3;
+  // Page index
   int32 index = 4;
 }
 
+// Paging settings
 message PageParams {
+  // Page size - number of items on page
   int32 size = 1;
+  // Page index
   int32 index = 2;
 }
 
+// Entity id request
 message IdRequest {
+  // Specific entity id
   int32 id = 1;
 }
 
+// Book entity
 message BookReply {
+  // Book entity id
   int32 id = 1;
+  // Book title
   string title = 2;
 }
 
+// Make entity
 message MakeReply {
+  // Make entity id
   int32 id = 1;
+  // Make name
   string name = 2;
+  // Parenting book entity id
   int32 bookId = 3;
 }
 
+// Model entity
 message ModelReply {
+  // Model entity id
   int32 id = 1;
+  // Model name
   string name = 2;
 }
 
+// Part entity
 message PartReply {
+  // Part entity id
   int32 id = 1;
+  // Part number
   string partNumber = 2;
+  // Part makers number
   string makersPartNumber = 3;
+  // Part description
   string description = 4;
 }
 
+// Property type entity
 message PropertyTypeReply {
+  // Property type entity id
   int32 id = 1;
+  // Property unit
   string unit = 2;
+  // Property name
   string name = 3;
 }
 
+// Property entity
 message PartPropertyReply {
+  // Property type entity id
   int32 typeId = 1;
+  // Property type name
   string type = 2;
+  // Property unit
   string unit = 3;
+  // Property name
   string name = 4;
+  // Property value
   string value = 5;
 }
