@@ -51,6 +51,11 @@ namespace Db.Infrastructure.Data
     public DbSet<SectionParts>? SectionParts { get; set; }
 
     /// <summary>
+    /// Collection of mappings of parent <see cref="SectionParts"/> to child <see cref="SectionParts"/>
+    /// </summary>
+    public DbSet<SectionPartParents>? SectionPartParents { get; set; }
+
+    /// <summary>
     /// Image points mapped to <see cref="SectionParts"/>
     /// </summary>
     public DbSet<ImagePoint>? ImagePoints { get; set; }
