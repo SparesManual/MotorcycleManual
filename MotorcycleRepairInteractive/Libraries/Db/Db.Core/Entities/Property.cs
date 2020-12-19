@@ -13,7 +13,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the <see cref="Entities.Part"/> with the given property
     /// </summary>
-    public Part? Part { get; set; }
+    public Part Part { get; set; } = null!;
 
     /// <summary>
     /// Foreign key of the <see cref="Entities.Part"/>
@@ -24,7 +24,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the property type
     /// </summary>
-    public PropertyType? PropertyType { get; set; }
+    public PropertyType PropertyType { get; set; } = null!;
 
     /// <summary>
     /// Type of the given property
@@ -35,7 +35,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the property value format type
     /// </summary>
-    public FormatType? FormatType { get; set; }
+    public FormatType FormatType { get; set; } = null!;
 
     /// <summary>
     /// Foreign key of the property value format type

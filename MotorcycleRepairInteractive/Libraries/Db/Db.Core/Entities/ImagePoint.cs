@@ -18,7 +18,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference of the <see cref="Entities.SectionParts"/> entity
     /// </summary>
-    public SectionParts? SectionParts { get; set; }
+    public SectionParts SectionParts { get; set; } = null!;
 
     /// <summary>
     /// Horizontal position of a <see cref="Part"/> in the <see cref="Section"/> mapped by the <see cref="SectionParts"/>

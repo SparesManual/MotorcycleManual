@@ -6,6 +6,7 @@ namespace Db.Core.Entities
   /// <summary>
   /// Maps a parenting <see cref="SectionParts"/> entity to the child <see cref="SectionParts"/>
   /// </summary>
+  // ReSharper disable once ClassNeverInstantiated.Global
   public class SectionPartParents
     : IEntity
   {
@@ -18,7 +19,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the parent <see cref="SectionParts"/> entity
     /// </summary>
-    public SectionParts? Parent { get; set; }
+    public SectionParts Parent { get; set; } = null!;
 
     /// <summary>
     /// Foreign key reference to the child <see cref="SectionParts"/> entity
@@ -29,6 +30,6 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the child <see cref="SectionParts"/> entity
     /// </summary>
-    public SectionParts? Child { get; set; }
+    public SectionParts Child { get; set; } = null!;
   }
 }

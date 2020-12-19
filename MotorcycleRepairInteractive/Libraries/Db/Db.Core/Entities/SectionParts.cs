@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
+
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Db.Core.Entities
@@ -26,7 +26,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the parent <see cref="Entities.Section"/> entity
     /// </summary>
-    public Section? Section { get; set; }
+    public Section Section { get; set; } = null!;
 
     /// <summary>
     /// Foreign key reference to the child <see cref="Entities.Part"/> entity
@@ -37,35 +37,21 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the child <see cref="Entities.Part"/> entity
     /// </summary>
-    public Part? Part { get; set; }
-
-    #endregion
-
-    #region Self Reference
+    public Part Part { get; set; } = null!;
 
     /// <summary>
-    /// Foreign key reference to the parent <see cref="SectionParts"/> entity
+    /// Section parts belonging to this section part
     /// </summary>
-    [AllowNull]
-    public int? ParentSectionPartsId { get; set; } = null;
-
-    /// <summary>
-    /// Reference to the parent <see cref="SectionParts"/> entity
-    /// </summary>
-    public SectionParts? ParentSectionParts { get; set; }
-
-    /// <summary>
-    /// Reference to parenting <see cref="SectionParts"/> entities
-    /// </summary>
-    /// <remarks>
-    /// Required for EF Core self reference
-    /// </remarks>
-    // ReSharper disable once CollectionNeverUpdated.Global
-    public List<SectionParts?> ParentSectionPartsList { get; set; } = new List<SectionParts?>();
+    public List<SectionPartParents> ChildSections { get; set; } = new List<SectionPartParents>();
 
     #endregion
 
     #region Additional Attributes
+
+    /// <summary>
+    /// Part reference index number in the section
+    /// </summary>
+    public int? Reference { get; set; }
 
     /// <summary>
     /// Number of the page in the parent <see cref="Book"/> of the <see cref="Section"/>

@@ -113,9 +113,9 @@ namespace Db.API
       => new()
       {
         Name = property?.PropertyName ?? string.Empty,
-        Type = property?.PropertyType?.Name ?? string.Empty,
+        Type = property?.PropertyType.Name,
         TypeId = property?.PropertyTypeId ?? -1,
-        Unit = property?.PropertyType?.Unit ?? string.Empty,
+        Unit = property?.PropertyType.Unit,
         Value = property?.PropertyValue ?? string.Empty
       };
 
@@ -125,6 +125,17 @@ namespace Db.API
         Id = propertyType?.Id ?? -1,
         Name = propertyType?.Name ?? string.Empty,
         Unit = propertyType?.Unit ?? string.Empty
+      };
+
+    private static SectionPartReply ToSectionPartReply(SectionParts? sectionParts)
+      => new()
+      {
+        Id = sectionParts?.Id ?? -1,
+        PartId = sectionParts?.PageNumber ?? -1,
+        PageNumber = sectionParts?.PageNumber ?? -1,
+        AdditionalInfo = sectionParts?.AdditionalInfo ?? string.Empty,
+        Remakrs = sectionParts?.Remarks ?? string.Empty,
+        Quantity = sectionParts?.Quantity ?? -1
       };
 
     #endregion
@@ -249,6 +260,13 @@ namespace Db.API
     {
       var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
       await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartsRepository, specification, responseStream, GetAllExAsync, ToPartReply, context).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetSectionPartChildren(IdAndPageParams pageRequest, IServerStreamWriter<SectionPartReply> responseStream, ServerCallContext context)
+    {
+      var specification = new SectionPartChildrenSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartParentsRepository, specification, responseStream, GetAllExAsync, ToSectionPartReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />

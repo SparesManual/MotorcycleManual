@@ -19,7 +19,7 @@ namespace Db.Core.Entities
     /// <summary>
     /// Reference to the parent <see cref="Entities.Book"/> entity
     /// </summary>
-    public Book? Book { get; set; }
+    public Book Book { get; set; } = null!;
 
     /// <summary>
     /// Header of the section

@@ -58,6 +58,14 @@ namespace MRI.Db
         Size = size
       };
 
+    private static IdAndPageParams ToIdAndPageParams(int id, int size, int index)
+      => new()
+      {
+        Id = id,
+        Index = index,
+        Size = size
+      };
+
     private static SearchAndPageParams ToSearchAndPageParams(string? search, int size, int index)
       => new()
       {
@@ -98,6 +106,9 @@ namespace MRI.Db
     private static IPropertyType ToPropertyType(PropertyTypeReply reply)
       => new PropertyTypeModel(reply.Id, reply.Name, reply.Unit);
 
+    private static ISectionParts ToSectionParts(SectionPartReply reply)
+      => new SectionPartModel(reply.Id, reply.PartId, reply.PageNumber, reply.Remakrs, reply.AdditionalInfo, reply.Quantity);
+
     #endregion
 
     #region API
@@ -129,6 +140,10 @@ namespace MRI.Db
     /// <inheritdoc />
     public async Task<IPaging<IProperty>> GetPartPropertiesAsync(int partId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
       => await GetPagingAsync(client => client.GetPartProperties(ToIdSearchAndPageParams(partId, search, size, index), cancellationToken: cancellationToken), ToProperty).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IPaging<ISectionParts>> GetSectionPartChildren(int parentId, int size, int index, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetSectionPartChildren(ToIdAndPageParams(parentId, size, index), cancellationToken: cancellationToken), ToSectionParts).ConfigureAwait(false);
 
     /// <inheritdoc />
     public async Task<IPaging<IPropertyType>> GetPropertyTypesAsync(int size, int index, CancellationToken cancellationToken = default)

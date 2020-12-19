@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Db.API.Data
 {
     [DbContext(typeof(ManualContext))]
-    [Migration("20201201164008_InitialCreate")]
+    [Migration("20201219231928_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,6 +255,21 @@ namespace Db.API.Data
                     b.ToTable("Sections");
                 });
 
+            modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
+                {
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ChildId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ParentId", "ChildId");
+
+                    b.HasIndex("ChildId");
+
+                    b.ToTable("SectionPartParents");
+                });
+
             modelBuilder.Entity("Db.Core.Entities.SectionParts", b =>
                 {
                     b.Property<int>("Id")
@@ -267,13 +282,13 @@ namespace Db.API.Data
                     b.Property<int>("PageNumber")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ParentSectionPartsId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("PartId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Reference")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Remarks")
@@ -284,8 +299,6 @@ namespace Db.API.Data
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ParentSectionPartsId");
 
                     b.HasIndex("PartId");
 
@@ -381,12 +394,27 @@ namespace Db.API.Data
                     b.Navigation("Book");
                 });
 
+            modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
+                {
+                    b.HasOne("Db.Core.Entities.SectionParts", "Child")
+                        .WithMany("ChildSections")
+                        .HasForeignKey("ChildId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Db.Core.Entities.SectionParts", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Child");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("Db.Core.Entities.SectionParts", b =>
                 {
-                    b.HasOne("Db.Core.Entities.SectionParts", "ParentSectionParts")
-                        .WithMany("ParentSectionPartsList")
-                        .HasForeignKey("ParentSectionPartsId");
-
                     b.HasOne("Db.Core.Entities.Part", "Part")
                         .WithMany("PartSections")
                         .HasForeignKey("PartId")
@@ -398,8 +426,6 @@ namespace Db.API.Data
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ParentSectionParts");
 
                     b.Navigation("Part");
 
@@ -436,7 +462,7 @@ namespace Db.API.Data
 
             modelBuilder.Entity("Db.Core.Entities.SectionParts", b =>
                 {
-                    b.Navigation("ParentSectionPartsList");
+                    b.Navigation("ChildSections");
                 });
 #pragma warning restore 612, 618
         }

@@ -60,6 +60,7 @@ namespace Db.Infrastructure.Data
         await Populate(c => c.Properties!, "properties.csv", new CsvPropertyMapping()).ConfigureAwait(false);
         await Populate(c => c.Sections!, "sections.csv", new CsvSectionMapping()).ConfigureAwait(false);
         await Populate(c => c.SectionParts!, "sectionParts.csv", new CsvSectionPartsMapping()).ConfigureAwait(false);
+        await Populate(c => c.SectionPartParents!, "sectionPartParents.csv", new CsvSectionPartParentsMapping()).ConfigureAwait(false);
         await Populate(c => c.ImagePoints!, "imagePoints.csv", new CsvImagePointsMapping()).ConfigureAwait(false);
       }
       catch (Exception e)

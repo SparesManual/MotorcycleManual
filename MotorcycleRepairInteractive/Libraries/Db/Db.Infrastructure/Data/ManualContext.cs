@@ -105,6 +105,16 @@ namespace Db.Infrastructure.Data
 
       #endregion
 
+      #region Many-to-many SectionPartParents
+
+      modelBuilder.Entity<SectionPartParents>().HasKey(section => new {section.ParentId, section.ChildId});
+      modelBuilder.Entity<SectionPartParents>()
+        .HasOne(bc => bc.Child)
+        .WithMany(c => c!.ChildSections)
+        .HasForeignKey(bc => bc.ChildId);
+
+      #endregion
+
       #region Many-to-one BookMakes
 
       modelBuilder.Entity<BookMakes>()

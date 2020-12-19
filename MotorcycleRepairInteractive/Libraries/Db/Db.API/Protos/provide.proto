@@ -20,7 +20,7 @@ service Provider {
   // Gets a model by its id
   rpc GetModel(IdRequest) returns (ModelReply);
   // Gets models using full-text search with paging settings
-  rpc GetAllModel(SearchAndPageParams) returns (stream ModelReply);
+  rpc GetAllModels(SearchAndPageParams) returns (stream ModelReply);
 
   // Gets a part by its id
   rpc GetPart (IdRequest) returns (PartReply);
@@ -31,6 +31,9 @@ service Provider {
   // Gets parts using full-text search with paging settings from a section of a given id
   rpc GetPartsFromSection (IdSearchAndPageParams) returns (stream PartReply);
   
+  // Gets section part children based on the parent section id
+  rpc GetSectionPartChildren (IdAndPageParams) returns (stream SectionPartReply);
+
   // Gets properties using full-text search with paging settings for a part of a given id
   rpc GetPartProperties (IdSearchAndPageParams) returns (stream PartPropertyReply);
   // Gets properties types with paging settings
@@ -122,6 +125,22 @@ message PartReply {
   string makersPartNumber = 3;
   // Part description
   string description = 4;
+}
+
+// Section part entity
+message SectionPartReply {
+  // Section part entity id
+  int32 id = 1;
+  // Part entity id
+  int32 partId = 2;
+  // Number of the page on which the section is
+  int32 pageNumber = 3;
+  // Section information
+  string additionalInfo = 4;
+  // Part occurrence number in the section
+  int32 quantity = 5;
+  // Mapping remarks
+  string remakrs = 6;
 }
 
 // Property type entity

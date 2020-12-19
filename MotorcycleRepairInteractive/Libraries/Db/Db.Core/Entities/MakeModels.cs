@@ -9,6 +9,7 @@ namespace Db.Core.Entities
   /// <remarks>
   /// Adds additional attributes to the relation
   /// </remarks>
+  // ReSharper disable once ClassNeverInstantiated.Global
   public class MakeModels
     : IEntity
   {
@@ -17,20 +18,22 @@ namespace Db.Core.Entities
     /// </summary>
     [Required]
     public int MakeId { get; set; }
+
     /// <summary>
     /// Reference to the <see cref="Entities.Make"/> entity
     /// </summary>
-    public Make? Make { get; set; }
+    public Make Make { get; set; } = null!;
 
     /// <summary>
     /// Foreign key reference to the <see cref="Entities.Model"/> entity
     /// </summary>
     [Required]
     public int ModelId { get; set; }
+
     /// <summary>
     /// Reference to the <see cref="Entities.Model"/> entity
     /// </summary>
-    public Model? Model { get; set; }
+    public Model Model { get; set; } = null!;
 
     /// <summary>
     /// Model start year
