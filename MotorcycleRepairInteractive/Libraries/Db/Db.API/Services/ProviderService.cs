@@ -134,7 +134,7 @@ namespace Db.API
         PartId = sectionParts?.PageNumber ?? -1,
         PageNumber = sectionParts?.PageNumber ?? -1,
         AdditionalInfo = sectionParts?.AdditionalInfo ?? string.Empty,
-        Remakrs = sectionParts?.Remarks ?? string.Empty,
+        Remarks = sectionParts?.Remarks ?? string.Empty,
         Quantity = sectionParts?.Quantity ?? -1
       };
 

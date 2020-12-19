@@ -107,7 +107,7 @@ namespace MRI.Db
       => new PropertyTypeModel(reply.Id, reply.Name, reply.Unit);
 
     private static ISectionParts ToSectionParts(SectionPartReply reply)
-      => new SectionPartModel(reply.Id, reply.PartId, reply.PageNumber, reply.Remakrs, reply.AdditionalInfo, reply.Quantity);
+      => new SectionPartModel(reply.Id, reply.PartId, reply.PageNumber, reply.Remarks, reply.AdditionalInfo, reply.Quantity);
 
     #endregion
 

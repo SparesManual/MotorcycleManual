@@ -140,7 +140,7 @@ message SectionPartReply {
   // Part occurrence number in the section
   int32 quantity = 5;
   // Mapping remarks
-  string remakrs = 6;
+  string remarks = 6;
 }
 
 // Property type entity
