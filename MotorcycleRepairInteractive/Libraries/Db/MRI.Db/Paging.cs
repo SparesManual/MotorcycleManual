@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Db.Interfaces;
 
 namespace MRI.Db
@@ -41,5 +43,15 @@ namespace MRI.Db
     /// <inheritdoc />
     public IAsyncEnumerable<T> ReadAll(CancellationToken cancellationToken = default)
       => m_stream(cancellationToken);
+
+    /// <inheritdoc />
+    public async Task<IReadOnlyCollection<T>> GetItems(CancellationToken cancellationToken = default)
+    {
+      var result = new ConcurrentBag<T>();
+      await foreach(var item in ReadAll(cancellationToken).WithCancellation(cancellationToken).ConfigureAwait(false))
+        result.Add(item);
+
+      return result;
+    }
   }
 }
