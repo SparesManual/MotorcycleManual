@@ -2,7 +2,7 @@
 
 namespace Db.API.Data
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,12 +12,24 @@ namespace Db.API.Data
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    EngineNumber = table.Column<string>(type: "TEXT", maxLength: 32, nullable: false)
+                    Title = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carburetors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carburetors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,24 +51,11 @@ namespace Db.API.Data
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Makes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Models",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Models", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,8 +98,7 @@ namespace Db.API.Data
                     StartPage = table.Column<int>(type: "INTEGER", nullable: false),
                     EndPage = table.Column<int>(type: "INTEGER", nullable: false),
                     FigureNumber = table.Column<int>(type: "INTEGER", nullable: false),
-                    FigureDescription = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
-                    SpecificToModel = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true)
+                    FigureDescription = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -114,51 +112,24 @@ namespace Db.API.Data
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookMakes",
+                name: "Engines",
                 columns: table => new
                 {
-                    BookId = table.Column<int>(type: "INTEGER", nullable: false),
-                    MakeId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Displacement = table.Column<short>(type: "INTEGER", nullable: false),
+                    Carburetors = table.Column<short>(type: "INTEGER", nullable: false),
+                    CarburetorId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Transmission = table.Column<short>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookMakes", x => new { x.BookId, x.MakeId });
+                    table.PrimaryKey("PK_Engines", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BookMakes_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookMakes_Makes_MakeId",
-                        column: x => x.MakeId,
-                        principalTable: "Makes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MakeModels",
-                columns: table => new
-                {
-                    MakeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ModelId = table.Column<int>(type: "INTEGER", nullable: false),
-                    YearFrom = table.Column<int>(type: "INTEGER", nullable: false),
-                    YearTo = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MakeModels", x => new { x.MakeId, x.ModelId });
-                    table.ForeignKey(
-                        name: "FK_MakeModels_Makes_MakeId",
-                        column: x => x.MakeId,
-                        principalTable: "Makes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MakeModels_Models_ModelId",
-                        column: x => x.ModelId,
-                        principalTable: "Models",
+                        name: "FK_Engines_Carburetors_CarburetorId",
+                        column: x => x.CarburetorId,
+                        principalTable: "Carburetors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -228,6 +199,41 @@ namespace Db.API.Data
                 });
 
             migrationBuilder.CreateTable(
+                name: "Models",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    BookId = table.Column<int>(type: "INTEGER", nullable: true),
+                    MakeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EngineId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Year = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Models", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Models_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Models_Engines_EngineId",
+                        column: x => x.EngineId,
+                        principalTable: "Engines",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Models_Makes_MakeId",
+                        column: x => x.MakeId,
+                        principalTable: "Makes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ImagePoints",
                 columns: table => new
                 {
@@ -272,11 +278,34 @@ namespace Db.API.Data
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SectionModel",
+                columns: table => new
+                {
+                    SectionId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ModelId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SectionModel", x => new { x.SectionId, x.ModelId });
+                    table.ForeignKey(
+                        name: "FK_SectionModel_Models_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "Models",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SectionModel_Sections_SectionId",
+                        column: x => x.SectionId,
+                        principalTable: "Sections",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_BookMakes_MakeId",
-                table: "BookMakes",
-                column: "MakeId",
-                unique: true);
+                name: "IX_Engines_CarburetorId",
+                table: "Engines",
+                column: "CarburetorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImagePoints_SectionPartsId",
@@ -284,9 +313,19 @@ namespace Db.API.Data
                 column: "SectionPartsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MakeModels_ModelId",
-                table: "MakeModels",
-                column: "ModelId");
+                name: "IX_Models_BookId",
+                table: "Models",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Models_EngineId",
+                table: "Models",
+                column: "EngineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Models_MakeId",
+                table: "Models",
+                column: "MakeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Properties_FormatTypeId",
@@ -297,6 +336,11 @@ namespace Db.API.Data
                 name: "IX_Properties_PropertyTypeId",
                 table: "Properties",
                 column: "PropertyTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SectionModel_ModelId",
+                table: "SectionModel",
+                column: "ModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SectionPartParents_ChildId",
@@ -322,25 +366,16 @@ namespace Db.API.Data
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookMakes");
-
-            migrationBuilder.DropTable(
                 name: "ImagePoints");
-
-            migrationBuilder.DropTable(
-                name: "MakeModels");
 
             migrationBuilder.DropTable(
                 name: "Properties");
 
             migrationBuilder.DropTable(
+                name: "SectionModel");
+
+            migrationBuilder.DropTable(
                 name: "SectionPartParents");
-
-            migrationBuilder.DropTable(
-                name: "Makes");
-
-            migrationBuilder.DropTable(
-                name: "Models");
 
             migrationBuilder.DropTable(
                 name: "FormatTypes");
@@ -349,13 +384,25 @@ namespace Db.API.Data
                 name: "PropertyTypes");
 
             migrationBuilder.DropTable(
+                name: "Models");
+
+            migrationBuilder.DropTable(
                 name: "SectionParts");
+
+            migrationBuilder.DropTable(
+                name: "Engines");
+
+            migrationBuilder.DropTable(
+                name: "Makes");
 
             migrationBuilder.DropTable(
                 name: "Parts");
 
             migrationBuilder.DropTable(
                 name: "Sections");
+
+            migrationBuilder.DropTable(
+                name: "Carburetors");
 
             migrationBuilder.DropTable(
                 name: "Books");

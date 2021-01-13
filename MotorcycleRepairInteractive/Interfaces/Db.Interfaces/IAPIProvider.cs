@@ -49,6 +49,24 @@ namespace Db.Interfaces
     Task<IPaging<IProperty>> GetPartPropertiesAsync(int partId, int size, int index, string? search = null, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Get a section based on the given <paramref name="id"/>
+    /// </summary>
+    /// <param name="id">Id of the section</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>Retrieved section</returns>
+    Task<ISection> GetSectionAsync(int id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get all sections
+    /// </summary>
+    /// <param name="size">Page size</param>
+    /// <param name="index">Page index</param>
+    /// <param name="search">Part fuzzy search</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>Paging batch of sections</returns>
+    Task<IPaging<ISection>> GetSectionsAsync(int size, int index, string? search = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Get all parts
     /// </summary>
     /// <param name="size">Page size</param>

@@ -3,14 +3,16 @@ using System;
 using Db.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Db.API.Data
 {
     [DbContext(typeof(ManualContext))]
-    partial class ManualContextModelSnapshot : ModelSnapshot
+    [Migration("20210113232855_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,11 +24,6 @@ namespace Db.API.Data
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("EngineNumber")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -37,20 +34,48 @@ namespace Db.API.Data
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Db.Core.Entities.BookMakes", b =>
+            modelBuilder.Entity("Db.Core.Entities.Carburetor", b =>
                 {
-                    b.Property<int>("BookId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MakeId")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carburetors");
+                });
+
+            modelBuilder.Entity("Db.Core.Entities.Engine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("BookId", "MakeId");
+                    b.Property<int>("CarburetorId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("MakeId")
-                        .IsUnique();
+                    b.Property<short>("Carburetors")
+                        .HasColumnType("INTEGER");
 
-                    b.ToTable("BookMakes");
+                    b.Property<short>("Displacement")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<short>("Transmission")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarburetorId");
+
+                    b.ToTable("Engines");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.FormatType", b =>
@@ -99,32 +124,12 @@ namespace Db.API.Data
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Makes");
-                });
-
-            modelBuilder.Entity("Db.Core.Entities.MakeModels", b =>
-                {
-                    b.Property<int>("MakeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ModelId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("YearFrom")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("YearTo")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("MakeId", "ModelId");
-
-                    b.HasIndex("ModelId");
-
-                    b.ToTable("MakeModels");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.Model", b =>
@@ -133,11 +138,29 @@ namespace Db.API.Data
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("EngineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MakeId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("EngineId");
+
+                    b.HasIndex("MakeId");
 
                     b.ToTable("Models");
                 });
@@ -239,10 +262,6 @@ namespace Db.API.Data
                     b.Property<string>("SectionHeader")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SpecificToModel")
-                        .HasMaxLength(64)
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("StartPage")
                         .HasColumnType("INTEGER");
 
@@ -251,6 +270,21 @@ namespace Db.API.Data
                     b.HasIndex("BookId");
 
                     b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("Db.Core.Entities.SectionModels", b =>
+                {
+                    b.Property<int>("SectionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("SectionId", "ModelId");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("SectionModel");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
@@ -305,29 +339,21 @@ namespace Db.API.Data
                     b.ToTable("SectionParts");
                 });
 
-            modelBuilder.Entity("Db.Core.Entities.BookMakes", b =>
+            modelBuilder.Entity("Db.Core.Entities.Engine", b =>
                 {
-                    b.HasOne("Db.Core.Entities.Book", "Book")
-                        .WithMany("BookMakes")
-                        .HasForeignKey("BookId")
+                    b.HasOne("Db.Core.Entities.Carburetor", "Carburetor")
+                        .WithMany()
+                        .HasForeignKey("CarburetorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Db.Core.Entities.Make", "Make")
-                        .WithOne("ParentBook")
-                        .HasForeignKey("Db.Core.Entities.BookMakes", "MakeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Make");
+                    b.Navigation("Carburetor");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.ImagePoint", b =>
                 {
                     b.HasOne("Db.Core.Entities.SectionParts", "SectionParts")
-                        .WithMany()
+                        .WithMany("ImagePoints")
                         .HasForeignKey("SectionPartsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -335,23 +361,29 @@ namespace Db.API.Data
                     b.Navigation("SectionParts");
                 });
 
-            modelBuilder.Entity("Db.Core.Entities.MakeModels", b =>
+            modelBuilder.Entity("Db.Core.Entities.Model", b =>
                 {
+                    b.HasOne("Db.Core.Entities.Book", "Book")
+                        .WithMany("BookModels")
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("Db.Core.Entities.Engine", "Engine")
+                        .WithMany()
+                        .HasForeignKey("EngineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Db.Core.Entities.Make", "Make")
-                        .WithMany("MakeModels")
+                        .WithMany("Models")
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Db.Core.Entities.Model", "Model")
-                        .WithMany("ParentMakes")
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Book");
+
+                    b.Navigation("Engine");
 
                     b.Navigation("Make");
-
-                    b.Navigation("Model");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.Property", b =>
@@ -363,7 +395,7 @@ namespace Db.API.Data
                         .IsRequired();
 
                     b.HasOne("Db.Core.Entities.Part", "Part")
-                        .WithMany()
+                        .WithMany("PartProperties")
                         .HasForeignKey("PartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -384,12 +416,31 @@ namespace Db.API.Data
             modelBuilder.Entity("Db.Core.Entities.Section", b =>
                 {
                     b.HasOne("Db.Core.Entities.Book", "Book")
-                        .WithMany()
+                        .WithMany("BookSections")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("Db.Core.Entities.SectionModels", b =>
+                {
+                    b.HasOne("Db.Core.Entities.Model", "Model")
+                        .WithMany("ModelSections")
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Db.Core.Entities.Section", "Section")
+                        .WithMany("SectionModels")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Model");
+
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
@@ -432,35 +483,40 @@ namespace Db.API.Data
 
             modelBuilder.Entity("Db.Core.Entities.Book", b =>
                 {
-                    b.Navigation("BookMakes");
+                    b.Navigation("BookModels");
+
+                    b.Navigation("BookSections");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.Make", b =>
                 {
-                    b.Navigation("MakeModels");
-
-                    b.Navigation("ParentBook")
-                        .IsRequired();
+                    b.Navigation("Models");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.Model", b =>
                 {
-                    b.Navigation("ParentMakes");
+                    b.Navigation("ModelSections");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.Part", b =>
                 {
+                    b.Navigation("PartProperties");
+
                     b.Navigation("PartSections");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.Section", b =>
                 {
+                    b.Navigation("SectionModels");
+
                     b.Navigation("SectionParts");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.SectionParts", b =>
                 {
                     b.Navigation("ChildSections");
+
+                    b.Navigation("ImagePoints");
                 });
 #pragma warning restore 612, 618
         }

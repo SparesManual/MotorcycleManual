@@ -21,19 +21,19 @@ namespace Db.Infrastructure.Data
     public DbSet<Make>? Makes { get; set; }
 
     /// <summary>
-    /// Collection of mappings of <see cref="Books"/> to <see cref="Makes"/>
+    /// Collection of engines
     /// </summary>
-    public DbSet<BookMakes>? BookMakes { get; set; }
+    public DbSet<Carburetor>? Carburetors { get; set; }
+
+    /// <summary>
+    /// Collection of engines
+    /// </summary>
+    public DbSet<Engine>? Engines { get; set; }
 
     /// <summary>
     /// Collection of models
     /// </summary>
     public DbSet<Model>? Models { get; set; }
-
-    /// <summary>
-    /// Collection of mappings of <see cref="Makes"/> to <see cref="Models"/>
-    /// </summary>
-    public DbSet<MakeModels>? MakeModels { get; set; }
 
     /// <summary>
     /// Collection of sections covering <see cref="Book"/> pages
@@ -44,6 +44,8 @@ namespace Db.Infrastructure.Data
     /// Collection of parts documented in <see cref="Sections"/>
     /// </summary>
     public DbSet<Part>? Parts { get; set; }
+
+    public DbSet<SectionModels>? SectionModels { get; set; }
 
     /// <summary>
     /// Collection of mappings of <see cref="Sections"/> to <see cref="Parts"/>
@@ -105,6 +107,17 @@ namespace Db.Infrastructure.Data
 
       #endregion
 
+      modelBuilder.Entity<Property>().HasKey(prop => new {prop.PartId, prop.PropertyName});
+      modelBuilder.Entity<Property>()
+        .HasOne(bc => bc!.Part)
+        .WithMany(b => b!.PartProperties)
+        .HasForeignKey(bc => bc.PartId);
+
+      modelBuilder.Entity<Section>()
+        .HasOne(bc => bc!.Book)
+        .WithMany(b => b!.BookSections)
+        .HasForeignKey(bc => bc!.BookId);
+
       #region Many-to-many SectionPartParents
 
       modelBuilder.Entity<SectionPartParents>().HasKey(section => new {section.ParentId, section.ChildId});
@@ -115,38 +128,22 @@ namespace Db.Infrastructure.Data
 
       #endregion
 
-      #region Many-to-one BookMakes
+      #region Many-to-many SectionModels
 
-      modelBuilder.Entity<BookMakes>()
-        .HasKey(bc => new { bc.BookId, bc.MakeId });
-      modelBuilder.Entity<BookMakes>()
-        .HasOne(bc => bc.Book)
-        .WithMany(b => b!.BookMakes)
-        .HasForeignKey(bc => bc.BookId);
-      modelBuilder.Entity<BookMakes>()
-        .HasOne(bc => bc.Make)
-        .WithOne(c => c!.ParentBook);
-
-      #endregion
-
-      #region Many-to-many MakeModels
-
-      modelBuilder.Entity<MakeModels>()
-        .HasKey(bc => new { bc.MakeId, bc.ModelId });
-      modelBuilder.Entity<MakeModels>()
-        .HasOne(bc => bc.Make)
-        .WithMany(b => b!.MakeModels)
-        .HasForeignKey(bc => bc.MakeId);
-      modelBuilder.Entity<MakeModels>()
+      modelBuilder.Entity<SectionModels>().HasKey(section => new {section.SectionId, section.ModelId});
+      modelBuilder.Entity<SectionModels>()
         .HasOne(bc => bc.Model)
-        .WithMany(c => c!.ParentMakes)
+        .WithMany(c => c.ModelSections)
         .HasForeignKey(bc => bc.ModelId);
+      modelBuilder.Entity<SectionModels>()
+        .HasOne(bc => bc.Section)
+        .WithMany(c => c.SectionModels)
+        .HasForeignKey(bc => bc.SectionId);
 
       #endregion
 
       base.OnModelCreating(modelBuilder);
       modelBuilder.ApplyConfigurationsFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
-      modelBuilder.Entity<Property>().HasKey(prop => new {prop.PartId, prop.PropertyName});
 
       // If the current provider is not SQLite..
       if (!Database.ProviderName.Equals("Microsoft.EntityFrameworkCore.Sqlite"))

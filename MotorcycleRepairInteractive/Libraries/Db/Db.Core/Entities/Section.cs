@@ -50,15 +50,10 @@ namespace Db.Core.Entities
     public string? FigureDescription { get; set; }
 
     /// <summary>
-    /// Name of the model to which this section is specifically dedicated to
-    /// </summary>
-    [MaxLength(64)]
-    public string? SpecificToModel { get; set; }
-
-    /// <summary>
     /// <see cref="Part"/> entities inside this given section
     /// </summary>
-    // ReSharper disable once CollectionNeverUpdated.Global
-    public List<SectionParts> SectionParts { get; set; } = new List<SectionParts>();
+    public List<SectionParts> SectionParts { get; set; } = null!;
+
+    public List<SectionModels> SectionModels { get; set; } = null!;
   }
 }

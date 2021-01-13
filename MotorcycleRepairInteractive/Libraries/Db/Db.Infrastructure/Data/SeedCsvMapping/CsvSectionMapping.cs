@@ -15,7 +15,6 @@ namespace Db.Infrastructure.Data.SeedCsvMapping
       MapProperty(4, x => x.SectionHeader);
       MapProperty(5, x => x.FigureNumber);
       MapProperty(6, x => x.FigureDescription);
-      MapProperty(7, x => x.SpecificToModel);
     }
   }
 }

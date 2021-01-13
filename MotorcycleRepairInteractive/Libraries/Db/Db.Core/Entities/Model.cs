@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Db.Core.Entities
 {
@@ -9,15 +11,34 @@ namespace Db.Core.Entities
   public class Model
     : BaseEntity
   {
+    [AllowNull]
+    public int? BookId { get; set; } = null;
+
+    public Book Book { get; set; } = null!;
+
+    [Required]
+    public int MakeId { get; set; }
+
+    public Make Make { get; set; } = null!;
+
+    [Required]
+    public int EngineId { get; set; }
+
+    /// <summary>
+    /// Model engine
+    /// </summary>
+    public Engine Engine { get; set; } = null!;
+
     /// <summary>
     /// Model name
     /// </summary>
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Collection of parent <see cref="Make"/> mappings
+    /// Model year
     /// </summary>
-    // ReSharper disable once CollectionNeverUpdated.Global
-    public List<MakeModels> ParentMakes { get; set; } = new List<MakeModels>();
+    public int Year { get; set; }
+
+    public List<SectionModels> ModelSections { get; set; } = null!;
   }
 }

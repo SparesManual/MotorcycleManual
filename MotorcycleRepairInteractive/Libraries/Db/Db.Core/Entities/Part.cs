@@ -37,6 +37,11 @@ namespace Db.Core.Entities
     /// <see cref="Section"/> entities have this given part
     /// </summary>
     // ReSharper disable once CollectionNeverUpdated.Global
-    public List<SectionParts> PartSections { get; set; } = new List<SectionParts>();
+    public List<SectionParts> PartSections { get; set; } = null!;
+
+    /// <summary>
+    /// <see cref="Property"/> entities linked to this <see cref="Part"/>
+    /// </summary>
+    public List<Property> PartProperties { get; set; } = null!;
   }
 }

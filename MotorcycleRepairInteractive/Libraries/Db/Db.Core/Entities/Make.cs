@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Db.Core.Entities
 {
@@ -12,17 +13,10 @@ namespace Db.Core.Entities
     /// <summary>
     /// Make name
     /// </summary>
+    [Required]
+    [MaxLength(64)]
     public string Name { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Reference to the parent book
-    /// </summary>
-    public BookMakes ParentBook { get; set; } = null!;
-
-    /// <summary>
-    /// List of all child models
-    /// </summary>
-    // ReSharper disable once CollectionNeverUpdated.Global
-    public List<MakeModels> MakeModels { get; set; } = new List<MakeModels>();
+    public List<Model> Models { get; set; } = null!;
   }
 }

@@ -22,6 +22,9 @@ service Provider {
   // Gets models using full-text search with paging settings
   rpc GetAllModels(SearchAndPageParams) returns (stream ModelReply);
 
+  // Gets engines using full-text search with paging settings
+  rpc GetAllEngines(SearchAndPageParams) returns (stream EngineReply);
+  
   // Gets a part by its id
   rpc GetPart (IdRequest) returns (PartReply);
   // Gets parts using full-text search with paging settings
@@ -30,6 +33,11 @@ service Provider {
   rpc GetPartsFromBook (IdSearchAndPageParams) returns (stream PartReply);
   // Gets parts using full-text search with paging settings from a section of a given id
   rpc GetPartsFromSection (IdSearchAndPageParams) returns (stream PartReply);
+  
+  // Gets a section by its id
+  rpc GetSection(IdRequest) returns (SectionReply);
+  // Gets sections using full-text search with paging settings
+  rpc GetAllSections(SearchAndPageParams) returns (stream SectionReply);
   
   // Gets section part children based on the parent section id
   rpc GetSectionPartChildren (IdAndPageParams) returns (stream SectionPartReply);
@@ -97,6 +105,18 @@ message BookReply {
   string title = 2;
 }
 
+// Engine entity
+message EngineReply {
+  // Engine entity id
+  int32 id = 1;
+  // Engine name
+  string name = 2;
+  // Engine cylinders count
+  int32 cylinders = 3;
+  // Engine carburetors count
+  int32 carburetors = 4;
+}
+
 // Make entity
 message MakeReply {
   // Make entity id
@@ -111,8 +131,12 @@ message MakeReply {
 message ModelReply {
   // Model entity id
   int32 id = 1;
+  // Model make
+  int32 makeId = 2;
+  // Model engine
+  int32 engineId = 3;
   // Model name
-  string name = 2;
+  string name = 4;
 }
 
 // Part entity
@@ -125,6 +149,24 @@ message PartReply {
   string makersPartNumber = 3;
   // Part description
   string description = 4;
+}
+
+// Section entity
+message SectionReply {
+  // Section entity id
+  int32 id = 1;
+  // Parent book entity id
+  int32 bookId = 2;
+  // Section header
+  string header = 3;
+  // Section start page
+  int32 startPage = 4;
+  // Section end page
+  int32 endPage = 5;
+  // Section figure number
+  int32 figureNumber = 6;
+  // Section figure description
+  string figureDescription = 7;
 }
 
 // Section part entity

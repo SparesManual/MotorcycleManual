@@ -17,15 +17,18 @@ namespace Db.API
   public class ProviderService
     : Provider.ProviderBase
   {
+    private delegate TReply Convert<in T, out TReply>(T input);
+
     #region Fields
 
     private readonly ILogger<ProviderService> m_logger;
     private readonly IGenericRepository<Book> m_bookRepository;
+    private readonly IGenericRepository<Carburetor> m_carburetorRepository;
+    private readonly IGenericRepository<Engine> m_engineRepository;
     private readonly IGenericRepository<Make> m_makeRepository;
-    private readonly IGenericRepository<BookMakes> m_bookMakesRepository;
     private readonly IGenericRepository<Model> m_modelRepository;
-    private readonly IGenericRepository<MakeModels> m_makeModelsRepository;
     private readonly IGenericRepository<Section> m_sectionRepository;
+    private readonly IGenericRepository<SectionModels> m_sectionModels;
     private readonly IGenericRepository<SectionParts> m_sectionPartsRepository;
     private readonly IGenericRepository<SectionPartParents> m_sectionPartParentsRepository;
     private readonly IGenericRepository<Part> m_partRepository;
@@ -41,21 +44,25 @@ namespace Db.API
     /// <param name="bookRepository">Injected book repository</param>
     /// <param name="makeModelsRepository"></param>
     /// <param name="sectionRepository">Injected section repository</param>
+    /// <param name="sectionModels"></param>
     /// <param name="sectionPartsRepository">Injected section parts repository</param>
     /// <param name="sectionPartParentsRepository">Injected section part parents repository</param>
     /// <param name="partRepository">Injected parts repository</param>
     /// <param name="propertyRepository">Injected property repository</param>
     /// <param name="propertyTypeRepository">Injected property type repository</param>
+    /// <param name="carburetorRepository"></param>
+    /// <param name="engineRepository"></param>
     /// <param name="makeRepository">Injected make repository</param>
     /// <param name="bookMakesRepository"></param>
     /// <param name="modelRepository">Injected model repository</param>
     public ProviderService(ILogger<ProviderService> logger,
       IGenericRepository<Book> bookRepository,
+      IGenericRepository<Carburetor> carburetorRepository,
+      IGenericRepository<Engine> engineRepository,
       IGenericRepository<Make> makeRepository,
-      IGenericRepository<BookMakes> bookMakesRepository,
       IGenericRepository<Model> modelRepository,
-      IGenericRepository<MakeModels> makeModelsRepository,
       IGenericRepository<Section> sectionRepository,
+      IGenericRepository<SectionModels> sectionModels,
       IGenericRepository<SectionParts> sectionPartsRepository,
       IGenericRepository<SectionPartParents> sectionPartParentsRepository,
       IGenericRepository<Part> partRepository,
@@ -64,11 +71,12 @@ namespace Db.API
     {
       m_logger = logger;
       m_bookRepository = bookRepository;
+      m_carburetorRepository = carburetorRepository;
+      m_engineRepository = engineRepository;
       m_makeRepository = makeRepository;
-      m_bookMakesRepository = bookMakesRepository;
       m_modelRepository = modelRepository;
-      m_makeModelsRepository = makeModelsRepository;
       m_sectionRepository = sectionRepository;
+      m_sectionModels = sectionModels;
       m_sectionPartsRepository = sectionPartsRepository;
       m_sectionPartParentsRepository = sectionPartParentsRepository;
       m_partRepository = partRepository;
@@ -82,7 +90,7 @@ namespace Db.API
       => new()
       {
         Id = book?.Id ?? -1,
-        Title = book?.Title ?? string.Empty
+        Title = book?.Title ?? string.Empty,
       };
 
     private static MakeReply ToMakeReply(Make? make)
@@ -90,14 +98,13 @@ namespace Db.API
       {
         Id = make?.Id ?? -1,
         Name = make?.Name ?? string.Empty,
-        BookId = make?.ParentBook.BookId ?? -1
       };
 
     private static ModelReply ToModelReply(Model? model)
       => new()
       {
         Id = model?.Id ?? -1,
-        Name = model?.Name ?? string.Empty,
+        Name = model?.Name ?? string.Empty
       };
 
     private static PartReply ToPartReply(Part? part)
@@ -127,6 +134,18 @@ namespace Db.API
         Unit = propertyType?.Unit ?? string.Empty
       };
 
+    private static SectionReply ToSectionReply(Section? section)
+      => new()
+      {
+        Id = section?.Id ?? -1,
+        BookId = section?.BookId ?? -1,
+        StartPage = section?.StartPage ?? -1,
+        EndPage = section?.EndPage ?? -1,
+        FigureNumber = section?.FigureNumber ?? -1,
+        FigureDescription = section?.FigureDescription ?? string.Empty,
+        Header = section?.SectionHeader ?? string.Empty
+      };
+
     private static SectionPartReply ToSectionPartReply(SectionParts? sectionParts)
       => new()
       {
@@ -142,7 +161,7 @@ namespace Db.API
 
     #region Helpers
 
-    private async Task<TReply> GetById<T, TReply>(int id, IGenericRepository<T> repository, Func<T?, TReply> converter)
+    private async Task<TReply> GetById<T, TReply>(int id, IGenericRepository<T> repository, Convert<T?, TReply> converter)
       where T : class, IEntity
     {
       // Get the requested item by its id
@@ -157,16 +176,16 @@ namespace Db.API
       return converter(item);
     }
 
-    private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, ISpecification<T> specification, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
+    private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, ISpecification<T> specification, IAsyncStreamWriter<TReply> responseStream, Convert<T?, TReply> converter, CancellationToken ct)
       where T : class, IEntity
       => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
 
-    private async Task GetAllExAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, IAsyncStreamWriter<TReply> responseStream, Func<TChild?, TReply> converter, CancellationToken ct)
+    private async Task GetAllExAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, IAsyncStreamWriter<TReply> responseStream, Convert<TChild?, TReply> converter, CancellationToken ct)
       where TParent : class, IEntity
       where TChild : class, IEntity
       => await GetAllProcessorAsync(repository.GetAllAsync(specification), responseStream, converter, ct).ConfigureAwait(false);
 
-    private async Task GetAllProcessorAsync<T, TReply>(IAsyncEnumerable<T> items, IAsyncStreamWriter<TReply> responseStream, Func<T?, TReply> converter, CancellationToken ct)
+    private async Task GetAllProcessorAsync<T, TReply>(IAsyncEnumerable<T> items, IAsyncStreamWriter<TReply> responseStream, Convert<T?, TReply> converter, CancellationToken ct)
       where T : class, IEntity
     {
       // For every item of requested type..
@@ -194,8 +213,8 @@ namespace Db.API
       IGenericRepository<TParent> repository,
       ISpecificationEx<TParent, TChild> specification,
       IAsyncStreamWriter<TReply> responseStream,
-      Func<IGenericRepository<TParent>, ISpecificationEx<TParent, TChild>, IAsyncStreamWriter<TReply>, Func<TChild?, TReply>, CancellationToken, Task> processor,
-      Func<TChild?, TReply> converter,
+      Func<IGenericRepository<TParent>, ISpecificationEx<TParent, TChild>, IAsyncStreamWriter<TReply>, Convert<TChild?, TReply>, CancellationToken, Task> processor,
+      Convert<TChild?, TReply> converter,
       ServerCallContext context)
       where TParent : class, IEntity
       where TChild : class, IEntity
@@ -213,8 +232,8 @@ namespace Db.API
       IGenericRepository<TChild> repository,
       ISpecification<TChild> specification,
       IAsyncStreamWriter<TReply> responseStream,
-      Func<IGenericRepository<TChild>, ISpecification<TChild>, IAsyncStreamWriter<TReply>, Func<TChild?, TReply>, CancellationToken, Task> processor,
-      Func<TChild?, TReply> converter,
+      Func<IGenericRepository<TChild>, ISpecification<TChild>, IAsyncStreamWriter<TReply>, Convert<TChild?, TReply>, CancellationToken, Task> processor,
+      Convert<TChild?, TReply> converter,
       ServerCallContext context)
       where TChild : class, IEntity
     {
@@ -263,6 +282,10 @@ namespace Db.API
     }
 
     /// <inheritdoc />
+    public override async Task<SectionReply> GetSection(IdRequest request, ServerCallContext context)
+      => await GetById(request.Id, m_sectionRepository, ToSectionReply).ConfigureAwait(false);
+
+    /// <inheritdoc />
     public override async Task GetSectionPartChildren(IdAndPageParams pageRequest, IServerStreamWriter<SectionPartReply> responseStream, ServerCallContext context)
     {
       var specification = new SectionPartChildrenSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
@@ -279,6 +302,13 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task<PartReply> GetPart(IdRequest request, ServerCallContext context)
       => await GetById(request.Id, m_partRepository, ToPartReply).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public override async Task GetAllSections(SearchAndPageParams request, IServerStreamWriter<SectionReply> responseStream, ServerCallContext context)
+    {
+      var specification = new SectionSpec(request.Search, request.Size, request.Index);
+      await ProcessPagedStream(request.Size, request.Index, m_sectionRepository, specification, responseStream, GetAllAsync, ToSectionReply, context).ConfigureAwait(false);
+    }
 
     /// <inheritdoc />
     public override async Task GetPartProperties(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartPropertyReply> responseStream, ServerCallContext context)

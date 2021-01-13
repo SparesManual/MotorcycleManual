@@ -18,14 +18,13 @@ namespace Db.Core.Entities
     public string Title { get; set; } = string.Empty;
 
     /// <summary>
-    /// Engine number
+    /// <see cref="Model"/> entities covered by this <see cref="Book"/>
     /// </summary>
-    [MaxLength(32)]
-    public string EngineNumber { get; set; } = string.Empty;
+    public List<Model> BookModels { get; set; } = new List<Model>();
 
     /// <summary>
-    /// Makes covered by this book
+    /// <see cref="Section"/> entities in this <see cref="Book"/>
     /// </summary>
-    public List<BookMakes> BookMakes { get; set; } = new List<BookMakes>();
+    public List<Section> BookSections { get; set; } = new List<Section>();
   }
 }

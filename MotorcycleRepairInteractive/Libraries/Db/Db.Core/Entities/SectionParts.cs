@@ -44,6 +44,11 @@ namespace Db.Core.Entities
     /// </summary>
     public List<SectionPartParents> ChildSections { get; set; } = new List<SectionPartParents>();
 
+    /// <summary>
+    /// Section parts image points
+    /// </summary>
+    public List<ImagePoint> ImagePoints { get; set; } = new List<ImagePoint>();
+
     #endregion
 
     #region Additional Attributes

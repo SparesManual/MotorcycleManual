@@ -40,20 +40,26 @@ namespace Db.Infrastructure.Data
         var result = parser
           .ReadFromFile(Path.Combine(root, path), Encoding.Default)
           .Where(mapped => mapped.IsValid)
-          .Select(mapped => mapped.Result)
-          .ToArray();
+          .Select(mapped => mapped.Result);
 
-        foreach (var item in result)
-        {
-          await extracted.AddAsync(item).ConfigureAwait(false);
+        // foreach (var item in result)
+        // {
+        //   await extracted.AddAsync(item).ConfigureAwait(false);
+        //
+        //   await context.SaveChangesAsync().ConfigureAwait(false);
+        // }
 
-          await context.SaveChangesAsync().ConfigureAwait(false);
-        }
+        await extracted.AddRangeAsync(result).ConfigureAwait(false);
+        await context.SaveChangesAsync().ConfigureAwait(false);
       }
 
       try
       {
         await Populate(c => c.Books!, "books.csv", new CsvBookMapping()).ConfigureAwait(false);
+        await Populate(c => c.Makes!, "makes.csv", new CsvMakeMapping()).ConfigureAwait(false);
+        await Populate(c => c.Carburetors!, "carburetors.csv", new CsvCarburetorMapping()).ConfigureAwait(false);
+        await Populate(c => c.Engines!, "engines.csv", new CsvEngineMapping()).ConfigureAwait(false);
+        await Populate(c => c.Models!, "models.csv", new CsvModelMapping()).ConfigureAwait(false);
         await Populate(c => c.Parts!, "parts.csv", new CsvPartMapping()).ConfigureAwait(false);
         await Populate(c => c.PropertyTypes!, "propertyTypes.csv", new CsvPropertyTypeMapping()).ConfigureAwait(false);
         await Populate(c => c.FormatTypes!, "formatTypes.csv", new CsvFormatTypeMapping()).ConfigureAwait(false);
