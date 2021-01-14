@@ -11,7 +11,7 @@ namespace Db.Core.Specifications
     /// <summary>
     /// Default constructor
     /// </summary>
-    /// <param name="search"></param>
+    /// <param name="search">Full-text search query</param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
     public PartsSpec(string? search, int size, int index)

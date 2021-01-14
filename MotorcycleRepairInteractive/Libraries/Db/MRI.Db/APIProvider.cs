@@ -95,22 +95,97 @@ namespace MRI.Db
       => (int.Parse(metadata.GetValue("totalsize")), int.Parse(metadata.GetValue("pagesize")), int.Parse(metadata.GetValue("pageindex")));
 
     private static IBook ToBook(BookReply reply)
-      => new BookModel(reply.Id, reply.Title);
+      => new BookModel
+      {
+        Id = reply.Id,
+        Title = reply.Title
+      };
 
     private static IPart ToPart(PartReply reply)
-      => new PartModel(reply.Id, reply.PartNumber, reply.MakersPartNumber, reply.Description);
+      => new PartModel
+      {
+        Id = reply.Id,
+        PartNumber = reply.PartNumber,
+        MakersPartNumber = reply.MakersPartNumber,
+        Description = reply.Description
+      };
 
     private static IProperty ToProperty(PartPropertyReply reply)
-      => new PropertyModel(reply.TypeId, reply.Name, reply.Value, reply.Type, reply.Unit);
+      => new PropertyModel
+      {
+        PropertyValue = reply.Value,
+        PropertyName = reply.Name,
+        Unit = reply.Unit,
+        Type = reply.Type,
+        PropertyTypeId = reply.TypeId
+      };
 
     private static IPropertyType ToPropertyType(PropertyTypeReply reply)
-      => new PropertyTypeModel(reply.Id, reply.Name, reply.Unit);
+      => new PropertyTypeModel
+      {
+        Id = reply.Id,
+        Name = reply.Name,
+        Unit = reply.Unit
+      };
 
     private static ISection ToSection(SectionReply reply)
-      => new SectionModel(reply.Id, reply.BookId, reply.Header, reply.StartPage, reply.EndPage, reply.FigureNumber, reply.FigureDescription);
+      => new SectionModel
+      {
+        Id = reply.Id,
+        BookId = reply.BookId,
+        Header = reply.Header,
+        StartPage = reply.StartPage,
+        EndPage = reply.EndPage,
+        FigureNumber = reply.FigureNumber,
+        FigureDescription = reply.FigureDescription
+      };
 
     private static ISectionParts ToSectionParts(SectionPartReply reply)
-      => new SectionPartModel(reply.Id, reply.PartId, reply.PageNumber, reply.Remarks, reply.AdditionalInfo, reply.Quantity);
+      => new SectionPartModel
+      {
+        Id = reply.Id,
+        PartId = reply.PartId,
+        PageNumber = reply.PageNumber,
+        Remarks = reply.Remarks,
+        AdditionalInfo = reply.AdditionalInfo,
+        Quantity = reply.Quantity
+      };
+
+    private static IMake ToMake(MakeReply reply)
+      => new MakeModel
+      {
+        Id = reply.Id,
+        Name = reply.Name
+      };
+
+    private static IModel ToModel(ModelReply reply)
+      => new ModelModel
+      {
+        Id = reply.Id,
+        BookId = reply.BookId,
+        MakeId = reply.MakeId,
+        EngineId = reply.EngineId,
+        Name = reply.Name,
+        Year = reply.Year
+      };
+
+    private static ICarburetor ToCarburetor(CarburetorReply reply)
+      => new CarburetorModel
+      {
+        Id = reply.Id,
+        Name = reply.Name
+      };
+
+    private static IEngine ToEngine(EngineReply reply)
+      => new EngineModel
+      {
+        Id = reply.Id,
+        Name = reply.Name,
+        Transmission = reply.Transmission,
+        Carburetor = reply.CarburetorName,
+        Carburetors = reply.Carburetors,
+        Displacement = reply.Displacement
+      };
 
     #endregion
 
@@ -123,6 +198,34 @@ namespace MRI.Db
     /// <inheritdoc />
     public async Task<IPaging<IBook>> GetBooksAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
       => await GetPagingAsync(client => client.GetBooks(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToBook).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IMake> GetMakeAsync(int id, CancellationToken cancellationToken = default)
+      => ToMake(await m_client.GetMakeAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
+
+    /// <inheritdoc />
+    public async Task<IPaging<IMake>> GetMakesAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllMakes(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToMake).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IModel> GetModelAsync(int id, CancellationToken cancellationToken = default)
+      => ToModel(await m_client.GetModelAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
+
+    /// <inheritdoc />
+    public async Task<IPaging<IModel>> GetModelsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllModels(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToModel).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IPaging<ICarburetor>> GetCarburetorsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllCarburetors(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToCarburetor).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IPaging<IEngine>> GetEnginesAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllEngines(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToEngine).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IEngine> GetModelEngineAsync(int id, CancellationToken cancellationToken = default)
+      => ToEngine(await m_client.GetModelEngineAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
     public async Task<IPart> GetPartAsync(int id, CancellationToken cancellationToken = default)
@@ -143,6 +246,10 @@ namespace MRI.Db
     /// <inheritdoc />
     public async Task<IPaging<IProperty>> GetPartPropertiesAsync(int partId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
       => await GetPagingAsync(client => client.GetPartProperties(ToIdSearchAndPageParams(partId, search, size, index), cancellationToken: cancellationToken), ToProperty).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IPaging<IModel>> GetSectionSpecificModelsAsync(int sectionId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetSectionSpecificModels(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken), ToModel).ConfigureAwait(false);
 
     /// <inheritdoc />
     public async Task<ISection> GetSectionAsync(int id, CancellationToken cancellationToken = default)

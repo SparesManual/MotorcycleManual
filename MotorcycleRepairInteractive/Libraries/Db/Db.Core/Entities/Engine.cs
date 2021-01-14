@@ -27,9 +27,15 @@ namespace Db.Core.Entities
     [Range(1, short.MaxValue)]
     public short Carburetors { get; set; }
 
+    /// <summary>
+    /// Foreign key reference to the <see cref="Entities.Carburetor"/> entity
+    /// </summary>
     [Required]
     public int CarburetorId { get; set; }
 
+    /// <summary>
+    /// Reference to the <see cref="Entities.Carburetor"/> entity
+    /// </summary>
     public Carburetor Carburetor { get; set; } = null!;
 
     /// <summary>

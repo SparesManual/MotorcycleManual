@@ -2,32 +2,22 @@
 
 namespace Models.Entities
 {
-  public class PropertyModel
-    : BaseReplyModel, IProperty
+  public record PropertyModel
+    : IProperty
   {
     /// <inheritdoc />
-    public int PropertyTypeId { get; }
+    public int PropertyTypeId { get; init; }
 
     /// <inheritdoc />
-    public string PropertyName { get; }
+    public string PropertyName { get; init; }
 
     /// <inheritdoc />
-    public string PropertyValue { get; }
+    public string PropertyValue { get; init; }
 
     /// <inheritdoc />
-    public string Type { get; }
+    public string Type { get; init; }
 
     /// <inheritdoc />
-    public string Unit { get; }
-
-    /// <inheritdoc />
-    public PropertyModel(int propertyTypeId, string propertyName, string propertyValue, string type, string unit)
-    {
-      PropertyTypeId = propertyTypeId;
-      PropertyName = propertyName;
-      PropertyValue = propertyValue;
-      Type = type;
-      Unit = unit;
-    }
+    public string Unit { get; init; }
   }
 }

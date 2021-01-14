@@ -2,8 +2,8 @@ using Models.Interfaces.Entities;
 
 namespace Models.Entities
 {
-  public record SectionModel
-    : ISection
+  public record ModelModel
+    : IModel
   {
     /// <inheritdoc />
     public int Id { get; init; }
@@ -12,18 +12,15 @@ namespace Models.Entities
     public int BookId { get; init; }
 
     /// <inheritdoc />
-    public string Header { get; init; }
+    public int MakeId { get; init; }
 
     /// <inheritdoc />
-    public int StartPage { get; init; }
+    public int EngineId { get; init; }
 
     /// <inheritdoc />
-    public int EndPage { get; init; }
+    public string Name { get; init; }
 
     /// <inheritdoc />
-    public int FigureNumber { get; init; }
-
-    /// <inheritdoc />
-    public string FigureDescription { get; init; }
+    public int Year { get; init; }
   }
 }

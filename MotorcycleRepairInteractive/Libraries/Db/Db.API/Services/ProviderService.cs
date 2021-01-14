@@ -109,7 +109,8 @@ namespace Db.API
         CarburetorName = engine?.Carburetor.Name ?? string.Empty,
         Carburetors = engine?.Carburetors ?? -1,
         Name = engine?.Name ?? string.Empty,
-        Transmission = engine?.Transmission ?? -1
+        Transmission = engine?.Transmission ?? -1,
+        Displacement = engine?.Displacement ?? -1
       };
 
     private static EngineReply ToEngineReply(Model? model)
@@ -203,14 +204,15 @@ namespace Db.API
       return converter(item);
     }
 
-    private static async Task<TReply> GetSingleExAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, Convert<TChild?, TReply> converter, CancellationToken cancellationToken)
-      where TParent : class, IEntity
-      where TChild : class, IEntity
-    {
-      var item = await repository.GetEntityWithSpecificationAsync(specification, cancellationToken).ConfigureAwait(false);
-
-      return converter(item);
-    }
+    // Uncomment if required
+    // private static async Task<TReply> GetSingleExAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, Convert<TChild?, TReply> converter, CancellationToken cancellationToken)
+    //   where TParent : class, IEntity
+    //   where TChild : class, IEntity
+    // {
+    //   var item = await repository.GetEntityWithSpecificationAsync(specification, cancellationToken).ConfigureAwait(false);
+    //
+    //   return converter(item);
+    // }
 
     private async Task GetAllAsync<T, TReply>(IGenericRepository<T> repository, ISpecification<T> specification, IAsyncStreamWriter<TReply> responseStream, Convert<T?, TReply> converter, CancellationToken ct)
       where T : class, IEntity

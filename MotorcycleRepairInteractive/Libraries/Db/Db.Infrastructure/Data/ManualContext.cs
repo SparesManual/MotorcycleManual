@@ -45,6 +45,9 @@ namespace Db.Infrastructure.Data
     /// </summary>
     public DbSet<Part>? Parts { get; set; }
 
+    /// <summary>
+    /// Collection of mapping of <see cref="Sections"/> to <see cref="Models"/>
+    /// </summary>
     public DbSet<SectionModels>? SectionModels { get; set; }
 
     /// <summary>

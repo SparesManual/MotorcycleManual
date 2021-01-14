@@ -134,6 +134,8 @@ message EngineReply {
   int32 carburetorId = 5;
   
   string carburetorName = 6;
+  
+  int32 displacement = 7;
 }
 
 // Make entity

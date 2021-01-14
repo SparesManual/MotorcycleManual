@@ -3,7 +3,7 @@ using TinyCsvParser.Mapping;
 
 namespace Db.Infrastructure.Data.SeedCsvMapping
 {
-  public class CsvMakeMapping
+  internal class CsvMakeMapping
     : CsvMapping<Make>
   {
     public CsvMakeMapping()

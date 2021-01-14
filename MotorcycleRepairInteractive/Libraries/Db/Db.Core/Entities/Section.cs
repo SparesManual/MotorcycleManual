@@ -54,6 +54,9 @@ namespace Db.Core.Entities
     /// </summary>
     public List<SectionParts> SectionParts { get; set; } = null!;
 
+    /// <summary>
+    /// <see cref="Model"/> entities specific to this section
+    /// </summary>
     public List<SectionModels> SectionModels { get; set; } = null!;
   }
 }

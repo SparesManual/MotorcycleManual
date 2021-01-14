@@ -2,20 +2,13 @@
 
 namespace Models.Entities
 {
-  public class BookModel
-    : BaseReplyModel, IBook
+  public record BookModel
+    : IBook
   {
     /// <inheritdoc />
-    public int Id { get; }
+    public int Id { get; init; }
 
     /// <inheritdoc />
-    public string Title { get; }
-
-    /// <inheritdoc />
-    public BookModel(int id, string title)
-    {
-      Id = id;
-      Title = title;
-    }
+    public string Title { get; init; }
   }
 }

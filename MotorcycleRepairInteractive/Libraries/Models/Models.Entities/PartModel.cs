@@ -2,28 +2,19 @@
 
 namespace Models.Entities
 {
-  public class PartModel
-    : BaseReplyModel, IPart
+  public record PartModel
+    : IPart
   {
     /// <inheritdoc />
-    public int Id { get; }
+    public int Id { get; init; }
 
     /// <inheritdoc />
-    public string PartNumber { get; }
+    public string PartNumber { get; init; }
 
     /// <inheritdoc />
-    public string MakersPartNumber { get; }
+    public string MakersPartNumber { get; init; }
 
     /// <inheritdoc />
-    public string Description { get; }
-
-    /// <inheritdoc />
-    public PartModel(int id, string partNumber, string makersPartNumber, string description)
-    {
-      Id = id;
-      PartNumber = partNumber;
-      MakersPartNumber = makersPartNumber;
-      Description = description;
-    }
+    public string Description { get; init; }
   }
 }
