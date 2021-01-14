@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Db.Core.Specifications
 {
+  /// <summary>
+  /// Specifications for querying <see cref="Model"/> entities based on their parent <see cref="Book"/> entity
+  /// </summary>
   public class BookModelsSpec
     : BaseSpecification<Book, Model>
   {

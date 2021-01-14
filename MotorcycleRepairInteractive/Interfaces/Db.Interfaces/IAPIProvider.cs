@@ -30,6 +30,17 @@ namespace Db.Interfaces
     Task<IPaging<IBook>> GetBooksAsync(int size, int index, string? search = null, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Get models covered by the given book
+    /// </summary>
+    /// <param name="bookId">Parent book id</param>
+    /// <param name="size">Page size</param>
+    /// <param name="index">Page index</param>
+    /// <param name="search">Fuzzy model search</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>Paging batch of models</returns>
+    Task<IPaging<IModel>> GetBookModelsAsync(int bookId, int size, int index, string? search = default, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Get a make based on the given <paramref name="id"/>
     /// </summary>
     /// <param name="id">Id of the make</param>

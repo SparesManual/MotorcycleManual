@@ -82,11 +82,13 @@ namespace MRI.Db
       var headers = await result.ResponseHeadersAsync.ConfigureAwait(false);
       var (total, pageSize, pageIndex) = RetrievePaging(headers);
 
+#pragma warning disable 8424
       async IAsyncEnumerable<TReplyModel> ConvertStream([EnumeratorCancellation] CancellationToken cancellationToken)
       {
         await foreach (var item in result.ResponseStream.ReadAllAsync(cancellationToken).WithCancellation(cancellationToken).ConfigureAwait(false))
           yield return converter(item);
       }
+#pragma warning restore 8424
 
       return new Paging<TReplyModel>(ConvertStream, total, pageSize, pageIndex);
     }
@@ -198,6 +200,10 @@ namespace MRI.Db
     /// <inheritdoc />
     public async Task<IPaging<IBook>> GetBooksAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
       => await GetPagingAsync(client => client.GetBooks(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToBook).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public async Task<IPaging<IModel>> GetBookModelsAsync(int bookId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetBookModels(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToModel).ConfigureAwait(false);
 
     /// <inheritdoc />
     public async Task<IMake> GetMakeAsync(int id, CancellationToken cancellationToken = default)

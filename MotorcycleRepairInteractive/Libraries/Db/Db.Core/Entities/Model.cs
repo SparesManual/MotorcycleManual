@@ -54,6 +54,9 @@ namespace Db.Core.Entities
     /// </summary>
     public int Year { get; set; }
 
+    /// <summary>
+    /// <see cref="Section"/> entities covering this <see cref="Model"/> entity
+    /// </summary>
     public List<SectionModels> ModelSections { get; set; } = null!;
   }
 }

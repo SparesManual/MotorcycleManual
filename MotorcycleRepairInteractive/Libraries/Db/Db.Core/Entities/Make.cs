@@ -17,6 +17,9 @@ namespace Db.Core.Entities
     [MaxLength(64)]
     public string Name { get; set; } = string.Empty;
 
+    /// <summary>
+    /// <see cref="Model"/> entities manufactured by this <see cref="Make"/>
+    /// </summary>
     public List<Model> Models { get; set; } = null!;
   }
 }

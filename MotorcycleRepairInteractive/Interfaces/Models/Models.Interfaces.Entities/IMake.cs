@@ -1,5 +1,8 @@
 namespace Models.Interfaces.Entities
 {
+  /// <summary>
+  /// Interface for the make reply
+  /// </summary>
   public interface IMake
     : IReply
   {

@@ -10,14 +10,26 @@ namespace Db.Core.Entities
   public class SectionModels
     : IEntity
   {
+    /// <summary>
+    /// Foreign key reference to the <see cref="Section"/>
+    /// </summary>
     [Required]
     public int SectionId { get; set; }
 
+    /// <summary>
+    /// Reference to the <see cref="Section"/>
+    /// </summary>
     public Section Section { get; set; } = null!;
 
+    /// <summary>
+    /// Foreign key reference to the <see cref="Model"/>
+    /// </summary>
     [Required]
     public int ModelId { get; set; }
 
+    /// <summary>
+    /// Reference to the <see cref="Model"/>
+    /// </summary>
     public Model Model { get; set; } = null!;
   }
 }
