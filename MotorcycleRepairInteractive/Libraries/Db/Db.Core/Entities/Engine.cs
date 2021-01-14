@@ -9,6 +9,9 @@ namespace Db.Core.Entities
   public class Engine
     : BaseEntity
   {
+    /// <summary>
+    /// Engine name
+    /// </summary>
     [Required]
     public string Name { get; set; } = string.Empty;
 

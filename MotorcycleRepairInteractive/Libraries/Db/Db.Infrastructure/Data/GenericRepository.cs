@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -38,13 +39,13 @@ namespace Db.Infrastructure.Data
       => m_context.Set<T>().AsAsyncEnumerable();
 
     /// <inheritdoc />
-    public async Task<T?> GetEntityWithSpecificationAsync(ISpecification<T> specification)
-      => await ApplySpecification(specification).FirstOrDefaultAsync().ConfigureAwait(false);
+    public async Task<T?> GetEntityWithSpecificationAsync(ISpecification<T> specification, CancellationToken cancellationToken = default)
+      => await ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<TChild?> GetEntityWithSpecificationAsync<TChild>(ISpecificationEx<T, TChild> specification)
+    public async Task<TChild?> GetEntityWithSpecificationAsync<TChild>(ISpecificationEx<T, TChild> specification, CancellationToken cancellationToken = default)
       where TChild : class, IEntity
-      => await ApplySpecification(specification).FirstOrDefaultAsync().ConfigureAwait(false);
+      => await ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
     public IAsyncEnumerable<T> GetAllAsync(ISpecification<T> specification)

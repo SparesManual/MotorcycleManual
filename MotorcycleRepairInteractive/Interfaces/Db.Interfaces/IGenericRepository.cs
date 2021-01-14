@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Db.Interfaces
@@ -27,15 +28,17 @@ namespace Db.Interfaces
     /// Gets an <see cref="IEntity"/> using a query <paramref name="specification"/>
     /// </summary>
     /// <param name="specification">Query specification</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>The retrieved <see cref="IEntity"/> using a query <paramref name="specification"/> or null of not found</returns>
-    Task<T?> GetEntityWithSpecificationAsync(ISpecification<T> specification);
+    Task<T?> GetEntityWithSpecificationAsync(ISpecification<T> specification, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets an <see cref="IEntity"/> using a query <paramref name="specification"/>
     /// </summary>
     /// <param name="specification">Query specification</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>The retrieved <see cref="IEntity"/> using a query <paramref name="specification"/> or null of not found</returns>
-    Task<TChild?> GetEntityWithSpecificationAsync<TChild>(ISpecificationEx<T, TChild> specification) where TChild : class, IEntity;
+    Task<TChild?> GetEntityWithSpecificationAsync<TChild>(ISpecificationEx<T, TChild> specification, CancellationToken cancellationToken = default) where TChild : class, IEntity;
 
     /// <summary>
     /// Gets all <see cref="IEntity"/> entries that match the supplied query <paramref name="specification"/>

@@ -28,7 +28,6 @@ namespace Db.API
     private readonly IGenericRepository<Make> m_makeRepository;
     private readonly IGenericRepository<Model> m_modelRepository;
     private readonly IGenericRepository<Section> m_sectionRepository;
-    private readonly IGenericRepository<SectionModels> m_sectionModels;
     private readonly IGenericRepository<SectionParts> m_sectionPartsRepository;
     private readonly IGenericRepository<SectionPartParents> m_sectionPartParentsRepository;
     private readonly IGenericRepository<Part> m_partRepository;
@@ -42,18 +41,15 @@ namespace Db.API
     /// </summary>
     /// <param name="logger">Injected logger instance</param>
     /// <param name="bookRepository">Injected book repository</param>
-    /// <param name="makeModelsRepository"></param>
     /// <param name="sectionRepository">Injected section repository</param>
-    /// <param name="sectionModels"></param>
     /// <param name="sectionPartsRepository">Injected section parts repository</param>
     /// <param name="sectionPartParentsRepository">Injected section part parents repository</param>
     /// <param name="partRepository">Injected parts repository</param>
     /// <param name="propertyRepository">Injected property repository</param>
     /// <param name="propertyTypeRepository">Injected property type repository</param>
-    /// <param name="carburetorRepository"></param>
-    /// <param name="engineRepository"></param>
+    /// <param name="carburetorRepository">Injected carburetor repository</param>
+    /// <param name="engineRepository">Injected engine repository</param>
     /// <param name="makeRepository">Injected make repository</param>
-    /// <param name="bookMakesRepository"></param>
     /// <param name="modelRepository">Injected model repository</param>
     public ProviderService(ILogger<ProviderService> logger,
       IGenericRepository<Book> bookRepository,
@@ -62,7 +58,6 @@ namespace Db.API
       IGenericRepository<Make> makeRepository,
       IGenericRepository<Model> modelRepository,
       IGenericRepository<Section> sectionRepository,
-      IGenericRepository<SectionModels> sectionModels,
       IGenericRepository<SectionParts> sectionPartsRepository,
       IGenericRepository<SectionPartParents> sectionPartParentsRepository,
       IGenericRepository<Part> partRepository,
@@ -76,7 +71,6 @@ namespace Db.API
       m_makeRepository = makeRepository;
       m_modelRepository = modelRepository;
       m_sectionRepository = sectionRepository;
-      m_sectionModels = sectionModels;
       m_sectionPartsRepository = sectionPartsRepository;
       m_sectionPartParentsRepository = sectionPartParentsRepository;
       m_partRepository = partRepository;
@@ -100,11 +94,36 @@ namespace Db.API
         Name = make?.Name ?? string.Empty,
       };
 
+    private static CarburetorReply ToCarburetorReply(Carburetor? carburetor)
+      => new()
+      {
+        Id = carburetor?.Id ?? -1,
+        Name = carburetor?.Name ?? string.Empty
+      };
+
+    private static EngineReply ToEngineReply(Engine? engine)
+      => new()
+      {
+        Id = engine?.Id ?? -1,
+        CarburetorId = engine?.CarburetorId ?? -1,
+        CarburetorName = engine?.Carburetor.Name ?? string.Empty,
+        Carburetors = engine?.Carburetors ?? -1,
+        Name = engine?.Name ?? string.Empty,
+        Transmission = engine?.Transmission ?? -1
+      };
+
+    private static EngineReply ToEngineReply(Model? model)
+      => ToEngineReply(model?.Engine);
+
     private static ModelReply ToModelReply(Model? model)
       => new()
       {
         Id = model?.Id ?? -1,
-        Name = model?.Name ?? string.Empty
+        Name = model?.Name ?? string.Empty,
+        BookId = model?.BookId ?? -1,
+        EngineId = model?.EngineId ?? -1,
+        MakeId = model?.EngineId ?? -1,
+        Year = model?.Year ?? -1
       };
 
     private static PartReply ToPartReply(Part? part)
@@ -173,6 +192,23 @@ namespace Db.API
         m_logger.LogWarning($"Request for unknown '{typeof(T).Name}' with id '{id}'");
 
       // Return the item converted to its equivalent proto-reply
+      return converter(item);
+    }
+
+    private static async Task<TReply> GetSingleAsync<T, TReply>(IGenericRepository<T> repository, ISpecification<T> specification, Convert<T?, TReply> converter, CancellationToken cancellationToken)
+      where T : class, IEntity
+    {
+      var item = await repository.GetEntityWithSpecificationAsync(specification, cancellationToken).ConfigureAwait(false);
+
+      return converter(item);
+    }
+
+    private static async Task<TReply> GetSingleExAsync<TParent, TChild, TReply>(IGenericRepository<TParent> repository, ISpecificationEx<TParent, TChild> specification, Convert<TChild?, TReply> converter, CancellationToken cancellationToken)
+      where TParent : class, IEntity
+      where TChild : class, IEntity
+    {
+      var item = await repository.GetEntityWithSpecificationAsync(specification, cancellationToken).ConfigureAwait(false);
+
       return converter(item);
     }
 
@@ -264,8 +300,50 @@ namespace Db.API
       => await GetById(request.Id, m_makeRepository, ToMakeReply).ConfigureAwait(false);
 
     /// <inheritdoc />
+    public override async Task GetAllMakes(SearchAndPageParams request, IServerStreamWriter<MakeReply> responseStream, ServerCallContext context)
+    {
+      var specification = new MakeSpec(request.Search, request.Size, request.Index);
+      await GetAllAsync(m_makeRepository, specification, responseStream, ToMakeReply, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetAllCarburetors(SearchAndPageParams request, IServerStreamWriter<CarburetorReply> responseStream, ServerCallContext context)
+    {
+      var specification = new CarburetorSpec(request.Search, request.Size, request.Index);
+      await GetAllAsync(m_carburetorRepository, specification, responseStream, ToCarburetorReply, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetAllEngines(SearchAndPageParams request, IServerStreamWriter<EngineReply> responseStream, ServerCallContext context)
+    {
+      var specification = new EngineSpec(request.Search, request.Size, request.Index);
+      await GetAllAsync(m_engineRepository, specification, responseStream, ToEngineReply, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task<EngineReply> GetModelEngine(IdRequest request, ServerCallContext context)
+    {
+      var specification = new ModelSpec(request.Id, true);
+      return await GetSingleAsync(m_modelRepository, specification, ToEngineReply, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetAllModels(SearchAndPageParams request, IServerStreamWriter<ModelReply> responseStream, ServerCallContext context)
+    {
+      var specification = new ModelSpec(request.Search, request.Size, request.Index);
+      await GetAllAsync(m_modelRepository, specification, responseStream, ToModelReply, context.CancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
     public override async Task<ModelReply> GetModel(IdRequest request, ServerCallContext context)
       => await GetById(request.Id, m_modelRepository, ToModelReply).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public override async Task GetBookModels(IdSearchAndPageParams request, IServerStreamWriter<ModelReply> responseStream, ServerCallContext context)
+    {
+      var specification = new BookModelsSpec(request.Id, request.Search, request.Size, request.Index);
+      await ProcessPagedStream(request.Size, request.Index, m_bookRepository, specification, responseStream, GetAllExAsync, ToModelReply, context).ConfigureAwait(false);
+    }
 
     /// <inheritdoc />
     public override async Task GetAllParts(SearchAndPageParams pageParams, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
@@ -290,6 +368,13 @@ namespace Db.API
     {
       var specification = new SectionPartChildrenSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
       await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartParentsRepository, specification, responseStream, GetAllExAsync, ToSectionPartReply, context).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetSectionSpecificModels(IdSearchAndPageParams request, IServerStreamWriter<ModelReply> responseStream, ServerCallContext context)
+    {
+      var specification = new SectionModelsSpec(request.Id, request.Search, request.Size, request.Index);
+      await ProcessPagedStream(request.Size, request.Index, m_sectionRepository, specification, responseStream, GetAllExAsync, ToModelReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
