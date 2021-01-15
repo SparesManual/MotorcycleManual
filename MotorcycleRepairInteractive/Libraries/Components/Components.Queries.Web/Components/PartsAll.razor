@@ -1,5 +1,4 @@
-﻿@* ReSharper disable UnknownCssClass *@
-@page "/partsall"
+﻿@page "/partsall"
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IAllPartsViewModel>
 
 <h1>PartsAll</h1>
@@ -11,13 +10,15 @@
 <RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="LoadTableData" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IPart">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="PartNumber" Title="Part number">
+      <Template Context="data">
+        <a href="@($"part/{data.Id}")">@data.PartNumber</a>
+      </Template>
       <FooterTemplate>
-        Displayed parts: <b>@ViewModel.PageItems</b> of <b>@ViewModel.TotalItems</b>
+        Displayed parts: <b>@ViewModel.Items.Count</b> of <b>@ViewModel.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="MakersPartNumber" Title="Makers number"/>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="Description" Title="Description"/>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="MakersDescription" Title="Makers description"/>
   </Columns>
 </RadzenGrid>
 

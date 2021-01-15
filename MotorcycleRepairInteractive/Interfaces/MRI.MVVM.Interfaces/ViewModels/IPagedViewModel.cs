@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Models.Interfaces.Entities;
 
-namespace MRI.MVVM.Interfaces
+namespace MRI.MVVM.Interfaces.ViewModels
 {
   /// <summary>
-  /// Interface View model with paging support
+  /// Interface for view models with paging support
   /// </summary>
   /// <typeparam name="T">Paged item type</typeparam>
   public interface IPagedViewModel<T>

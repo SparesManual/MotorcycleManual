@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
 using MRI.MVVM.Interfaces;
+using MRI.MVVM.Interfaces.ViewModels;
 
 namespace MRI.MVVM.Helpers
 {
@@ -107,7 +108,7 @@ namespace MRI.MVVM.Helpers
     /// <summary>
     /// Paged items to display
     /// </summary>
-    public ObservableCollection<T> Items { get; } = new ObservableCollection<T>();
+    public ObservableCollection<T> Items { get; } = new();
 
     #endregion
 

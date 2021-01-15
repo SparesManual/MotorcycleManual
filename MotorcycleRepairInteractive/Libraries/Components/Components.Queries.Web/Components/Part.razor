@@ -1,0 +1,31 @@
+@page "/part/{partid:int}"
+@using Test
+@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IPartViewModel>
+
+<h2>
+    @ViewModel.Item?.Description
+</h2>
+
+<PartProperties PartId="@PartId"/>
+
+@code {
+
+    [Parameter]
+    public int PartId
+    {
+        get => m_partId;
+        set
+        {
+            m_partId = value;
+            ViewModel.Id = value;
+        }
+    }
+
+    /// <inheritdoc />
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.LoadItem().ConfigureAwait(false);
+    }
+
+    private int m_partId;
+}

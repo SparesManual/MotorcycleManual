@@ -19,6 +19,8 @@ namespace MRI.Application
       services.AddScoped<HttpClient>();
       services.AddScoped<IBooksViewModel, BooksViewModel>();
       services.AddScoped<IAllPartsViewModel, PartsAllViewModel>();
+      services.AddScoped<IPartViewModel, PartViewModel>();
+      services.AddScoped<IPartPropertiesViewModel, PartPropertiesViewModel>();
       services.AddServerSideBlazor();
     }
 

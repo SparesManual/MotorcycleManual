@@ -94,7 +94,7 @@ namespace MRI.Db
     }
 
     private static (int total, int size, int index) RetrievePaging(Metadata metadata)
-      => (int.Parse(metadata.GetValue("totalsize")), int.Parse(metadata.GetValue("pagesize")), int.Parse(metadata.GetValue("pageindex")));
+      => (int.Parse(metadata.GetValue(@"totalsize")), int.Parse(metadata.GetValue(@"pagesize")), int.Parse(metadata.GetValue("pageindex")));
 
     private static IBook ToBook(BookReply reply)
       => new BookModel

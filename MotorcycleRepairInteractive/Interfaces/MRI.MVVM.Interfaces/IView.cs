@@ -1,4 +1,6 @@
-﻿namespace MRI.MVVM.Interfaces
+﻿using MRI.MVVM.Interfaces.ViewModels;
+
+namespace MRI.MVVM.Interfaces
 {
   /// <summary>
   /// Interface for classes that will represent the view
