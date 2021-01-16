@@ -348,8 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-MotorcycleRepairInteractive/.idea/*
 *.db
-MotorcycleRepairInteractive/.vscode/launch.json
-MotorcycleRepairInteractive/.vscode/settings.json
-MotorcycleRepairInteractive/.vscode/tasks.json
+MotorcycleRepairInteractive/.idea/*
+MotorcycleRepairInteractive/.vscode/*
