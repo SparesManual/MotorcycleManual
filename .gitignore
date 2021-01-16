@@ -350,3 +350,6 @@ MigrationBackup/
 .ionide/
 MotorcycleRepairInteractive/.idea/*
 *.db
+MotorcycleRepairInteractive/.vscode/launch.json
+MotorcycleRepairInteractive/.vscode/settings.json
+MotorcycleRepairInteractive/.vscode/tasks.json
