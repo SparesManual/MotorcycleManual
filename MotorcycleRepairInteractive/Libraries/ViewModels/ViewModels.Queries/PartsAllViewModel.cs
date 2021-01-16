@@ -14,17 +14,8 @@ namespace ViewModels.Queries
   public class PartsAllViewModel
     : BasePagedViewModel<IPart>, IAllPartsViewModel
   {
-    private readonly IAPIProvider m_provider;
-
     /// <inheritdoc />
     public ObservableCollection<string> Autocomplete { get; set; } = new ObservableCollection<string>();
-
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    /// <param name="provider">Injected API provider</param>
-    public PartsAllViewModel(IAPIProvider provider)
-      => m_provider = provider;
 
     /// <inheritdoc />
     public async Task UpdateAutocomplete(string? search)
@@ -39,5 +30,11 @@ namespace ViewModels.Queries
     /// <inheritdoc />
     protected override async Task<IPaging<IPart>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
       => await m_provider.GetPartsAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public PartsAllViewModel(IAPIProvider provider)
+      : base(provider)
+    {
+    }
   }
 }

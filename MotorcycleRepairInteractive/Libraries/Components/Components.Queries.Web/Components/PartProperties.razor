@@ -1,11 +1,11 @@
-@namespace Test
+@namespace Comp
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IPartPropertiesViewModel>
 
 <RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="LoadTableData" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IProperty">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IProperty" Property="PropertyName" Title="Name">
       <FooterTemplate>
-        Displayed parts: <b>@ViewModel.Items.Count</b> of <b>@ViewModel.TotalItems</b>
+        Displayed properties: <b>@ViewModel.Items.Count</b> of <b>@ViewModel.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IProperty" Title="Value">

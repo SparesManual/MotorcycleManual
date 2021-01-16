@@ -14,13 +14,7 @@ namespace Db.Core.Specifications
     /// Default constructor
     /// </summary>
     /// <param name="id">Book id</param>
-    /// <param name="search">Full-text search query</param>
-    /// <param name="size">Page size</param>
-    /// <param name="index">Page index</param>
-    public BookModelsSpec(int id, string? search, int size, int index)
-      : base(model => string.IsNullOrEmpty(search)
-                      || model.Name.Contains(search)
-                      || search.Contains(model.Year.ToString()))
+    public BookModelsSpec(int id)
     {
       SetExtractor(books => books
         .Where(book => book.Id.Equals(id))
@@ -28,7 +22,6 @@ namespace Db.Core.Specifications
         .SelectMany(book => book.BookModels));
 
       SetOrderBy(model => model.Year);
-      ApplyPaging(size, index);
     }
   }
 }

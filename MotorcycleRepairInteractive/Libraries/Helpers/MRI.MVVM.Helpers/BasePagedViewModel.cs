@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
-using MRI.MVVM.Interfaces;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace MRI.MVVM.Helpers
@@ -16,6 +15,7 @@ namespace MRI.MVVM.Helpers
   {
     #region Fields
 
+    protected readonly IAPIProvider m_provider;
     private int m_pageIndex = 1;
     private int m_pageSize = 10;
     private int m_pageItems;
@@ -111,6 +111,9 @@ namespace MRI.MVVM.Helpers
     public ObservableCollection<T> Items { get; } = new();
 
     #endregion
+
+    protected BasePagedViewModel(IAPIProvider provider)
+      => m_provider = provider;
 
     /// <summary>
     /// Queries the items

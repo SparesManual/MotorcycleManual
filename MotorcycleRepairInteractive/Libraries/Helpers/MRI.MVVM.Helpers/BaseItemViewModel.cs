@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Db.Interfaces;
 using Models.Interfaces.Entities;
 using MRI.MVVM.Interfaces.ViewModels;
 
@@ -7,9 +8,15 @@ namespace MRI.MVVM.Helpers
 {
   public abstract class BaseItemViewModel<T>
     : BasePropertyChanged, IItemViewModel<T>
-    where T : IReply
   {
+    #region Fields
+
+    protected readonly IAPIProvider m_provider;
     private bool m_loading;
+
+    #endregion
+
+    #region Properties
 
     /// <inheritdoc />
     public bool Loading
@@ -28,16 +35,23 @@ namespace MRI.MVVM.Helpers
     /// <inheritdoc />
     public T? Item { get; protected set; }
 
-    protected abstract Task GetItem(int id, CancellationToken cancellationToken = default);
+    #endregion
+
+    protected BaseItemViewModel(IAPIProvider provider)
+      => m_provider = provider;
+
+    protected abstract Task<T> GetItem(int id, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
     public async Task LoadItem()
     {
       Loading = true;
 
-      await GetItem(Id).ConfigureAwait(true);
+      Item = await GetItem(Id).ConfigureAwait(true);
 
       Loading = false;
+
+      OnPropertyChanged(nameof(Item));
     }
   }
 }

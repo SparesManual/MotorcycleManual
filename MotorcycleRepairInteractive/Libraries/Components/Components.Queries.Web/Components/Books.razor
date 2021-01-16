@@ -1,6 +1,7 @@
 ﻿@* ReSharper disable UnknownCssClass *@
 @page "/books"
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBooksViewModel>
+@inject NavigationManager NavigationManager
 
 <h1>Books</h1>
 
@@ -13,7 +14,7 @@
         </div>
       </div>
       <div class="row mt-2">
-        <RadzenButton Icon="assignment">Open</RadzenButton>
+        <RadzenButton Icon="assignment" Click="() => NavigateToBook(book.Id)">Open</RadzenButton>
       </div>
     </RadzenCard>
   </Template>
@@ -21,6 +22,11 @@
 
 @code
 {
+  private void NavigateToBook(int id)
+  {
+    NavigationManager.NavigateTo("book/" + id);
+  }
+
   private async void LoadTableData(LoadDataArgs obj)
   {
     ViewModel.Search = obj.Filter;

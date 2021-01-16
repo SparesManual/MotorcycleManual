@@ -1,0 +1,29 @@
+@page "/book/{bookId:int}"
+@using Comp
+@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBookViewModel>
+
+<h2>@ViewModel.Item?.Title</h2>
+
+<BookModels BookId="BookId"/>
+
+<BookSections BookId="BookId"/>
+
+@code {
+
+  private int m_bookId;
+
+  [Parameter]
+  public int BookId
+  {
+    get => m_bookId;
+    set
+    {
+      m_bookId = value;
+      ViewModel.Id = value;
+    }
+  }
+
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+    => await ViewModel.LoadItem().ConfigureAwait(false);
+}

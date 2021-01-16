@@ -10,7 +10,6 @@ namespace MRI.MVVM.Interfaces.ViewModels
   /// <typeparam name="T">Paged item type</typeparam>
   public interface IPagedViewModel<T>
     : IViewModel
-    where T : IReply
   {
     #region Properties
 

@@ -74,10 +74,17 @@ namespace MRI.Db
         Size = size
       };
 
+    private async IAsyncEnumerable<TReplyModel> GetItemsAsync<TReply, TReplyModel>(Func<Provider.ProviderClient, AsyncServerStreamingCall<TReply>> extractor, Func<TReply, TReplyModel> converter, [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+      var result = extractor(m_client);
+
+      await foreach (var item in result.ResponseStream.ReadAllAsync(cancellationToken).WithCancellation(cancellationToken).ConfigureAwait(false))
+        yield return converter(item);
+    }
+
     private async Task<IPaging<TReplyModel>> GetPagingAsync<TReply, TReplyModel>(Func<Provider.ProviderClient, AsyncServerStreamingCall<TReply>> extractor, Func<TReply, TReplyModel> converter)
       where TReplyModel : IReply
     {
-
       var result = extractor(m_client);
       var headers = await result.ResponseHeadersAsync.ConfigureAwait(false);
       var (total, pageSize, pageIndex) = RetrievePaging(headers);
@@ -202,8 +209,8 @@ namespace MRI.Db
       => await GetPagingAsync(client => client.GetBooks(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToBook).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IModel>> GetBookModelsAsync(int bookId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetBookModels(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToModel).ConfigureAwait(false);
+    public IAsyncEnumerable<IModel> GetBookModelsAsync(int bookId, CancellationToken cancellationToken = default)
+      => GetItemsAsync(client => client.GetBookModels(ToIdRequest(bookId), cancellationToken: cancellationToken), ToModel, cancellationToken);
 
     /// <inheritdoc />
     public async Task<IMake> GetMakeAsync(int id, CancellationToken cancellationToken = default)
@@ -236,6 +243,10 @@ namespace MRI.Db
     /// <inheritdoc />
     public async Task<IPart> GetPartAsync(int id, CancellationToken cancellationToken = default)
       => ToPart(await m_client.GetPartAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
+
+    /// <inheritdoc />
+    public async Task<IPaging<ISection>> GetSectionsFromBookAsync(int bookId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetSectionsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToSection).ConfigureAwait(false);
 
     /// <inheritdoc />
     public async Task<IPaging<IPart>> GetPartsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)

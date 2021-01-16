@@ -20,7 +20,7 @@ service Provider {
   // Gets models using full-text search with paging settings
   rpc GetAllModels(SearchAndPageParams) returns (stream ModelReply);
   // Gets models covered by the given book
-  rpc GetBookModels(IdSearchAndPageParams) returns (stream ModelReply);
+  rpc GetBookModels(IdRequest) returns (stream ModelReply);
   // Gets models specific to a given section
   rpc GetSectionSpecificModels(IdSearchAndPageParams) returns (stream ModelReply);
 
@@ -45,7 +45,8 @@ service Provider {
   rpc GetSection(IdRequest) returns (SectionReply);
   // Gets sections using full-text search with paging settings
   rpc GetAllSections(SearchAndPageParams) returns (stream SectionReply);
-  
+  // Gets sections using full-text search with paging settings from a book of a given id
+  rpc GetSectionsFromBook(IdSearchAndPageParams) returns (stream SectionReply);
   // Gets section part children based on the parent section id
   rpc GetSectionPartChildren (IdAndPageParams) returns (stream SectionPartReply);
 

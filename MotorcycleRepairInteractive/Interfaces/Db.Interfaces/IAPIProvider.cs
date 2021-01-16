@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Models.Interfaces.Entities;
@@ -33,12 +34,9 @@ namespace Db.Interfaces
     /// Get models covered by the given book
     /// </summary>
     /// <param name="bookId">Parent book id</param>
-    /// <param name="size">Page size</param>
-    /// <param name="index">Page index</param>
-    /// <param name="search">Fuzzy model search</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of models</returns>
-    Task<IPaging<IModel>> GetBookModelsAsync(int bookId, int size, int index, string? search = default, CancellationToken cancellationToken = default);
+    IAsyncEnumerable<IModel> GetBookModelsAsync(int bookId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get a make based on the given <paramref name="id"/>
@@ -151,6 +149,17 @@ namespace Db.Interfaces
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of sections</returns>
     Task<IPaging<ISection>> GetSectionsAsync(int size, int index, string? search = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets all parts belonging to a book with the given <paramref name="bookId"/>
+    /// </summary>
+    /// <param name="bookId">Id of the parent book</param>
+    /// <param name="size">Page size</param>
+    /// <param name="index">Page index</param>
+    /// <param name="search">Section fuzzy search</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>Paging batch of sections</returns>
+    Task<IPaging<ISection>> GetSectionsFromBookAsync(int bookId, int size, int index, string? search = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get all parts

@@ -245,6 +245,27 @@ namespace Db.API
         { "TotalSize", total.ToString() }
       };
 
+    private static async Task ProcessItemsStream<TParent, TChild, TReply>(
+      IGenericRepository<TParent> repository,
+      ISpecificationEx<TParent, TChild> specification,
+      IAsyncStreamWriter<TReply> responseStream,
+      Func<IGenericRepository<TParent>, ISpecificationEx<TParent, TChild>, IAsyncStreamWriter<TReply>, Convert<TChild?, TReply>, CancellationToken, Task> processor,
+      Convert<TChild?, TReply> converter,
+      ServerCallContext context)
+      where TParent : class, IEntity
+      where TChild : class, IEntity
+      => await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
+
+    private static async Task ProcessItemsStream<TChild, TReply>(
+      IGenericRepository<TChild> repository,
+      ISpecificationEx<TChild, TChild> specification,
+      IAsyncStreamWriter<TReply> responseStream,
+      Func<IGenericRepository<TChild>, ISpecificationEx<TChild, TChild>, IAsyncStreamWriter<TReply>, Convert<TChild?, TReply>, CancellationToken, Task> processor,
+      Convert<TChild?, TReply> converter,
+      ServerCallContext context)
+      where TChild : class, IEntity
+      => await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
+
     private static async Task ProcessPagedStream<TParent, TChild, TReply>(
       int size,
       int index,
@@ -341,10 +362,10 @@ namespace Db.API
       => await GetById(request.Id, m_modelRepository, ToModelReply).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public override async Task GetBookModels(IdSearchAndPageParams request, IServerStreamWriter<ModelReply> responseStream, ServerCallContext context)
+    public override async Task GetBookModels(IdRequest request, IServerStreamWriter<ModelReply> responseStream, ServerCallContext context)
     {
-      var specification = new BookModelsSpec(request.Id, request.Search, request.Size, request.Index);
-      await ProcessPagedStream(request.Size, request.Index, m_bookRepository, specification, responseStream, GetAllExAsync, ToModelReply, context).ConfigureAwait(false);
+      var specification = new BookModelsSpec(request.Id);
+      await ProcessItemsStream(m_bookRepository, specification, responseStream, GetAllExAsync, ToModelReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
@@ -352,6 +373,13 @@ namespace Db.API
     {
       var specification = new PartsSpec(pageParams.Search, pageParams.Size, pageParams.Index);
       await ProcessPagedStream(pageParams.Size, pageParams.Index, m_partRepository, specification, responseStream, GetAllAsync, ToPartReply, context).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetSectionsFromBook(IdSearchAndPageParams request, IServerStreamWriter<SectionReply> responseStream, ServerCallContext context)
+    {
+      var specification = new SectionSpec(request.Id, request.Search, request.Size, request.Index);
+      await ProcessPagedStream(request.Size, request.Index, m_sectionRepository, specification, responseStream, GetAllAsync, ToSectionReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />

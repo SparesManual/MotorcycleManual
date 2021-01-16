@@ -13,17 +13,14 @@ namespace ViewModels.Queries
   public class BooksViewModel
     : BasePagedViewModel<IBook>, IBooksViewModel
   {
-    private readonly IAPIProvider m_provider;
-
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    /// <param name="provider">Injected API provider</param>
-    public BooksViewModel(IAPIProvider provider)
-      => m_provider = provider;
-
     /// <inheritdoc />
     protected override async Task<IPaging<IBook>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
       => await m_provider.GetBooksAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(true);
+
+    /// <inheritdoc />
+    public BooksViewModel(IAPIProvider provider)
+      : base(provider)
+    {
+    }
   }
 }

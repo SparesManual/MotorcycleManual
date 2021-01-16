@@ -10,15 +10,12 @@ namespace ViewModels.Queries
   public class PartViewModel
     : BaseItemViewModel<IPart>, IPartViewModel
   {
-    private readonly IAPIProvider m_provider;
-
-    public PartViewModel(IAPIProvider provider)
-      => m_provider = provider;
+    /// <inheritdoc />
+    protected override async Task<IPart> GetItem(int id, CancellationToken cancellationToken = default)
+      => await m_provider.GetPartAsync(id, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    protected override async Task GetItem(int id, CancellationToken cancellationToken = default)
-    {
-      Item = await m_provider.GetPartAsync(id, cancellationToken).ConfigureAwait(false);
-    }
+    public PartViewModel(IAPIProvider provider)
+      : base(provider) { }
   }
 }

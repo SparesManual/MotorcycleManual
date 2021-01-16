@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Models.Interfaces.Entities;
 
 namespace MRI.MVVM.Interfaces.ViewModels
 {
@@ -9,7 +8,6 @@ namespace MRI.MVVM.Interfaces.ViewModels
   /// <typeparam name="T">Item type</typeparam>
   public interface IItemViewModel<out T>
     : IViewModel
-    where T : IReply
   {
     /// <summary>
     /// Indicates whether the current item is being loaded
