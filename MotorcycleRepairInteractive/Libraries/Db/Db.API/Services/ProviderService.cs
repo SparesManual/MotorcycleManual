@@ -190,6 +190,7 @@ namespace Db.API
       // If no item was found..
       if (item is null)
         // log a warning
+        // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
         m_logger.LogWarning($"Request for unknown '{typeof(T).Name}' with id '{id}'");
 
       // Return the item converted to its equivalent proto-reply
@@ -234,6 +235,7 @@ namespace Db.API
       // If the operation was cancelled..
       if (ct.IsCancellationRequested)
         // log a warning
+        // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
         m_logger.LogWarning($"Request for all entries of '{typeof(T).Name}' has been cancelled");
     }
 
