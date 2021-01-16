@@ -7,6 +7,9 @@ using ViewModels.Interfaces.Queries;
 
 namespace ViewModels.Queries
 {
+  /// <summary>
+  /// View model for displaying <see cref="IPart"/> information
+  /// </summary>
   public class PartViewModel
     : BaseItemViewModel<IPart>, IPartViewModel
   {

@@ -7,13 +7,23 @@ using MRI.MVVM.Interfaces.ViewModels;
 
 namespace MRI.MVVM.Helpers
 {
+  /// <summary>
+  /// Base view model for displaying items
+  /// </summary>
+  /// <typeparam name="T">Item type</typeparam>
   public abstract class BaseItemsViewModel<T>
     : BasePropertyChanged, IViewModel
   {
+    /// <summary>
+    /// API provider instance
+    /// </summary>
     protected readonly IAPIProvider m_provider;
 
     #region Properties
 
+    /// <summary>
+    /// Are items loaded
+    /// </summary>
     public bool Loading { get; set; }
 
     /// <summary>
@@ -23,6 +33,10 @@ namespace MRI.MVVM.Helpers
 
     #endregion
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider</param>
     protected BaseItemsViewModel(IAPIProvider provider)
       => m_provider = provider;
 

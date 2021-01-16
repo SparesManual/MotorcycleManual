@@ -15,6 +15,9 @@ namespace MRI.MVVM.Helpers
   {
     #region Fields
 
+    /// <summary>
+    /// API provider instance
+    /// </summary>
     protected readonly IAPIProvider m_provider;
     private int m_pageIndex = 1;
     private int m_pageSize = 10;
@@ -112,6 +115,10 @@ namespace MRI.MVVM.Helpers
 
     #endregion
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider</param>
     protected BasePagedViewModel(IAPIProvider provider)
       => m_provider = provider;
 

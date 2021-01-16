@@ -7,6 +7,9 @@ using ViewModels.Interfaces.Queries;
 
 namespace ViewModels.Queries
 {
+  /// <summary>
+  /// View model for paging all book sections
+  /// </summary>
   public class BookSectionsViewModel
     : BasePagedViewModel<ISection>, IBookSectionsViewModel
   {

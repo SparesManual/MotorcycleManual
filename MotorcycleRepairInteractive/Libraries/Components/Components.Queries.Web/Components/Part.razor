@@ -1,5 +1,4 @@
 @page "/part/{partid:int}"
-@using Comp
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IPartViewModel>
 
 <h2>
@@ -12,6 +11,9 @@
 
   private int m_partId;
 
+  /// <summary>
+  /// Parent part id
+  /// </summary>
   [Parameter]
   public int PartId
   {

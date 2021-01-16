@@ -1,5 +1,4 @@
 @page "/book/{bookId:int}"
-@using Comp
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBookViewModel>
 
 <h2>@ViewModel.Item?.Title</h2>
@@ -12,6 +11,9 @@
 
   private int m_bookId;
 
+  /// <summary>
+  /// Id of the book entity to display
+  /// </summary>
   [Parameter]
   public int BookId
   {

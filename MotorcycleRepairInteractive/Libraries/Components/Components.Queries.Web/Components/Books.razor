@@ -1,7 +1,6 @@
-﻿@* ReSharper disable UnknownCssClass *@
-@page "/books"
+﻿@page "/books"
 @inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBooksViewModel>
-@inject NavigationManager NavigationManager
+@inject NavigationManager m_navigationManager
 
 <h1>Books</h1>
 
@@ -23,9 +22,7 @@
 @code
 {
   private void NavigateToBook(int id)
-  {
-    NavigationManager.NavigateTo("book/" + id);
-  }
+    => m_navigationManager.NavigateTo("book/" + id);
 
   private async void LoadTableData(LoadDataArgs obj)
   {
@@ -38,5 +35,5 @@
 
   /// <inheritdoc />
   protected override async Task OnInitializedAsync()
-      => await ViewModel.LoadItems().ConfigureAwait(false);
+    => await ViewModel.LoadItems().ConfigureAwait(false);
 }

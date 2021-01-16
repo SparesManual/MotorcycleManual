@@ -1,16 +1,22 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
-using Models.Interfaces.Entities;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace MRI.MVVM.Helpers
 {
+  /// <summary>
+  /// Base view model for displaying an item
+  /// </summary>
+  /// <typeparam name="T">Item type</typeparam>
   public abstract class BaseItemViewModel<T>
     : BasePropertyChanged, IItemViewModel<T>
   {
     #region Fields
 
+    /// <summary>
+    /// API provider instance
+    /// </summary>
     protected readonly IAPIProvider m_provider;
     private bool m_loading;
 
@@ -37,9 +43,19 @@ namespace MRI.MVVM.Helpers
 
     #endregion
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider</param>
     protected BaseItemViewModel(IAPIProvider provider)
       => m_provider = provider;
 
+    /// <summary>
+    /// Queries the item
+    /// </summary>
+    /// <param name="id">Item id</param>
+    /// <param name="cancellationToken">Process cancellation</param>
+    /// <returns>Queried item</returns>
     protected abstract Task<T> GetItem(int id, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />

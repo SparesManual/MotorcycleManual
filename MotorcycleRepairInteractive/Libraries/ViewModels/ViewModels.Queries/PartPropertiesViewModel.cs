@@ -7,6 +7,9 @@ using ViewModels.Interfaces.Queries;
 
 namespace ViewModels.Queries
 {
+  /// <summary>
+  /// View model for paging all part properties
+  /// </summary>
   public class PartPropertiesViewModel
     : BasePagedViewModel<IProperty>, IPartPropertiesViewModel
   {

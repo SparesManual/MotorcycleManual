@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Models.Interfaces.Entities;
 
 namespace MRI.MVVM.Interfaces.ViewModels
 {

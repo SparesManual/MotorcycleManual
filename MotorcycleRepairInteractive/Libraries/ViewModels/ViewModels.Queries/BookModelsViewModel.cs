@@ -9,11 +9,14 @@ using ViewModels.Interfaces.Queries;
 
 namespace ViewModels.Queries
 {
+  /// <summary>
+  /// View model for displaying book models
+  /// </summary>
   public class BookModelsViewModel
     : BaseItemViewModel<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>>, IBookModelsViewModel
   {
     /// <inheritdoc />
-    public int BookId { get; }
+    public int BookId { get; set; }
 
     /// <inheritdoc />
     public BookModelsViewModel(IAPIProvider provider)

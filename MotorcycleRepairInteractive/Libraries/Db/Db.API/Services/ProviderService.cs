@@ -256,15 +256,16 @@ namespace Db.API
       where TChild : class, IEntity
       => await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
 
-    private static async Task ProcessItemsStream<TChild, TReply>(
-      IGenericRepository<TChild> repository,
-      ISpecificationEx<TChild, TChild> specification,
-      IAsyncStreamWriter<TReply> responseStream,
-      Func<IGenericRepository<TChild>, ISpecificationEx<TChild, TChild>, IAsyncStreamWriter<TReply>, Convert<TChild?, TReply>, CancellationToken, Task> processor,
-      Convert<TChild?, TReply> converter,
-      ServerCallContext context)
-      where TChild : class, IEntity
-      => await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
+    // Uncomment if required
+    // private static async Task ProcessItemsStream<TChild, TReply>(
+    //   IGenericRepository<TChild> repository,
+    //   ISpecificationEx<TChild, TChild> specification,
+    //   IAsyncStreamWriter<TReply> responseStream,
+    //   Func<IGenericRepository<TChild>, ISpecificationEx<TChild, TChild>, IAsyncStreamWriter<TReply>, Convert<TChild?, TReply>, CancellationToken, Task> processor,
+    //   Convert<TChild?, TReply> converter,
+    //   ServerCallContext context)
+    //   where TChild : class, IEntity
+    //   => await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
 
     private static async Task ProcessPagedStream<TParent, TChild, TReply>(
       int size,
