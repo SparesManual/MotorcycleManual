@@ -1,8 +1,8 @@
 @* ReSharper disable once CheckNamespace *@
 @namespace Comp
-@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBookSectionsViewModel>
+@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IBookSectionsViewModel, Models.Interfaces.Entities.ISection>
 
-<RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="LoadTableData" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.ISection">
+<RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.ISection">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Property="Header" Title="Header">
       <FooterTemplate>
@@ -48,18 +48,5 @@
       m_bookId = value;
       ViewModel.BookId = value;
     }
-  }
-
-  /// <inheritdoc />
-  protected override async Task OnInitializedAsync()
-    => await ViewModel.LoadItems().ConfigureAwait(true);
-
-  private async void LoadTableData(LoadDataArgs obj)
-  {
-    ViewModel.Search = obj.Filter;
-
-    ViewModel.PageIndex = obj.Skip!.Value / ViewModel.PageSize + 1;
-
-    await ViewModel.LoadItems().ConfigureAwait(false);
   }
 }

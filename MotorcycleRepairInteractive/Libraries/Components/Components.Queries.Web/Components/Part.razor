@@ -1,32 +1,8 @@
-@page "/part/{partid:int}"
-@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IPartViewModel>
+@page "/part/{itemid:int}"
+@inherits MRI.MVVM.Web.Helpers.BaseItemComponent<ViewModels.Interfaces.Queries.IPartViewModel, Models.Interfaces.Entities.IPart>
 
 <h2>
   @ViewModel.Item?.Description
 </h2>
 
-<PartProperties PartId="@PartId"/>
-
-@code {
-
-  private int m_partId;
-
-  /// <summary>
-  /// Parent part id
-  /// </summary>
-  [Parameter]
-  public int PartId
-  {
-    get => m_partId;
-    set
-    {
-      m_partId = value;
-      ViewModel.Id = value;
-    }
-  }
-
-  /// <inheritdoc />
-  protected override async Task OnInitializedAsync()
-    => await ViewModel.LoadItem().ConfigureAwait(false);
-
-}
+<PartProperties PartId="ItemId"/>

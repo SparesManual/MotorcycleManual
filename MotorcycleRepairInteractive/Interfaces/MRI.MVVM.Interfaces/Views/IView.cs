@@ -1,6 +1,6 @@
 ﻿using MRI.MVVM.Interfaces.ViewModels;
 
-namespace MRI.MVVM.Interfaces
+namespace MRI.MVVM.Interfaces.Views
 {
   /// <summary>
   /// Interface for classes that will represent the view

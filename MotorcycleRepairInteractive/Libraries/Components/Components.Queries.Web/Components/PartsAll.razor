@@ -1,5 +1,5 @@
 ﻿@page "/partsall"
-@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IAllPartsViewModel>
+@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IAllPartsViewModel, Models.Interfaces.Entities.IPart>
 
 <h1>PartsAll</h1>
 
@@ -7,7 +7,7 @@
   <RadzenAutoComplete Data="ViewModel.Autocomplete" LoadData="LoadAutocompleteData" Placeholder="Search..."/>
 </div>
 
-<RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="LoadTableData" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IPart">
+<RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IPart">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="PartNumber" Title="Part number">
       <Template Context="data">
@@ -24,19 +24,6 @@
 
 @code
 {
-  /// <inheritdoc />
-  protected override async Task OnInitializedAsync()
-    => await ViewModel.LoadItems().ConfigureAwait(true);
-
   private async void LoadAutocompleteData(LoadDataArgs obj)
     => await ViewModel.UpdateAutocomplete(obj.Filter).ConfigureAwait(false);
-
-  private async void LoadTableData(LoadDataArgs obj)
-  {
-    ViewModel.Search = obj.Filter;
-
-    ViewModel.PageIndex = obj.Skip!.Value / ViewModel.PageSize + 1;
-
-    await ViewModel.LoadItems().ConfigureAwait(false);
-  }
 }

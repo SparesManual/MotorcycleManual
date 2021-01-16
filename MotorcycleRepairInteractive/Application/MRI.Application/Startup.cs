@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MRI.Db;
+using MRI.MVVM.Interfaces.Views.Managers;
+using MRI.MVVM.Web.Helpers.Managers;
 using ViewModels.Interfaces.Queries;
 using ViewModels.Queries;
 
@@ -24,6 +26,8 @@ namespace MRI.Application
       services.AddScoped<IBookSectionsViewModel, BookSectionsViewModel>();
       services.AddScoped<IBookViewModel, BookViewModel>();
       services.AddScoped<IBookModelsViewModel, BookModelsViewModel>();
+
+      services.AddScoped<IPagingManager, RadzenPagingManager>();
       services.AddServerSideBlazor();
     }
 

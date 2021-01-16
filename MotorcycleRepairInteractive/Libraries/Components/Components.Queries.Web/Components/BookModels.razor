@@ -1,6 +1,6 @@
 @* ReSharper disable once CheckNamespace *@
 @namespace Comp
-@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBookModelsViewModel>
+@inherits MRI.MVVM.Web.Helpers.BaseItemComponent<ViewModels.Interfaces.Queries.IBookModelsViewModel, IReadOnlyDictionary<string, IReadOnlyCollection<Models.Interfaces.Entities.IModel>>>
 
 <ul>
   @if (ViewModel.Item is not null)
@@ -24,26 +24,3 @@
     }
   }
 </ul>
-
-@code {
-  private int m_bookId;
-
-  /// <summary>
-  /// Parent book id
-  /// </summary>
-  [Parameter]
-  public int BookId
-  {
-    get => m_bookId;
-    set
-    {
-      m_bookId = value;
-      ViewModel.Id = value;
-    }
-  }
-
-  /// <inheritdoc />
-  protected override async Task OnInitializedAsync()
-    => await ViewModel.LoadItem().ConfigureAwait(true);
-
-}

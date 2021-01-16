@@ -1,10 +1,10 @@
 ﻿@page "/books"
-@inherits MRI.MVVM.Web.Helpers.BaseComponent<ViewModels.Interfaces.Queries.IBooksViewModel>
+@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IBooksViewModel, Models.Interfaces.Entities.IBook>
 @inject NavigationManager m_navigationManager
 
 <h1>Books</h1>
 
-<RadzenDataList WrapItems="true" LoadData="@LoadTableData" AllowPaging="true" Count="@ViewModel.TotalItems" PageSize="@ViewModel.PageSize" Data="@ViewModel.Items" TItem="Models.Interfaces.Entities.IBook">
+<RadzenDataList WrapItems="true" LoadData="x => LoadData(x.Filter, x)" AllowPaging="true" Count="@ViewModel.TotalItems" PageSize="@ViewModel.PageSize" Data="@ViewModel.Items" TItem="Models.Interfaces.Entities.IBook">
   <Template Context="book">
     <RadzenCard Style="width:300px; padding-left: 25px; padding-top: 10px">
       <div class="row mb-auto">
@@ -23,17 +23,4 @@
 {
   private void NavigateToBook(int id)
     => m_navigationManager.NavigateTo("book/" + id);
-
-  private async void LoadTableData(LoadDataArgs obj)
-  {
-    ViewModel.Search = obj.Filter;
-
-    ViewModel.PageIndex = obj.Skip!.Value / ViewModel.PageSize + 1;
-
-    await ViewModel.LoadItems().ConfigureAwait(false);
-  }
-
-  /// <inheritdoc />
-  protected override async Task OnInitializedAsync()
-    => await ViewModel.LoadItems().ConfigureAwait(false);
 }

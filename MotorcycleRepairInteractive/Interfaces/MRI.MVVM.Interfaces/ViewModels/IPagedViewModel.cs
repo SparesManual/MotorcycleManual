@@ -1,14 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-
-namespace MRI.MVVM.Interfaces.ViewModels
+﻿namespace MRI.MVVM.Interfaces.ViewModels
 {
   /// <summary>
   /// Interface for view models with paging support
   /// </summary>
   /// <typeparam name="T">Paged item type</typeparam>
   public interface IPagedViewModel<T>
-    : IViewModel
+    : IItemsViewModel<T>
   {
     #region Properties
 
@@ -33,25 +30,10 @@ namespace MRI.MVVM.Interfaces.ViewModels
     int TotalItems { get; set; }
 
     /// <summary>
-    /// Is paging loading
-    /// </summary>
-    bool Loading { get; set; }
-
-    /// <summary>
     /// Search filter
     /// </summary>
     string Search { get; set; }
 
-    /// <summary>
-    /// Paged items to display
-    /// </summary>
-    ObservableCollection<T> Items { get; }
-
     #endregion
-
-    /// <summary>
-    /// Loads items
-    /// </summary>
-    Task LoadItems();
   }
 }

@@ -1,10 +1,10 @@
-﻿using MRI.MVVM.Interfaces;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
 using MRI.MVVM.Interfaces.ViewModels;
+using MRI.MVVM.Interfaces.Views;
 
 namespace MRI.MVVM.Web.Helpers
 {

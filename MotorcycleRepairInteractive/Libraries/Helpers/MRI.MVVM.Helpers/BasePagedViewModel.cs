@@ -11,7 +11,7 @@ namespace MRI.MVVM.Helpers
   /// </summary>
   /// <typeparam name="T">Paged item type</typeparam>
   public abstract class BasePagedViewModel<T>
-    : BasePropertyChanged, IViewModel
+    : BasePropertyChanged, IPagedViewModel<T>
   {
     #region Fields
 

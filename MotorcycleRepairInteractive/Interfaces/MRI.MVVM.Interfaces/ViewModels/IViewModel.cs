@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using MRI.MVVM.Interfaces.Views;
 
 namespace MRI.MVVM.Interfaces.ViewModels
 {
