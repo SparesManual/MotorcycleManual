@@ -21,7 +21,7 @@ namespace MRI.MVVM.Web.Helpers
 
     /// <inheritdoc />
     [Inject]
-    public TViewModel ViewModel { get; set; } = null!;
+    public TViewModel? ViewModel { get; set; } = null;
 
     /// <inheritdoc />
     protected override void OnInitialized()

@@ -10,7 +10,7 @@ namespace MRI.MVVM.Web.Helpers
   /// </summary>
   /// <typeparam name="TViewModel">View model for the view</typeparam>
   /// <typeparam name="TItem">Paged items type</typeparam>
-  public class BasePagedComponent<TViewModel, TItem>
+  public abstract class BasePagedComponent<TViewModel, TItem>
     : BaseComponent<TViewModel>
     where TViewModel : class, IPagedViewModel<TItem>
   {
@@ -19,7 +19,9 @@ namespace MRI.MVVM.Web.Helpers
 
     /// <inheritdoc />
     protected override async Task OnInitializedAsync()
-      => await ViewModel.LoadItems().ConfigureAwait(true);
+    {
+      if (ViewModel != null) await ViewModel.LoadItems().ConfigureAwait(true);
+    }
 
     /// <summary>
     /// Load paged data
@@ -28,11 +30,29 @@ namespace MRI.MVVM.Web.Helpers
     /// <param name="paging">Paging data</param>
     protected async void LoadData(string filter, object paging)
     {
-      ViewModel.Search = filter;
+      if (ViewModel is null)
+        return;
 
-      ViewModel.PageIndex = PagingManager.GetPageIndex(ViewModel, paging);
+      var newPage = PagingManager.GetPageIndex(ViewModel, paging);
+      if (ViewModel.Search.Equals(filter)
+          && ViewModel.PageIndex == newPage)
+        return;
+
+      ViewModel.Search = filter;
+      ViewModel.PageIndex = newPage;
 
       await ViewModel.LoadItems().ConfigureAwait(false);
     }
+
+    /// <inheritdoc />
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+      if (ViewModel?.PageIndex > 1)
+        GoToPage(ViewModel.PageIndex - 1);
+
+      return base.OnAfterRenderAsync(firstRender);
+    }
+
+    protected abstract void GoToPage(int page);
   }
 }

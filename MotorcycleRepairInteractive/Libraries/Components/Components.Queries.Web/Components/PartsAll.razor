@@ -1,4 +1,5 @@
 ﻿@page "/partsall"
+@using Models.Interfaces.Entities
 @inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IAllPartsViewModel, Models.Interfaces.Entities.IPart>
 
 <h1>PartsAll</h1>
@@ -7,7 +8,7 @@
   <RadzenAutoComplete Data="ViewModel.Autocomplete" LoadData="LoadAutocompleteData" Placeholder="Search..."/>
 </div>
 
-<RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IPart">
+<RadzenGrid @ref="m_grid" Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IPart">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="PartNumber" Title="Part number">
       <Template Context="data">
@@ -22,8 +23,15 @@
   </Columns>
 </RadzenGrid>
 
-@code
-{
+@code {
+
+  private RadzenGrid<IPart> m_grid;
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+    => m_grid?.GoToPage(page);
+
   private async void LoadAutocompleteData(LoadDataArgs obj)
     => await ViewModel.UpdateAutocomplete(obj.Filter).ConfigureAwait(false);
+
 }

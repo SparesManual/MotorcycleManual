@@ -1,8 +1,9 @@
 @* ReSharper disable once CheckNamespace *@
 @namespace Comp
+@using Models.Interfaces.Entities
 @inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IPartPropertiesViewModel, Models.Interfaces.Entities.IProperty>
 
-<RadzenGrid Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IProperty">
+<RadzenGrid @ref="m_grid" Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IProperty">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IProperty" Property="PropertyName" Title="Name">
       <FooterTemplate>
@@ -23,6 +24,7 @@
 
 @code {
 
+  private RadzenGrid<IProperty> m_grid;
   private int m_partId;
 
   /// <summary>
@@ -38,4 +40,9 @@
       ViewModel.PartId = value;
     }
   }
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+    => m_grid?.GoToPage(page);
+
 }

@@ -1,10 +1,11 @@
 ﻿@page "/books"
+@using Models.Interfaces.Entities
 @inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IBooksViewModel, Models.Interfaces.Entities.IBook>
 @inject NavigationManager m_navigationManager
 
 <h1>Books</h1>
 
-<RadzenDataList WrapItems="true" LoadData="x => LoadData(x.Filter, x)" AllowPaging="true" Count="@ViewModel.TotalItems" PageSize="@ViewModel.PageSize" Data="@ViewModel.Items" TItem="Models.Interfaces.Entities.IBook">
+<RadzenDataList @ref="m_list" WrapItems="true" LoadData="x => LoadData(x.Filter, x)" AllowPaging="true" Count="@ViewModel.TotalItems" PageSize="@ViewModel.PageSize" Data="@ViewModel.Items" TItem="Models.Interfaces.Entities.IBook">
   <Template Context="book">
     <RadzenCard Style="width:300px; padding-left: 25px; padding-top: 10px">
       <div class="row mb-auto">
@@ -19,8 +20,15 @@
   </Template>
 </RadzenDataList>
 
-@code
-{
+@code {
+
+  private RadzenDataList<IBook> m_list;
+
   private void NavigateToBook(int id)
     => m_navigationManager.NavigateTo("book/" + id);
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+    => m_list?.GoToPage(page);
+
 }

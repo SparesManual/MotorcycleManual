@@ -3,7 +3,7 @@
 @inherits MRI.MVVM.Web.Helpers.BaseItemComponent<ViewModels.Interfaces.Queries.IBookModelsViewModel, IReadOnlyDictionary<string, IReadOnlyCollection<Models.Interfaces.Entities.IModel>>>
 
 <ul>
-  @if (ViewModel.Item is not null)
+  @if (ViewModel?.Item is not null)
   {
     foreach (var (name, models) in ViewModel.Item)
     {
