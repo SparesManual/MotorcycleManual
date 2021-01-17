@@ -1,0 +1,8 @@
+@page "/book/{itemId:int}"
+@inherits MRI.MVVM.Web.Helpers.BaseItemComponent<ViewModels.Interfaces.Queries.IBookViewModel, Models.Interfaces.Entities.IBook>
+
+<h2>@ViewModel?.Item?.Title</h2>
+
+<BookModels ItemId="ItemId"/>
+
+<BookSections BookId="ItemId"/>

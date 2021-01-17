@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../../../bin/Debug/Libraries/Components</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Libraries/Components/Components.Queries.Web.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../../bin/Release/Libraries/Components</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Books.razor" />
+    <None Remove="_Imports.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Radzen.Blazor" Version="2.17.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Db\MRI.Db\MRI.Db.csproj" />
+    <ProjectReference Include="..\..\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
+    <ProjectReference Include="..\..\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
+  </ItemGroup>
+
+</Project>

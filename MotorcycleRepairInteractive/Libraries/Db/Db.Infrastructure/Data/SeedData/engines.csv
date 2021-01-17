@@ -1,0 +1,21 @@
+Id;Name;Displacement;Carburetor;CarburetorId;Transmission
+1;649cc OHV non-unit;649;2;6;4
+2;649cc OHV;649;2;6;4
+3;649cc OHV TT Special;649;2;7;4
+4;649cc OHV;649;2;2;4
+5;649cc OHV;649;2;4;4
+6;649cc OHV 5-speed;744;2;4;5
+7;649cc OHV 5-speed;744;2;3;5
+8;649cc OHV 5-speed;744;2;9;5
+9;649cc OHV 8-valve;744;2;9;5
+10;649cc OHV non-unit;649;1;5;4
+11;649cc OHV;649;1;8;4
+12;649cc OHV;649;1;2;4
+13;649cc OHV;649;1;1;4
+14;649cc OHV 5-speed;649;1;1;5
+15;744cc OHV 5-speed;744;1;10;5
+16;740cc OHV triple;741;3;11;4
+17;740cc OHV triple 5-speed;741;3;12;5
+18;490cc OHV;490;2;11;4
+19;348cc OHV;348;1;13;4
+20;499cc OHV;499;1;13;4

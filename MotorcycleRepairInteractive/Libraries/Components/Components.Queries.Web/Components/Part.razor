@@ -1,0 +1,8 @@
+@page "/part/{itemid:int}"
+@inherits MRI.MVVM.Web.Helpers.BaseItemComponent<ViewModels.Interfaces.Queries.IPartViewModel, Models.Interfaces.Entities.IPart>
+
+<h2>
+  @ViewModel?.Item?.Description
+</h2>
+
+<PartProperties PartId="ItemId"/>

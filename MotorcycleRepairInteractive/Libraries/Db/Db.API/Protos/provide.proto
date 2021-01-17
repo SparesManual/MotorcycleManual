@@ -1,0 +1,234 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Db.API";
+
+package provide;
+
+service Provider {
+  // Gets a book by its id
+  rpc GetBook (IdRequest) returns (BookReply);
+  // Gets books using full-text search with paging settings
+  rpc GetBooks (SearchAndPageParams) returns (stream BookReply);
+
+  // Gets a make by its id
+  rpc GetMake(IdRequest) returns (MakeReply);
+  // Gets makes using full-text search with paging settings
+  rpc GetAllMakes(SearchAndPageParams) returns (stream MakeReply);
+
+  // Gets a model by its id
+  rpc GetModel(IdRequest) returns (ModelReply);
+  // Gets models using full-text search with paging settings
+  rpc GetAllModels(SearchAndPageParams) returns (stream ModelReply);
+  // Gets models covered by the given book
+  rpc GetBookModels(IdRequest) returns (stream ModelReply);
+  // Gets models specific to a given section
+  rpc GetSectionSpecificModels(IdSearchAndPageParams) returns (stream ModelReply);
+
+  // Gets engines using full-text search with paging settings
+  rpc GetAllEngines(SearchAndPageParams) returns (stream EngineReply);
+  // Gets the engine for the specific part
+  rpc GetModelEngine(IdRequest) returns (EngineReply);
+  
+  // Gets carburetors using full-text search with paging settings
+  rpc GetAllCarburetors(SearchAndPageParams) returns (stream CarburetorReply);
+  
+  // Gets a part by its id
+  rpc GetPart (IdRequest) returns (PartReply);
+  // Gets parts using full-text search with paging settings
+  rpc GetAllParts (SearchAndPageParams) returns (stream PartReply);
+  // Gets parts using full-text search with paging settings from a book of a given id
+  rpc GetPartsFromBook (IdSearchAndPageParams) returns (stream PartReply);
+  // Gets parts using full-text search with paging settings from a section of a given id
+  rpc GetPartsFromSection (IdSearchAndPageParams) returns (stream PartReply);
+  
+  // Gets a section by its id
+  rpc GetSection(IdRequest) returns (SectionReply);
+  // Gets sections using full-text search with paging settings
+  rpc GetAllSections(SearchAndPageParams) returns (stream SectionReply);
+  // Gets sections using full-text search with paging settings from a book of a given id
+  rpc GetSectionsFromBook(IdSearchAndPageParams) returns (stream SectionReply);
+  // Gets section part children based on the parent section id
+  rpc GetSectionPartChildren (IdAndPageParams) returns (stream SectionPartReply);
+
+  // Gets properties using full-text search with paging settings for a part of a given id
+  rpc GetPartProperties (IdSearchAndPageParams) returns (stream PartPropertyReply);
+  // Gets properties types with paging settings
+  rpc GetPropertyTypes (PageParams) returns (stream PropertyTypeReply);
+}
+
+// Empty argument type
+message Empty { }
+
+// Parent entity id with paging settings
+message IdAndPageParams {
+  // Parent entity id
+  int32 id = 1;
+  // Page size - number of items on page
+  int32 size = 2;
+  // Page index
+  int32 index = 3;
+}
+
+// Search query request with paging settings
+message SearchAndPageParams {
+  // Search query text
+  string search = 1;
+  // Page size - number of items on page
+  int32 size = 2;
+  // Page index
+  int32 index = 3;
+}
+
+// Parent entity id and search query request with paging settings
+message IdSearchAndPageParams {
+  // Parent entity id
+  int32 id = 1;
+  // Search query text
+  string search = 2;
+  // Page size - number of items on page
+  int32 size = 3;
+  // Page index
+  int32 index = 4;
+}
+
+// Paging settings
+message PageParams {
+  // Page size - number of items on page
+  int32 size = 1;
+  // Page index
+  int32 index = 2;
+}
+
+// Entity id request
+message IdRequest {
+  // Specific entity id
+  int32 id = 1;
+}
+
+// Book entity
+message BookReply {
+  // Book entity id
+  int32 id = 1;
+  // Book title
+  string title = 2;
+}
+
+// Carburetor entity
+message CarburetorReply {
+  // Carburetor entity id
+  int32 id = 1;
+  // Carburetor name
+  string name = 2;
+}
+
+// Engine entity
+message EngineReply {
+  // Engine entity id
+  int32 id = 1;
+  // Engine name
+  string name = 2;
+  // Engine transmission
+  int32 transmission = 3;
+  // Engine carburetors count
+  int32 carburetors = 4;
+  
+  int32 carburetorId = 5;
+  
+  string carburetorName = 6;
+  
+  int32 displacement = 7;
+}
+
+// Make entity
+message MakeReply {
+  // Make entity id
+  int32 id = 1;
+  // Make name
+  string name = 2;
+}
+
+// Model entity
+message ModelReply {
+  // Model entity id
+  int32 id = 1;
+  // Book covering the model
+  int32 bookId = 2;
+  // Model make
+  int32 makeId = 3;
+  // Model engine
+  int32 engineId = 4;
+  // Model name
+  string name = 5;
+  // Model year
+  int32 year = 6;
+}
+
+// Part entity
+message PartReply {
+  // Part entity id
+  int32 id = 1;
+  // Part number
+  string partNumber = 2;
+  // Part makers number
+  string makersPartNumber = 3;
+  // Part description
+  string description = 4;
+}
+
+// Section entity
+message SectionReply {
+  // Section entity id
+  int32 id = 1;
+  // Parent book entity id
+  int32 bookId = 2;
+  // Section header
+  string header = 3;
+  // Section start page
+  int32 startPage = 4;
+  // Section end page
+  int32 endPage = 5;
+  // Section figure number
+  int32 figureNumber = 6;
+  // Section figure description
+  string figureDescription = 7;
+}
+
+// Section part entity
+message SectionPartReply {
+  // Section part entity id
+  int32 id = 1;
+  // Part entity id
+  int32 partId = 2;
+  // Number of the page on which the section is
+  int32 pageNumber = 3;
+  // Section information
+  string additionalInfo = 4;
+  // Part occurrence number in the section
+  int32 quantity = 5;
+  // Mapping remarks
+  string remarks = 6;
+}
+
+// Property type entity
+message PropertyTypeReply {
+  // Property type entity id
+  int32 id = 1;
+  // Property unit
+  string unit = 2;
+  // Property name
+  string name = 3;
+}
+
+// Property entity
+message PartPropertyReply {
+  // Property type entity id
+  int32 typeId = 1;
+  // Property type name
+  string type = 2;
+  // Property unit
+  string unit = 3;
+  // Property name
+  string name = 4;
+  // Property value
+  string value = 5;
+}

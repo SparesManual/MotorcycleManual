@@ -1,0 +1,68 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@using Models.Interfaces.Entities
+@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IBookSectionsViewModel, Models.Interfaces.Entities.ISection>
+
+<RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.ISection">
+  <Columns>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Property="Header" Title="Header">
+      <FooterTemplate>
+        Displayed sections: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
+      </FooterTemplate>
+    </RadzenGridColumn>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Title="Figure">
+      <Template Context="data">
+        @if (string.IsNullOrEmpty(data.FigureDescription))
+        {
+          <span>None</span>
+        }
+        else
+        {
+          <span>@data.FigureNumber</span>
+          <span>. </span>
+          <span>@data.FigureDescription</span>
+        }
+      </Template>
+    </RadzenGridColumn>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Title="Pages">
+      <Template Context="data">
+        @if (data.StartPage == data.EndPage)
+        {
+          <span>@data.StartPage</span>
+        }
+        else
+        {
+          <span>@data.StartPage</span>
+          <span> - </span>
+          <span>@data.EndPage</span>
+        }
+      </Template>
+    </RadzenGridColumn>
+  </Columns>
+</RadzenGrid>
+
+@code {
+#nullable enable
+
+  private RadzenGrid<ISection>? m_grid;
+  private int m_bookId;
+
+  /// <summary>
+  /// Parent book id
+  /// </summary>
+  [Parameter]
+  public int BookId
+  {
+    get => m_bookId;
+    set
+    {
+      m_bookId = value;
+      if (ViewModel != null) ViewModel.BookId = value;
+    }
+  }
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+    => m_grid?.GoToPage(page);
+
+}

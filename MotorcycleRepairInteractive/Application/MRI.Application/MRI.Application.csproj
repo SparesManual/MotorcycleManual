@@ -1,7 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
@@ -18,16 +17,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.13.0" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.32.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.32.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Radzen.Blazor" Version="2.17.9" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web\Components.Queries.Web.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Db\MRI.Db.csproj" />
+    <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
+    <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
   </ItemGroup>
 
 </Project>
