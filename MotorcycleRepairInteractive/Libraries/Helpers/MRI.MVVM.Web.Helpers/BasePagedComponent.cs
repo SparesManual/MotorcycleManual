@@ -53,6 +53,10 @@ namespace MRI.MVVM.Web.Helpers
       return base.OnAfterRenderAsync(firstRender);
     }
 
+    /// <summary>
+    /// Change paging to given <paramref name="page"/> number
+    /// </summary>
+    /// <param name="page">Page number</param>
     protected abstract void GoToPage(int page);
   }
 }

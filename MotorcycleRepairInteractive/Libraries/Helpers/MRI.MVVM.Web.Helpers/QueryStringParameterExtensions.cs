@@ -9,9 +9,18 @@ using Microsoft.Extensions.Primitives;
 
 namespace MRI.MVVM.Web.Helpers
 {
+  /// <summary>
+  /// Helper class for working with query string parameters
+  /// </summary>
   public static class QueryStringParameterExtensions
   {
-    // Apply the values from the query string to the current component
+    /// <summary>
+    /// Apply the values from the query string to the current component
+    /// </summary>
+    /// <param name="component">Parent component</param>
+    /// <param name="navigationManager">Navigation manager instance</param>
+    /// <typeparam name="T">Component type</typeparam>
+    /// <exception cref="InvalidOperationException">If the current URL is invalid</exception>
     public static void SetParametersFromQueryString<T>(this T component, NavigationManager navigationManager)
       where T : ComponentBase
     {
@@ -26,19 +35,25 @@ namespace MRI.MVVM.Web.Helpers
       {
         // Get the name of the parameter to read from the query string
         var parameterName = GetQueryStringParameterName(property);
-        if (parameterName == null)
+        if (parameterName is null)
           continue; // The property is not decorated by [QueryStringParameterAttribute]
 
-        if (queryString.TryGetValue(parameterName, out var value))
-        {
-          // Convert the value from string to the actual property type
-          var convertedValue = ConvertValue(value, property.PropertyType);
-          property.SetValue(component, convertedValue);
-        }
+        if (!queryString.TryGetValue(parameterName, out var value))
+          continue;
+
+        // Convert the value from string to the actual property type
+        var convertedValue = ConvertValue(value, property.PropertyType);
+        property.SetValue(component, convertedValue);
       }
     }
 
-    // Apply the values from the component to the query string
+    /// <summary>
+    /// Apply the values from the component to the query string
+    /// </summary>
+    /// <param name="component">Parent component</param>
+    /// <param name="navigationManager">Navigation manager instance</param>
+    /// <typeparam name="T">Component type</typeparam>
+    /// <exception cref="InvalidOperationException">If the current URL is invalid</exception>
     public static void UpdateQueryString<T>(this T component, NavigationManager navigationManager)
       where T : ComponentBase
     {
@@ -65,24 +80,22 @@ namespace MRI.MVVM.Web.Helpers
 
       // Compute the new URL
       var newUri = uri.GetComponents(UriComponents.Scheme | UriComponents.Host | UriComponents.Port | UriComponents.Path, UriFormat.UriEscaped);
-      foreach (var parameter in parameters)
-        newUri = parameter.Value.Aggregate(newUri, (current, value) => QueryHelpers.AddQueryString(current, parameter.Key, value));
+      foreach (var (key, stringValues) in parameters)
+        newUri = stringValues.Aggregate(newUri, (current, value) => QueryHelpers.AddQueryString(current, key, value));
 
       navigationManager.NavigateTo(newUri, true);
     }
 
     private static object ConvertValue(StringValues value, Type type)
-      => Convert.ChangeType(value[0], type, CultureInfo.InvariantCulture);
+      => Convert.ChangeType(value[0], type, CultureInfo.InvariantCulture)!;
 
     private static string? ConvertToString(object value)
       => Convert.ToString(value, CultureInfo.InvariantCulture);
 
-    private static PropertyInfo[] GetProperties<T>()
-    {
-      return typeof(T).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-    }
+    private static IEnumerable<PropertyInfo> GetProperties<T>()
+      => typeof(T).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-    private static string? GetQueryStringParameterName(PropertyInfo property)
+    private static string? GetQueryStringParameterName(MemberInfo property)
     {
       var attribute = property.GetCustomAttribute<QueryStringParameterAttribute>();
 

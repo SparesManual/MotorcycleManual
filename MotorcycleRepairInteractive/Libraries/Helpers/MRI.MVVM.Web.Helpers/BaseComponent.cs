@@ -64,12 +64,16 @@ namespace MRI.MVVM.Web.Helpers
       GC.SuppressFinalize(this);
     }
 
+    /// <summary>
+    /// Releases resources
+    /// </summary>
+    /// <param name="disposing"></param>
     protected virtual void Dispose(bool disposing)
     {
       if (!disposing)
         return;
 
-      ViewModel.PropertyChanged -= ViewModelOnPropertyChanged;
+      ViewModel!.PropertyChanged -= ViewModelOnPropertyChanged;
       foreach (var property in m_properties)
         property.PropertyChanged -= ViewModelOnPropertyChanged;
     }

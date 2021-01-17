@@ -3,11 +3,11 @@
 @using Models.Interfaces.Entities
 @inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IBookSectionsViewModel, Models.Interfaces.Entities.ISection>
 
-<RadzenGrid @ref="m_grid" Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.ISection">
+<RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.ISection">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Property="Header" Title="Header">
       <FooterTemplate>
-        Displayed sections: <b>@ViewModel.Items.Count</b> of <b>@ViewModel.TotalItems</b>
+        Displayed sections: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Title="Figure">
@@ -42,8 +42,9 @@
 </RadzenGrid>
 
 @code {
+#nullable enable
 
-  private RadzenGrid<ISection> m_grid;
+  private RadzenGrid<ISection>? m_grid;
   private int m_bookId;
 
   /// <summary>

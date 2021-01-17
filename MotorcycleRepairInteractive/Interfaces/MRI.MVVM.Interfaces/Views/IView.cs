@@ -12,6 +12,6 @@ namespace MRI.MVVM.Interfaces.Views
     /// <summary>
     /// Specific view model of the view
     /// </summary>
-    TViewModel ViewModel { get; }
+    TViewModel? ViewModel { get; }
   }
 }

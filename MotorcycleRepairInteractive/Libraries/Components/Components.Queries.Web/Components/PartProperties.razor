@@ -3,11 +3,11 @@
 @using Models.Interfaces.Entities
 @inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IPartPropertiesViewModel, Models.Interfaces.Entities.IProperty>
 
-<RadzenGrid @ref="m_grid" Count="ViewModel.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel.Items" PageSize="ViewModel.PageSize" TItem="Models.Interfaces.Entities.IProperty">
+<RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.IProperty">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IProperty" Property="PropertyName" Title="Name">
       <FooterTemplate>
-        Displayed properties: <b>@ViewModel.Items.Count</b> of <b>@ViewModel.TotalItems</b>
+        Displayed properties: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.IProperty" Title="Value">
@@ -23,8 +23,9 @@
 </RadzenGrid>
 
 @code {
+#nullable enable
 
-  private RadzenGrid<IProperty> m_grid;
+  private RadzenGrid<IProperty>? m_grid;
   private int m_partId;
 
   /// <summary>
@@ -37,7 +38,7 @@
     set
     {
       m_partId = value;
-      ViewModel.PartId = value;
+      if (ViewModel != null) ViewModel.PartId = value;
     }
   }
 
