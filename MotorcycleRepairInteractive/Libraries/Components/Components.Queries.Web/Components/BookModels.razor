@@ -1,6 +1,6 @@
 @* ReSharper disable once CheckNamespace *@
 @namespace Comp
-@inherits MRI.MVVM.Web.Helpers.BaseItemComponent<ViewModels.Interfaces.Queries.IBookModelsViewModel, IReadOnlyDictionary<string, IReadOnlyCollection<Models.Interfaces.Entities.IModel>>>
+@inherits BaseItemComponent<IBookModelsViewModel, IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>>
 
 <ul>
   @if (ViewModel?.Item is not null)

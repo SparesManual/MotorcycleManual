@@ -27,6 +27,8 @@ namespace MRI.Application
       services.AddScoped<IBookViewModel, BookViewModel>();
       services.AddScoped<IBookModelsViewModel, BookModelsViewModel>();
       services.AddScoped<ISectionPartsViewModel, SectionPartsViewModel>();
+      services.AddScoped<IModelViewModel, ModelViewModel>();
+      services.AddScoped<IEngineViewModel, EngineViewModel>();
 
       services.AddScoped<IPagingManager, RadzenPagingManager>();
       services.AddServerSideBlazor();

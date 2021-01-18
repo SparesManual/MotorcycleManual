@@ -32,7 +32,10 @@ namespace Db.Core.Specifications
       : base(model => model.Id.Equals(id))
     {
       if (includeEngine)
+      {
         AddInclude(model => model.Engine);
+        AddInclude(model => model.Engine.Carburetor);
+      }
     }
   }
 }

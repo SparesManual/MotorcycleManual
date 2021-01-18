@@ -1,6 +1,5 @@
 ﻿@page "/partsall"
-@using Models.Interfaces.Entities
-@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IAllPartsViewModel, Models.Interfaces.Entities.IPart>
+@inherits BasePagedComponent<IAllPartsViewModel, IPart>
 
 <h1>PartsAll</h1>
 

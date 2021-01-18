@@ -1,7 +1,6 @@
 @* ReSharper disable once CheckNamespace *@
 @namespace Comp
-@using Models.Interfaces.Entities
-@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IPartPropertiesViewModel, Models.Interfaces.Entities.IProperty>
+@inherits BasePagedComponent<IPartPropertiesViewModel, IProperty>
 
 <RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.IProperty">
   <Columns>

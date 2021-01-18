@@ -1,6 +1,5 @@
 ﻿@page "/books"
-@using Models.Interfaces.Entities
-@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IBooksViewModel, Models.Interfaces.Entities.IBook>
+@inherits BasePagedComponent<IBooksViewModel, IBook>
 @inject NavigationManager m_navigationManager
 
 <h1>Books</h1>
