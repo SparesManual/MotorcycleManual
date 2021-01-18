@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
@@ -111,7 +111,7 @@ namespace MRI.MVVM.Helpers
     /// <summary>
     /// Paged items to display
     /// </summary>
-    public ObservableCollection<T> Items { get; } = new();
+    public ConcurrentBag<T> Items { get; } = new();
 
     #endregion
 
@@ -151,12 +151,15 @@ namespace MRI.MVVM.Helpers
         Items.Add(item);
 
       Loading = false;
+
+      OnPropertyChanged(nameof(Items));
     }
 
     /// <inheritdoc />
     public void ClearItems()
     {
       Items.Clear();
+      OnPropertyChanged(nameof(Items));
     }
   }
 }

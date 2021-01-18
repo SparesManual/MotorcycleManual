@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
 namespace MRI.MVVM.Interfaces.ViewModels
@@ -20,7 +20,7 @@ namespace MRI.MVVM.Interfaces.ViewModels
     /// <summary>
     /// Items to display
     /// </summary>
-    ObservableCollection<T> Items { get; }
+    ConcurrentBag<T> Items { get; }
 
     #endregion
 
