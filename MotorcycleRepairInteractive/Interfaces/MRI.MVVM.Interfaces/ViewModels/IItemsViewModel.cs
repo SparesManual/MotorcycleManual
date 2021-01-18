@@ -28,5 +28,10 @@ namespace MRI.MVVM.Interfaces.ViewModels
     /// Loads items
     /// </summary>
     Task LoadItems();
+
+    /// <summary>
+    /// Clears loaded items
+    /// </summary>
+    void ClearItems();
   }
 }

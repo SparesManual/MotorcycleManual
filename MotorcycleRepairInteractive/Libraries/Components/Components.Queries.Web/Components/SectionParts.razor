@@ -1,0 +1,59 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@using Models.Interfaces.Entities
+@inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.ISectionPartsViewModel, Models.Interfaces.Entities.ISectionPart>
+
+<RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.ISectionPart">
+  <Columns>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="PartNumber" Title="Part number">
+      <FooterTemplate>
+        Displayed parts: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
+      </FooterTemplate>
+    </RadzenGridColumn>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="MakersPartNumber" Title="Makers number"/>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="PageNumber" Title="Page number"/>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="Remarks" Title="Remarks"/>
+  </Columns>
+</RadzenGrid>
+
+
+@code {
+#nullable enable
+
+  private RadzenGrid<ISectionPart>? m_grid;
+
+  /// <summary>
+  /// Currently selected section id
+  /// </summary>
+  [Parameter]
+  public int? SectionId
+  {
+    get => ViewModel?.SectionId;
+    set
+    {
+      if (ViewModel != null) ViewModel.SectionId = value;
+    }
+  }
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+    => m_grid?.GoToPage(page);
+
+  /// <summary>
+  /// Modify the current section
+  /// </summary>
+  /// <param name="section">Section number</param>
+  public async Task ChangeSectionAsync(int? section)
+  {
+    if (section is null)
+      ClearData();
+
+    if (SectionId == section)
+      return;
+
+    SectionId = section;
+
+    await ReloadData(ViewModel?.Search ?? string.Empty).ConfigureAwait(false);
+  }
+
+}

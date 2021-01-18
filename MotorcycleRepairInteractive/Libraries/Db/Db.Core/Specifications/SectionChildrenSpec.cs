@@ -7,24 +7,27 @@ namespace Db.Core.Specifications
   /// <summary>
   /// Specifications for querying <see cref="SectionParts"/> entities based on their parent <see cref="SectionPartParents"/> entity
   /// </summary>
-  public class SectionPartChildrenSpec
-    : BaseSpecification<SectionPartParents, SectionParts>
+  public class SectionChildrenSpec
+    : BaseSpecification<SectionPartParents, Section>
   {
     /// <summary>
     /// Default constructor
     /// </summary>
+    /// <param name="search"></param>
     /// <param name="id">Id of the <see cref="SectionPartParents"/></param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
-    public SectionPartChildrenSpec(int id, int size, int index)
+    public SectionChildrenSpec(string? search, int id, int size, int index)
     {
       SetExtractor(sectionPartParents =>
         sectionPartParents
           .Where(parent => parent.ParentId == id)
           .Include(parent => parent.Child)
-          .Select(x => x.Child));
+          .Include(x => x.Child.Section)
+          .Select(x => x.Child.Section)
+          .Where(section => string.IsNullOrEmpty(search) || search.Contains(section.SectionHeader ?? string.Empty)));
 
-      SetOrderBy(part => part.SectionId);
+      SetOrderBy(section => section.Id);
       ApplyPaging(size, index);
     }
   }

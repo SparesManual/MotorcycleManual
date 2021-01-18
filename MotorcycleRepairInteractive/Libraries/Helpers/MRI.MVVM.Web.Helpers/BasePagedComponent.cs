@@ -28,7 +28,7 @@ namespace MRI.MVVM.Web.Helpers
     /// </summary>
     /// <param name="filter">Full-text filter string</param>
     /// <param name="paging">Paging data</param>
-    protected async void LoadData(string filter, object paging)
+    protected async Task LoadData(string filter, object paging)
     {
       if (ViewModel is null)
         return;
@@ -40,6 +40,27 @@ namespace MRI.MVVM.Web.Helpers
 
       ViewModel.Search = filter;
       ViewModel.PageIndex = newPage;
+
+      await ViewModel.LoadItems().ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Clears the currently displayed data
+    /// </summary>
+    protected void ClearData()
+      => ViewModel?.ClearItems();
+
+    /// <summary>
+    /// Reloads the current data
+    /// </summary>
+    /// <param name="filter">Filter for the data</param>
+    protected async Task ReloadData(string filter)
+    {
+      if (ViewModel is null)
+        return;
+
+      ViewModel.Search = filter;
+      ViewModel.PageIndex = 1;
 
       await ViewModel.LoadItems().ConfigureAwait(false);
     }

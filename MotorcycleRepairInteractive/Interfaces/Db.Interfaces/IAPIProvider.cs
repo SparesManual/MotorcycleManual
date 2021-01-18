@@ -191,7 +191,7 @@ namespace Db.Interfaces
     /// <param name="search">Part fuzzy search</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of parts</returns>
-    Task<IPaging<IPart>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = null, CancellationToken cancellationToken = default);
+    Task<IPaging<ISectionPart>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get all child section parts based on the given <paramref name="parentId"/> of the section part
@@ -199,9 +199,10 @@ namespace Db.Interfaces
     /// <param name="parentId">Id of the parent section parts</param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
+    /// <param name="search"></param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>Paging batch of section parts</returns>
-    Task<IPaging<ISectionParts>> GetSectionPartChildren(int parentId, int size, int index, CancellationToken cancellationToken = default);
+    Task<IPaging<ISection>> GetSectionChildrenAsync(int parentId, int size, int index, string? search = default, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get all property types

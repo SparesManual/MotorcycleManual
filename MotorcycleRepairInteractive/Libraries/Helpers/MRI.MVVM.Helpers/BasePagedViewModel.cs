@@ -137,7 +137,7 @@ namespace MRI.MVVM.Helpers
     /// </summary>
     public async Task LoadItems()
     {
-      Items.Clear();
+      ClearItems();
 
       Loading = true;
 
@@ -151,6 +151,12 @@ namespace MRI.MVVM.Helpers
         Items.Add(item);
 
       Loading = false;
+    }
+
+    /// <inheritdoc />
+    public void ClearItems()
+    {
+      Items.Clear();
     }
   }
 }

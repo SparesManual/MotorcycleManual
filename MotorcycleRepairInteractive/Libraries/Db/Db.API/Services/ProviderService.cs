@@ -169,7 +169,7 @@ namespace Db.API
     private static SectionPartReply ToSectionPartReply(SectionParts? sectionParts)
       => new()
       {
-        Id = sectionParts?.Id ?? -1,
+        Part = ToPartReply(sectionParts?.Part),
         PartId = sectionParts?.PageNumber ?? -1,
         PageNumber = sectionParts?.PageNumber ?? -1,
         AdditionalInfo = sectionParts?.AdditionalInfo ?? string.Empty,
@@ -386,10 +386,10 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task GetPartsFromSection(IdSearchAndPageParams pageRequest, IServerStreamWriter<PartReply> responseStream, ServerCallContext context)
+    public override async Task GetPartsFromSection(IdSearchAndPageParams pageRequest, IServerStreamWriter<SectionPartReply> responseStream, ServerCallContext context)
     {
       var specification = new SectionPartsSpec(pageRequest.Id, pageRequest.Search, pageRequest.Size, pageRequest.Index);
-      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartsRepository, specification, responseStream, GetAllExAsync, ToPartReply, context).ConfigureAwait(false);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartsRepository, specification, responseStream, GetAllExAsync, ToSectionPartReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />
@@ -397,10 +397,10 @@ namespace Db.API
       => await GetById(request.Id, m_sectionRepository, ToSectionReply).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public override async Task GetSectionPartChildren(IdAndPageParams pageRequest, IServerStreamWriter<SectionPartReply> responseStream, ServerCallContext context)
+    public override async Task GetSectionChildren(IdSearchAndPageParams pageRequest, IServerStreamWriter<SectionReply> responseStream, ServerCallContext context)
     {
-      var specification = new SectionPartChildrenSpec(pageRequest.Id, pageRequest.Size, pageRequest.Index);
-      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartParentsRepository, specification, responseStream, GetAllExAsync, ToSectionPartReply, context).ConfigureAwait(false);
+      var specification = new SectionChildrenSpec(pageRequest.Search, pageRequest.Id, pageRequest.Size, pageRequest.Index);
+      await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartParentsRepository, specification, responseStream, GetAllExAsync, ToSectionReply, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />

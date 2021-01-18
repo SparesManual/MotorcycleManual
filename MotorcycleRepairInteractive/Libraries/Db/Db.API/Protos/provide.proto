@@ -39,7 +39,7 @@ service Provider {
   // Gets parts using full-text search with paging settings from a book of a given id
   rpc GetPartsFromBook (IdSearchAndPageParams) returns (stream PartReply);
   // Gets parts using full-text search with paging settings from a section of a given id
-  rpc GetPartsFromSection (IdSearchAndPageParams) returns (stream PartReply);
+  rpc GetPartsFromSection (IdSearchAndPageParams) returns (stream SectionPartReply);
   
   // Gets a section by its id
   rpc GetSection(IdRequest) returns (SectionReply);
@@ -48,7 +48,7 @@ service Provider {
   // Gets sections using full-text search with paging settings from a book of a given id
   rpc GetSectionsFromBook(IdSearchAndPageParams) returns (stream SectionReply);
   // Gets section part children based on the parent section id
-  rpc GetSectionPartChildren (IdAndPageParams) returns (stream SectionPartReply);
+  rpc GetSectionChildren(IdSearchAndPageParams) returns (stream SectionReply);
 
   // Gets properties using full-text search with paging settings for a part of a given id
   rpc GetPartProperties (IdSearchAndPageParams) returns (stream PartPropertyReply);
@@ -195,8 +195,8 @@ message SectionReply {
 
 // Section part entity
 message SectionPartReply {
-  // Section part entity id
-  int32 id = 1;
+  // Part
+  PartReply part = 1;
   // Part entity id
   int32 partId = 2;
   // Number of the page on which the section is

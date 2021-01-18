@@ -58,13 +58,14 @@ namespace MRI.Db
         Size = size
       };
 
-    private static IdAndPageParams ToIdAndPageParams(int id, int size, int index)
-      => new()
-      {
-        Id = id,
-        Index = index,
-        Size = size
-      };
+    // Uncomment if needed
+    // private static IdAndPageParams ToIdAndPageParams(int id, int size, int index)
+    //   => new()
+    //   {
+    //     Id = id,
+    //     Index = index,
+    //     Size = size
+    //   };
 
     private static SearchAndPageParams ToSearchAndPageParams(string? search, int size, int index)
       => new()
@@ -149,15 +150,17 @@ namespace MRI.Db
         FigureDescription = reply.FigureDescription
       };
 
-    private static ISectionParts ToSectionParts(SectionPartReply reply)
+    private static ISectionPart ToSectionParts(SectionPartReply reply)
       => new SectionPartModel
       {
-        Id = reply.Id,
-        PartId = reply.PartId,
+        Id = reply.Part.Id,
         PageNumber = reply.PageNumber,
         Remarks = reply.Remarks,
         AdditionalInfo = reply.AdditionalInfo,
-        Quantity = reply.Quantity
+        Quantity = reply.Quantity,
+        Description = reply.Part.Description,
+        PartNumber = reply.Part.PartNumber,
+        MakersPartNumber = reply.Part.MakersPartNumber
       };
 
     private static IMake ToMake(MakeReply reply)
@@ -257,8 +260,8 @@ namespace MRI.Db
       => await GetPagingAsync(client => client.GetPartsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToPart).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IPart>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPartsFromSection(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken), ToPart).ConfigureAwait(false);
+    public async Task<IPaging<ISectionPart>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPartsFromSection(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken), ToSectionParts).ConfigureAwait(false);
 
     /// <inheritdoc />
     public async Task<IPaging<IProperty>> GetPartPropertiesAsync(int partId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
@@ -277,8 +280,8 @@ namespace MRI.Db
       => await GetPagingAsync(client => client.GetAllSections(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToSection).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<ISectionParts>> GetSectionPartChildren(int parentId, int size, int index, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetSectionPartChildren(ToIdAndPageParams(parentId, size, index), cancellationToken: cancellationToken), ToSectionParts).ConfigureAwait(false);
+    public async Task<IPaging<ISection>> GetSectionChildrenAsync(int parentId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetSectionChildren(ToIdSearchAndPageParams(parentId, search, size, index), cancellationToken: cancellationToken), ToSection).ConfigureAwait(false);
 
     /// <inheritdoc />
     public async Task<IPaging<IPropertyType>> GetPropertyTypesAsync(int size, int index, CancellationToken cancellationToken = default)

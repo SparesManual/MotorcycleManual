@@ -3,7 +3,7 @@
 @using Models.Interfaces.Entities
 @inherits MRI.MVVM.Web.Helpers.BasePagedComponent<ViewModels.Interfaces.Queries.IBookSectionsViewModel, Models.Interfaces.Entities.ISection>
 
-<RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.ISection">
+<RadzenGrid RowSelect="RowSelected" @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.ISection">
   <Columns>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Property="Header" Title="Header">
       <FooterTemplate>
@@ -61,8 +61,17 @@
     }
   }
 
+  /// <summary>
+  /// Triggered when the section section id is changed
+  /// </summary>
+  [Parameter]
+  public EventCallback<int?> CurrentSectionChanged { get; set; }
+
   /// <inheritdoc />
   protected override void GoToPage(int page)
     => m_grid?.GoToPage(page);
+
+  private async void RowSelected(ISection? section)
+    => await CurrentSectionChanged.InvokeAsync(section?.Id).ConfigureAwait(false);
 
 }

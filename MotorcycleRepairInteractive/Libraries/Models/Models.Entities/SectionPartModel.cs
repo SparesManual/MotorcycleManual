@@ -3,13 +3,19 @@
 namespace Models.Entities
 {
   public class SectionPartModel
-    : ISectionParts
+    : ISectionPart
   {
     /// <inheritdoc />
     public int Id { get; init; }
 
     /// <inheritdoc />
-    public int PartId { get; init; }
+    public string PartNumber { get; init; }
+
+    /// <inheritdoc />
+    public string MakersPartNumber { get; init; }
+
+    /// <inheritdoc />
+    public string Description { get; init; }
 
     /// <inheritdoc />
     public int PageNumber { get; init; }

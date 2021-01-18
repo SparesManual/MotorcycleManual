@@ -5,4 +5,18 @@
 
 <BookModels ItemId="ItemId"/>
 
-<BookSections BookId="ItemId"/>
+<BookSections BookId="ItemId" CurrentSectionChanged="@Callback"/>
+
+<SectionParts @ref="m_sectionParts"/>
+
+@code {
+#nullable enable
+
+  private SectionParts? m_sectionParts;
+
+  private async void Callback(int? section)
+  {
+    if (m_sectionParts != null) await m_sectionParts.ChangeSectionAsync(section).ConfigureAwait(false);
+  }
+
+}
