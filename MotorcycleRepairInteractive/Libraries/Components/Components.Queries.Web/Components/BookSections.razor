@@ -9,20 +9,7 @@
         Displayed sections: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Title="Figure">
-      <Template Context="data">
-        @if (string.IsNullOrEmpty(data.FigureDescription))
-        {
-          <span>None</span>
-        }
-        else
-        {
-          <span>@data.FigureNumber</span>
-          <span>. </span>
-          <span>@data.FigureDescription</span>
-        }
-      </Template>
-    </RadzenGridColumn>
+    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Property="FigureNumber" Title="Figure"/>
     <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Title="Pages">
       <Template Context="data">
         @if (data.StartPage == data.EndPage)

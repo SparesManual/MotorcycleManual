@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
@@ -147,7 +148,7 @@ namespace MRI.MVVM.Helpers
       PageIndex = result.PageIndex;
       TotalItems = result.TotalItems;
 
-      await foreach (var item in result.ReadAll().ConfigureAwait(true))
+      await foreach (var item in result.ReadAll().Reverse().ConfigureAwait(true))
         Items.Add(item);
 
       Loading = false;

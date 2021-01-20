@@ -5,9 +5,14 @@
 
 <BookModels ItemId="ItemId"/>
 
-<BookSections BookId="ItemId" CurrentSectionChanged="@Callback"/>
-
-<SectionParts @ref="m_sectionParts"/>
+<div class="container-split">
+  <div class="content-left">
+    <BookSections BookId="ItemId" CurrentSectionChanged="@Callback"/>
+  </div>
+  <div class="content-right">
+    <SectionParts @ref="m_sectionParts"/>
+  </div>
+</div>
 
 @code {
 #nullable enable

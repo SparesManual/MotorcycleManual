@@ -38,7 +38,7 @@ namespace Db.Core.Specifications
                             || !string.IsNullOrEmpty(section.FigureDescription) && section.FigureDescription.Contains(search)
                             || true))
     {
-      SetOrderBy(section => section.Id);
+      SetOrderBy(section => section.FigureNumber);
       ApplyPaging(size, index);
     }
   }
