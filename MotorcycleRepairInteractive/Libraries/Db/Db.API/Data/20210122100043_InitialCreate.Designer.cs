@@ -9,9 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Db.API.Data
 {
     [DbContext(typeof(ManualContext))]
-    [Migration("20210113232855_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210122100043_InitialCreate")]
+    partial class InitialCreate
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
@@ -284,7 +285,7 @@ namespace Db.API.Data
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("SectionModel");
+                    b.ToTable("SectionModels");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
@@ -446,13 +447,13 @@ namespace Db.API.Data
             modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
                 {
                     b.HasOne("Db.Core.Entities.SectionParts", "Child")
-                        .WithMany("ChildSections")
+                        .WithMany()
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Db.Core.Entities.SectionParts", "Parent")
-                        .WithMany()
+                        .WithMany("ChildSections")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
