@@ -59,6 +59,7 @@
   {
     await base.OnInitializedAsync().ConfigureAwait(false);
 
+    // Try set the persistent selection when the component is initialized
     await SetSelection().ConfigureAwait(false);
   }
 
@@ -76,20 +77,31 @@
   {
     m_sectionId = id;
 
+    // Try set the persistent selection when the selection id is provided
     await SetSelection().ConfigureAwait(false);
   }
 
   private async Task SetSelection()
   {
+    // If either there is no section to set,
+    // or the grid is not initialized,
+    // or the view model is not initialized,
+    // or there are no items provided by the view model..
     if (m_sectionId is null || m_grid is null || ViewModel is null || ViewModel.Items.IsEmpty)
+      // Exit
       return;
 
+    // Try find the section in the grid
     var section = ViewModel.Items.FirstOrDefault(x => x.Id.Equals(m_sectionId));
+    // If no section is found..
     if (section is null)
+      // Exit
       return;
 
+    // Apply the selection
     await InvokeAsync(() => m_grid!.SelectRow(section)).ConfigureAwait(false);
 
+    // Ensure the selection is applied only once
     m_sectionId = null;
   }
 
@@ -97,6 +109,7 @@
   {
     await LoadData(data.Filter, data).ConfigureAwait(false);
 
+    // Try set the persistent selection when changing the page
     await SetSelection().ConfigureAwait(false);
   }
 

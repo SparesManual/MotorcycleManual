@@ -2,6 +2,9 @@
 
 namespace Models.Entities
 {
+  /// <summary>
+  /// Model representing a property type
+  /// </summary>
   public class PropertyTypeModel
     : IPropertyType
   {

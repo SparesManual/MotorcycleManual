@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
+using MRI.Helpers;
 
 namespace MRI.Db
 {
@@ -51,7 +53,9 @@ namespace MRI.Db
       await foreach(var item in ReadAll(cancellationToken).WithCancellation(cancellationToken).ConfigureAwait(false))
         result.Add(item);
 
-      return result;
+      return result
+        .Reverse()
+        .ToReadOnlyCollection();
     }
   }
 }

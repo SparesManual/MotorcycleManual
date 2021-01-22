@@ -1,5 +1,6 @@
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
@@ -12,7 +13,7 @@ namespace MRI.MVVM.Helpers
   /// </summary>
   /// <typeparam name="T">Item type</typeparam>
   public abstract class BaseItemsViewModel<T>
-    : BasePropertyChanged, IViewModel
+    : BasePropertyChanged, IItemsViewModel<T>
   {
     /// <summary>
     /// API provider instance
@@ -21,15 +22,11 @@ namespace MRI.MVVM.Helpers
 
     #region Properties
 
-    /// <summary>
-    /// Are items loaded
-    /// </summary>
+    /// <inheritdoc />
     public bool Loading { get; set; }
 
-    /// <summary>
-    /// Paged items to display
-    /// </summary>
-    public ObservableCollection<T> Items { get; } = new();
+    /// <inheritdoc />
+    public ConcurrentBag<T> Items { get; } = new();
 
     #endregion
 
@@ -47,19 +44,35 @@ namespace MRI.MVVM.Helpers
     /// <returns>Queried items</returns>
     protected abstract IAsyncEnumerable<T> GetItems(CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// Loads items
-    /// </summary>
+    /// <inheritdoc />
     public async Task LoadItems()
     {
-      Items.Clear();
+      // Remove old items
+      ClearItems();
 
+      // Enter loading state
       Loading = true;
 
-      await foreach (var item in GetItems().ConfigureAwait(true))
+      // For every queried item..
+      await foreach (var item in GetItems().Reverse().ConfigureAwait(true))
+        // Add it to the view
         Items.Add(item);
 
+      // Exit loading state
       Loading = false;
+
+      // Notify the view of the data update
+      OnPropertyChanged(nameof(Items));
     }
+
+    /// <inheritdoc />
+    public void ClearItems()
+    {
+      // Clear the current items
+      Items.Clear();
+      // Notify the view of the data update
+      OnPropertyChanged(nameof(Items));
+    }
+
   }
 }

@@ -2,6 +2,9 @@
 
 namespace Models.Entities
 {
+  /// <summary>
+  /// Model representing a book
+  /// </summary>
   public record BookModel
     : IBook
   {

@@ -2,6 +2,9 @@
 
 namespace Models.Entities
 {
+  /// <summary>
+  /// Model representing a part
+  /// </summary>
   public record PartModel
     : IPart
   {

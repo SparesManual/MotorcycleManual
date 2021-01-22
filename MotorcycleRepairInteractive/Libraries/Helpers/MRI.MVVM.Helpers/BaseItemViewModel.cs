@@ -61,12 +61,16 @@ namespace MRI.MVVM.Helpers
     /// <inheritdoc />
     public async Task LoadItem()
     {
+      // Enter loading state
       Loading = true;
 
+      // Retrieve the item by its id
       Item = await GetItem(Id).ConfigureAwait(true);
 
+      // Exit loading state
       Loading = false;
 
+      // Notify the view of data update
       OnPropertyChanged(nameof(Item));
     }
   }

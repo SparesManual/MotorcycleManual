@@ -138,28 +138,41 @@ namespace MRI.MVVM.Helpers
     /// </summary>
     public async Task LoadItems()
     {
+      // Remove old items
       ClearItems();
 
+      // Enter loading state
       Loading = true;
 
-      var result = await GetItems(PageSize, PageIndex, Search).ConfigureAwait(true);
+      // Get the items
+      var items = await GetItems(PageSize, PageIndex, Search).ConfigureAwait(true);
 
-      PageItems = result.PageItems;
-      PageIndex = result.PageIndex;
-      TotalItems = result.TotalItems;
+      // TODO: This is page size not items count
+      PageItems = items.PageItems;
+      // TODO: Is this required?
+      // Set the current page index
+      PageIndex = items.PageIndex;
+      // Set the total available items
+      TotalItems = items.TotalItems;
 
-      await foreach (var item in result.ReadAll().Reverse().ConfigureAwait(true))
+      // For every item from the query..
+      await foreach (var item in items.ReadAll().Reverse().ConfigureAwait(true))
+        // Add it to the list
         Items.Add(item);
 
+      // Exit loading state
       Loading = false;
 
+      // Notify the view of the data update
       OnPropertyChanged(nameof(Items));
     }
 
     /// <inheritdoc />
     public void ClearItems()
     {
+      // Clear the current items
       Items.Clear();
+      // Notify the view of the data update
       OnPropertyChanged(nameof(Items));
     }
   }

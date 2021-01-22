@@ -2,6 +2,9 @@ using Models.Interfaces.Entities;
 
 namespace Models.Entities
 {
+  /// <summary>
+  /// Model representing an engine
+  /// </summary>
   public record EngineModel
     : IEngine
   {

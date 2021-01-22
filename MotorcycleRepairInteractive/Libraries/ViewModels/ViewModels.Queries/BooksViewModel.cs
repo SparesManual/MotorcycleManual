@@ -14,13 +14,13 @@ namespace ViewModels.Queries
     : BasePagedViewModel<IBook>, IBooksViewModel
   {
     /// <inheritdoc />
-    protected override async Task<IPaging<IBook>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
-      => await m_provider.GetBooksAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(true);
-
-    /// <inheritdoc />
     public BooksViewModel(IAPIProvider provider)
       : base(provider)
     {
     }
+
+    /// <inheritdoc />
+    protected override async Task<IPaging<IBook>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
+      => await m_provider.GetBooksAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(true);
   }
 }

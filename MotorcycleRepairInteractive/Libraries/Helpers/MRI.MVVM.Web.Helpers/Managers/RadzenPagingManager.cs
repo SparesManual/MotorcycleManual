@@ -13,8 +13,10 @@ namespace MRI.MVVM.Web.Helpers.Managers
     /// <inheritdoc />
     public int GetPageIndex<T>(IPagedViewModel<T> viewModel, object paging)
     {
+      // Cast the input
       var data = (LoadDataArgs) paging;
 
+      // Return the calculated page index
       return data.Skip!.Value / viewModel.PageSize + 1;
     }
   }

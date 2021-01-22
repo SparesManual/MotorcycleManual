@@ -42,13 +42,6 @@ namespace Db.Infrastructure.Data
           .Where(mapped => mapped.IsValid)
           .Select(mapped => mapped.Result);
 
-        // foreach (var item in result)
-        // {
-        //   await extracted.AddAsync(item).ConfigureAwait(false);
-        //
-        //   await context.SaveChangesAsync().ConfigureAwait(false);
-        // }
-
         await extracted.AddRangeAsync(result).ConfigureAwait(false);
         await context.SaveChangesAsync().ConfigureAwait(false);
       }

@@ -20,7 +20,10 @@ namespace MRI.MVVM.Web.Helpers
     /// <inheritdoc />
     protected override async Task OnInitializedAsync()
     {
-      if (ViewModel != null) await ViewModel.LoadItems().ConfigureAwait(true);
+      // If the view model is not null..
+      if (ViewModel is not null)
+        // Load the view items
+        await ViewModel.LoadItems().ConfigureAwait(true);
     }
 
     /// <summary>
@@ -30,17 +33,25 @@ namespace MRI.MVVM.Web.Helpers
     /// <param name="paging">Paging data</param>
     protected async Task LoadData(string filter, object paging)
     {
+      // If the view model is null..
       if (ViewModel is null)
+        // Exit
         return;
 
+      // Get the page index
       var newPage = PagingManager.GetPageIndex(ViewModel, paging);
+      // If the filter and page index are unchanged..
       if (ViewModel.Search.Equals(filter)
           && ViewModel.PageIndex == newPage)
+        // Exit
         return;
 
+      // Update the filter
       ViewModel.Search = filter;
+      // Update the page index
       ViewModel.PageIndex = newPage;
 
+      // Load the view items
       await ViewModel.LoadItems().ConfigureAwait(false);
     }
 
@@ -56,21 +67,29 @@ namespace MRI.MVVM.Web.Helpers
     /// <param name="filter">Filter for the data</param>
     protected async Task ReloadData(string filter)
     {
+      // If the view model is null..
       if (ViewModel is null)
+        // Exit
         return;
 
+      // Update the filter
       ViewModel.Search = filter;
+      // Move the first page
       ViewModel.PageIndex = 1;
 
+      // Load the view items
       await ViewModel.LoadItems().ConfigureAwait(false);
 
+      // Go to the first page
       GoToPage(0);
     }
 
     /// <inheritdoc />
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
+      // If the persisting page number is greater than one..
       if (ViewModel?.PageIndex > 1)
+        // Navigate to the persisting page
         GoToPage(ViewModel.PageIndex - 1);
 
       return base.OnAfterRenderAsync(firstRender);

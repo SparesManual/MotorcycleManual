@@ -2,6 +2,9 @@ using Models.Interfaces.Entities;
 
 namespace Models.Entities
 {
+  /// <summary>
+  /// Model representing a section
+  /// </summary>
   public record SectionModel
     : ISection
   {

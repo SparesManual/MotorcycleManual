@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
 using Models.Interfaces.Entities;
+using MRI.Helpers;
 using MRI.MVVM.Helpers;
 using ViewModels.Interfaces.Queries;
 
@@ -24,14 +25,20 @@ namespace ViewModels.Queries
     /// <inheritdoc />
     protected override async Task<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>> GetItem(int id, CancellationToken cancellationToken = default)
     {
+      // Get the models
       var models = await m_provider
+        // Query the models from a given book
         .GetBookModelsAsync(id, cancellationToken)
+        // Materialize the result
         .ToListAsync(cancellationToken)
         .ConfigureAwait(false);
 
+      // Return the result
       return models
+        // Group the models by their names
         .GroupBy(model => model.Name)
-        .ToDictionary(group => group.Key, group => new LinkedList<IModel>(group) as IReadOnlyCollection<IModel>);
+        // Materialize the items into a map of model name to concrete models
+        .ToDictionary(group => group.Key, group => group.ToReadOnlyCollection());
     }
   }
 }

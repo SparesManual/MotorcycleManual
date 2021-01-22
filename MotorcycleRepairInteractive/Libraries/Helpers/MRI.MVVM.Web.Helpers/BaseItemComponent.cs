@@ -22,14 +22,20 @@ namespace MRI.MVVM.Web.Helpers
       get => ViewModel?.Id ?? -1;
       set
       {
-        if (ViewModel != null) ViewModel.Id = value;
+        // If the view model is not null..
+        if (ViewModel is not null)
+          // Set the value
+          ViewModel.Id = value;
       }
     }
 
     /// <inheritdoc />
     protected override async Task OnInitializedAsync()
     {
-      if (ViewModel != null) await ViewModel.LoadItem().ConfigureAwait(false);
+      // If the view model is not null..
+      if (ViewModel is not null)
+        // Load the view items
+        await ViewModel.LoadItem().ConfigureAwait(false);
     }
   }
 }

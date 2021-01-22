@@ -2,6 +2,9 @@ using Models.Interfaces.Entities;
 
 namespace Models.Entities
 {
+  /// <summary>
+  /// Model representing a carburetor
+  /// </summary>
   public record CarburetorModel
     : ICarburetor
   {

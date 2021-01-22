@@ -25,7 +25,9 @@
   {
     await base.OnInitializedAsync().ConfigureAwait(false);
 
+    // If the section selection persisted..
     if (m_sectionParts?.SectionId != null)
+      // Propagate it to the sections grid
       await m_bookSections!.SetSectionId((int)m_sectionParts.SectionId).ConfigureAwait(false);
   }
 

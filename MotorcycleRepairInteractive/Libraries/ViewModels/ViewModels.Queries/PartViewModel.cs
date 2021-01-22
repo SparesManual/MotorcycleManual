@@ -14,11 +14,11 @@ namespace ViewModels.Queries
     : BaseItemViewModel<IPart>, IPartViewModel
   {
     /// <inheritdoc />
-    protected override async Task<IPart> GetItem(int id, CancellationToken cancellationToken = default)
-      => await m_provider.GetPartAsync(id, cancellationToken).ConfigureAwait(false);
-
-    /// <inheritdoc />
     public PartViewModel(IAPIProvider provider)
       : base(provider) { }
+
+    /// <inheritdoc />
+    protected override async Task<IPart> GetItem(int id, CancellationToken cancellationToken = default)
+      => await m_provider.GetPartAsync(id, cancellationToken).ConfigureAwait(false);
   }
 }

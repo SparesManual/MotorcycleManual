@@ -3,6 +3,9 @@ using Models.Interfaces.Entities;
 
 namespace Models.Entities
 {
+  /// <summary>
+  /// Model representing a section part
+  /// </summary>
   public class SectionPartModel
     : ISectionPart
   {

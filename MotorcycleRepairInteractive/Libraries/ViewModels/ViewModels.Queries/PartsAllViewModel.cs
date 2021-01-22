@@ -18,6 +18,14 @@ namespace ViewModels.Queries
     public ObservableCollection<string> Autocomplete { get; } = new();
 
     /// <inheritdoc />
+    public PartsAllViewModel(IAPIProvider provider)
+      : base(provider)
+    {
+    }
+
+    #region Methods
+
+    /// <inheritdoc />
     public async Task UpdateAutocomplete(string? search)
     {
       Autocomplete.Clear();
@@ -31,10 +39,6 @@ namespace ViewModels.Queries
     protected override async Task<IPaging<IPart>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
       => await m_provider.GetPartsAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(false);
 
-    /// <inheritdoc />
-    public PartsAllViewModel(IAPIProvider provider)
-      : base(provider)
-    {
-    }
+    #endregion
   }
 }
