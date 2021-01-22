@@ -63,6 +63,8 @@ namespace MRI.MVVM.Web.Helpers
       ViewModel.PageIndex = 1;
 
       await ViewModel.LoadItems().ConfigureAwait(false);
+
+      GoToPage(0);
     }
 
     /// <inheritdoc />

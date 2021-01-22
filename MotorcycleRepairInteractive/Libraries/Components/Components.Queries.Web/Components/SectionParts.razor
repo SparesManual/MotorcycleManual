@@ -2,7 +2,7 @@
 @namespace Comp
 @inherits BasePagedComponent<ISectionPartsViewModel, ISectionPart>
 
-<RadzenGrid @ref="      m_grid"
+<RadzenGrid @ref="m_grid"
              Count="ViewModel!.TotalItems"
              AllowPaging="true"
              LoadData="x => LoadData(x.Filter, x)"
@@ -47,13 +47,13 @@
     get => ViewModel?.SectionId;
     set
     {
-      if (ViewModel != null) ViewModel.SectionId = value;
+      if (ViewModel is not null) ViewModel.SectionId = value;
     }
   }
 
   void RowRender(RowRenderEventArgs<ISectionPart> args)
   {
-    if (ViewModel != null)
+    if (ViewModel is not null)
       args.Expandable = args.Data.Children.Any();
   }
 
@@ -67,6 +67,9 @@
   /// <param name="section">Section number</param>
   public async Task ChangeSectionAsync(int? section)
   {
+    if (ViewModel is null)
+      return;
+
     if (section is null)
       ClearData();
 
@@ -75,7 +78,7 @@
 
     SectionId = section;
 
-    await ReloadData(ViewModel?.Search ?? string.Empty).ConfigureAwait(false);
+    await ReloadData(ViewModel!.Search).ConfigureAwait(false);
   }
 
 }
