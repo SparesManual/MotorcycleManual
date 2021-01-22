@@ -1,6 +1,7 @@
 @* ReSharper disable once CheckNamespace *@
 @namespace Comp
 @inherits BasePagedComponent<ISectionPartsViewModel, ISectionPart>
+@inject NavigationManager m_navigationManager
 
 <RadzenGrid @ref="m_grid"
              Count="ViewModel!.TotalItems"
@@ -9,14 +10,16 @@
              Data="ViewModel!.Items"
              PageSize="ViewModel!.PageSize"
              TItem="ISectionPart"
-             RowRender="@RowRender" ExpandMode="DataGridExpandMode.Single">
+             RowRender="@RowRender"
+             RowSelect="@SelectPart"
+             ExpandMode="DataGridExpandMode.Single">
   <Template Context="sectionPart">
-    <RadzenGrid Data="@sectionPart.Children" TItem="ISectionPart">
+    <RadzenGrid Data="@sectionPart.Children" TItem="ISectionPart" RowSelect="@SelectPart">
       <Columns>
         <RadzenGridColumn TItem="ISectionPart" Property="PartNumber" Title="Part number"/>
-        <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="MakersPartNumber" Title="Makers number"/>
-        <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="PageNumber" Title="Page number"/>
-        <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="Remarks" Title="Remarks"/>
+        <RadzenGridColumn TItem="ISectionPart" Property="MakersPartNumber" Title="Makers number"/>
+        <RadzenGridColumn TItem="ISectionPart" Property="PageNumber" Title="Page number"/>
+        <RadzenGridColumn TItem="ISectionPart" Property="Remarks" Title="Remarks"/>
       </Columns>
     </RadzenGrid>
   </Template>
@@ -26,12 +29,11 @@
         Displayed parts: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="MakersPartNumber" Title="Makers number"/>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="PageNumber" Title="Page number"/>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="Remarks" Title="Remarks"/>
+    <RadzenGridColumn TItem="ISectionPart" Property="MakersPartNumber" Title="Makers number"/>
+    <RadzenGridColumn TItem="ISectionPart" Property="PageNumber" Title="Page number"/>
+    <RadzenGridColumn TItem="ISectionPart" Property="Remarks" Title="Remarks"/>
   </Columns>
 </RadzenGrid>
-
 
 @code {
 #nullable enable
@@ -80,5 +82,8 @@
 
     await ReloadData(ViewModel!.Search).ConfigureAwait(false);
   }
+
+  private void SelectPart(ISectionPart sectionPart)
+    => m_navigationManager.NavigateTo("part/" + sectionPart.Id);
 
 }

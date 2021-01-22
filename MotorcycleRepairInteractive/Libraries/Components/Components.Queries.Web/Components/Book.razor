@@ -7,7 +7,7 @@
 
 <div class="container-split">
   <div class="content-left">
-    <BookSections BookId="ItemId" CurrentSectionChanged="@Callback"/>
+    <BookSections @ref="m_bookSections" BookId="ItemId" CurrentSectionChanged="@SectionChanged"/>
   </div>
   <div class="content-right">
     <SectionParts @ref="m_sectionParts"/>
@@ -18,10 +18,12 @@
 #nullable enable
 
   private SectionParts? m_sectionParts;
+  private BookSections? m_bookSections;
 
-  private async void Callback(int? section)
+  private async void SectionChanged(int? section)
   {
-    if (m_sectionParts != null) await m_sectionParts.ChangeSectionAsync(section).ConfigureAwait(false);
+    if (m_sectionParts != null)
+      await m_sectionParts.ChangeSectionAsync(section).ConfigureAwait(false);
   }
 
 }

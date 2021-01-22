@@ -2,15 +2,15 @@
 @namespace Comp
 @inherits BasePagedComponent<IBookSectionsViewModel, ISection>
 
-<RadzenGrid RowSelect="RowSelected" @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.ISection">
+<RadzenGrid RowSelect="@RowSelected" @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="ISection">
   <Columns>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Property="Header" Title="Header">
+    <RadzenGridColumn TItem="ISection" Property="Header" Title="Header">
       <FooterTemplate>
         Displayed sections: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Property="FigureNumber" Title="Figure"/>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISection" Title="Pages">
+    <RadzenGridColumn TItem="ISection" Property="FigureNumber" Title="Figure"/>
+    <RadzenGridColumn TItem="ISection" Title="Pages">
       <Template Context="data">
         @if (data.StartPage == data.EndPage)
         {

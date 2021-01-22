@@ -1,5 +1,6 @@
 ﻿@page "/partsall"
 @inherits BasePagedComponent<IAllPartsViewModel, IPart>
+@inject NavigationManager m_navigationManager
 
 <h1>PartsAll</h1>
 
@@ -7,18 +8,22 @@
   <RadzenAutoComplete Data="ViewModel!.Autocomplete" LoadData="LoadAutocompleteData" Placeholder="Search..."/>
 </div>
 
-<RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.IPart">
+<RadzenGrid @ref="m_grid"
+            Count="ViewModel!.TotalItems"
+            AllowPaging="true"
+            LoadData="x => LoadData(x.Filter, x)"
+            Data="ViewModel!.Items"
+            PageSize="ViewModel!.PageSize"
+            RowSelect="@SelectPart"
+            TItem="IPart">
   <Columns>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="PartNumber" Title="Part number">
-      <Template Context="data">
-        <a href="@($"part/{data.Id}")">@data.PartNumber</a>
-      </Template>
+    <RadzenGridColumn TItem="IPart" Property="PartNumber" Title="Part number">
       <FooterTemplate>
         Displayed parts: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
       </FooterTemplate>
     </RadzenGridColumn>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="MakersPartNumber" Title="Makers number"/>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.IPart" Property="Description" Title="Description"/>
+    <RadzenGridColumn TItem="IPart" Property="MakersPartNumber" Title="Makers number"/>
+    <RadzenGridColumn TItem="IPart" Property="Description" Title="Description"/>
   </Columns>
 </RadzenGrid>
 
@@ -37,5 +42,8 @@
   {
     if (ViewModel != null) await ViewModel.UpdateAutocomplete(obj.Filter).ConfigureAwait(false);
   }
+
+  private void SelectPart(IPart part)
+    => m_navigationManager.NavigateTo("part/" + part.Id);
 
 }
