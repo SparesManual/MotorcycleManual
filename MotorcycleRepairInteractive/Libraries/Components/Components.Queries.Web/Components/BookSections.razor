@@ -2,7 +2,7 @@
 @namespace Comp
 @inherits BasePagedComponent<IBookSectionsViewModel, ISection>
 
-<RadzenGrid RowSelect="@RowSelected" @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="ISection">
+<RadzenGrid RowSelect="@RowSelected" @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="@LoadTableData" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="ISection">
   <Columns>
     <RadzenGridColumn TItem="ISection" Property="Header" Title="Header">
       <FooterTemplate>
@@ -32,6 +32,7 @@
 
   private RadzenGrid<ISection>? m_grid;
   private int m_bookId;
+  private int? m_sectionId;
 
   /// <summary>
   /// Parent book id
@@ -54,10 +55,49 @@
   public EventCallback<int?> CurrentSectionChanged { get; set; }
 
   /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync().ConfigureAwait(false);
+
+    await SetSelection().ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
   protected override void GoToPage(int page)
     => m_grid?.GoToPage(page);
 
   private async void RowSelected(ISection? section)
     => await CurrentSectionChanged.InvokeAsync(section?.Id).ConfigureAwait(false);
+
+  /// <summary>
+  /// Sets the currently selected section id
+  /// </summary>
+  public async Task SetSectionId(int id)
+  {
+    m_sectionId = id;
+
+    await SetSelection().ConfigureAwait(false);
+  }
+
+  private async Task SetSelection()
+  {
+    if (m_sectionId is null || m_grid is null || ViewModel is null || ViewModel.Items.IsEmpty)
+      return;
+
+    var section = ViewModel.Items.FirstOrDefault(x => x.Id.Equals(m_sectionId));
+    if (section is null)
+      return;
+
+    await InvokeAsync(() => m_grid!.SelectRow(section)).ConfigureAwait(false);
+
+    m_sectionId = null;
+  }
+
+  private async void LoadTableData(LoadDataArgs data)
+  {
+    await LoadData(data.Filter, data).ConfigureAwait(false);
+
+    await SetSelection().ConfigureAwait(false);
+  }
 
 }

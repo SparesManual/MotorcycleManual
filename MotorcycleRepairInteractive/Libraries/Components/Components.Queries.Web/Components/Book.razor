@@ -20,6 +20,15 @@
   private SectionParts? m_sectionParts;
   private BookSections? m_bookSections;
 
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync().ConfigureAwait(false);
+
+    if (m_sectionParts?.SectionId != null)
+      await m_bookSections!.SetSectionId((int)m_sectionParts.SectionId).ConfigureAwait(false);
+  }
+
   private async void SectionChanged(int? section)
   {
     if (m_sectionParts != null)
