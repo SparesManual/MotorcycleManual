@@ -194,9 +194,9 @@ namespace Db.Interfaces
     Task<IPaging<ISectionPart>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = null, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Get all child section parts based on the given <paramref name="parentId"/> of the section part
+    /// Get all child sections based on the given <paramref name="parentId"/> of the section part
     /// </summary>
-    /// <param name="parentId">Id of the parent section parts</param>
+    /// <param name="parentId">Id of the parent section part</param>
     /// <param name="size">Page size</param>
     /// <param name="index">Page index</param>
     /// <param name="search"></param>

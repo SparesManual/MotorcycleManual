@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Core.Entities;
@@ -167,15 +168,24 @@ namespace Db.API
       };
 
     private static SectionPartReply ToSectionPartReply(SectionParts? sectionParts)
-      => new()
-      {
-        Part = ToPartReply(sectionParts?.Part),
-        PartId = sectionParts?.PageNumber ?? -1,
-        PageNumber = sectionParts?.PageNumber ?? -1,
-        AdditionalInfo = sectionParts?.AdditionalInfo ?? string.Empty,
-        Remarks = sectionParts?.Remarks ?? string.Empty,
-        Quantity = sectionParts?.Quantity ?? -1
-      };
+    {
+      static SectionPartReply Convert(SectionParts? item)
+        => new()
+        {
+          Part = ToPartReply(item?.Part),
+          PartId = item?.PageNumber ?? -1,
+          PageNumber = item?.PageNumber ?? -1,
+          AdditionalInfo = item?.AdditionalInfo ?? string.Empty,
+          Remarks = item?.Remarks ?? string.Empty,
+          Quantity = item?.Quantity ?? -1
+        };
+
+      var converted = Convert(sectionParts);
+      if (sectionParts is not null)
+        converted.Children.AddRange(sectionParts.ChildSections.Select(x => x.Child).Select(Convert));
+
+      return converted;
+    }
 
     #endregion
 

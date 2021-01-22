@@ -1,4 +1,5 @@
-﻿using Models.Interfaces.Entities;
+﻿using System.Collections.Generic;
+using Models.Interfaces.Entities;
 
 namespace Models.Entities
 {
@@ -28,5 +29,8 @@ namespace Models.Entities
 
     /// <inheritdoc />
     public int Quantity { get; init; }
+
+    /// <inheritdoc />
+    public IReadOnlyCollection<ISectionPart> Children { get; init; }
   }
 }

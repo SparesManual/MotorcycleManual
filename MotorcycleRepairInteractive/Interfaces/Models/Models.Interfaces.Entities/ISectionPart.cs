@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Models.Interfaces.Entities
 {
   /// <summary>
@@ -22,5 +24,9 @@ namespace Models.Interfaces.Entities
     /// Occurrence of the part in the parent section
     /// </summary>
     int Quantity { get; }
+    /// <summary>
+    /// Child parts
+    /// </summary>
+    IReadOnlyCollection<ISectionPart> Children { get; }
   }
 }

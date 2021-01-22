@@ -2,9 +2,26 @@
 @namespace Comp
 @inherits BasePagedComponent<ISectionPartsViewModel, ISectionPart>
 
-<RadzenGrid @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="x => LoadData(x.Filter, x)" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="Models.Interfaces.Entities.ISectionPart">
+<RadzenGrid @ref="      m_grid"
+             Count="ViewModel!.TotalItems"
+             AllowPaging="true"
+             LoadData="x => LoadData(x.Filter, x)"
+             Data="ViewModel!.Items"
+             PageSize="ViewModel!.PageSize"
+             TItem="ISectionPart"
+             RowRender="@RowRender" ExpandMode="DataGridExpandMode.Single">
+  <Template Context="sectionPart">
+    <RadzenGrid Data="@sectionPart.Children" TItem="ISectionPart">
+      <Columns>
+        <RadzenGridColumn TItem="ISectionPart" Property="PartNumber" Title="Part number"/>
+        <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="MakersPartNumber" Title="Makers number"/>
+        <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="PageNumber" Title="Page number"/>
+        <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="Remarks" Title="Remarks"/>
+      </Columns>
+    </RadzenGrid>
+  </Template>
   <Columns>
-    <RadzenGridColumn TItem="Models.Interfaces.Entities.ISectionPart" Property="PartNumber" Title="Part number">
+    <RadzenGridColumn TItem="ISectionPart" Property="PartNumber" Title="Part number">
       <FooterTemplate>
         Displayed parts: <b>@ViewModel!.Items.Count</b> of <b>@ViewModel!.TotalItems</b>
       </FooterTemplate>
@@ -32,6 +49,12 @@
     {
       if (ViewModel != null) ViewModel.SectionId = value;
     }
+  }
+
+  void RowRender(RowRenderEventArgs<ISectionPart> args)
+  {
+    if (ViewModel != null)
+      args.Expandable = args.Data.Children.Any();
   }
 
   /// <inheritdoc />

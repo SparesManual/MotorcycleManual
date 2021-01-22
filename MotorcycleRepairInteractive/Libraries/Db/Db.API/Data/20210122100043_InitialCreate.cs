@@ -3,7 +3,7 @@
 
 namespace Db.API.Data
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -280,7 +280,7 @@ namespace Db.API.Data
                 });
 
             migrationBuilder.CreateTable(
-                name: "SectionModel",
+                name: "SectionModels",
                 columns: table => new
                 {
                     SectionId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -288,15 +288,15 @@ namespace Db.API.Data
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SectionModel", x => new { x.SectionId, x.ModelId });
+                    table.PrimaryKey("PK_SectionModels", x => new { x.SectionId, x.ModelId });
                     table.ForeignKey(
-                        name: "FK_SectionModel_Models_ModelId",
+                        name: "FK_SectionModels_Models_ModelId",
                         column: x => x.ModelId,
                         principalTable: "Models",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SectionModel_Sections_SectionId",
+                        name: "FK_SectionModels_Sections_SectionId",
                         column: x => x.SectionId,
                         principalTable: "Sections",
                         principalColumn: "Id",
@@ -339,8 +339,8 @@ namespace Db.API.Data
                 column: "PropertyTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SectionModel_ModelId",
-                table: "SectionModel",
+                name: "IX_SectionModels_ModelId",
+                table: "SectionModels",
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
@@ -373,7 +373,7 @@ namespace Db.API.Data
                 name: "Properties");
 
             migrationBuilder.DropTable(
-                name: "SectionModel");
+                name: "SectionModels");
 
             migrationBuilder.DropTable(
                 name: "SectionPartParents");

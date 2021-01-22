@@ -28,7 +28,10 @@ namespace Db.Core.Specifications
         sections
           .Where(sp => sp.SectionId == id)
           .Include(sp => sp.Part!)
-          .Where(part => part != null)
+          .Include(sectionPart => sectionPart.ChildSections)
+          .ThenInclude(x => x.Child)
+          .Include(sectionPart => sectionPart.ChildSections)
+          .ThenInclude(x => x.Child.Part)
       );
 
       SetOrderBy(sectionParts => sectionParts.Part.PartNumber);

@@ -207,6 +207,8 @@ message SectionPartReply {
   int32 quantity = 5;
   // Mapping remarks
   string remarks = 6;
+  // Child section parts
+  repeated SectionPartReply children = 7;
 }
 
 // Property type entity

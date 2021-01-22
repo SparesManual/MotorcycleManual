@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -151,17 +152,23 @@ namespace MRI.Db
       };
 
     private static ISectionPart ToSectionParts(SectionPartReply reply)
-      => new SectionPartModel
-      {
-        Id = reply.Part.Id,
-        PageNumber = reply.PageNumber,
-        Remarks = reply.Remarks,
-        AdditionalInfo = reply.AdditionalInfo,
-        Quantity = reply.Quantity,
-        Description = reply.Part.Description,
-        PartNumber = reply.Part.PartNumber,
-        MakersPartNumber = reply.Part.MakersPartNumber
-      };
+    {
+      static ISectionPart Convert(SectionPartReply item, bool children)
+        => new SectionPartModel
+        {
+          Id = item.Part.Id,
+          PageNumber = item.PageNumber,
+          Remarks = item.Remarks,
+          AdditionalInfo = item.AdditionalInfo,
+          Quantity = item.Quantity,
+          Description = item.Part.Description,
+          PartNumber = item.Part.PartNumber,
+          MakersPartNumber = item.Part.MakersPartNumber,
+          Children = children ? item.Children.Select(x => Convert(x, false)).ToArray() : Array.Empty<ISectionPart>()
+        };
+
+      return Convert(reply, true);
+    }
 
     private static IMake ToMake(MakeReply reply)
       => new MakeModel

@@ -283,7 +283,7 @@ namespace Db.API.Data
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("SectionModel");
+                    b.ToTable("SectionModels");
                 });
 
             modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
@@ -445,13 +445,13 @@ namespace Db.API.Data
             modelBuilder.Entity("Db.Core.Entities.SectionPartParents", b =>
                 {
                     b.HasOne("Db.Core.Entities.SectionParts", "Child")
-                        .WithMany("ChildSections")
+                        .WithMany()
                         .HasForeignKey("ChildId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Db.Core.Entities.SectionParts", "Parent")
-                        .WithMany()
+                        .WithMany("ChildSections")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

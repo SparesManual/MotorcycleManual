@@ -125,9 +125,9 @@ namespace Db.Infrastructure.Data
 
       modelBuilder.Entity<SectionPartParents>().HasKey(section => new {section.ParentId, section.ChildId});
       modelBuilder.Entity<SectionPartParents>()
-        .HasOne(bc => bc.Child)
+        .HasOne(bc => bc.Parent)
         .WithMany(c => c!.ChildSections)
-        .HasForeignKey(bc => bc.ChildId);
+        .HasForeignKey(bc => bc.ParentId);
 
       #endregion
 
