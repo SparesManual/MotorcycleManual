@@ -14,7 +14,7 @@ namespace MRI.Application
 {
   public class Startup
   {
-    public void ConfigureServices(IServiceCollection services)
+    public static void ConfigureServices(IServiceCollection services)
     {
       services.AddRazorPages();
       services.AddSingleton<IAPIProvider, APIProvider>();
@@ -34,7 +34,7 @@ namespace MRI.Application
       services.AddServerSideBlazor();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       if (env.IsDevelopment())
       {

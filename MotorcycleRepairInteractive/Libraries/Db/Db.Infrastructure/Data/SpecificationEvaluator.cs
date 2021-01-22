@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -72,13 +73,14 @@ namespace Db.Infrastructure.Data
     /// <param name="inputQuery">Query to which the <paramref name="specification"/> is to be applied</param>
     /// <param name="specification">Query specification</param>
     /// <param name="criteriaOnly">Skip applying modifications and only filter data using the defined <see cref="ISpecification{T}.Criteria"/></param>
+    /// <exception cref="InvalidDataException">If the <paramref name="specification"/> required <see cref="ISpecificationEx{TInput,TOutput}.Extractor"/> property is null</exception>
     /// <returns>Modified query</returns>
     public static IQueryable<TEntity> GetQuery<TParent, TEntity>(this IQueryable<TParent> inputQuery, ISpecificationEx<TParent, TEntity> specification, bool criteriaOnly = false)
       where TParent : class, IEntity
       where TEntity : class, IEntity
     {
       if (specification.Extractor is null)
-        throw new ArgumentNullException(nameof(specification.Extractor));
+        throw new InvalidDataException(nameof(specification.Extractor));
 
       // Extract the required entities
       var query = specification.Extractor(inputQuery);

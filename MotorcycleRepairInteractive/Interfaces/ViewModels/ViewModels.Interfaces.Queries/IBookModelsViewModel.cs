@@ -10,9 +10,5 @@ namespace ViewModels.Interfaces.Queries
   public interface IBookModelsViewModel
     : IItemViewModel<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>>
   {
-    /// <summary>
-    /// Parent book id
-    /// </summary>
-    int BookId { get; }
   }
 }

@@ -9,6 +9,7 @@ namespace Db.Infrastructure.Data
     : DbContext
   {
     #region Properties
+    // ReSharper disable UnusedAutoPropertyAccessor.Global
 
     /// <summary>
     /// Collection of books
@@ -80,6 +81,7 @@ namespace Db.Infrastructure.Data
     /// </summary>
     public DbSet<PropertyType>? PropertyTypes { get; set; }
 
+    // ReSharper restore UnusedAutoPropertyAccessor.Global
     #endregion
 
     /// <summary>

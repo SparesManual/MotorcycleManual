@@ -85,14 +85,14 @@ namespace Db.API
       => new()
       {
         Id = book?.Id ?? -1,
-        Title = book?.Title ?? string.Empty,
+        Title = book?.Title ?? string.Empty
       };
 
     private static MakeReply ToMakeReply(Make? make)
       => new()
       {
         Id = make?.Id ?? -1,
-        Name = make?.Name ?? string.Empty,
+        Name = make?.Name ?? string.Empty
       };
 
     private static CarburetorReply ToCarburetorReply(Carburetor? carburetor)
@@ -134,7 +134,7 @@ namespace Db.API
         Id = part?.Id ?? -1,
         PartNumber = part?.PartNumber ?? string.Empty,
         MakersPartNumber = part?.MakersPartNumber ?? string.Empty,
-        Description = part?.Description ?? string.Empty,
+        Description = part?.Description ?? string.Empty
       };
 
     private static PartPropertyReply ToPropertyReply(Property? property)

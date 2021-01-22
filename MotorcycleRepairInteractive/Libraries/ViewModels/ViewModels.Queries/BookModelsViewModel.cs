@@ -16,9 +16,6 @@ namespace ViewModels.Queries
     : BaseItemViewModel<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>>, IBookModelsViewModel
   {
     /// <inheritdoc />
-    public int BookId { get; set; }
-
-    /// <inheritdoc />
     public BookModelsViewModel(IAPIProvider provider)
       : base(provider)
     {

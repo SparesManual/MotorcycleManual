@@ -31,11 +31,11 @@ namespace Db.Core.Specifications
     public ModelSpec(int id, bool includeEngine)
       : base(model => model.Id.Equals(id))
     {
-      if (includeEngine)
-      {
-        AddInclude(model => model.Engine);
-        AddInclude(model => model.Engine.Carburetor);
-      }
+      if (!includeEngine)
+        return;
+
+      AddInclude(model => model.Engine);
+      AddInclude(model => model.Engine.Carburetor);
     }
   }
 }

@@ -71,7 +71,7 @@ namespace MRI.Helpers
     /// <typeparam name="T">Input collection items type</typeparam>
     /// <returns>Linked list</returns>
     public static LinkedList<T> ToLinkedList<T>(this IEnumerable<T> input)
-      => new LinkedList<T>(input);
+      => new(input);
 
     /// <summary>
     /// Filters out null types

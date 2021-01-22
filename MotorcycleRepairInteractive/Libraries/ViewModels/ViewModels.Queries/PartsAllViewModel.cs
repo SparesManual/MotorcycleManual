@@ -15,7 +15,7 @@ namespace ViewModels.Queries
     : BasePagedViewModel<IPart>, IAllPartsViewModel
   {
     /// <inheritdoc />
-    public ObservableCollection<string> Autocomplete { get; set; } = new ObservableCollection<string>();
+    public ObservableCollection<string> Autocomplete { get; } = new();
 
     /// <inheritdoc />
     public async Task UpdateAutocomplete(string? search)
