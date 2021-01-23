@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="urn:sparesmanual.com:bom" xmlns="urn:sparesmanual.com:bom"
+  xmlns:b="urn:sparesmanual.com:bom">
+
+  <xs:element name="bill" type="billType">
+    <xs:annotation>
+      <xs:documentation>BOM root element</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <xs:complexType name="billType">
+    <xs:annotation>
+      <xs:documentation>BOM root element type</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="client" type="clientType" minOccurs="0" nillable="true">
+        <xs:annotation>
+          <xs:documentation>Client data element</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="material" type="materialType" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>BOM material element</xs:documentation>
+        </xs:annotation>
+        <xs:key name="materialKey">
+          <xs:annotation>
+            <xs:documentation>No two materials should have the same part number and makers part number key-pair</xs:documentation>
+          </xs:annotation>
+          <xs:selector xpath="b:material"/>
+          <xs:field xpath="@partNumber"/>
+          <xs:field xpath="@makersPartNumber"/>
+        </xs:key>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="clientType">
+    <xs:annotation>
+      <xs:documentation>Client data type</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="nonEmpty" nillable="true" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Client name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="email" type="emailType" nillable="true" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Client email</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="message" type="nonEmpty" nillable="true" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Client message</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="emailType">
+    <xs:annotation>
+      <xs:documentation>Email string type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="6"/>
+      <xs:maxLength value="254"/>
+      <xs:pattern value="^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="materialType">
+    <xs:annotation>
+      <xs:documentation>BOM material element type</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="quantity" use="required">
+          <xs:annotation>
+            <xs:documentation>Material quantity</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:unsignedInt">
+              <xs:minExclusive value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="partNumber" type="nonEmpty" use="required">
+          <xs:annotation>
+            <xs:documentation>Material number</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="makersPartNumber" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Material makers number</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="nonEmpty">
+    <xs:annotation>
+      <xs:documentation>A non-empty string</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
