@@ -75,6 +75,11 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
+        <xs:attribute name="id" use="required" type="xs:integer">
+          <xs:annotation>
+            <xs:documentation>Part id</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="quantity" use="required">
           <xs:annotation>
             <xs:documentation>Material quantity</xs:documentation>

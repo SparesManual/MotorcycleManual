@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DocumentationFile>bin\Debug\Models.Entities.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\bin\Debug\Libraries\Models\Models.Entities.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/Libraries/Models\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>../../../bin/Release/Libraries/Models\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

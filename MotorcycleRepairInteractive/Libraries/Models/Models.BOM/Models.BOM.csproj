@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>..\..\..\bin\Debug\Libraries\Models\Models.BOM.xml</DocumentationFile>
+        <OutputPath>../../../bin/Debug/Libraries/Models\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>../../../bin/Release/Libraries/Models\</OutputPath>
+    </PropertyGroup>
+</Project>
