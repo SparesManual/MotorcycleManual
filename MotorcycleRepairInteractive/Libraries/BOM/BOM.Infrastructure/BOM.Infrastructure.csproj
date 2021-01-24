@@ -17,18 +17,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <None Remove="XML\BOM.xsd" />
+      <EmbeddedResource Include="XML\BOM.xsd">
+        <SubType>Designer</SubType>
       </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
-      </Compile>
+      <None Remove="XML\BOM.xsl" />
+      <EmbeddedResource Include="XML\BOM.xsl" />
     </ItemGroup>
 
 </Project>

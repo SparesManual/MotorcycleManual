@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -29,6 +30,8 @@ namespace BOM.Infrastructure
 
     #region Constants
 
+    private const string XSD = "BOM.Infrastructure.XML.BOM.xsd";
+    private const string XSL = "BOM.Infrastructure.XML.BOM.xsl";
     private const string NAMESPACE = "urn:sparesmanual.com:bom";
     private const string PREFIX = "b";
     private const string BILL = "bill";
@@ -46,11 +49,18 @@ namespace BOM.Infrastructure
 
     static BOMHelper()
     {
+      var asm = Assembly.GetExecutingAssembly();
+      using var xsd = asm.GetManifestResourceStream(XSD);
+      using var xsl = asm.GetManifestResourceStream(XSL);
+
+      using var xsdReader = new StreamReader(xsd!);
+      using var xslReader = new XmlTextReader(xsl!);
+
       XSLT = new XslTransform();
-      XSLT.Load(new XmlTextReader(new StringReader(Resources.Transformation)));
+      XSLT.Load(xslReader);
 
       SCHEMA = new XmlSchemaSet();
-      SCHEMA.Add(NAMESPACE, new XmlTextReader(new StringReader(Resources.Schema)));
+      SCHEMA.Add(NAMESPACE, new XmlTextReader(xsdReader));
     }
 
     #region Methods
@@ -100,19 +110,19 @@ namespace BOM.Infrastructure
         var material = xml.CreateElement(PREFIX, MATERIAL, NAMESPACE);
         material.InnerText = item.Description;
 
-        var id = xml.CreateAttribute(PREFIX, ID, NAMESPACE);
+        var id = xml.CreateAttribute(ID, NAMESPACE);
         id.Value = item.Id.ToString();
         material.Attributes.Append(id);
 
-        var partNumber = xml.CreateAttribute(PREFIX, PART_NUMBER, NAMESPACE);
+        var partNumber = xml.CreateAttribute(PART_NUMBER, NAMESPACE);
         partNumber.Value = item.PartNumber;
         material.Attributes.Append(partNumber);
 
-        var makersPartNumber = xml.CreateAttribute(PREFIX, MAKERS_PART_NUMBER, NAMESPACE);
+        var makersPartNumber = xml.CreateAttribute(MAKERS_PART_NUMBER, NAMESPACE);
         makersPartNumber.Value = item.MakersPartNumber ?? string.Empty;
         material.Attributes.Append(makersPartNumber);
 
-        var quantity = xml.CreateAttribute(PREFIX, QUANTITY, NAMESPACE);
+        var quantity = xml.CreateAttribute(QUANTITY, NAMESPACE);
         quantity.Value = item.Quantity.ToString();
         material.Attributes.Append(quantity);
 

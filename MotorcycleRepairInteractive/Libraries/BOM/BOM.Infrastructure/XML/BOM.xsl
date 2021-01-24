@@ -7,9 +7,6 @@
 
   <xsl:template match="/">
     <html>
-      <head>
-        <title>Bill of materials</title>
-      </head>
       <body>
         <div class="container">
           <xsl:apply-templates select="b:bill" />
@@ -31,47 +28,52 @@
           <th>Descritpion</th>
         </tr>
       </thead>
-      <tfoot>
-        <tr>
-          <td colspan="0">Total quantity: <xsl:value-of select="sum(/b:bill/b:material/@quantity)"
-             /></td>
-        </tr>
-      </tfoot>
       <tbody>
         <xsl:apply-templates select="b:material" />
       </tbody>
     </table>
+    <p> Total quantity: <xsl:value-of select="sum(/b:bill/b:material/@b:quantity)" />
+    </p>
   </xsl:template>
 
   <xsl:template match="b:client">
     <h2>Client details</h2>
     <ul>
-      <xsl:apply-templates />  
-    </ul>    
+      <xsl:apply-templates />
+    </ul>
   </xsl:template>
-  
+
   <xsl:template match="b:name">
-    <li><strong>Name: </strong><xsl:value-of select="."/></li>
+    <li>
+      <strong>Name: </strong>
+      <xsl:value-of select="." />
+    </li>
   </xsl:template>
-  
+
   <xsl:template match="b:email">
-    <li><strong>Email: </strong><xsl:value-of select="."/></li>
+    <li>
+      <strong>Email: </strong>
+      <xsl:value-of select="." />
+    </li>
   </xsl:template>
-  
+
   <xsl:template match="b:message">
-    <li><strong>Message: </strong><xsl:value-of select="."/></li>
+    <li>
+      <strong>Message: </strong>
+      <xsl:value-of select="." />
+    </li>
   </xsl:template>
 
   <xsl:template match="b:material">
     <tr>
       <td>
-        <xsl:value-of select="@partNumber" />
+        <xsl:value-of select="@b:partNumber" />
       </td>
       <td>
-        <xsl:value-of select="@makersPartNumber" />
+        <xsl:value-of select="@b:makersPartNumber" />
       </td>
       <td>
-        <xsl:value-of select="@quantity" />
+        <xsl:value-of select="@b:quantity" />
       </td>
       <td>
         <xsl:value-of select="." />
