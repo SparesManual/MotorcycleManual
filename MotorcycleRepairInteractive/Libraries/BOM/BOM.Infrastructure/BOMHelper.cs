@@ -25,14 +25,15 @@ namespace BOM.Infrastructure
 
     private static readonly XslTransform XSLT;
     private static readonly XmlSchemaSet SCHEMA;
+    private static readonly string NAMESPACE = $"urn:{URL}:bom";
 
     #endregion
 
     #region Constants
 
+    private const string URL = "sparesmanual.com";
     private const string XSD = "BOM.Infrastructure.XML.BOM.xsd";
     private const string XSL = "BOM.Infrastructure.XML.BOM.xsl";
-    private const string NAMESPACE = "urn:sparesmanual.com:bom";
     private const string PREFIX = "b";
     private const string BILL = "bill";
     private const string CLIENT = "client";
@@ -231,16 +232,24 @@ namespace BOM.Infrastructure
     /// <param name="output">Output file path</param>
     public static void ToPDF(this string html, string output)
     {
-      var document = new Document();
       using var stream = new FileStream(output, FileMode.Create);
+      var document = new Document(PageSize.A4, 72, 72,72, 72);
       PdfWriter.GetInstance(document, stream);
+      document.AddAuthor(URL);
+      document.Header = new HeaderFooter(new Phrase($"Generated with {URL}"), false);
+      document.Footer = new HeaderFooter(new Phrase("Page "), true);
+
       document.Open();
 
       try
       {
-        var worker = new HtmlWorker(document);
         using var reader = new StringReader(html);
-        worker.Parse(reader);
+        var styles = new StyleSheet();
+
+        var list = HtmlWorker.ParseToList(reader, styles);
+
+        foreach (IElement element in list)
+          document.Add(element);
       }
       finally
       {
