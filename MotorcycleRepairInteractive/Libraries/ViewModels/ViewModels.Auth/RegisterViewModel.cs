@@ -5,6 +5,9 @@ using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace ViewModels.Auth
 {
+  /// <summary>
+  /// View model for the register views
+  /// </summary>
   public class RegisterViewModel
     : BaseFormViewModel, IRegisterViewModel
   {

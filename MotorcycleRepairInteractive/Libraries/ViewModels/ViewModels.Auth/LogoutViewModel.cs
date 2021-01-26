@@ -4,6 +4,9 @@ using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace ViewModels.Auth
 {
+  /// <summary>
+  /// View model for logout views
+  /// </summary>
   public class LogoutViewModel
     : BaseFormViewModel, ILogoutViewModel
   {

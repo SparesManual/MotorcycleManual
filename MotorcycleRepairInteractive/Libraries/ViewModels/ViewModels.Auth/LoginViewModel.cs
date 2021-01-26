@@ -5,6 +5,9 @@ using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace ViewModels.Auth
 {
+  /// <summary>
+  /// View model for login views
+  /// </summary>
   public class LoginViewModel
     : BaseFormViewModel, ILoginViewModel
   {

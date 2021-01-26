@@ -5,6 +5,9 @@ using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace ViewModels.Auth
 {
+  /// <summary>
+  /// View model for the reset password views
+  /// </summary>
   public class ResetPasswordViewModel
     : BaseFormViewModel, IResetPasswordViewModel
   {
