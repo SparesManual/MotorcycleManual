@@ -13,7 +13,7 @@ namespace Models.BOM
     /// <summary>
     /// Material part number
     /// </summary>
-    public string PartNumber { get; init; }
+    public string PartNumber { get; init; } = string.Empty;
 
     /// <summary>
     /// Material makers number
@@ -23,11 +23,12 @@ namespace Models.BOM
     /// <summary>
     /// Material occurrence in a bill
     /// </summary>
-    public uint Quantity { get; set; } = 0;
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
+    public uint Quantity { get; set; }
 
     /// <summary>
     /// Material part description
     /// </summary>
-    public string Description { get; init; }
+    public string Description { get; init; } = string.Empty;
   }
 }
