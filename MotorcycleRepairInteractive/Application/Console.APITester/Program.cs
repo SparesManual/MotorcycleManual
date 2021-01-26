@@ -1,26 +1,265 @@
-﻿using System.Threading.Tasks;
-using MRI.Db;
+﻿using BOM.Infrastructure;
+using Models.BOM;
 
 namespace Console.APITester
 {
   public static class Program
   {
-    private static async Task Main()
+    private static void Main()
     {
-      const int pageSize = 10;
-      const int pageIndex = 1;
+      var bill = new Bill
+      {
+        Materials = new[]
+        {
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          },
+          new Material
+          {
+            PartNumber = "12345",
+            MakersPartNumber = "abcde",
+            Description = "a part",
+            Quantity = 4
+          }
+        }
+      };
 
-      using var provider = new APIProvider();
-
-      var parts = await provider.GetPartsFromSectionAsync(1, pageSize, pageIndex).ConfigureAwait(false);
-
-      System.Console.WriteLine($"{parts.PageIndex}: {parts.PageItems}/{parts.TotalItems}");
-
-      var index = pageSize * (pageIndex - 1);
-      await foreach (var part in parts.ReadAll().ConfigureAwait(false))
-        System.Console.WriteLine($" {++index}\t{part.PartNumber}\t{part.MakersPartNumber}\t{part.Description}");
-
-      System.Console.WriteLine("END");
+      bill.ToPDF(@"C:\Users\Denis\Desktop\output\result.pdf");
     }
   }
 }

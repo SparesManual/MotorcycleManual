@@ -3,17 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DocumentationFile>..\..\..\bin\Debug\Libraries\Models\Models.BOM.xml</DocumentationFile>
-    <OutputPath>../../../bin/Debug/Libraries/Models\</OutputPath>
+    <OutputPath>../../../bin/Debug/Libraries/ViewModel</OutputPath>
+    <DocumentationFile>..\..\..\bin\Debug\Libraries\ViewModel\ViewModels.Auth.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../../bin/Release/Libraries/Models\</OutputPath>
+    <OutputPath>../../../bin/Release/Libraries/ViewModel\</OutputPath>
   </PropertyGroup>
+
 </Project>

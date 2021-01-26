@@ -1,7 +1,7 @@
 ﻿namespace Components.Queries.Web
 {
 #pragma warning disable 1591
-  public class Component
+  public class Export
   {
   }
 }

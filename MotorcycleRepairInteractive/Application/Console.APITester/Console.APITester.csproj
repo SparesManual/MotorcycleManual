@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\BOM\BOM.Infrastructure\BOM.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Db\MRI.Db.csproj" />
   </ItemGroup>
 
