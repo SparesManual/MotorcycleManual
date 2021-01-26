@@ -10,12 +10,13 @@ namespace MRI.MVVM.Helpers
   /// <summary>
   /// Base view model with validation support
   /// </summary>
-  public abstract class BaseFormViewModel
+  public abstract class BaseFormViewModel<TValidator>
     : BasePropertyChanged, IFormViewModel
+    where TValidator : IValidator
   {
     #region Fields
 
-    private readonly IValidator m_validator;
+    private readonly TValidator m_validator;
     private readonly ConcurrentDictionary<string, bool> m_properties;
     private readonly ValidationContext<IFormViewModel> m_context;
 
@@ -55,7 +56,7 @@ namespace MRI.MVVM.Helpers
     /// Default constructor
     /// </summary>
     /// <param name="validator">Form validator</param>
-    protected BaseFormViewModel(IValidator validator)
+    protected BaseFormViewModel(TValidator validator)
     {
       m_validator = validator;
       m_properties = new ConcurrentDictionary<string, bool>();

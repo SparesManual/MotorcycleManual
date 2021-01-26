@@ -1,6 +1,6 @@
 using System.Security;
-using FluentValidation;
 using MRI.MVVM.Helpers;
+using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace ViewModels.Auth
@@ -9,7 +9,7 @@ namespace ViewModels.Auth
   /// View model for login views
   /// </summary>
   public class LoginViewModel
-    : BaseFormViewModel, ILoginViewModel
+    : BaseFormViewModel<ILoginViewModelValidator>, ILoginViewModel
   {
     #region Properties
 
@@ -25,7 +25,7 @@ namespace ViewModels.Auth
     #endregion
 
     /// <inheritdoc />
-    public LoginViewModel(IValidator validator)
+    public LoginViewModel(ILoginViewModelValidator validator)
       : base(validator)
     {
     }

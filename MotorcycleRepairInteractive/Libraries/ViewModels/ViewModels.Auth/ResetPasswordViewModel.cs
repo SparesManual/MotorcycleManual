@@ -1,6 +1,6 @@
 using System.Security;
-using FluentValidation;
 using MRI.MVVM.Helpers;
+using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace ViewModels.Auth
@@ -9,7 +9,7 @@ namespace ViewModels.Auth
   /// View model for the reset password views
   /// </summary>
   public class ResetPasswordViewModel
-    : BaseFormViewModel, IResetPasswordViewModel
+    : BaseFormViewModel<IResetPasswordViewModelValidator>, IResetPasswordViewModel
   {
     #region Properties
 
@@ -22,7 +22,7 @@ namespace ViewModels.Auth
     #endregion
 
     /// <inheritdoc />
-    public ResetPasswordViewModel(IValidator validator)
+    public ResetPasswordViewModel(IResetPasswordViewModelValidator validator)
       : base(validator)
     {
     }

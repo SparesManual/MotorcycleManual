@@ -1,5 +1,5 @@
-using FluentValidation;
 using MRI.MVVM.Helpers;
+using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace ViewModels.Auth
@@ -8,10 +8,10 @@ namespace ViewModels.Auth
   /// View model for logout views
   /// </summary>
   public class LogoutViewModel
-    : BaseFormViewModel, ILogoutViewModel
+    : BaseFormViewModel<ILogoutViewModelValidator>, ILogoutViewModel
   {
     /// <inheritdoc />
-    public LogoutViewModel(IValidator validator)
+    public LogoutViewModel(ILogoutViewModelValidator validator)
       : base(validator)
     {
     }
