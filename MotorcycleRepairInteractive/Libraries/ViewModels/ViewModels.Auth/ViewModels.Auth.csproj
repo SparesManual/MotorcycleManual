@@ -16,4 +16,9 @@
     <OutputPath>../../../bin/Release/Libraries/ViewModel\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
+    <ProjectReference Include="..\..\Helpers\MRI.MVVM.Helpers\MRI.MVVM.Helpers.csproj" />
+  </ItemGroup>
+
 </Project>

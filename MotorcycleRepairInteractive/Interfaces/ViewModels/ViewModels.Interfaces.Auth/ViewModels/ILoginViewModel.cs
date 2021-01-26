@@ -1,3 +1,4 @@
+using System.Security;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
@@ -18,7 +19,7 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// <summary>
     /// Authentication user password
     /// </summary>
-    string Password { get; set; }
+    SecureString Password { get; set; }
 
     /// <summary>
     /// Authentication caching
