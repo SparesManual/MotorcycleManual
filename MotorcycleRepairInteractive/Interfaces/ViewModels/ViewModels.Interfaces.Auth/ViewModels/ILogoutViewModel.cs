@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
@@ -8,5 +9,10 @@ namespace ViewModels.Interfaces.Auth.ViewModels
   public interface ILogoutViewModel
     : IFormViewModel
   {
+    /// <summary>
+    /// Attempts to logout the user
+    /// </summary>
+    /// <returns>True if logged out</returns>
+    ValueTask<bool> LogoutUser();
   }
 }

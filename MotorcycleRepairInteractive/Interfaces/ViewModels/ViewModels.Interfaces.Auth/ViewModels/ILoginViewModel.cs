@@ -1,4 +1,4 @@
-using System.Security;
+using System.Threading.Tasks;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
@@ -19,7 +19,7 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// <summary>
     /// Authentication user password
     /// </summary>
-    SecureString Password { get; set; }
+    string Password { get; set; }
 
     /// <summary>
     /// Authentication caching
@@ -27,5 +27,11 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     bool RememberMe { get; set; }
 
     #endregion
+
+    /// <summary>
+    /// Attempts to login the user
+    /// </summary>
+    /// <returns>True if logged in successfully</returns>
+    ValueTask<bool> LoginUser();
   }
 }

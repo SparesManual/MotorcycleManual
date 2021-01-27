@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
@@ -8,6 +9,12 @@ namespace ViewModels.Interfaces.Auth.ViewModels
   public interface IForgotPasswordViewModel
     : IFormViewModel
   {
+    /// <summary>
+    /// User email
+    /// </summary>
+    [Required]
+    [EmailAddress]
+    string Email { get; set; }
     // Task ResetAsync(CancellationToken cancellationToken = default);
   }
 }

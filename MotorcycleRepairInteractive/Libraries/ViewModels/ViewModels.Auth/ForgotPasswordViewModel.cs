@@ -11,6 +11,9 @@ namespace ViewModels.Auth
     : BaseFormViewModel<IForgotPasswordViewModelValidator>, IForgotPasswordViewModel
   {
     /// <inheritdoc />
+    public string Email { get; set; } = string.Empty;
+
+    /// <inheritdoc />
     public ForgotPasswordViewModel(IForgotPasswordViewModelValidator validator)
       : base(validator)
     {
