@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Interfaces.Auth"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.Auth.Web", "Libraries\Components\Components.Auth.Web\Components.Auth.Web.csproj", "{27E2D5C8-D336-4EF5-973A-070C22356D7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Auth", "Libraries\Db\MRI.Auth\MRI.Auth.csproj", "{13188164-6177-47EC-88E1-B52760A994DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{27E2D5C8-D336-4EF5-973A-070C22356D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27E2D5C8-D336-4EF5-973A-070C22356D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27E2D5C8-D336-4EF5-973A-070C22356D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13188164-6177-47EC-88E1-B52760A994DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13188164-6177-47EC-88E1-B52760A994DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13188164-6177-47EC-88E1-B52760A994DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13188164-6177-47EC-88E1-B52760A994DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +207,7 @@ Global
 		{8DBA0670-1FBD-4BA5-9FBC-9CB05D13DB75} = {05A93E85-50AE-4004-BA30-90EA900215CA}
 		{E21BA997-3D95-4B38-B281-1AAE56437423} = {D4871559-ECFF-41A0-9FE2-93AFBD7CFC5D}
 		{27E2D5C8-D336-4EF5-973A-070C22356D7A} = {6CCCFE74-4126-409A-B3E0-D5B933DA8B90}
+		{13188164-6177-47EC-88E1-B52760A994DB} = {1A528DA7-20F7-4045-AB75-33F949A91112}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB209151-52A5-4156-B92F-10FB84E38FDA}
