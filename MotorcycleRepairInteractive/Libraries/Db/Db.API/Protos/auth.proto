@@ -5,10 +5,13 @@ option csharp_namespace = "Db.API";
 package auth;
 
 service Auth {
+  // Logs in a given user
   rpc LoginUser(UserRequest) returns (BooleanReply);
+  // Logs out the current user
   rpc Logout(Nothing) returns (BooleanReply);
 }
 
+// Empty message
 message Nothing { }
 
 // User login request

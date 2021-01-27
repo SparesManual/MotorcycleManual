@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Db.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +32,11 @@ namespace Db.API
         var context = services.GetRequiredService<ManualContext>();
         await context.Database.MigrateAsync().ConfigureAwait(false);
         await context.SeedAsync(loggerFactory).ConfigureAwait(false);
+
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var identityContext = services.GetRequiredService<IdentityContext>();
+        await identityContext.Database.MigrateAsync().ConfigureAwait(false);
+        await userManager.SeedUsersAsync().ConfigureAwait(false);
       }
       catch (Exception e)
       {

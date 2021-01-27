@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Grpc.Core;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace Db.API
 {
@@ -15,16 +15,16 @@ namespace Db.API
   {
     #region Field
 
-    private readonly ILogger<AuthService> m_logger;
+    private readonly UserManager<IdentityUser> m_userManager;
 
     #endregion
 
     /// <summary>
     /// Default constructor
     /// </summary>
-    public AuthService(ILogger<AuthService> logger)
+    public AuthService(UserManager<IdentityUser> userManager)
     {
-      m_logger = logger;
+      m_userManager = userManager;
     }
 
     /// <inheritdoc />
@@ -32,12 +32,31 @@ namespace Db.API
     {
       var http = context.GetHttpContext();
       var claim = new Claim(ClaimTypes.Email, request.Email);
-      var claimsIdentity = new ClaimsIdentity(new[] { claim }, "serverAuth");
+      var claimsIdentity = new ClaimsIdentity(new[] {claim}, "serverAuth");
       var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+      var user = await m_userManager.GetUserAsync(claimsPrincipal).ConfigureAwait(false);
+      if (user is null)
+        return new BooleanReply
+        {
+          Reply = false,
+          Error = 404
+        };
+
+      if (!await m_userManager.CheckPasswordAsync(user, request.Password).ConfigureAwait(false))
+        return new BooleanReply
+        {
+          Reply = false,
+          Error = 403
+        };
 
       await http.SignInAsync(claimsPrincipal).ConfigureAwait(false);
 
-      return new BooleanReply {Reply = false};
+      return new BooleanReply
+      {
+        Reply = true,
+        Error = 0
+      };
     }
 
     /// <inheritdoc />
@@ -45,7 +64,11 @@ namespace Db.API
     {
       await context.GetHttpContext().SignOutAsync().ConfigureAwait(false);
 
-      return new BooleanReply {Reply = true};
+      return new BooleanReply
+      {
+        Reply = true,
+        Error = 0
+      };
     }
   }
 }

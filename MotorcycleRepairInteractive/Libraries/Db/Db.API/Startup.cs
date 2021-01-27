@@ -1,4 +1,5 @@
-﻿using Db.Infrastructure.Data;
+﻿using Db.API.Extensions;
+using Db.Infrastructure.Data;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,8 +36,11 @@ namespace Db.API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddGrpc();
-      services.AddDbContext<ManualContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultConnection"), migration => migration.MigrationsAssembly("Db.API")));
-      services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+      services
+        .AddDbContext<ManualContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultConnection")))
+        .AddDbContext<IdentityContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultAuthConnection")))
+        .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+        .AddIdentityServices();
     }
 
     /// <summary>
@@ -55,10 +59,7 @@ namespace Db.API
       {
         endpoints.MapGrpcService<ProviderService>();
 
-        endpoints.MapGet("/", async context =>
-        {
-          await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-        });
+        endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909"); });
       });
     }
   }

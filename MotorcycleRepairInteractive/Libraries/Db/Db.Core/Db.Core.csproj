@@ -31,4 +31,8 @@
     <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Identity" />
+  </ItemGroup>
+
 </Project>

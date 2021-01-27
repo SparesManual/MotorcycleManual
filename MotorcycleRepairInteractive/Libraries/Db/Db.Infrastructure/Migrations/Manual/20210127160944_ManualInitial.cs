@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 #pragma warning disable 1591
 
-namespace Db.API.Data
+namespace Db.Infrastructure.Migrations.Manual
 {
-    public partial class InitialCreate : Migration
+    public partial class ManualInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
