@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MRI.Application.Extensions;
+using MRI.Auth;
 using MRI.Db;
 using MRI.MVVM.Interfaces.Views.Managers;
 using MRI.MVVM.Web.Helpers.Managers;
-using ViewModels.Interfaces.Queries;
-using ViewModels.Queries;
 
 namespace MRI.Application
 {
@@ -18,17 +18,9 @@ namespace MRI.Application
     {
       services.AddRazorPages();
       services.AddSingleton<IAPIProvider, APIProvider>();
+      services.AddScoped<IAPIAuth, APIAuth>();
       services.AddScoped<HttpClient>();
-      services.AddScoped<IBooksViewModel, BooksViewModel>();
-      services.AddScoped<IAllPartsViewModel, PartsAllViewModel>();
-      services.AddScoped<IPartViewModel, PartViewModel>();
-      services.AddScoped<IPartPropertiesViewModel, PartPropertiesViewModel>();
-      services.AddScoped<IBookSectionsViewModel, BookSectionsViewModel>();
-      services.AddScoped<IBookViewModel, BookViewModel>();
-      services.AddScoped<IBookModelsViewModel, BookModelsViewModel>();
-      services.AddScoped<ISectionPartsViewModel, SectionPartsViewModel>();
-      services.AddScoped<IModelViewModel, ModelViewModel>();
-      services.AddScoped<IEngineViewModel, EngineViewModel>();
+      services.AddManualViewModels();
 
       services.AddScoped<IPagingManager, RadzenPagingManager>();
       services.AddServerSideBlazor();
