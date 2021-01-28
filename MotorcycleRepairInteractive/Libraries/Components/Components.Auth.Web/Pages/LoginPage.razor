@@ -1,34 +1,41 @@
 @page "/login"
 @inherits BaseComponent<ILoginViewModel>
-@inject ILoginViewModelValidator Validator
+@inject ILoginViewModelValidator m_validator
 
-<div class="col">
-  <EditForm Model="@ViewModel"
-            OnValidSubmit="Submit">
-    <FluentValidator Validator="Validator"/>
-    <RadzenFieldset Text="Login">
-      <div class="row" style="margin-bottom: 24px">
-        <RadzenTextBox Placeholder="Email..." Change="x => ViewModel!.Email = x"/>
+<EditForm Model="@ViewModel"
+          OnValidSubmit="Submit">
+  <FluentValidator Validator="m_validator"/>
+  <div class="row" style="margin-bottom: 24px">
+    <div class="col">
+      <div class="row">
+        <RadzenTextBox style="display: block" Placeholder="Email" Name="Email" @bind-Value="@ViewModel!.Email"/>
+      </div>
+      <div class="row">
         <ValidationMessage For="() => ViewModel.Email"/>
       </div>
+    </div>
+  </div>
 
-      <div class="row" style="margin-bottom: 24px">
-        <RadzenPassword Placeholder="Password..." Change="x => ViewModel!.Password = x"/>
+  <div class="row" style="margin-bottom: 24px">
+    <div class="col">
+      <div class="row">
+        <RadzenPassword Placeholder="Password..." Name="Password" @bind-Value="@ViewModel!.Password"/>
+      </div>
+      <div class="row">
         <ValidationMessage For="() => ViewModel.Password"/>
       </div>
+    </div>
+  </div>
 
-      <RadzenButton ButtonType="ButtonType.Submit"
-                    Text="Login"/>
-    </RadzenFieldset>
-  </EditForm>
-</div>
+  <RadzenButton ButtonType="ButtonType.Submit"
+                Text="Login"/>
+</EditForm>
 
 @code {
 
-
-  private async void Submit(EditContext obj)
+  private async void Submit()
   {
-    var result = await ViewModel.LoginUser().ConfigureAwait(false);
+    var result = await ViewModel!.LoginUser().ConfigureAwait(false);
   }
 
 }
