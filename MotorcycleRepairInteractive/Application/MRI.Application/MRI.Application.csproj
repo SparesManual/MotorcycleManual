@@ -26,10 +26,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
+    <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Web\Components.Auth.Web.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web\Components.Queries.Web.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Auth\MRI.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Db\MRI.Db.csproj" />
     <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
+    <ProjectReference Include="..\..\Libraries\Validators\Validators.Auth\Validators.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
   </ItemGroup>

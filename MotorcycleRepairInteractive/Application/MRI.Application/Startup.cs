@@ -20,7 +20,7 @@ namespace MRI.Application
       services.AddSingleton<IAPIProvider, APIProvider>();
       services.AddScoped<IAPIAuth, APIAuth>();
       services.AddScoped<HttpClient>();
-      services.AddManualViewModels();
+      services.AddManualViewModels().AddIdentityViewModels();
 
       services.AddScoped<IPagingManager, RadzenPagingManager>();
       services.AddServerSideBlazor();

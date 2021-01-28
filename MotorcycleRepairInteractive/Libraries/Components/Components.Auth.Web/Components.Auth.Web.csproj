@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Accelist.FluentValidation.Blazor" Version="4.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.4.0" />
     <PackageReference Include="Radzen.Blazor" Version="3.0.2" />
   </ItemGroup>
 
@@ -14,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
+    <ProjectReference Include="..\..\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
     <ProjectReference Include="..\..\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj" />
   </ItemGroup>
 

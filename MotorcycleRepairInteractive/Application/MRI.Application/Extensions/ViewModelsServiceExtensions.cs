@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using Validators.Auth;
 using ViewModels.Auth;
+using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
 using ViewModels.Interfaces.Queries;
 using ViewModels.Queries;
@@ -29,17 +31,16 @@ namespace MRI.Application.Extensions
     {
       services
         .AddScoped<ILoginViewModel, LoginViewModel>()
-        .AddScoped<ILogoutViewModel, LogoutViewModel>()
+        // .AddScoped<ILogoutViewModel, LogoutViewModel>()
         .AddScoped<IRegisterViewModel, RegisterViewModel>()
         .AddScoped<IForgotPasswordViewModel, ForgotPasswordViewModel>()
         .AddScoped<IResetPasswordViewModel, ResetPasswordViewModel>();
 
-      // TODO: Implement the missing validators
-      // services
-      //   .AddScoped<ILoginViewModelValidator>()
-      //   .AddScoped<IRegisterViewModelValidator>()
-      //   .AddScoped<IForgotPasswordViewModelValidator>()
-      //   .AddScoped<IResetPasswordViewModelValidator>();
+      services
+        .AddScoped<ILoginViewModelValidator, LoginValidator>()
+        .AddScoped<IRegisterViewModelValidator, RegisterValidator>()
+        .AddScoped<IForgotPasswordViewModelValidator, ForgotPasswordValidator>()
+        .AddScoped<IResetPasswordViewModelValidator, ResetPasswordValidator>();
 
       return services;
     }

@@ -12,9 +12,9 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     #region Properties
 
     /// <summary>
-    /// Authentication user name
+    /// Authentication user email
     /// </summary>
-    string Username { get; set; }
+    string Email { get; set; }
 
     /// <summary>
     /// Authentication user password

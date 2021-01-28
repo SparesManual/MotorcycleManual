@@ -17,7 +17,7 @@ namespace ViewModels.Auth
     #region Properties
 
     /// <inheritdoc />
-    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
 
     /// <inheritdoc />
     public string Password { get; set; } = string.Empty;
@@ -36,6 +36,6 @@ namespace ViewModels.Auth
 
     /// <inheritdoc />
     public async ValueTask<bool> LoginUser()
-      => await m_authProvider.LoginUser(Username, Password).ConfigureAwait(false);
+      => await m_authProvider.LoginUser(Email, Password).ConfigureAwait(false);
   }
 }
