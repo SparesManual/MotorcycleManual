@@ -5,14 +5,17 @@
 
 <BookModels ItemId="ItemId"/>
 
-<div class="container-split">
-  <div class="content-left">
-    <BookSections @ref="m_bookSections" BookId="ItemId" CurrentSectionChanged="@SectionChanged"/>
-  </div>
-  <div class="content-right">
-    <SectionParts @ref="m_sectionParts"/>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <BookSections @ref="m_bookSections" BookId="ItemId" CurrentSectionChanged="@SectionChanged"/>
+    </div>
+    <div class="col">
+      <SectionParts @ref="m_sectionParts"/>
+    </div>
   </div>
 </div>
+
 
 @code {
 #nullable enable
@@ -25,10 +28,10 @@
   {
     await base.OnInitializedAsync().ConfigureAwait(false);
 
-    // If the section selection persisted..
+  // If the section selection persisted..
     if (m_sectionParts?.SectionId != null)
-      // Propagate it to the sections grid
-      await m_bookSections!.SetSectionId((int)m_sectionParts.SectionId).ConfigureAwait(false);
+  // Propagate it to the sections grid
+      await m_bookSections!.SetSectionId((int) m_sectionParts.SectionId).ConfigureAwait(false);
   }
 
   private async void SectionChanged(int? section)
