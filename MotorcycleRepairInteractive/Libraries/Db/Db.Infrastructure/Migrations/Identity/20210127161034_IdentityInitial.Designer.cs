@@ -12,6 +12,7 @@ namespace Db.Infrastructure.Migrations.Identity
     [Migration("20210127161034_IdentityInitial")]
     partial class IdentityInitial
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

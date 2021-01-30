@@ -12,6 +12,7 @@ namespace Db.Infrastructure.Migrations.Manual
     [Migration("20210127160944_ManualInitial")]
     partial class ManualInitial
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

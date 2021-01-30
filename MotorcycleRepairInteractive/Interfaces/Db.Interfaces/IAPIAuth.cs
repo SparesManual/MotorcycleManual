@@ -15,9 +15,10 @@ namespace Db.Interfaces
     /// </summary>
     /// <param name="email">User email</param>
     /// <param name="password">User password</param>
+    /// <param name="rememberMe"></param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>True if logged in</returns>
-    ValueTask<bool> LoginUser(string email, string password, CancellationToken cancellationToken = default);
+    Task<(bool, int)> LoginUser(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Attempts to logout the user

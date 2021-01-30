@@ -36,10 +36,10 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<bool> LoginUser(string email, string password, CancellationToken cancellationToken = default)
+    public async Task<(bool, int)> LoginUser(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default)
     {
-      var result = await m_client.LoginUserAsync(new UserRequest {Email = email, Password = password}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
-      return result.Reply;
+      var result = await m_client.LoginUserAsync(new LoginRequest {Email = email, Password = password, RememberMe = rememberMe}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      return (result.Reply, result.Error);
     }
 
     /// <inheritdoc />

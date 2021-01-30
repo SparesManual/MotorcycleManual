@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,10 @@ namespace Db.Infrastructure.Data
       };
 
       await userManager.CreateAsync(user, "Pa$$w0rd").ConfigureAwait(false);
+
+      var claim = new Claim(ClaimTypes.Email, user.Email);
+
+      await userManager.AddClaimAsync(user, claim);
     }
   }
 }

@@ -28,14 +28,11 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task<BooleanReply> LoginUser(UserRequest request, ServerCallContext context)
+    public override async Task<BooleanReply> LoginUser(LoginRequest request, ServerCallContext context)
     {
       var http = context.GetHttpContext();
-      var claim = new Claim(ClaimTypes.Email, request.Email);
-      var claimsIdentity = new ClaimsIdentity(new[] {claim}, "serverAuth");
-      var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-      var user = await m_userManager.GetUserAsync(claimsPrincipal).ConfigureAwait(false);
+      var user = await m_userManager.FindByEmailAsync(request.Email).ConfigureAwait(false);
       if (user is null)
         return new BooleanReply
         {
@@ -49,6 +46,10 @@ namespace Db.API
           Reply = false,
           Error = 403
         };
+
+      var claims = await m_userManager.GetClaimsAsync(user).ConfigureAwait(false);
+      var claimsIdentity = new ClaimsIdentity(claims, "serverAuth");
+      var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
       await http.SignInAsync(claimsPrincipal).ConfigureAwait(false);
 

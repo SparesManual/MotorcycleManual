@@ -6,7 +6,7 @@ package auth;
 
 service Auth {
   // Logs in a given user
-  rpc LoginUser(UserRequest) returns (BooleanReply);
+  rpc LoginUser(LoginRequest) returns (BooleanReply);
   // Logs out the current user
   rpc Logout(Nothing) returns (BooleanReply);
 }
@@ -15,11 +15,13 @@ service Auth {
 message Nothing { }
 
 // User login request
-message UserRequest {
+message LoginRequest {
   // User mail
   string email = 1;
   // User password
   string password = 2;
+  // Persist login
+  bool rememberMe = 3;
 }
 
 // Reply of boolean type

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using MRI.MVVM.Interfaces.ViewModels;
+using ViewModels.Interfaces.Auth.Enums;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
 {
@@ -32,6 +33,6 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// Attempts to login the user
     /// </summary>
     /// <returns>True if logged in successfully</returns>
-    ValueTask<bool> LoginUser();
+    Task<LoginResult> LoginUser();
   }
 }

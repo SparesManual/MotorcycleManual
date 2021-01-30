@@ -1,6 +1,13 @@
 @page "/login"
+@using ViewModels.Interfaces.Auth.Enums
 @inherits BaseComponent<ILoginViewModel>
 @inject ILoginViewModelValidator m_validator
+@inject NavigationManager m_navigationManager
+
+@if (m_invalidCredentials)
+{
+  <span>Invalid email or password</span>
+}
 
 <EditForm Model="@ViewModel"
           OnValidSubmit="Submit">
@@ -33,9 +40,28 @@
 
 @code {
 
+  private bool m_invalidCredentials;
+
+  /// <inheritdoc />
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    m_invalidCredentials = false;
+  }
+
   private async void Submit()
   {
     var result = await ViewModel!.LoginUser().ConfigureAwait(false);
+    switch (result)
+    {
+      case LoginResult.Success:
+        m_invalidCredentials = false;
+        m_navigationManager.NavigateTo("/");
+        break;
+      case LoginResult.InvalidCredentials:
+        m_invalidCredentials = true;
+        break;
+    }
   }
 
 }

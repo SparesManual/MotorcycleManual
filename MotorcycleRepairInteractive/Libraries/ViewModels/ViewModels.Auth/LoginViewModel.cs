@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Db.Interfaces;
 using MRI.MVVM.Helpers;
+using ViewModels.Interfaces.Auth.Enums;
 using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
 
@@ -35,7 +36,16 @@ namespace ViewModels.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<bool> LoginUser()
-      => await m_authProvider.LoginUser(Email, Password).ConfigureAwait(false);
+    public async Task<LoginResult> LoginUser()
+    {
+      var result = await m_authProvider.LoginUser(Email, Password).ConfigureAwait(false);
+      return result switch
+      {
+        (false, 404) => LoginResult.InvalidCredentials,
+        (false, 403) => LoginResult.InvalidCredentials,
+        (true, _) => LoginResult.Success,
+        _ => LoginResult.ServerError
+      };
+    }
   }
 }
