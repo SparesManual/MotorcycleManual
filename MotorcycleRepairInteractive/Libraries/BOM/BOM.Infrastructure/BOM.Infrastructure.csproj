@@ -9,22 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.0"/>
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj"/>
-    <ProjectReference Include="..\..\Helpers\MRI.Helpers\MRI.Helpers.csproj"/>
-    <ProjectReference Include="..\..\Models\Models.BOM\Models.BOM.csproj"/>
+    <ProjectReference Include="..\..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
+    <ProjectReference Include="..\..\Helpers\MRI.Helpers\MRI.Helpers.csproj" />
+    <ProjectReference Include="..\..\Models\Models.BOM\Models.BOM.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="XML\BOM.xsd"/>
+    <None Remove="XML\BOM.xsd" />
     <EmbeddedResource Include="XML\BOM.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Remove="XML\BOM.xsl"/>
-    <EmbeddedResource Include="XML\BOM.xsl"/>
+    <None Remove="XML\BOM.xsl" />
+    <EmbeddedResource Include="XML\BOM.xsl" />
   </ItemGroup>
 
 </Project>
