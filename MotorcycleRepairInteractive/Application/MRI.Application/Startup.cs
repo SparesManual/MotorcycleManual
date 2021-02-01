@@ -1,6 +1,7 @@
 using System.Net.Http;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +10,7 @@ using MRI.Auth;
 using MRI.Db;
 using MRI.MVVM.Interfaces.Views.Managers;
 using MRI.MVVM.Web.Helpers.Managers;
+using States.General;
 
 namespace MRI.Application
 {
@@ -23,6 +25,8 @@ namespace MRI.Application
       services.AddManualViewModels().AddIdentityViewModels();
 
       services.AddScoped<IPagingManager, RadzenPagingManager>();
+      services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+      services.AddAuthenticationCore();
       services.AddServerSideBlazor();
     }
 

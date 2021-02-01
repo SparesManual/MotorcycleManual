@@ -31,6 +31,7 @@
     <ProjectReference Include="..\..\Libraries\Db\MRI.Auth\MRI.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Db\MRI.Db.csproj" />
     <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
+    <ProjectReference Include="..\..\Libraries\States\States.General\States.General.csproj" />
     <ProjectReference Include="..\..\Libraries\Validators\Validators.Auth\Validators.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
