@@ -71,5 +71,23 @@ namespace Db.API
         Error = 0
       };
     }
+
+    /// <inheritdoc />
+    public override async Task<StringReply> LoggedInEmail(Nothing request, ServerCallContext context)
+    {
+      var http = context.GetHttpContext();
+
+      if (http.User.Identity?.IsAuthenticated is not true)
+        return new StringReply
+        {
+          Reply = null
+        };
+
+      var user = await m_userManager.GetUserAsync(http.User).ConfigureAwait(false);
+      return new StringReply
+      {
+        Reply = user.Email
+      };
+    }
   }
 }

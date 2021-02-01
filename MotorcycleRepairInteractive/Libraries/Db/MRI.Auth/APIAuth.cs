@@ -48,5 +48,12 @@ namespace MRI.Auth
       var result = await m_client.LogoutAsync(new Nothing(), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
     }
+
+    /// <inheritdoc />
+    public async Task<string?> GetUserAsync(CancellationToken cancellationToken = default)
+    {
+      var result = await m_client.LoggedInEmailAsync(new Nothing(), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      return result.Reply;
+    }
   }
 }

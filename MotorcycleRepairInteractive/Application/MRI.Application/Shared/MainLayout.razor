@@ -1,4 +1,21 @@
-﻿@inherits LayoutComponentBase
+﻿@using global::Db.Interfaces
+@inherits LayoutComponentBase
+@inject NavigationManager m_navigationManager
+@inject IAPIAuth m_authProvider
+
+@code {
+
+  private void LoginUser()
+  {
+    m_navigationManager.NavigateTo("/login");
+  }
+
+  private async Task LogoutUser()
+  {
+    await m_authProvider.LogoutUser().ConfigureAwait(false);
+  }
+
+}
 
 <div class="sidebar">
   <NavMenu/>
@@ -6,12 +23,25 @@
 
 <div class="main">
   <div class="top-row px-4" style="z-index: 1000">
-@* ReSharper disable Html.PathError *@
-    <a href="login">Login</a>
-@* ReSharper enable Html.PathError *@
+    <AuthorizeView>
+      <Authorized>
+        <div class="top-row px-4">
+          <h4>
+            <b>Hello, @context.User.Identity!.Name</b>
+          </h4> &nbsp;
+          <button class="btn btn-danger" @onclick="LogoutUser">Logout</button>
+        </div>
+      </Authorized>
+      <NotAuthorized>
+        <div class="top-row px-4">
+          <button class="btn btn-primary" @onclick="LoginUser">Login</button>
+        </div>
+      </NotAuthorized>
+    </AuthorizeView>
   </div>
 
   <div class="content px-4">
     @Body
   </div>
 </div>
+

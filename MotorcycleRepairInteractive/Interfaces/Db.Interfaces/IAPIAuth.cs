@@ -26,5 +26,12 @@ namespace Db.Interfaces
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>True if logged out</returns>
     ValueTask<bool> LogoutUser(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get the currently signed in user email
+    /// </summary>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>The signed in user email. Null if not signed in</returns>
+    Task<string?> GetUserAsync(CancellationToken cancellationToken = default);
   }
 }

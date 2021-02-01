@@ -9,6 +9,7 @@ service Auth {
   rpc LoginUser(LoginRequest) returns (BooleanReply);
   // Logs out the current user
   rpc Logout(Nothing) returns (BooleanReply);
+  rpc LoggedInEmail(Nothing) returns (StringReply);
 }
 
 // Empty message
@@ -22,6 +23,10 @@ message LoginRequest {
   string password = 2;
   // Persist login
   bool rememberMe = 3;
+}
+
+message StringReply {
+  string reply = 1;
 }
 
 // Reply of boolean type
