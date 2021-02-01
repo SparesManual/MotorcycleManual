@@ -1,6 +1,7 @@
 ﻿using Db.API.Extensions;
 using Db.Infrastructure.Data;
 using Db.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -41,6 +42,11 @@ namespace Db.API
         .AddDbContext<IdentityContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultAuthConnection")))
         .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
         .AddIdentityServices();
+
+      services.AddAuthentication(options =>
+      {
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+      }).AddCookie();
     }
 
     /// <summary>
@@ -54,6 +60,7 @@ namespace Db.API
         app.UseDeveloperExceptionPage();
 
       app.UseRouting();
+      app.UseAuthentication();
 
       app.UseEndpoints(endpoints =>
       {
