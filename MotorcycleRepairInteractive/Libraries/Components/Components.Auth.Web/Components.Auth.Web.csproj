@@ -1,20 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <OutputType>Library</OutputType>
+    <RazorLangVersion>3.0</RazorLangVersion>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Accelist.FluentValidation.Blazor" Version="4.0.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
+    <PackageReference Include="Accelist.FluentValidation.Blazor" Version="3.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.2" />
     <PackageReference Include="Radzen.Blazor" Version="3.0.4" />
   </ItemGroup>
 
