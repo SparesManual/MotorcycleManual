@@ -1,3 +1,4 @@
+/* ReSharper disable CssNotResolved */
 .page {
     position: relative;
     display: flex;
@@ -22,6 +23,7 @@
 }
 
     .top-row ::deep a, .top-row .btn-link {
+      /* ReSharper restore CssNotResolved */
         white-space: nowrap;
         margin-left: 1.5rem;
     }
