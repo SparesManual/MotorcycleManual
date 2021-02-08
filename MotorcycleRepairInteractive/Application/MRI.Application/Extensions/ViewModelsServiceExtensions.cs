@@ -31,7 +31,6 @@ namespace MRI.Application.Extensions
     {
       services
         .AddScoped<ILoginViewModel, LoginViewModel>()
-        // .AddScoped<ILogoutViewModel, LogoutViewModel>()
         .AddScoped<IRegisterViewModel, RegisterViewModel>()
         .AddScoped<IForgotPasswordViewModel, ForgotPasswordViewModel>()
         .AddScoped<IResetPasswordViewModel, ResetPasswordViewModel>();
