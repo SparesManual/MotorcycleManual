@@ -81,6 +81,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "States", "States", "{FCAB7F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "States.General", "Libraries\States\States.General\States.General.csproj", "{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Client", "Application\MRI.Client\MRI.Client.csproj", "{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,10 @@ Global
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,6 +234,7 @@ Global
 		{EDC419CF-D946-4342-A112-5DEDF4567871} = {A53584D5-3FF0-4B62-A2DC-EA604CAF32BA}
 		{FCAB7FBD-E6BC-444B-81CE-AB13A067E851} = {A766BB6A-8A96-4C08-90A2-BC1412C498EC}
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6} = {FCAB7FBD-E6BC-444B-81CE-AB13A067E851}
+		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304} = {5E79D870-AD74-4363-B7E7-3FBF27426330}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB209151-52A5-4156-B92F-10FB84E38FDA}
