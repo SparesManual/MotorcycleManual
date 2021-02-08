@@ -1,6 +1,6 @@
 @using System.Reflection
 <CascadingAuthenticationState>
-  <Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="m_componentAssemblies" PreferExactMatches="@true">
+  <Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="COMPONENT_ASSEMBLIES" PreferExactMatches="@true">
     <Found Context="routeData">
       <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
     </Found>
@@ -14,7 +14,7 @@
 
 @code {
 
-  private static readonly Assembly[] m_componentAssemblies =
+  private static readonly Assembly[] COMPONENT_ASSEMBLIES =
   {
     // typeof(Components.Auth.Web.Export).Assembly
   };
