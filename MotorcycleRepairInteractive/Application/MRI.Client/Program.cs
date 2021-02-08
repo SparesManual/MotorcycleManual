@@ -1,10 +1,10 @@
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using MRI.Auth;
 using MRI.Db;
 using MRI.MVVM.Interfaces.Views.Managers;
@@ -21,12 +21,12 @@ namespace MRI.Client
 {
   public class Program
   {
-    static async Task Main(string[] args)
+    public static async Task Main(string[] args)
     {
       var builder = WebAssemblyHostBuilder.CreateDefault(args);
-      builder.RootComponents.Add<App>("#app");
+      builder.RootComponents.Add<App>("app");
 
-      builder.Services.AddScoped(_ => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
+      builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
       builder.Services.AddSingleton<IAPIProvider, APIProvider>();
       builder.Services.AddScoped<IAPIAuth, APIAuth>();
       builder.Services.AddScoped<HttpClient>();
@@ -55,7 +55,8 @@ namespace MRI.Client
         .AddScoped<IForgotPasswordViewModelValidator, ForgotPasswordValidator>()
         .AddScoped<IResetPasswordViewModelValidator, ResetPasswordValidator>();
 
-      await builder.Build().RunAsync();
+      // ReSharper disable once AsyncConverter.AsyncAwaitMayBeElidedHighlighting
+      await builder.Build().RunAsync().ConfigureAwait(false);
     }
   }
 }

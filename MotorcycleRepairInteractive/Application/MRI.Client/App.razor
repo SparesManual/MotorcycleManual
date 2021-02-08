@@ -1,22 +1,21 @@
 @using System.Reflection
-<CascadingAuthenticationState>
-  <Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="COMPONENT_ASSEMBLIES" PreferExactMatches="@true">
-    <Found Context="routeData">
-      <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
-    </Found>
-    <NotFound>
-      <LayoutView Layout="@typeof(MainLayout)">
-        <p>Sorry, there's nothing at this address.</p>
-      </LayoutView>
-    </NotFound>
-  </Router>
-</CascadingAuthenticationState>
+<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="COMPONENT_ASSEMBLIES">
+  <Found Context="routeData">
+    <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+  </Found>
+  <NotFound>
+    <LayoutView Layout="@typeof(MainLayout)">
+      <p>Sorry, there's nothing at this address.</p>
+    </LayoutView>
+  </NotFound>
+</Router>
 
 @code {
 
   private static readonly Assembly[] COMPONENT_ASSEMBLIES =
   {
-    // typeof(Components.Auth.Web.Export).Assembly
+    typeof(Components.Auth.Web.Export).Assembly,
+    typeof(Components.Queries.Web.Export).Assembly,
   };
 
 }

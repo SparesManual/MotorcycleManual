@@ -57,31 +57,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{89C5DE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.Interfaces.Entities", "Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj", "{1CA306F3-D666-46F6-B2CC-075A8688B70F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.Entities", "Libraries\Models\Models.Entities\Models.Entities.csproj", "{D5E4EC78-6C18-427F-85B5-B7FB951A285A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.Entities", "Libraries\Models\Models.Entities\Models.Entities.csproj", "{D5E4EC78-6C18-427F-85B5-B7FB951A285A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BOM", "BOM", "{EF45BCFF-6D7A-4627-9853-51B44FBCB166}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.BOM", "Libraries\Models\Models.BOM\Models.BOM.csproj", "{66048149-8B8F-49E8-B5C3-666FAB1C262B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.BOM", "Libraries\Models\Models.BOM\Models.BOM.csproj", "{66048149-8B8F-49E8-B5C3-666FAB1C262B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOM.Infrastructure", "Libraries\BOM\BOM.Infrastructure\BOM.Infrastructure.csproj", "{92A37F3A-9E3F-46EB-AFB8-26AF17FB4CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BOM.Infrastructure", "Libraries\BOM\BOM.Infrastructure\BOM.Infrastructure.csproj", "{92A37F3A-9E3F-46EB-AFB8-26AF17FB4CFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Auth", "Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj", "{8DBA0670-1FBD-4BA5-9FBC-9CB05D13DB75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels.Auth", "Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj", "{8DBA0670-1FBD-4BA5-9FBC-9CB05D13DB75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Interfaces.Auth", "Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj", "{E21BA997-3D95-4B38-B281-1AAE56437423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels.Interfaces.Auth", "Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj", "{E21BA997-3D95-4B38-B281-1AAE56437423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.Auth.Web", "Libraries\Components\Components.Auth.Web\Components.Auth.Web.csproj", "{27E2D5C8-D336-4EF5-973A-070C22356D7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components.Auth.Web", "Libraries\Components\Components.Auth.Web\Components.Auth.Web.csproj", "{27E2D5C8-D336-4EF5-973A-070C22356D7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Auth", "Libraries\Db\MRI.Auth\MRI.Auth.csproj", "{13188164-6177-47EC-88E1-B52760A994DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.Auth", "Libraries\Db\MRI.Auth\MRI.Auth.csproj", "{13188164-6177-47EC-88E1-B52760A994DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validators", "Validators", "{A53584D5-3FF0-4B62-A2DC-EA604CAF32BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validators.Auth", "Libraries\Validators\Validators.Auth\Validators.Auth.csproj", "{EDC419CF-D946-4342-A112-5DEDF4567871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validators.Auth", "Libraries\Validators\Validators.Auth\Validators.Auth.csproj", "{EDC419CF-D946-4342-A112-5DEDF4567871}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "States", "States", "{FCAB7FBD-E6BC-444B-81CE-AB13A067E851}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "States.General", "Libraries\States\States.General\States.General.csproj", "{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "States.General", "Libraries\States\States.General\States.General.csproj", "{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Client", "Application\MRI.Client\MRI.Client.csproj", "{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Client", "Application\MRI.Client\MRI.Client.csproj", "{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,10 +189,10 @@ Global
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -234,7 +234,7 @@ Global
 		{EDC419CF-D946-4342-A112-5DEDF4567871} = {A53584D5-3FF0-4B62-A2DC-EA604CAF32BA}
 		{FCAB7FBD-E6BC-444B-81CE-AB13A067E851} = {A766BB6A-8A96-4C08-90A2-BC1412C498EC}
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6} = {FCAB7FBD-E6BC-444B-81CE-AB13A067E851}
-		{6F3D56A0-0520-40CA-A6F4-5BD0C9BCD304} = {5E79D870-AD74-4363-B7E7-3FBF27426330}
+		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2} = {5E79D870-AD74-4363-B7E7-3FBF27426330}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB209151-52A5-4156-B92F-10FB84E38FDA}
