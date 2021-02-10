@@ -59,7 +59,7 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async Task<string?> GetUserAsync(CancellationToken cancellationToken = default)
+    public async Task<string> GetUserAsync(CancellationToken cancellationToken = default)
     {
       var result = await m_client.LoggedInEmailAsync(new Nothing(), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;

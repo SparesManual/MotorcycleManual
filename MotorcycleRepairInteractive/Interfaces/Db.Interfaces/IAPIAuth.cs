@@ -32,6 +32,6 @@ namespace Db.Interfaces
     /// </summary>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>The signed in user email. Null if not signed in</returns>
-    Task<string?> GetUserAsync(CancellationToken cancellationToken = default);
+    Task<string> GetUserAsync(CancellationToken cancellationToken = default);
   }
 }
