@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,13 +19,15 @@ namespace MRI.MVVM.Helpers
     /// </summary>
     protected readonly IAPIProvider m_provider;
 
+    private readonly List<T> m_items = new();
+
     #region Properties
 
     /// <inheritdoc />
     public bool Loading { get; set; }
 
     /// <inheritdoc />
-    public ConcurrentBag<T> Items { get; } = new();
+    public IReadOnlyCollection<T> Items => m_items;
 
     #endregion
 
@@ -45,7 +46,7 @@ namespace MRI.MVVM.Helpers
     protected abstract IAsyncEnumerable<T> GetItems(CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
-    public async Task LoadItems()
+    public async Task LoadItemsAsync()
     {
       // Remove old items
       ClearItems();
@@ -56,7 +57,7 @@ namespace MRI.MVVM.Helpers
       // For every queried item..
       await foreach (var item in GetItems().Reverse().ConfigureAwait(true))
         // Add it to the view
-        Items.Add(item);
+        m_items.Add(item);
 
       // Exit loading state
       Loading = false;
@@ -69,7 +70,7 @@ namespace MRI.MVVM.Helpers
     public void ClearItems()
     {
       // Clear the current items
-      Items.Clear();
+      m_items.Clear();
       // Notify the view of the data update
       OnPropertyChanged(nameof(Items));
     }

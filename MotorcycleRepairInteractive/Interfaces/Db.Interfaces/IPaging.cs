@@ -13,6 +13,11 @@ namespace Db.Interfaces
     #region Properties
 
     /// <summary>
+    /// Paging items
+    /// </summary>
+    public IReadOnlyCollection<T> Items { get; set; }
+
+    /// <summary>
     /// Total items count
     /// </summary>
     int TotalItems { get; }
@@ -28,19 +33,5 @@ namespace Db.Interfaces
     int PageIndex { get; }
 
     #endregion
-
-    /// <summary>
-    /// Get the async stream
-    /// </summary>
-    /// <param name="cancellationToken">Cancellation</param>
-    /// <returns>Async item stream</returns>
-    IAsyncEnumerable<T> ReadAll(CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Get the materialized async stream
-    /// </summary>
-    /// <param name="cancellationToken">Cancellation</param>
-    /// <returns>Materialized collection of items</returns>
-    Task<IReadOnlyCollection<T>> GetItems(CancellationToken cancellationToken = default);
   }
 }

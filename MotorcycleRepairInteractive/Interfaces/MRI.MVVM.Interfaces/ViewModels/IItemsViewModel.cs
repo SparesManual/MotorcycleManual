@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MRI.MVVM.Interfaces.ViewModels
@@ -20,14 +21,14 @@ namespace MRI.MVVM.Interfaces.ViewModels
     /// <summary>
     /// Items to display
     /// </summary>
-    ConcurrentBag<T> Items { get; }
+    IReadOnlyCollection<T> Items { get; }
 
     #endregion
 
     /// <summary>
     /// Loads items
     /// </summary>
-    Task LoadItems();
+    Task LoadItemsAsync();
 
     /// <summary>
     /// Clears loaded items

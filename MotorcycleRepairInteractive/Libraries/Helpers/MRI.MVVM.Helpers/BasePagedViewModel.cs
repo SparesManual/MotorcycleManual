@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
@@ -26,6 +25,7 @@ namespace MRI.MVVM.Helpers
     private int m_totalItems;
     private bool m_loading;
     private string m_search = string.Empty;
+    private static readonly List<T> EMPTY = new();
 
     #endregion
 
@@ -112,7 +112,7 @@ namespace MRI.MVVM.Helpers
     /// <summary>
     /// Paged items to display
     /// </summary>
-    public ConcurrentBag<T> Items { get; } = new();
+    public IReadOnlyCollection<T> Items { get; private set; } = EMPTY;
 
     #endregion
 
@@ -131,34 +131,34 @@ namespace MRI.MVVM.Helpers
     /// <param name="search">Optional search filter</param>
     /// <param name="cancellationToken">Process cancellation</param>
     /// <returns>Queried items</returns>
-    protected abstract Task<IPaging<T>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default);
+    protected abstract Task<IPaging<T>> GetItemsAsync(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Loads items
     /// </summary>
-    public async Task LoadItems()
+    public async Task LoadItemsAsync()
     {
       // Remove old items
-      ClearItems();
+      //ClearItems();
 
       // Enter loading state
       Loading = true;
 
       // Get the items
-      var items = await GetItems(PageSize, PageIndex, Search).ConfigureAwait(true);
+      var items = await GetItemsAsync(PageSize, PageIndex, Search).ConfigureAwait(true);
 
-      // TODO: This is page size not items count
-      PageItems = items.PageItems;
-      // TODO: Is this required?
-      // Set the current page index
-      PageIndex = items.PageIndex;
-      // Set the total available items
-      TotalItems = items.TotalItems;
-
-      // For every item from the query..
-      await foreach (var item in items.ReadAll().Reverse().ConfigureAwait(true))
+      if (items is not null)
+      {
+        // TODO: This is page size not items count
+        PageItems = items.PageItems;
+        // TODO: Is this required?
+        // Set the current page index
+        PageIndex = items.PageIndex;
+        // Set the total available items
+        TotalItems = items.TotalItems;
         // Add it to the list
-        Items.Add(item);
+        Items = items.Items;
+      }
 
       // Exit loading state
       Loading = false;
@@ -171,7 +171,7 @@ namespace MRI.MVVM.Helpers
     public void ClearItems()
     {
       // Clear the current items
-      Items.Clear();
+      Items = EMPTY;
       // Notify the view of the data update
       OnPropertyChanged(nameof(Items));
     }
