@@ -10,13 +10,14 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Models.Entities;
 using Models.Interfaces.Entities;
+// ReSharper disable AsyncConverter.AsyncAwaitMayBeElidedHighlighting
 
 namespace MRI.Db
 {
   /// <summary>
   /// Provider of API method calls to the Database
   /// </summary>
-  public sealed class APIProvider
+  public class APIProvider
     : IAPIProvider
   {
     #region Fields
@@ -30,8 +31,17 @@ namespace MRI.Db
     /// Default constructor
     /// </summary>
     public APIProvider()
+      : this(GrpcChannel.ForAddress("https://localhost:5001"))
     {
-      m_channel = GrpcChannel.ForAddress("https://localhost:5001");
+    }
+
+    /// <summary>
+    /// Provider constructor
+    /// </summary>
+    /// <param name="channel">Grpc channel instance</param>
+    protected APIProvider(GrpcChannel channel)
+    {
+      m_channel = channel;
       m_client = new Provider.ProviderClient(m_channel);
     }
 

@@ -27,7 +27,7 @@ namespace MRI.Client
       builder.RootComponents.Add<App>("app");
 
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-      builder.Services.AddSingleton<IAPIProvider, APIProvider>();
+      builder.Services.AddSingleton<IAPIProvider, APIWebProvider>();
       builder.Services.AddScoped<IAPIAuth, APIAuth>();
       builder.Services.AddScoped<HttpClient>();
       builder.Services.AddScoped<IPagingManager, RadzenPagingManager>();
