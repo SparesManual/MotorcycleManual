@@ -42,6 +42,16 @@ namespace Db.API
         .AddDbContext<IdentityContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultAuthConnection")))
         .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
         .AddIdentityServices();
+      services.AddCors(options =>
+      {
+        options.AddPolicy("AllowAll", builder =>
+        {
+          builder.WithOrigins("https://localhost:4155", "https://localhost:5468")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+        });
+      });
 
       services.AddAuthentication(options =>
       {
@@ -60,11 +70,13 @@ namespace Db.API
         app.UseDeveloperExceptionPage();
 
       app.UseRouting();
+      app.UseCors("AllowAll");
+      app.UseGrpcWeb();
       app.UseAuthentication();
 
       app.UseEndpoints(endpoints =>
       {
-        endpoints.MapGrpcService<ProviderService>();
+        endpoints.MapGrpcService<ProviderService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<AuthService>();
 
         endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909"); });
