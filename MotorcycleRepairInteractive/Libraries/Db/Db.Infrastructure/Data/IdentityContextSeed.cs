@@ -29,7 +29,7 @@ namespace Db.Infrastructure.Data
 
       var claim = new Claim(ClaimTypes.Email, user.Email);
 
-      await userManager.AddClaimAsync(user, claim);
+      await userManager.AddClaimAsync(user, claim).ConfigureAwait(false);
     }
   }
 }

@@ -23,8 +23,17 @@ namespace MRI.Auth
     /// Default constructor
     /// </summary>
     public APIAuth()
+      : this(GrpcChannel.ForAddress("https://localhost:5001"))
     {
-      m_channel = GrpcChannel.ForAddress("https://localhost:5001");
+    }
+
+    /// <summary>
+    /// Provider constructor
+    /// </summary>
+    /// <param name="channel">Grpc channel instance</param>
+    protected APIAuth(GrpcChannel channel)
+    {
+      m_channel = channel;
       m_client = new Db.API.Auth.AuthClient(m_channel);
     }
 
