@@ -80,7 +80,7 @@ namespace Db.API
       if (http.User.Identity?.IsAuthenticated is not true)
         return new StringReply
         {
-          Reply = null
+          Reply = ""
         };
 
       var user = await m_userManager.GetUserAsync(http.User).ConfigureAwait(false);

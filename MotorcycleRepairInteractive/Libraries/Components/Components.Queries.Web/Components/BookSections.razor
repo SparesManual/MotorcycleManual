@@ -1,4 +1,3 @@
-@* ReSharper disable once CheckNamespace *@
 @namespace Comp
 @inherits BasePagedComponent<IBookSectionsViewModel, ISection>
 
@@ -87,7 +86,7 @@
     // or the grid is not initialized,
     // or the view model is not initialized,
     // or there are no items provided by the view model..
-    if (m_sectionId is null || m_grid is null || ViewModel is null || ViewModel.Items.IsEmpty)
+    if (m_sectionId is null || m_grid is null || ViewModel is null || ViewModel.Items.Count == 0)
       // Exit
       return;
 

@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-    <PackageReference Include="Radzen.Blazor" Version="3.0.4" />
+    <PackageReference Include="Radzen.Blazor" Version="3.0.8" />
   </ItemGroup>
 
 </Project>
