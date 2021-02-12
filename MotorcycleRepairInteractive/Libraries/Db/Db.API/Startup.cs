@@ -78,6 +78,7 @@ namespace Db.API
       {
         endpoints.MapGrpcService<ProviderService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<AuthService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapControllers();
 
         endpoints.MapGet("/", context => context.Response.WriteAsync(""));
       });
