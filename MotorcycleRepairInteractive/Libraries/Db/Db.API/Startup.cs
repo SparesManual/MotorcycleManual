@@ -53,6 +53,8 @@ namespace Db.API
         });
       });
 
+      services.AddControllers();
+
       services.AddAuthentication(options =>
       {
         options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
