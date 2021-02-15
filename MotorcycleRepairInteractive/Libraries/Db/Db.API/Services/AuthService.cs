@@ -44,7 +44,7 @@ namespace Db.API
         return new BooleanReply
         {
           Reply = false,
-          Error = 403
+          Error = 404
         };
 
       var claims = await m_userManager.GetClaimsAsync(user).ConfigureAwait(false);

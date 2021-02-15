@@ -1,14 +1,19 @@
 using System;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 
 namespace Db.API.Controllers
 {
+  /// <summary>
+  /// REST API Controller for authentication
+  /// </summary>
   [ApiController]
+  [EnableCors("AllowAll")]
   [Route("[controller]")]
   public sealed class AuthController
     : ControllerBase
@@ -19,6 +24,10 @@ namespace Db.API.Controllers
 
     #endregion
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="userManager">Injected user manager instance</param>
     public AuthController (UserManager<IdentityUser> userManager)
     {
       m_userManager = userManager;

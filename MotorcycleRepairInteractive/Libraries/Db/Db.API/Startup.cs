@@ -36,6 +36,7 @@ namespace Db.API
     /// <param name="services">Injected services library</param>
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddControllersWithViews();
       services.AddGrpc();
       services
         .AddDbContext<ManualContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultConnection")))
@@ -55,10 +56,7 @@ namespace Db.API
 
       services.AddControllers();
 
-      services.AddAuthentication(options =>
-      {
-        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-      }).AddCookie();
+      services.AddAuthentication(options => { options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; }).AddCookie();
     }
 
     /// <summary>
