@@ -28,7 +28,7 @@ namespace MRI.Client
 
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
       builder.Services.AddSingleton<IAPIProvider, APIWebProvider>();
-      builder.Services.AddHttpClient<IAPIAuth, APIRESTAuth>("WASMClient", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+      builder.Services.AddHttpClient<IAPIAuth, APIRESTAuth>("WasmClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
       builder.Services.AddScoped<HttpClient>();
       builder.Services.AddScoped<IPagingManager, RadzenPagingManager>();
       builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
