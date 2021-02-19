@@ -5,6 +5,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
+    <RazorLangVersion>3.0</RazorLangVersion>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
