@@ -17,7 +17,7 @@ namespace MRI.MVVM.WPF.Helpers
     /// <summary>
     /// Invoked when navigating to a new page
     /// </summary>
-    public static EventHandler<string>? NavigationChanged;
+    public static event EventHandler<string>? NavigationChanged;
 
     /// <summary>
     /// The currently displayed page
@@ -77,10 +77,9 @@ namespace MRI.MVVM.WPF.Helpers
       if (!VIEWS.TryGetValue(name, out var view))
         throw new KeyNotFoundException($"No views with the name {name} are registered in the manager");
 
-      var constructor = view.GetConstructors().First(c => c.GetParameters().Length == 0);
+      var constructor = view!.GetConstructors().First(c => c.GetParameters().Length == 0);
       var instance = constructor.Invoke(null);
 
-      // TODO: Test
       return (IView<IViewModel>)instance;
     }
   }

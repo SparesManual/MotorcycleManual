@@ -1,4 +1,3 @@
-using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -24,7 +23,7 @@ namespace MRI.Auth
 
     private readonly HttpClient m_httpClient;
     private readonly IStorage m_storage;
-    private readonly AuthenticationStateProvider m_stateProvider; 
+    private readonly AuthenticationStateProvider m_stateProvider;
 
     #endregion
 
@@ -76,7 +75,6 @@ namespace MRI.Auth
       await m_storage.RemoveItemAsync("authToken").ConfigureAwait(false);
       ((ApiAuthenticationStateProvider)m_stateProvider).MarkUserAsLoggedOut();
       m_httpClient.DefaultRequestHeaders.Authorization = null;
-      var response = await m_httpClient.PostAsync("auth/SignOutUser", null, cancellationToken).ConfigureAwait(false);
 
       return true;
     }

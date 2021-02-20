@@ -19,7 +19,7 @@ namespace MRI.MVVM.WPF.Helpers
     /// <summary>
     /// Initializes the view model resolver
     /// </summary>
-    /// <param name="builder">IoC builder instance</param>
+    /// <param name="container">DI container instance</param>
     public static void Initialize(IContainer container)
     {
       if (m_isInitialized)
