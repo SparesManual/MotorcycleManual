@@ -4,17 +4,25 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:helpers="clr-namespace:MRI.MVVM.WPF.Helpers;assembly=MRI.MVVM.WPF.Helpers"
       mc:Ignorable="d" 
       Background="Transparent"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Login">
-  <Grid Margin="15">
+  <Grid Margin="15" MaxWidth="350" VerticalAlignment="Center">
     <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <TextBox Width="250" Grid.Row="0" ui:ControlHelper.PlaceholderText="Email" Text="{Binding Email}"/>
-    <TextBox Width="250" Grid.Row="1" ui:ControlHelper.PlaceholderText="Password" Margin="0 5 0 0" Text="{Binding Password}"/>
+    <TextBox Grid.Row="0" Cursor="IBeam" ui:ControlHelper.PlaceholderText="Email" Text="{Binding Email}"/>
+    <PasswordBox Grid.Row="1" helpers:PasswordBoxHelper.BindPassword="True" helpers:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ui:ControlHelper.PlaceholderText="Password"   Margin="0 15 0 0"/>
+    <DockPanel Grid.Row="2" Margin="0 15 0 0">
+      <CheckBox DockPanel.Dock="Left" IsChecked="{Binding RememberMe}">Remember me</CheckBox>
+      <Button DockPanel.Dock="Right" HorizontalAlignment="Right">Forgot password</Button>
+    </DockPanel>
+    <Button Grid.Row="3" Margin="0 15 0 0">Login</Button>
   </Grid>
 </Page>
