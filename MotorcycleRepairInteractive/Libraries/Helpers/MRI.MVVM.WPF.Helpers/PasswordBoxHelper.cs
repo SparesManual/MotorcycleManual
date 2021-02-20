@@ -3,6 +3,9 @@ using System.Windows.Controls;
 
 namespace MRI.MVVM.WPF.Helpers
 {
+  /// <summary>
+  /// Helper class for binding to the WPF password box content
+  /// </summary>
   public static class PasswordBoxHelper
   {
     /// <summary>
@@ -23,6 +26,10 @@ namespace MRI.MVVM.WPF.Helpers
         typeof(PasswordBoxHelper),
         new PropertyMetadata(false, OnBindPasswordChanged));
 
+    /// <summary>
+    /// Determines whether the password value is being modified
+    /// </summary>
+    // ReSharper disable once InconsistentNaming
     private static readonly DependencyProperty UpdatingPassword =
       DependencyProperty.RegisterAttached(nameof(UpdatingPassword),
         typeof(bool),
@@ -72,7 +79,7 @@ namespace MRI.MVVM.WPF.Helpers
       var box = sender as PasswordBox;
 
       // set a flag to indicate that we're updating the password
-      SetUpdatingPassword(box, true);
+      SetUpdatingPassword(box!, true);
       // push the new password into the BoundPassword property
       SetBoundPassword(box, box.Password);
       SetUpdatingPassword(box, false);
@@ -86,9 +93,19 @@ namespace MRI.MVVM.WPF.Helpers
     public static void SetBindPassword(DependencyObject dp, bool value)
       => dp.SetValue(BindPassword, value);
 
+    /// <summary>
+    /// Gets the value of the <see cref="BindPassword"/> property
+    /// </summary>
+    /// <param name="dp">Object containing the bound property</param>
+    /// <returns>Property value</returns>
     public static bool GetBindPassword(DependencyObject dp)
       => (bool) dp.GetValue(BindPassword);
 
+    /// <summary>
+    /// Gets the value of the <see cref="BoundPassword"/> property
+    /// </summary>
+    /// <param name="dp">Object containing the bound property</param>
+    /// <returns>Property value</returns>
     public static string GetBoundPassword(DependencyObject dp)
       => (string) dp.GetValue(BoundPassword);
 
@@ -100,6 +117,11 @@ namespace MRI.MVVM.WPF.Helpers
     public static void SetBoundPassword(DependencyObject dp, string value)
       => dp.SetValue(BoundPassword, value);
 
+    /// <summary>
+    /// Gets the value of the <see cref="UpdatingPassword"/> property
+    /// </summary>
+    /// <param name="dp">Object containing the bound property</param>
+    /// <returns>Property value</returns>
     private static bool GetUpdatingPassword(DependencyObject dp)
       => (bool) dp.GetValue(UpdatingPassword);
 
