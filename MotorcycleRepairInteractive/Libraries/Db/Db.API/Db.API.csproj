@@ -42,6 +42,11 @@
     <PackageReference Include="Grpc.AspNetCore" Version="2.35.0" />
     <PackageReference Include="Grpc.AspNetCore.Web" Version="2.35.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -52,6 +57,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Models\Models.BOM\Models.BOM.csproj" />
+    <ProjectReference Include="..\..\Models\Models.REST.Auth\Models.REST.Auth.csproj" />
     <ProjectReference Include="..\..\States\States.General\States.General.csproj" />
     <ProjectReference Include="..\Db.Infrastructure\Db.Infrastructure.csproj" />
   </ItemGroup>

@@ -81,7 +81,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "States", "States", "{FCAB7F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "States.General", "Libraries\States\States.General\States.General.csproj", "{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Client", "Application\MRI.Client\MRI.Client.csproj", "{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.Client", "Application\MRI.Client\MRI.Client.csproj", "{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.REST.Auth", "Libraries\Models\Models.REST.Auth\Models.REST.Auth.csproj", "{BC6AFC07-5A06-4E17-926F-61A534C1082C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -193,6 +195,10 @@ Global
 		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC6AFC07-5A06-4E17-926F-61A534C1082C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC6AFC07-5A06-4E17-926F-61A534C1082C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC6AFC07-5A06-4E17-926F-61A534C1082C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC6AFC07-5A06-4E17-926F-61A534C1082C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -235,6 +241,7 @@ Global
 		{FCAB7FBD-E6BC-444B-81CE-AB13A067E851} = {A766BB6A-8A96-4C08-90A2-BC1412C498EC}
 		{826BCB8F-AC17-4345-99CB-CFA9D0A42DA6} = {FCAB7FBD-E6BC-444B-81CE-AB13A067E851}
 		{1461BB7D-DCB4-49DA-A129-54935E3B9BB2} = {5E79D870-AD74-4363-B7E7-3FBF27426330}
+		{BC6AFC07-5A06-4E17-926F-61A534C1082C} = {C54A3983-3803-4678-BAFF-D72B9F90D43E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB209151-52A5-4156-B92F-10FB84E38FDA}
