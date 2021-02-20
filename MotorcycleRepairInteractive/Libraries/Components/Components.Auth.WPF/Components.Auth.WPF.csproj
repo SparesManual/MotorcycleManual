@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../../../bin/Debug/Libraries/Components</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../../bin/Release/Libraries/Components</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
+    <ProjectReference Include="..\..\Helpers\MRI.MVVM.WPF.Helpers\MRI.MVVM.WPF.Helpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ModernWpf">
+      <HintPath>..\..\..\..\..\..\..\.nuget\packages\modernwpfui\0.9.3\lib\netcoreapp3.0\ModernWpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
