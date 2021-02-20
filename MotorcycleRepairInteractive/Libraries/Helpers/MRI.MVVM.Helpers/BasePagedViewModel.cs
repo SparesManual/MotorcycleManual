@@ -131,7 +131,8 @@ namespace MRI.MVVM.Helpers
     /// <param name="search">Optional search filter</param>
     /// <param name="cancellationToken">Process cancellation</param>
     /// <returns>Queried items</returns>
-    protected abstract Task<IPaging<T>> GetItemsAsync(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default);
+    protected abstract ValueTask<IPaging<T>> GetItemsAsync(int pageSize, int pageIndex, string? search,
+      CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Loads items

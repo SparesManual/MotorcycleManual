@@ -23,7 +23,8 @@ namespace ViewModels.Queries
     }
 
     /// <inheritdoc />
-    protected override Task<IPaging<ISectionPart>> GetItemsAsync(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
+    protected override ValueTask<IPaging<ISectionPart>> GetItemsAsync(int pageSize, int pageIndex, string? search,
+      CancellationToken cancellationToken = default)
       => m_provider.GetPartsFromSectionAsync(SectionId ?? 0, pageSize, pageIndex, cancellationToken: cancellationToken);
   }
 }

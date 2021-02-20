@@ -36,7 +36,8 @@ namespace ViewModels.Queries
     }
 
     /// <inheritdoc />
-    protected override Task<IPaging<IPart>> GetItemsAsync(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
+    protected override ValueTask<IPaging<IPart>> GetItemsAsync(int pageSize, int pageIndex, string? search,
+      CancellationToken cancellationToken = default)
       => m_provider.GetPartsAsync(pageSize, pageIndex, search, cancellationToken);
 
     #endregion
