@@ -31,7 +31,7 @@ namespace States.General
         return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
 
       var claim = new Claim(ClaimTypes.Email, userEmail);
-      var claimsIdentity = new ClaimsIdentity(new[] {claim}, "serverAuth");
+      var claimsIdentity = new ClaimsIdentity(new[] { claim }, "serverAuth");
       var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
       return new AuthenticationState(claimsPrincipal);

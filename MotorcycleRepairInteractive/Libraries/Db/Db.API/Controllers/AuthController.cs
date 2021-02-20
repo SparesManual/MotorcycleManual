@@ -1,11 +1,17 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using Db.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Models.BOM;
 
 namespace Db.API.Controllers
 {
@@ -20,6 +26,8 @@ namespace Db.API.Controllers
   {
     #region Fields
 
+    private readonly IConfiguration m_configuration;
+    private readonly SignInManager<IdentityUser> m_signInManager;
     private readonly UserManager<IdentityUser> m_userManager;
 
     #endregion
@@ -28,8 +36,10 @@ namespace Db.API.Controllers
     /// Default constructor
     /// </summary>
     /// <param name="userManager">Injected user manager instance</param>
-    public AuthController (UserManager<IdentityUser> userManager)
+    public AuthController(IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
     {
+      m_configuration = configuration;
+      m_signInManager = signInManager;
       m_userManager = userManager;
     }
 
@@ -41,22 +51,31 @@ namespace Db.API.Controllers
     /// <param name="userData">Data of the user to sign in</param>
     [HttpPost(nameof(SignInUser))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> SignInUser(Tuple<string, string> userData)
+    public async Task<ActionResult<string>> SignInUser([FromBody] Models.REST.Auth.LoginRequest userData)
     {
-      var user = await m_userManager.FindByEmailAsync(userData.Item1).ConfigureAwait(false);
-      if (user is null)
+      var result = await m_signInManager.PasswordSignInAsync(userData.Email, userData.Password, userData.RememberMe, false).ConfigureAwait(false);
+
+      if (!result.Succeeded)
         return BadRequest();
 
-      if (!await m_userManager.CheckPasswordAsync(user, userData.Item2).ConfigureAwait(false))
-        return BadRequest();
+      var claims = new[]
+      {
+        new Claim(ClaimTypes.Name, userData.Email)
+      };
 
-      var claims = await m_userManager.GetClaimsAsync(user).ConfigureAwait(false);
-      var claimsIdentity = new ClaimsIdentity(claims, "serverAuth");
-      var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+      var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(m_configuration["JwtSecurityKey"]));
+      var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+      var expiry = DateTime.Now.AddDays(Convert.ToInt32(m_configuration["JwtExpiryInDays"]));
 
-      await HttpContext.SignInAsync(claimsPrincipal).ConfigureAwait(false);
+      var token = new JwtSecurityToken(
+        m_configuration["JwtIssuer"],
+        m_configuration["JwtAudience"],
+        claims,
+        expires: expiry,
+        signingCredentials: credentials
+      );
 
-      return Ok();
+      return Ok(new JwtSecurityTokenHandler().WriteToken(token));
     }
 
     /// <summary>

@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Models\Models.BOM\Models.BOM.csproj" />
+    <ProjectReference Include="..\..\Models\Models.REST.Auth\Models.REST.Auth.csproj" />
+    <ProjectReference Include="..\..\States\States.General\States.General.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +38,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
