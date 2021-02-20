@@ -6,13 +6,12 @@
 @code {
 
   private void LoginUser()
-  {
-    m_navigationManager.NavigateTo("/login");
-  }
+    => m_navigationManager.NavigateTo("/login");
 
   private async Task LogoutUser()
   {
     await m_authProvider.LogoutUser().ConfigureAwait(false);
+    m_navigationManager.NavigateTo("/", true);
   }
 
 }
@@ -44,4 +43,3 @@
     @Body
   </div>
 </div>
-

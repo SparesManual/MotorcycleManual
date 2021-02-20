@@ -56,7 +56,7 @@
     {
       case LoginResult.Success:
         m_invalidCredentials = false;
-        m_navigationManager.NavigateTo("/");
+        m_navigationManager.NavigateTo("/", true);
         break;
       case LoginResult.InvalidCredentials:
         m_invalidCredentials = true;

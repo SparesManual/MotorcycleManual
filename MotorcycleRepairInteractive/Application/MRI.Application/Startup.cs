@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -20,7 +21,7 @@ namespace MRI.Application
     {
       services.AddRazorPages();
       services.AddSingleton<IAPIProvider, APIProvider>();
-      services.AddScoped<IAPIAuth, APIAuth>();
+      services.AddHttpClient<IAPIAuth, APIRESTAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
       services.AddScoped<HttpClient>();
       services.AddManualViewModels().AddIdentityViewModels();
 
