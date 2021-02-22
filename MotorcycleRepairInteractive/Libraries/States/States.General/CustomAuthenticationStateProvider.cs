@@ -25,13 +25,13 @@ namespace States.General
     /// <inheritdoc />
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-      var userEmail = await m_provider.GetUserAsync();
+      var userEmail = await m_provider.GetUserAsync().ConfigureAwait(false);
 
-      if (userEmail is null)
+      if (string.IsNullOrEmpty(userEmail))
         return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
 
       var claim = new Claim(ClaimTypes.Email, userEmail);
-      var claimsIdentity = new ClaimsIdentity(new[] {claim}, "serverAuth");
+      var claimsIdentity = new ClaimsIdentity(new[] { claim }, "serverAuth");
       var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
       return new AuthenticationState(claimsPrincipal);

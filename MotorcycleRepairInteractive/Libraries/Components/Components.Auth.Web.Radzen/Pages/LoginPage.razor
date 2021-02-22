@@ -1,5 +1,4 @@
 @page "/login"
-@using ViewModels.Interfaces.Auth.Enums
 @inherits BaseComponent<ILoginViewModel>
 @inject ILoginViewModelValidator m_validator
 @inject NavigationManager m_navigationManager
@@ -10,7 +9,7 @@
 }
 
 <EditForm Model="@ViewModel"
-          OnValidSubmit="Submit">
+          OnValidSubmit="@Submit">
   <FluentValidator Validator="m_validator"/>
   <div class="row" style="margin-bottom: 24px">
     <div class="col">
@@ -56,7 +55,7 @@
     {
       case LoginResult.Success:
         m_invalidCredentials = false;
-        m_navigationManager.NavigateTo("/");
+        m_navigationManager.NavigateTo("/", true);
         break;
       case LoginResult.InvalidCredentials:
         m_invalidCredentials = true;

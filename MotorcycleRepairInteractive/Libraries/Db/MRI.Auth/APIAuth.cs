@@ -23,8 +23,17 @@ namespace MRI.Auth
     /// Default constructor
     /// </summary>
     public APIAuth()
+      : this(GrpcChannel.ForAddress("https://localhost:5001"))
     {
-      m_channel = GrpcChannel.ForAddress("https://localhost:5001");
+    }
+
+    /// <summary>
+    /// Provider constructor
+    /// </summary>
+    /// <param name="channel">Grpc channel instance</param>
+    protected APIAuth(GrpcChannel channel)
+    {
+      m_channel = channel;
       m_client = new Db.API.Auth.AuthClient(m_channel);
     }
 
@@ -36,7 +45,8 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async Task<(bool, int)> LoginUser(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default)
+    public async ValueTask<(bool, int)> LoginUser(string email, string password, bool rememberMe = default,
+      CancellationToken cancellationToken = default)
     {
       var result = await m_client.LoginUserAsync(new LoginRequest {Email = email, Password = password, RememberMe = rememberMe}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return (result.Reply, result.Error);
@@ -50,7 +60,7 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async Task<string?> GetUserAsync(CancellationToken cancellationToken = default)
+    public async ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default)
     {
       var result = await m_client.LoggedInEmailAsync(new Nothing(), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;

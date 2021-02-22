@@ -42,7 +42,6 @@ namespace ViewModels.Auth
       return result switch
       {
         (false, 404) => LoginResult.InvalidCredentials,
-        (false, 403) => LoginResult.InvalidCredentials,
         (true, _) => LoginResult.Success,
         _ => LoginResult.ServerError
       };

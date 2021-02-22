@@ -10,13 +10,14 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Models.Entities;
 using Models.Interfaces.Entities;
+// ReSharper disable AsyncConverter.AsyncAwaitMayBeElidedHighlighting
 
 namespace MRI.Db
 {
   /// <summary>
   /// Provider of API method calls to the Database
   /// </summary>
-  public sealed class APIProvider
+  public class APIProvider
     : IAPIProvider
   {
     #region Fields
@@ -30,8 +31,17 @@ namespace MRI.Db
     /// Default constructor
     /// </summary>
     public APIProvider()
+      : this(GrpcChannel.ForAddress("https://localhost:5001"))
     {
-      m_channel = GrpcChannel.ForAddress("https://localhost:5001");
+    }
+
+    /// <summary>
+    /// Provider constructor
+    /// </summary>
+    /// <param name="channel">Grpc channel instance</param>
+    protected APIProvider(GrpcChannel channel)
+    {
+      m_channel = channel;
       m_client = new Provider.ProviderClient(m_channel);
     }
 
@@ -84,26 +94,30 @@ namespace MRI.Db
         yield return converter(item);
     }
 
-    private async Task<IPaging<TReplyModel>> GetPagingAsync<TReply, TReplyModel>(Func<Provider.ProviderClient, AsyncServerStreamingCall<TReply>> extractor, Func<TReply, TReplyModel> converter)
+    private async Task<IPaging<TReplyModel>> GetPagingAsync<TReply, TReplyModel>(
+      Func<Provider.ProviderClient, AsyncServerStreamingCall<TReply>> extractor, Func<TReply, TReplyModel> converter,
+      CancellationToken cancellationToken)
       where TReplyModel : IReply
     {
       var result = extractor(m_client);
-      var headers = await result.ResponseHeadersAsync.ConfigureAwait(false);
-      var (total, pageSize, pageIndex) = RetrievePaging(headers);
+      var items = await result.ResponseStream.ReadAllAsync(cancellationToken)
+        .Select(converter)
+        .Where(x => x is not null)
+        .ToListAsync(cancellationToken).ConfigureAwait(false);
 
-#pragma warning disable 8424
-      async IAsyncEnumerable<TReplyModel> ConvertStream([EnumeratorCancellation] CancellationToken cancellationToken)
-      {
-        await foreach (var item in result.ResponseStream.ReadAllAsync(cancellationToken).WithCancellation(cancellationToken).ConfigureAwait(false))
-          yield return converter(item);
-      }
-#pragma warning restore 8424
+      var metadata = result.GetTrailers();
+      var (total, size, index) = metadata is null ? (0, 1, 1) : RetrievePaging(metadata);
 
-      return new Paging<TReplyModel>(ConvertStream, total, pageSize, pageIndex);
+      return new Paging<TReplyModel>(items, total, size, index);
     }
 
     private static (int total, int size, int index) RetrievePaging(Metadata metadata)
-      => (int.Parse(metadata.GetValue(@"totalsize")), int.Parse(metadata.GetValue(@"pagesize")), int.Parse(metadata.GetValue("pageindex")));
+    {
+      int.TryParse(metadata.GetValue("totalsize"), out var totalSize);
+      int.TryParse(metadata.GetValue("pagesize"), out var size);
+      int.TryParse(metadata.GetValue("pageindex"), out var index);
+      return (totalSize, size, index);
+    }
 
     private static IBook ToBook(BookReply reply)
       => new BookModel
@@ -211,88 +225,91 @@ namespace MRI.Db
     #region API
 
     /// <inheritdoc />
-    public async Task<IBook> GetBookAsync(int id, CancellationToken cancellationToken = default)
+    public async ValueTask<IBook> GetBookAsync(int id, CancellationToken cancellationToken = default)
       => ToBook(await m_client.GetBookAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
-    public async Task<IPaging<IBook>> GetBooksAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetBooks(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToBook).ConfigureAwait(false);
+    public async ValueTask<IPaging<IBook>> GetBooksAsync(int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetBooks(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToBook, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
     public IAsyncEnumerable<IModel> GetBookModelsAsync(int bookId, CancellationToken cancellationToken = default)
       => GetItemsAsync(client => client.GetBookModels(ToIdRequest(bookId), cancellationToken: cancellationToken), ToModel, cancellationToken);
 
     /// <inheritdoc />
-    public async Task<IMake> GetMakeAsync(int id, CancellationToken cancellationToken = default)
+    public async ValueTask<IMake> GetMakeAsync(int id, CancellationToken cancellationToken = default)
       => ToMake(await m_client.GetMakeAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
-    public async Task<IPaging<IMake>> GetMakesAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetAllMakes(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToMake).ConfigureAwait(false);
+    public async ValueTask<IPaging<IMake>> GetMakesAsync(int size, int index, string? search,
+      CancellationToken cancellationToken)
+      => await GetPagingAsync(client => client.GetAllMakes(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToMake, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IModel> GetModelAsync(int id, CancellationToken cancellationToken = default)
+    public async ValueTask<IModel> GetModelAsync(int id, CancellationToken cancellationToken = default)
       => ToModel(await m_client.GetModelAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
-    public async Task<IPaging<IModel>> GetModelsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetAllModels(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToModel).ConfigureAwait(false);
+    public async ValueTask<IPaging<IModel>> GetModelsAsync(int size, int index, string? search = default,
+      CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllModels(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToModel, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<ICarburetor>> GetCarburetorsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetAllCarburetors(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToCarburetor).ConfigureAwait(false);
+    public async ValueTask<IPaging<ICarburetor>> GetCarburetorsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllCarburetors(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToCarburetor, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IEngine>> GetEnginesAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetAllEngines(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToEngine).ConfigureAwait(false);
+    public async ValueTask<IPaging<IEngine>> GetEnginesAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllEngines(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToEngine, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IEngine> GetModelEngineAsync(int id, CancellationToken cancellationToken = default)
+    public async ValueTask<IEngine> GetModelEngineAsync(int id, CancellationToken cancellationToken = default)
       => ToEngine(await m_client.GetModelEngineAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
-    public async Task<IPart> GetPartAsync(int id, CancellationToken cancellationToken = default)
+    public async ValueTask<IPart> GetPartAsync(int id, CancellationToken cancellationToken = default)
       => ToPart(await m_client.GetPartAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
-    public async Task<IPaging<ISection>> GetSectionsFromBookAsync(int bookId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetSectionsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToSection).ConfigureAwait(false);
+    public async ValueTask<IPaging<ISection>> GetSectionsFromBookAsync(int bookId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetSectionsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToSection, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IPart>> GetPartsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetAllParts(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToPart).ConfigureAwait(false);
+    public async ValueTask<IPaging<IPart>> GetPartsAsync(int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllParts(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToPart, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IPart>> GetPartsFromBookAsync(int bookId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPartsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToPart).ConfigureAwait(false);
+    public async ValueTask<IPaging<IPart>> GetPartsFromBookAsync(int bookId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPartsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToPart, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<ISectionPart>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPartsFromSection(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken), ToSectionParts).ConfigureAwait(false);
+    public async ValueTask<IPaging<ISectionPart>> GetPartsFromSectionAsync(int sectionId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPartsFromSection(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken), ToSectionParts, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IProperty>> GetPartPropertiesAsync(int partId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPartProperties(ToIdSearchAndPageParams(partId, search, size, index), cancellationToken: cancellationToken), ToProperty).ConfigureAwait(false);
+    public async ValueTask<IPaging<IProperty>> GetPartPropertiesAsync(int partId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPartProperties(ToIdSearchAndPageParams(partId, search, size, index), cancellationToken: cancellationToken), ToProperty, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IModel>> GetSectionSpecificModelsAsync(int sectionId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetSectionSpecificModels(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken), ToModel).ConfigureAwait(false);
+    public async ValueTask<IPaging<IModel>> GetSectionSpecificModelsAsync(int sectionId, int size, int index,
+      string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetSectionSpecificModels(ToIdSearchAndPageParams(sectionId, search, size, index), cancellationToken: cancellationToken), ToModel, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<ISection> GetSectionAsync(int id, CancellationToken cancellationToken = default)
+    public async ValueTask<ISection> GetSectionAsync(int id, CancellationToken cancellationToken = default)
       => ToSection(await m_client.GetSectionAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
-    public async Task<IPaging<ISection>> GetSectionsAsync(int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetAllSections(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToSection).ConfigureAwait(false);
+    public async ValueTask<IPaging<ISection>> GetSectionsAsync(int size, int index, string? search = null, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetAllSections(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToSection, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<ISection>> GetSectionChildrenAsync(int parentId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetSectionChildren(ToIdSearchAndPageParams(parentId, search, size, index), cancellationToken: cancellationToken), ToSection).ConfigureAwait(false);
+    public async ValueTask<IPaging<ISection>> GetSectionChildrenAsync(int parentId, int size, int index, string? search = default, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetSectionChildren(ToIdSearchAndPageParams(parentId, search, size, index), cancellationToken: cancellationToken), ToSection, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async Task<IPaging<IPropertyType>> GetPropertyTypesAsync(int size, int index, CancellationToken cancellationToken = default)
-      => await GetPagingAsync(client => client.GetPropertyTypes(ToPageParams(size, index), cancellationToken: cancellationToken), ToPropertyType).ConfigureAwait(false);
+    public async ValueTask<IPaging<IPropertyType>> GetPropertyTypesAsync(int size, int index, CancellationToken cancellationToken = default)
+      => await GetPagingAsync(client => client.GetPropertyTypes(ToPageParams(size, index), cancellationToken: cancellationToken), ToPropertyType, cancellationToken).ConfigureAwait(false);
 
     #endregion
 

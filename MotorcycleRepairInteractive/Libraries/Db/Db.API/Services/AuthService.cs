@@ -44,7 +44,7 @@ namespace Db.API
         return new BooleanReply
         {
           Reply = false,
-          Error = 403
+          Error = 404
         };
 
       var claims = await m_userManager.GetClaimsAsync(user).ConfigureAwait(false);
@@ -80,7 +80,7 @@ namespace Db.API
       if (http.User.Identity?.IsAuthenticated is not true)
         return new StringReply
         {
-          Reply = null
+          Reply = ""
         };
 
       var user = await m_userManager.GetUserAsync(http.User).ConfigureAwait(false);

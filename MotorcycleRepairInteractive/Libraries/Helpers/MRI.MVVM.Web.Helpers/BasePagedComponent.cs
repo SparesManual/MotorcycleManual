@@ -23,7 +23,7 @@ namespace MRI.MVVM.Web.Helpers
       // If the view model is not null..
       if (ViewModel is not null)
         // Load the view items
-        await ViewModel.LoadItems().ConfigureAwait(true);
+        await ViewModel.LoadItemsAsync().ConfigureAwait(true);
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ namespace MRI.MVVM.Web.Helpers
       ViewModel.PageIndex = newPage;
 
       // Load the view items
-      await ViewModel.LoadItems().ConfigureAwait(false);
+      await ViewModel.LoadItemsAsync().ConfigureAwait(false);
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ namespace MRI.MVVM.Web.Helpers
       ViewModel.PageIndex = 1;
 
       // Load the view items
-      await ViewModel.LoadItems().ConfigureAwait(false);
+      await ViewModel.LoadItemsAsync().ConfigureAwait(false);
 
       // Go to the first page
       GoToPage(0);

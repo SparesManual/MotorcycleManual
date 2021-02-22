@@ -18,7 +18,7 @@ namespace Db.Interfaces
     /// <param name="rememberMe"></param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>True if logged in</returns>
-    Task<(bool, int)> LoginUser(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default);
+    ValueTask<(bool, int)> LoginUser(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Attempts to logout the user
@@ -32,6 +32,6 @@ namespace Db.Interfaces
     /// </summary>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>The signed in user email. Null if not signed in</returns>
-    Task<string?> GetUserAsync(CancellationToken cancellationToken = default);
+    ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default);
   }
 }

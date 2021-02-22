@@ -21,15 +21,10 @@ namespace Db.Infrastructure.Data
 
       var user = new IdentityUser
       {
-        Email = "bob@test.com",
-        UserName = "bazooka"
+        UserName = "bob@test.com",
       };
 
       await userManager.CreateAsync(user, "Pa$$w0rd").ConfigureAwait(false);
-
-      var claim = new Claim(ClaimTypes.Email, user.Email);
-
-      await userManager.AddClaimAsync(user, claim);
     }
   }
 }

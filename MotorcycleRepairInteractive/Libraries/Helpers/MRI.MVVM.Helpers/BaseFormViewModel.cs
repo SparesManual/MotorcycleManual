@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using FluentValidation;
 using MRI.MVVM.Interfaces.ViewModels;
@@ -25,7 +24,6 @@ namespace MRI.MVVM.Helpers
     #region Properties
 
     /// <inheritdoc />
-    [NotMapped]
     public string Error
     {
       get

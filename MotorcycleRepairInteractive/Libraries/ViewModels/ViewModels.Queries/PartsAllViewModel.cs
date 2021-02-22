@@ -31,13 +31,14 @@ namespace ViewModels.Queries
       Autocomplete.Clear();
 
       var result = await m_provider.GetPartsAsync(5, 1, search).ConfigureAwait(true);
-      await foreach (var item in result.ReadAll().ConfigureAwait(true))
+      foreach (var item in result.Items)
         Autocomplete.Add($"{item.PartNumber} {item.Description}");
     }
 
     /// <inheritdoc />
-    protected override async Task<IPaging<IPart>> GetItems(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
-      => await m_provider.GetPartsAsync(pageSize, pageIndex, search, cancellationToken).ConfigureAwait(false);
+    protected override ValueTask<IPaging<IPart>> GetItemsAsync(int pageSize, int pageIndex, string? search,
+      CancellationToken cancellationToken = default)
+      => m_provider.GetPartsAsync(pageSize, pageIndex, search, cancellationToken);
 
     #endregion
   }

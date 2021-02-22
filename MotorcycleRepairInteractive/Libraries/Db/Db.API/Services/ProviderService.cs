@@ -8,6 +8,7 @@ using Db.Core.Specifications;
 using Db.Interfaces;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+// ReSharper disable AsyncConverter.AsyncMethodNamingHighlighting
 
 namespace Db.API
 {
@@ -249,13 +250,12 @@ namespace Db.API
         m_logger.LogWarning($"Request for all entries of '{typeof(T).Name}' has been cancelled");
     }
 
-    private static Metadata GeneratePagingMetadata(int total, int size, int index)
-      => new()
-      {
-        { "PageSize", size.ToString() },
-        { "PageIndex", index.ToString() },
-        { "TotalSize", total.ToString() }
-      };
+    private static void AddPagingData(Metadata metadata, int total, int size, int index)
+    {
+      metadata.Add("PageSize", size.ToString());
+      metadata.Add("PageIndex", index.ToString());
+      metadata.Add("TotalSize", total.ToString());
+    }
 
     private static async Task ProcessItemsStream<TParent, TChild, TReply>(
       IGenericRepository<TParent> repository,
@@ -293,7 +293,7 @@ namespace Db.API
     {
       var count = await repository.CountAsync(specification).ConfigureAwait(false);
 
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, size, index)).ConfigureAwait(false);
+      AddPagingData(context.ResponseTrailers, count, size, index);
 
       await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
     }
@@ -311,7 +311,7 @@ namespace Db.API
     {
       var count = await repository.CountAsync(specification).ConfigureAwait(false);
 
-      await context.WriteResponseHeadersAsync(GeneratePagingMetadata(count, size, index)).ConfigureAwait(false);
+      AddPagingData(context.ResponseTrailers, count, size, index);
 
       await processor(repository, specification, responseStream, converter, context.CancellationToken).ConfigureAwait(false);
     }
