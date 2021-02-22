@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Text;
-using Db.API.Extensions;
 using Db.Infrastructure.Data;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9</LangVersion>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <Authors>Denis Akopyan</Authors>
+    <Product>MRI</Product>
+    <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl>https://github.com/DicksHalfwayInnTeam/MotorcycleManual</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../../bin/Debug/Application</OutputPath>
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../bin/Release/Application</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ControlzEx" Version="4.4.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.3" />
+    <PackageReference Include="ModernWpfUI.MahApps" Version="0.9.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Components\Components.Auth.WPF\Components.Auth.WPF.csproj" />
+    <ProjectReference Include="..\..\Libraries\Db\MRI.Auth\MRI.Auth.csproj" />
+    <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.WPF.Helpers\MRI.MVVM.WPF.Helpers.csproj" />
+    <ProjectReference Include="..\..\Libraries\Validators\Validators.Auth\Validators.Auth.csproj" />
+    <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj" />
+  </ItemGroup>
+
+</Project>

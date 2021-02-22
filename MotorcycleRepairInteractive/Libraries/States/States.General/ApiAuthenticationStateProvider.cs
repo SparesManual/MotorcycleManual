@@ -11,20 +11,33 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace States.General
 {
+  /// <summary>
+  /// Custom authentication state provider
+  /// </summary>
   public class ApiAuthenticationStateProvider
     : AuthenticationStateProvider
   {
     private readonly HttpClient m_httpClient;
-    private readonly IStorage m_localStorage;
+    private readonly IStorage m_storage;
 
-    public ApiAuthenticationStateProvider(HttpClient httpClient, IStorage localStorage)
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="httpClient">Injected client instance</param>
+    /// <param name="storage">Injected storage manager</param>
+    public ApiAuthenticationStateProvider(HttpClient httpClient, IStorage storage)
     {
       m_httpClient = httpClient;
-      m_localStorage = localStorage;
+      m_storage = storage;
     }
+
+    /// <summary>
+    /// Retrieves the current authentication state
+    /// </summary>
+    /// <returns>Authentication state</returns>
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-      var savedToken = await m_localStorage.GetItemAsync<string>("authToken").ConfigureAwait(false);
+      var savedToken = await m_storage.GetItemAsync<string>("authToken").ConfigureAwait(false);
 
       if (string.IsNullOrWhiteSpace(savedToken))
         return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
@@ -34,6 +47,10 @@ namespace States.General
       return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
     }
 
+    /// <summary>
+    /// Marks the given <paramref name="email"/> as authenticated
+    /// </summary>
+    /// <param name="email">Email to mark</param>
     public void MarkUserAsAuthenticated(string email)
     {
       var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }, "apiauth"));
@@ -41,6 +58,9 @@ namespace States.General
       NotifyAuthenticationStateChanged(authState);
     }
 
+    /// <summary>
+    /// Marks the currently authenticated user as unauthenticated
+    /// </summary>
     public void MarkUserAsLoggedOut()
     {
       var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
@@ -80,8 +100,12 @@ namespace States.General
     {
       switch (base64.Length % 4)
       {
-        case 2: base64 += "=="; break;
-        case 3: base64 += "="; break;
+        case 2:
+          base64 += "==";
+          break;
+        case 3:
+          base64 += "=";
+          break;
       }
       return Convert.FromBase64String(base64);
     }

@@ -3,7 +3,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Db.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Models.BOM;
 
 namespace Db.API.Controllers
 {
@@ -35,7 +33,9 @@ namespace Db.API.Controllers
     /// <summary>
     /// Default constructor
     /// </summary>
+    /// <param name="signInManager">Injected sign in manager</param>
     /// <param name="userManager">Injected user manager instance</param>
+    /// <param name="configuration">Injected web service configuration</param>
     public AuthController(IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
     {
       m_configuration = configuration;
