@@ -1,19 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>9</LangVersion>
-    <Nullable>enable</Nullable>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <OutputType>Library</OutputType>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <Nullable>enable</Nullable>
+    <LangVersion>9</LangVersion>
+    <RootNamespace>Components.Queries.Web</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>../../../bin/Debug/Libraries/Components</OutputPath>
-    <DocumentationFile>../../../bin/Debug/Libraries/Components/Components.Queries.Web.xml</DocumentationFile>
+    <DocumentationFile>../../../bin/Debug/Libraries/Components/Components.Queries.Web.Radzen.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -21,13 +19,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.0" />
     <PackageReference Include="Radzen.Blazor" Version="3.0.8" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Queries\ViewModels.Interfaces.Queries.csproj" />
     <ProjectReference Include="..\..\Db\MRI.Db\MRI.Db.csproj" />
     <ProjectReference Include="..\..\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
-    <ProjectReference Include="..\..\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RazorLangVersion>3.0</RazorLangVersion>
+    <TargetFramework>net5.0</TargetFramework>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
 
@@ -16,19 +15,21 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.3" PrivateAssets="all" />
     <PackageReference Include="Radzen.Blazor" Version="3.0.8" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Web\Components.Auth.Web.csproj" />
-    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web\Components.Queries.Web.csproj" />
+    <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Web.Radzen\Components.Auth.Web.Radzen.csproj" />
+    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web.Radzen\Components.Queries.Web.Radzen.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Auth\MRI.Auth.csproj" />
+    <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
     <ProjectReference Include="..\..\Libraries\States\States.General\States.General.csproj" />
     <ProjectReference Include="..\..\Libraries\Validators\Validators.Auth\Validators.Auth.csproj" />
+    <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj" />
+    <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
   </ItemGroup>
 
   <ItemGroup>

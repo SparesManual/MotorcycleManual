@@ -1,5 +1,8 @@
 @* ReSharper disable once CheckNamespace *@
 @namespace Comp
+@using Models.Interfaces.Entities
+@using Radzen
+@using Radzen.Blazor
 @inherits BasePagedComponent<IBookSectionsViewModel, ISection>
 
 <RadzenGrid RowSelect="@RowSelected" @ref="m_grid" Count="ViewModel!.TotalItems" AllowPaging="true" LoadData="@LoadTableData" Data="ViewModel!.Items" PageSize="ViewModel!.PageSize" TItem="ISection">
