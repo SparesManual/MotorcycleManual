@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Windows.Input;
 using MRI.MVVM.Interfaces.ViewModels;
 using ViewModels.Interfaces.Auth.Enums;
 
@@ -26,6 +27,20 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// Authentication caching
     /// </summary>
     bool RememberMe { get; set; }
+
+    #endregion
+
+    #region Command
+
+    /// <summary>
+    /// Submits the login form
+    /// </summary>
+    ICommand SubmitCommand { get; }
+
+    /// <summary>
+    /// Submits a request for the password recovery form
+    /// </summary>
+    ICommand ForgotPasswordCommand { get; }
 
     #endregion
 

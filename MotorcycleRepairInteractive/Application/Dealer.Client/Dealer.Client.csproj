@@ -16,7 +16,6 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>../../bin/Debug/Application</OutputPath>
-    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -26,7 +25,6 @@
   <ItemGroup>
     <PackageReference Include="ControlzEx" Version="4.4.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.3" />
-    <PackageReference Include="ModernWpfUI.MahApps" Version="0.9.3" />
   </ItemGroup>
 
   <ItemGroup>

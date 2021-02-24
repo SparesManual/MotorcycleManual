@@ -1,7 +1,8 @@
 @page "/login"
 @inherits BaseComponent<ILoginViewModel>
+@implements ILoginView
+
 @inject ILoginViewModelValidator m_validator
-@inject NavigationManager m_navigationManager
 
 @if (m_invalidCredentials)
 {
@@ -9,32 +10,46 @@
 }
 
 <EditForm Model="@ViewModel"
-          OnValidSubmit="@Submit">
+          OnValidSubmit="ViewModel!.SubmitCommand.Execute">
   <FluentValidator Validator="m_validator"/>
-  <div class="row" style="margin-bottom: 24px">
-    <div class="col">
-      <div class="row">
-        <RadzenTextBox style="display: block" Placeholder="Email" Name="Email" @bind-Value="@ViewModel!.Email"/>
-      </div>
-      <div class="row">
-        <ValidationMessage For="() => ViewModel.Email"/>
-      </div>
-    </div>
-  </div>
-
-  <div class="row" style="margin-bottom: 24px">
-    <div class="col">
-      <div class="row">
-        <RadzenPassword Placeholder="Password..." Name="Password" @bind-Value="@ViewModel!.Password"/>
-      </div>
-      <div class="row">
-        <ValidationMessage For="() => ViewModel.Password"/>
+  <div class="container w-25 align-middle">
+    <div class="row mb-2">
+      <div class="col">
+        <div class="row">
+          <RadzenTextBox id="Email" Placeholder="Email" Name="Email" @bind-Value="@ViewModel!.Email" Style="width: 100%" />
+        </div>
+        <div class="row">
+          <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
+        </div>
       </div>
     </div>
-  </div>
+    
+    <div class="row mb-4">
+      <div class="col">
+        <div class="row">
+          <RadzenPassword id="Password" Placeholder="Password..." Name="Password" @bind-Value="@ViewModel!.Password" class="w-100"/>
+        </div>
+        <div class="row">
+          <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col align-content-start">
+        <RadzenCheckBox id="RememberMe" Value="ViewModel.RememberMe" TValue="bool" Name="CheckBox1"/>
+        <RadzenLabel Text="Remember me" Component="CheckBox1" class="ml-2"/>
+      </div>
+      <div class="col-sm align-content-end">
+        <a href="/forgotPassword" id="ForgotPassword">Forgot password</a>
+      </div>
+    </div>
 
-  <RadzenButton ButtonType="ButtonType.Submit"
-                Text="Login"/>
+    <RadzenButton class="row"
+                  id="Login"
+                  ButtonType="ButtonType.Submit"
+                  Text="Login"/>
+  </div>
 </EditForm>
 
 @code {
@@ -46,21 +61,6 @@
   {
     base.OnInitialized();
     m_invalidCredentials = false;
-  }
-
-  private async void Submit()
-  {
-    var result = await ViewModel!.LoginUser().ConfigureAwait(false);
-    switch (result)
-    {
-      case LoginResult.Success:
-        m_invalidCredentials = false;
-        m_navigationManager.NavigateTo("/", true);
-        break;
-      case LoginResult.InvalidCredentials:
-        m_invalidCredentials = true;
-        break;
-    }
   }
 
 }

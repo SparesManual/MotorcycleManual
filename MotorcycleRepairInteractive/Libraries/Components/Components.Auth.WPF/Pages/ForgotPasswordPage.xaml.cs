@@ -1,21 +1,20 @@
-﻿using MRI.MVVM.Interfaces.Views;
 using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace Components.Auth.WPF.Pages
 {
   /// <summary>
-  /// Interaction logic for RegisterPage.xaml
+  /// Interaction logic for ForgotPasswordPage.xaml
   /// </summary>
-  public partial class RegisterPage
-    : IView<IRegisterViewModel>
+  public partial class ForgotPasswordPage
+    : IForgotPasswordView
   {
     /// <inheritdoc />
-    public IRegisterViewModel ViewModel { get; }
+    public IForgotPasswordViewModel ViewModel { get; }
 
     /// <summary>
     /// Default constructor
     /// </summary>
-    public RegisterPage(IRegisterViewModel viewModel)
+    public ForgotPasswordPage(IForgotPasswordViewModel viewModel)
     {
       ViewModel = viewModel;
       DataContext = ViewModel;

@@ -89,6 +89,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.MVVM.WPF.Helpers", "Lib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components.Auth.WPF", "Libraries\Components\Components.Auth.WPF\Components.Auth.WPF.csproj", "{DA818583-A657-466E-B668-EE6529BFEDE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.Auth", "Interfaces\Components\Components.Auth\Components.Auth.csproj", "{BA5DE810-571B-4F75-A024-96AB36007BAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -211,6 +213,10 @@ Global
 		{DA818583-A657-466E-B668-EE6529BFEDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA818583-A657-466E-B668-EE6529BFEDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA818583-A657-466E-B668-EE6529BFEDE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA5DE810-571B-4F75-A024-96AB36007BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA5DE810-571B-4F75-A024-96AB36007BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA5DE810-571B-4F75-A024-96AB36007BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA5DE810-571B-4F75-A024-96AB36007BAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -256,6 +262,7 @@ Global
 		{4D90F7BF-3DBF-479F-A1BC-E2CAC64DDD07} = {5E79D870-AD74-4363-B7E7-3FBF27426330}
 		{F535A753-12B4-410A-98B4-C7BD82F755A1} = {19A631EC-F199-40B6-9E97-C9BEE94BE64C}
 		{DA818583-A657-466E-B668-EE6529BFEDE7} = {6CCCFE74-4126-409A-B3E0-D5B933DA8B90}
+		{BA5DE810-571B-4F75-A024-96AB36007BAB} = {09A0E87B-A9A3-402E-ABF3-907AAF3D9AF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB209151-52A5-4156-B92F-10FB84E38FDA}

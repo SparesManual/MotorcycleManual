@@ -1,4 +1,5 @@
-﻿using MRI.MVVM.WPF.Helpers;
+﻿using MRI.MVVM.Interfaces;
+using MRI.MVVM.WPF.Helpers;
 
 namespace Dealer.Client
 {
@@ -7,18 +8,21 @@ namespace Dealer.Client
   /// </summary>
   public partial class MainWindow
   {
+    private readonly NavigationManager m_navigator;
+
     /// <summary>
     /// Default constructor
     /// </summary>
     public MainWindow()
     {
-      NavigationManager.NavigationChanged += OnNavigationChanged;
+      m_navigator = (NavigationManager)TypeResolver.Resolve<INavigator>();
+      m_navigator.NavigationChanged += OnNavigationChanged;
       InitializeComponent();
 
-      NavigationManager.NavigateTo("login");
+      m_navigator.NavigateTo("/login");
     }
 
     private void OnNavigationChanged(object? sender, string name)
-      => MainContent.Content = NavigationManager.ResolveView(name);
+      => MainContent.Content = m_navigator.ResolveView(name);
   }
 }

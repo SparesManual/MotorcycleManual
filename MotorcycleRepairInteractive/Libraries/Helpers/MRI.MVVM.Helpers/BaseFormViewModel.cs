@@ -69,8 +69,8 @@ namespace MRI.MVVM.Helpers
         var error = m_validator.Validate(m_context)
           .Errors
           .FirstOrDefault(x => x.PropertyName == columnName)
-          ?.ErrorMessage ?? string.Empty;
-        var hasError = error.Length > 0;
+          ?.ErrorMessage;
+        var hasError = error is null || error.Length > 0;
         if (!m_properties.ContainsKey(columnName))
         {
           m_properties.TryAdd(columnName, hasError);
@@ -81,14 +81,24 @@ namespace MRI.MVVM.Helpers
         {
           m_properties.TryGetValue(columnName, out var e);
           if (hasError == e)
-            return error;
+            return error!;
 
           m_properties.AddOrUpdate(columnName, hasError, (_, x) => !x);
           OnErrorsChanged(columnName, hasError);
+
+          return null!;
         }
 
-        return error;
+        return error!;
       }
+    }
+
+    /// <summary>
+    /// Clears all discovered errors
+    /// </summary>
+    protected void ClearErrors()
+    {
+      m_properties.Clear();
     }
 
     /// <summary>

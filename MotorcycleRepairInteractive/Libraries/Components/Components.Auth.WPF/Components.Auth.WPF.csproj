@@ -18,18 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\Interfaces\Components\Components.Auth\Components.Auth.csproj" />
     <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
     <ProjectReference Include="..\..\Helpers\MRI.MVVM.WPF.Helpers\MRI.MVVM.WPF.Helpers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ModernWpf">
-      <HintPath>..\..\..\..\..\..\..\.nuget\packages\modernwpfui\0.9.3\lib\netcoreapp3.0\ModernWpf.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

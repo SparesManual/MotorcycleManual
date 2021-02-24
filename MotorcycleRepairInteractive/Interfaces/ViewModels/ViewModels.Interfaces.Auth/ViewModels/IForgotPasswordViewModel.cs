@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Windows.Input;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
@@ -15,6 +16,17 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     [Required]
     [EmailAddress]
     string Email { get; set; }
+
+    /// <summary>
+    /// Submits the password reset request
+    /// </summary>
+    ICommand SubmitCommand { get; }
+
+    /// <summary>
+    /// Submits a request to navigate to the login page
+    /// </summary>
+    ICommand BackToLoginCommand { get; }
+
     // Task ResetAsync(CancellationToken cancellationToken = default);
   }
 }

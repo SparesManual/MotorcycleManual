@@ -1,6 +1,4 @@
-﻿using MRI.MVVM.Interfaces.Views;
-using MRI.MVVM.WPF.Helpers;
-using ViewModels.Interfaces.Auth.ViewModels;
+﻿using ViewModels.Interfaces.Auth.ViewModels;
 
 namespace Components.Auth.WPF.Pages
 {
@@ -8,7 +6,7 @@ namespace Components.Auth.WPF.Pages
   /// Interaction logic for LoginPage.xaml
   /// </summary>
   public partial class LoginPage
-    : IView<ILoginViewModel>
+    : ILoginView
   {
     /// <inheritdoc />
     public ILoginViewModel ViewModel { get; }
@@ -16,12 +14,12 @@ namespace Components.Auth.WPF.Pages
     /// <summary>
     /// Default constructor
     /// </summary>
-    public LoginPage()
+    public LoginPage(ILoginViewModel viewModel)
     {
-      ViewModel = ViewModelResolver.Resolve<ILoginViewModel>();
-      DataContext = ViewModel;
-
       InitializeComponent();
+
+      ViewModel = viewModel;
+      DataContext = ViewModel;
     }
   }
 }

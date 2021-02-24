@@ -148,18 +148,15 @@ namespace MRI.MVVM.Helpers
       // Get the items
       var items = await GetItemsAsync(PageSize, PageIndex, Search).ConfigureAwait(true);
 
-      if (items is not null)
-      {
-        // TODO: This is page size not items count
-        PageItems = items.PageItems;
-        // TODO: Is this required?
-        // Set the current page index
-        PageIndex = items.PageIndex;
-        // Set the total available items
-        TotalItems = items.TotalItems;
-        // Add it to the list
-        Items = items.Items;
-      }
+      // TODO: This is page size not items count
+      PageItems = items.PageItems;
+      // TODO: Is this required?
+      // Set the current page index
+      PageIndex = items.PageIndex;
+      // Set the total available items
+      TotalItems = items.TotalItems;
+      // Add it to the list
+      Items = items.Items;
 
       // Exit loading state
       Loading = false;
