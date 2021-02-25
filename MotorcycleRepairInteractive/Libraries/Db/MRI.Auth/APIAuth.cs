@@ -40,7 +40,9 @@ namespace MRI.Auth
     /// <inheritdoc />
     public async void Dispose()
     {
+      // Shutting down the communication channel
       await m_channel.ShutdownAsync().ConfigureAwait(false);
+      // Disposing of the channel instance
       m_channel.Dispose();
     }
 
