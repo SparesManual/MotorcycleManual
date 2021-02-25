@@ -50,6 +50,9 @@ namespace Dealer.Client
 
       navigator.Register<ILoginView>("/login");
       navigator.Register<IForgotPasswordView>("/forgotPassword");
+
+      // TODO: Add more views
+
       // NavigationManager.Register<IRegisterView>("register");
 
       var container = builder.Build();
