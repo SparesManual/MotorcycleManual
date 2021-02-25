@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
+using MRI.MVVM.Interfaces;
 using States.General;
 
 // ReSharper disable StringLiteralTypo
@@ -73,7 +74,7 @@ namespace MRI.Auth
     public async ValueTask<bool> LogoutUser(CancellationToken cancellationToken = default)
     {
       await m_storage.RemoveItemAsync("authToken").ConfigureAwait(false);
-      ((ApiAuthenticationStateProvider)m_stateProvider).MarkUserAsLoggedOut();
+      ((IAPIAuthenticationStateProvider)m_stateProvider).MarkUserAsLoggedOut();
       m_httpClient.DefaultRequestHeaders.Authorization = null;
 
       return true;

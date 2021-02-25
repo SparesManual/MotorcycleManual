@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\MRI.MVVM.Interfaces\MRI.MVVM.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>

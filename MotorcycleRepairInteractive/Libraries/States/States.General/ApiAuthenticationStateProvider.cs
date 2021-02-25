@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
+using MRI.MVVM.Interfaces;
 
 namespace States.General
 {
@@ -15,7 +16,7 @@ namespace States.General
   /// Custom authentication state provider
   /// </summary>
   public class ApiAuthenticationStateProvider
-    : AuthenticationStateProvider
+    : AuthenticationStateProvider, IAPIAuthenticationStateProvider
   {
     private readonly HttpClient m_httpClient;
     private readonly IStorage m_storage;

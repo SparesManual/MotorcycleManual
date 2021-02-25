@@ -1,10 +1,14 @@
-﻿using Autofac;
+﻿using System;
+using System.Net.Http;
+using Autofac;
 using Components.Auth;
 using Components.Auth.WPF.Pages;
 using Db.Interfaces;
+using Microsoft.AspNetCore.Components.Authorization;
 using MRI.Auth;
 using MRI.MVVM.Interfaces;
 using MRI.MVVM.WPF.Helpers;
+using States.General;
 using Validators.Auth;
 using ViewModels.Auth;
 using ViewModels.Interfaces.Auth.Validators;
@@ -20,7 +24,15 @@ namespace Dealer.Client
     public App()
     {
       var builder = new ContainerBuilder();
-      builder.RegisterType<APIAuth>().As<IAPIAuth>();
+      var httpClient = new HttpClient
+      {
+        BaseAddress = new Uri("https://localhost:5001")
+      };
+
+      builder.RegisterInstance(httpClient).SingleInstance();
+      builder.RegisterType<ApiAuthenticationStateProvider>().As<AuthenticationStateProvider>().SingleInstance();
+      builder.RegisterType<APIRESTAuth>().As<IAPIAuth>();
+      builder.RegisterType<WPFStorage>().As<IStorage>();
 
       builder.RegisterType<LoginPage>().As<ILoginView>();
       builder.RegisterType<ForgotPasswordPage>().As<IForgotPasswordView>();

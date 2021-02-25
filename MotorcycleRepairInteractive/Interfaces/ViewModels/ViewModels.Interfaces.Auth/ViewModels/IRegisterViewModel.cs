@@ -1,4 +1,4 @@
-using System.Security;
+using System.Windows.Input;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
@@ -24,13 +24,18 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// <summary>
     /// User password
     /// </summary>
-    SecureString Password { get; set; }
+    string Password { get; set; }
 
     /// <summary>
     /// User password confirmation
     /// </summary>
-    SecureString ConfirmPassword { get; set; }
+    string ConfirmPassword { get; set; }
 
     #endregion
+
+    /// <summary>
+    /// Submits the registration request
+    /// </summary>
+    ICommand SubmitCommand { get; }
   }
 }
