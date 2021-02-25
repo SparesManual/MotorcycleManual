@@ -48,7 +48,7 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<(bool, int)> LoginUser(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default)
+    public async ValueTask<(bool, int)> LoginUserAsync(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default)
     {
       var data = JsonSerializer.Serialize(new Models.REST.Auth.LoginRequest
       {
@@ -71,13 +71,34 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<bool> LogoutUser(CancellationToken cancellationToken = default)
+    public async ValueTask<bool> LogoutUserAsync(CancellationToken cancellationToken = default)
     {
       await m_storage.RemoveItemAsync("authToken").ConfigureAwait(false);
       ((IAPIAuthenticationStateProvider)m_stateProvider).MarkUserAsLoggedOut();
       m_httpClient.DefaultRequestHeaders.Authorization = null;
 
       return true;
+    }
+
+    /// <inheritdoc />
+    public async ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default)
+    {
+      var data = JsonSerializer.Serialize(new Models.REST.Auth.RegistrationRequest()
+      {
+        Email = email,
+        Password = password
+      });
+
+      var response = await m_httpClient.PostAsync("auth/RegisterUser", new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
+
+      return response.IsSuccessStatusCode;
+    }
+
+    /// <inheritdoc />
+    public async ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default)
+    {
+      var response = await m_httpClient.PostAsJsonAsync("auth/UserExists", email, cancellationToken).ConfigureAwait(false);
+      return await response.Content.ReadFromJsonAsync<bool>(cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc />

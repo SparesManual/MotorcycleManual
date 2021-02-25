@@ -87,7 +87,7 @@ namespace ViewModels.Auth
     /// <inheritdoc />
     public async Task<LoginResult> LoginUser()
     {
-      var result = await m_authProvider.LoginUser(Email, Password).ConfigureAwait(false);
+      var result = await m_authProvider.LoginUserAsync(Email, Password).ConfigureAwait(false);
       return result switch
       {
         (false, 404) => LoginResult.InvalidCredentials,

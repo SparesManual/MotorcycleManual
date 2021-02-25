@@ -65,7 +65,7 @@ namespace ViewModels.Auth
 
     /// <inheritdoc />
     public ICommand SubmitCommand
-      => new RelayCommand(() => { });
+      => new RelayCommand(async () => await m_apiAuth.RegisterUserAsync(Email, Password));
 
     #endregion
 

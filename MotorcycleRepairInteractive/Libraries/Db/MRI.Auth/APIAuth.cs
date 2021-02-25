@@ -45,7 +45,7 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<(bool, int)> LoginUser(string email, string password, bool rememberMe = default,
+    public async ValueTask<(bool, int)> LoginUserAsync(string email, string password, bool rememberMe = default,
       CancellationToken cancellationToken = default)
     {
       var result = await m_client.LoginUserAsync(new LoginRequest {Email = email, Password = password, RememberMe = rememberMe}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
@@ -53,11 +53,17 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<bool> LogoutUser(CancellationToken cancellationToken = default)
+    public async ValueTask<bool> LogoutUserAsync(CancellationToken cancellationToken = default)
     {
       var result = await m_client.LogoutAsync(new Nothing(), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
     }
+
+    /// <inheritdoc />
+    public ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default) => throw new System.NotImplementedException();
+
+    /// <inheritdoc />
+    public ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default) => throw new System.NotImplementedException();
 
     /// <inheritdoc />
     public async ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default)

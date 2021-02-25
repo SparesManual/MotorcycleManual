@@ -18,14 +18,31 @@ namespace Db.Interfaces
     /// <param name="rememberMe"></param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>True if logged in</returns>
-    ValueTask<(bool, int)> LoginUser(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default);
+    ValueTask<(bool, int)> LoginUserAsync(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Attempts to logout the user
     /// </summary>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>True if logged out</returns>
-    ValueTask<bool> LogoutUser(CancellationToken cancellationToken = default);
+    ValueTask<bool> LogoutUserAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Attempts to register a new user
+    /// </summary>
+    /// <param name="email">New users email</param>
+    /// <param name="password">New users password</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if registered</returns>
+    ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Checks if a user with the given <paramref name="email"/> exists
+    /// </summary>
+    /// <param name="email">Email to check</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if exists</returns>
+    ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get the currently signed in user email

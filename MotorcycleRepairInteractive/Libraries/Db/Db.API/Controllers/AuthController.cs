@@ -93,6 +93,39 @@ namespace Db.API.Controllers
     }
 
     /// <summary>
+    /// Attempts to register a new user
+    /// </summary>
+    /// <param name="userData">New user data</param>
+    [HttpPost(nameof(RegisterUser))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> RegisterUser([FromBody] Models.REST.Auth.RegistrationRequest userData)
+    {
+      if (await m_userManager.FindByNameAsync(userData.Email).ConfigureAwait(false) is null)
+        return BadRequest();
+
+      var user = new IdentityUser
+      {
+        UserName = userData.Email
+      };
+      await m_userManager.CreateAsync(user, userData.Password).ConfigureAwait(false);
+
+      return Ok();
+    }
+
+    /// <summary>
+    /// Checks if a user of a given <paramref name="email"/> exists
+    /// </summary>
+    /// <param name="email">Email of the user to check</param>
+    /// <returns>Check result</returns>
+    [HttpPost(nameof(UserExists))]
+    public async Task<ActionResult<bool>> UserExists(string email)
+    {
+      var user = await m_userManager.FindByNameAsync(email).ConfigureAwait(false);
+
+      return Ok(user is not null);
+    }
+
+    /// <summary>
     /// Gets the currently signed in users email
     /// </summary>
     /// <returns>The signed in user email. Empty string in no user is signed in</returns>

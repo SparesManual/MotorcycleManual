@@ -12,7 +12,7 @@
 
   private async Task LogoutUser()
   {
-    await m_authProvider.LogoutUser().ConfigureAwait(false);
+    await m_authProvider.LogoutUserAsync().ConfigureAwait(false);
   }
 
 }

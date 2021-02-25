@@ -23,6 +23,6 @@ namespace ViewModels.Auth
 
     /// <inheritdoc />
     public async ValueTask<bool> LogoutUser()
-      => await m_authProvider.LogoutUser().ConfigureAwait(false);
+      => await m_authProvider.LogoutUserAsync().ConfigureAwait(false);
   }
 }

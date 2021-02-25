@@ -1,3 +1,4 @@
+using Db.Interfaces;
 using FluentValidation;
 using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
@@ -13,11 +14,15 @@ namespace Validators.Auth
     /// <summary>
     /// Default constructor
     /// </summary>
-    public RegisterValidator()
+    public RegisterValidator(IAPIAuth authProvider)
     {
-      RuleFor(x => x.Email).NotEmpty().EmailAddress();
+      RuleFor(x => x.Email)
+        .NotEmpty()
+        .EmailAddress()
+        .UnlessAsync((x, y, z) => authProvider.UserExistsAsync(x.Email, z).AsTask())
+        .WithMessage("A user with this email exists");
       RuleFor(x => x.Password).NotEmpty();
-      RuleFor(x => x.ConfirmPassword).NotEmpty().NotEqual(x => x.Password);
+      RuleFor(x => x.ConfirmPassword).NotEmpty().Equal(x => x.Password);
     }
   }
 }
