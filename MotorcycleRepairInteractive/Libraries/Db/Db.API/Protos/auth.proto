@@ -6,7 +6,7 @@ package auth;
 
 service Auth {
   // Logs in a given user
-  rpc LoginUser(LoginRequest) returns (BooleanReply);
+  rpc LoginUser(LoginRequest) returns (LoginResult);
   // Logs out the current user
   rpc Logout(Nothing) returns (BooleanReply);
   rpc LoggedInEmail(Nothing) returns (StringReply);
@@ -14,6 +14,14 @@ service Auth {
 
 // Empty message
 message Nothing { }
+
+// Login request reply
+message LoginResult {
+  // Authentication token
+  string token = 1;
+  // Login success status
+  bool success = 2;
+}
 
 // User login request
 message LoginRequest {

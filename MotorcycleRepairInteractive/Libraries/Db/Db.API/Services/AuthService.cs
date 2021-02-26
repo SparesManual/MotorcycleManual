@@ -1,8 +1,13 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Db.API
 {
@@ -16,47 +21,55 @@ namespace Db.API
     #region Field
 
     private readonly UserManager<IdentityUser> m_userManager;
+    private readonly SignInManager<IdentityUser> m_signInManager;
+    private readonly IConfiguration m_configuration;
 
     #endregion
 
     /// <summary>
     /// Default constructor
     /// </summary>
-    public AuthService(UserManager<IdentityUser> userManager)
+    public AuthService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration)
     {
       m_userManager = userManager;
+      m_signInManager = signInManager;
+      m_configuration = configuration;
     }
 
     /// <inheritdoc />
-    public override async Task<BooleanReply> LoginUser(LoginRequest request, ServerCallContext context)
+    public override async Task<LoginResult> LoginUser(LoginRequest request, ServerCallContext context)
     {
-      var http = context.GetHttpContext();
+      var result = await m_signInManager.PasswordSignInAsync(request.Email, request.Password, request.RememberMe, false).ConfigureAwait(false);
 
-      var user = await m_userManager.FindByEmailAsync(request.Email).ConfigureAwait(false);
-      if (user is null)
-        return new BooleanReply
+      if (!result.Succeeded)
+        return new LoginResult
         {
-          Reply = false,
-          Error = 404
+          Success = false, Token = string.Empty
         };
 
-      if (!await m_userManager.CheckPasswordAsync(user, request.Password).ConfigureAwait(false))
-        return new BooleanReply
-        {
-          Reply = false,
-          Error = 404
-        };
-
-      var claims = await m_userManager.GetClaimsAsync(user).ConfigureAwait(false);
-      var claimsIdentity = new ClaimsIdentity(claims, "serverAuth");
-      var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-      await http.SignInAsync(claimsPrincipal).ConfigureAwait(false);
-
-      return new BooleanReply
+      var claims = new[]
       {
-        Reply = true,
-        Error = 0
+        new Claim(ClaimTypes.Name, request.Email)
+      };
+
+      var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(m_configuration["JwtSecurityKey"]));
+      var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+      var expiry = DateTime.Now.AddDays(Convert.ToInt32(m_configuration["JwtExpiryInDays"]));
+
+      var token = new JwtSecurityToken(
+        m_configuration["JwtIssuer"],
+        m_configuration["JwtAudience"],
+        claims,
+        expires: expiry,
+        signingCredentials: credentials
+      );
+
+      var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+      return new LoginResult
+      {
+        Success = true,
+        Token = tokenString
       };
     }
 

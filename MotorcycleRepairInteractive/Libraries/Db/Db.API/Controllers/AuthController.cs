@@ -118,11 +118,14 @@ namespace Db.API.Controllers
     /// <param name="email">Email of the user to check</param>
     /// <returns>Check result</returns>
     [HttpPost(nameof(UserExists))]
-    public async Task<ActionResult<bool>> UserExists(string email)
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> UserExists(string email)
     {
       var user = await m_userManager.FindByNameAsync(email).ConfigureAwait(false);
 
-      return Ok(user is not null);
+      return user is not null
+        ? Ok()
+        : BadRequest();
     }
 
     /// <summary>
