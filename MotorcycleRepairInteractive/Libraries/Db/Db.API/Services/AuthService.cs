@@ -74,6 +74,40 @@ namespace Db.API
     }
 
     /// <inheritdoc />
+    public override async Task<BooleanReply> RegisterUser(RegistrationRequest request, ServerCallContext context)
+    {
+      if (await m_userManager.FindByNameAsync(request.Email).ConfigureAwait(false) is null)
+        return new BooleanReply
+        {
+          Reply = false,
+          Error = 403
+        };
+
+      var user = new IdentityUser
+      {
+        UserName = request.Email
+      };
+      await m_userManager.CreateAsync(user, request.Password).ConfigureAwait(false);
+
+      return new BooleanReply
+      {
+        Reply = true,
+        Error = 0
+      };
+    }
+
+    /// <inheritdoc />
+    public override async Task<BooleanReply> UserExists(SingleString request, ServerCallContext context)
+    {
+      var user = await m_userManager.FindByNameAsync(request.Content).ConfigureAwait(false);
+
+      return new BooleanReply
+      {
+        Reply = user is not null
+      };
+    }
+
+    /// <inheritdoc />
     public override async Task<BooleanReply> Logout(Nothing request, ServerCallContext context)
     {
       await context.GetHttpContext().SignOutAsync().ConfigureAwait(false);

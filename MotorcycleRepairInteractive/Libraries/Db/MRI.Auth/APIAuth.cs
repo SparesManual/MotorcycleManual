@@ -6,7 +6,7 @@ using Db.API;
 using Db.Interfaces;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Components.Authorization;
-using States.General;
+using MRI.MVVM.Interfaces;
 
 namespace MRI.Auth
 {
@@ -61,8 +61,7 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<(bool, int)> LoginUserAsync(string email, string password, bool rememberMe = default,
-      CancellationToken cancellationToken = default)
+    public async ValueTask<(bool, int)> LoginUserAsync(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default)
     {
       var result = await m_client.LoginUserAsync(new LoginRequest {Email = email, Password = password, RememberMe = rememberMe}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
 
@@ -70,7 +69,7 @@ namespace MRI.Auth
         return (false, 403);
 
       await m_storage.SetItemAsync("authToken", result.Token).ConfigureAwait(false);
-      ((ApiAuthenticationStateProvider)m_stateProvider).MarkUserAsAuthenticated(email);
+      ((IAPIAuthenticationStateProvider) m_stateProvider).MarkUserAsAuthenticated(email);
       m_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
 
       return (result.Success, 200);
@@ -79,15 +78,26 @@ namespace MRI.Auth
     /// <inheritdoc />
     public async ValueTask<bool> LogoutUserAsync(CancellationToken cancellationToken = default)
     {
-      var result = await m_client.LogoutAsync(new Nothing(), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      await m_storage.RemoveItemAsync("authToken").ConfigureAwait(false);
+      ((IAPIAuthenticationStateProvider) m_stateProvider).MarkUserAsLoggedOut();
+      m_httpClient.DefaultRequestHeaders.Authorization = null;
+
+      return true;
+    }
+
+    /// <inheritdoc />
+    public async ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default)
+    {
+      var result = await m_client.RegisterUserAsync(new RegistrationRequest {Email = email, Password = password}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
     }
 
     /// <inheritdoc />
-    public ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default) => throw new System.NotImplementedException();
-
-    /// <inheritdoc />
-    public ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default) => throw new System.NotImplementedException();
+    public async ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default)
+    {
+      var result = await m_client.UserExistsAsync(new SingleString {Content = email}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      return result.Reply;
+    }
 
     /// <inheritdoc />
     public async ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default)

@@ -35,7 +35,7 @@ namespace MRI.Client
       builder.Services.AddScoped<INavigator, Navigator>();
       builder.Services.AddScoped<IPagingManager, RadzenPagingManager>();
       builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
-      builder.Services.AddHttpClient<IAPIAuth, APIRESTAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
+      builder.Services.AddHttpClient<IAPIAuth, APIWebAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
       builder.Services.AddAuthorizationCore();
       builder.Services
         .AddScoped<IBooksViewModel, BooksViewModel>()
