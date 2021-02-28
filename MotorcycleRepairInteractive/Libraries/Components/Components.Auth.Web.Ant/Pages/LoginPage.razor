@@ -1,0 +1,68 @@
+@page "/login"
+@inherits BaseComponent<ILoginViewModel>
+@implements ILoginView
+
+@inject ILoginViewModelValidator m_validator
+
+@if (m_invalidCredentials)
+{
+  <span>Invalid email or password</span>
+}
+
+<EditForm Model="@ViewModel"
+          OnValidSubmit="ViewModel!.SubmitCommand.Execute">
+  <FluentValidator Validator="m_validator"/>
+  <div class="container w-25 align-middle">
+    <div class="row mb-2">
+      <div class="col">
+        <div class="row">
+          <Input Id="Email" Placeholder="Email" Value="@ViewModel!.Email" Class="w-100" />
+        </div>
+        <div class="row">
+          <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col">
+        <div class="row">
+          <InputPassword Id="Password" Placeholder="Password" Value="@ViewModel!.Password" Class="w-100" Type="string"></InputPassword>
+        </div>
+        <div class="row">
+          <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col align-content-start">
+        <Checkbox Id="RememberMe" Checked="ViewModel!.RememberMe">
+          Remember me
+        </Checkbox>
+      </div>
+      <div class="col-sm align-content-end">
+        <a href="/forgotPassword" id="ForgotPassword">Forgot password</a>
+      </div>
+    </div>
+
+    <Button Type="submit" Id="Login" class="row" Size="large">
+      Login
+    </Button>
+    
+    <a href="/register">Not a member? Register</a>
+  </div>
+</EditForm>
+
+@code {
+
+  private bool m_invalidCredentials;
+
+  /// <inheritdoc />
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    m_invalidCredentials = false;
+  }
+
+}

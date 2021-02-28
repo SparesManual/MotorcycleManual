@@ -8,7 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MRI.Application.Extensions;
 using MRI.Auth;
+using MRI.Client;
 using MRI.Db;
+using MRI.MVVM.Interfaces;
 using MRI.MVVM.Interfaces.Views.Managers;
 using MRI.MVVM.Web.Helpers.Managers;
 using States.General;
@@ -21,12 +23,14 @@ namespace MRI.Application
     {
       services.AddRazorPages();
       services.AddSingleton<IAPIProvider, APIProvider>();
-      services.AddHttpClient<IAPIAuth, APIRESTAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
+      //services.AddHttpClient<IAPIAuth, APIRESTAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
       services.AddScoped<HttpClient>();
-      services.AddManualViewModels().AddIdentityViewModels();
+      services.AddScoped<INavigator, Navigator>();
+      services.AddAntDesign();
+      //services.AddManualViewModels().AddIdentityViewModels();
 
       services.AddScoped<IPagingManager, RadzenPagingManager>();
-      services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+      //services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
       services.AddAuthenticationCore();
       services.AddServerSideBlazor();
     }

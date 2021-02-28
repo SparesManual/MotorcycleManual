@@ -1,0 +1,67 @@
+@inherits LayoutComponentBase
+@inject NavigationManager m_navigationManager
+@inject IAPIAuth m_authProvider
+
+@code {
+
+  private void LoginUser()
+  {
+    m_navigationManager.NavigateTo("/login");
+  }
+
+  private async Task LogoutUser()
+  {
+    await m_authProvider.LogoutUserAsync().ConfigureAwait(false);
+  }
+
+}
+
+<Layout>
+  <Header Style="position: fixed; z-index: 1; width: 100%; ">
+    <div class="row">
+      <div class="col">
+        <NavigationComponent />
+      </div>
+      <div class="col-auto text-right mr-5">
+        <AuthorizeView>
+          <Authorized>
+            <Menu Mode="MenuMode.Vertical" Theme="MenuTheme.Dark">
+              <SubMenu>
+                <Icon Type="user" Theme="outline"></Icon>
+                <MenuItem Title="Edit">
+                  <Icon Type="edit" Theme="outline"></Icon>
+                </MenuItem>
+                <MenuItem OnClick="LogoutUser" Title="Logout">
+                  <Icon Type="logout" Theme="outline"></Icon>
+                </MenuItem>
+              </SubMenu>
+            </Menu>
+          </Authorized>
+          <NotAuthorized>
+            <Button Shape="circle" Id="Login" Icon="login" OnClick="LoginUser"></Button>
+          </NotAuthorized>
+        </AuthorizeView>
+      </div>
+    </div>
+  </Header>
+  <Content Class="site-layout" Style="padding:0 50px; margin-top: 64px; ">
+    <div class="site-layout-background" style="padding: 24px; min-height: 380px ">
+      @Body
+    </div>
+  </Content>
+  <Footer Style="text-align: center;">Ant Design ©2018 Created by Ant UED</Footer>
+</Layout>
+
+<style>
+  #components-layout-demo-fixed .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+  }
+
+  .site-layout .site-layout-background {
+    background: #fff;
+  }
+</style>
