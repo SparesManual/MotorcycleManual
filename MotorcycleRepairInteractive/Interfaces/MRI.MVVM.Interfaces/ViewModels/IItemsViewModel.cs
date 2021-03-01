@@ -7,7 +7,7 @@ namespace MRI.MVVM.Interfaces.ViewModels
   /// Interface for view models displaying items without paging
   /// </summary>
   /// <typeparam name="T">Item type</typeparam>
-  public interface IItemsViewModel<T>
+  public interface IItemsViewModel<out T>
     : IViewModel
   {
     #region Properties

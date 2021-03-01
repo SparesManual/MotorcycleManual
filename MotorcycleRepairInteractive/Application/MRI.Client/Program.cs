@@ -34,7 +34,7 @@ namespace MRI.Client
       builder.Services.AddBlazoredLocalStorage();
       builder.Services.AddScoped<IStorage, StorageProvider>();
       builder.Services.AddScoped<INavigator, Navigator>();
-      builder.Services.AddScoped<IPagingManager, RadzenPagingManager>();
+      builder.Services.AddScoped<IPagingManager, AntDesignPagingManager>();
       builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
       builder.Services.AddHttpClient<IAPIAuth, APIWebAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
       builder.Services.AddAuthorizationCore();

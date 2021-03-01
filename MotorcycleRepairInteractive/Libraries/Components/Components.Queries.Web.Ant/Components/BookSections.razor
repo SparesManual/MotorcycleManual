@@ -1,0 +1,95 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@inherits BasePagedComponent<IBookSectionsViewModel, ISection>
+
+@code {
+#nullable enable
+
+  private Table<ISection>? m_grid;
+  private int m_bookId;
+  private int? m_sectionId;
+
+  /// <summary>
+  /// Parent book id
+  /// </summary>
+  [Parameter]
+  public int BookId
+  {
+    get => m_bookId;
+    set
+    {
+      m_bookId = value;
+      if (ViewModel != null) ViewModel.BookId = value;
+    }
+  }
+
+  /// <summary>
+  /// Triggered when the section section id is changed
+  /// </summary>
+  [Parameter]
+  public EventCallback<int?> CurrentSectionChanged { get; set; }
+
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync().ConfigureAwait(false);
+
+  // Try set the persistent selection when the component is initialized
+    await SetSelection().ConfigureAwait(false);
+  }
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+  {
+  }
+
+  private async Task RowSelected(ISection? section)
+    => await CurrentSectionChanged.InvokeAsync(section?.Id).ConfigureAwait(false);
+
+  /// <summary>
+  /// Sets the currently selected section id
+  /// </summary>
+  public Task SetSectionId(int id)
+  {
+    m_sectionId = id;
+
+    // Try set the persistent selection when the selection id is provided
+    return SetSelection();
+  }
+
+  private async Task SetSelection()
+  {
+    // If either there is no section to set,
+    // or the grid is not initialized,
+    // or the view model is not initialized,
+    // or there are no items provided by the view model..
+    if (m_sectionId is null
+        || m_grid is null
+        || ViewModel is null
+        || ViewModel.Items.Count == 0)
+      // Exit
+      return;
+
+    // Try find the section in the grid
+    var section = ViewModel.Items.FirstOrDefault(x => x.Id.Equals(m_sectionId));
+    // If no section is found..
+    if (section is null)
+      // Exit
+      return;
+
+    // Apply the selection
+    await InvokeAsync(() => m_grid!.SelectedRows = new []{ section }).ConfigureAwait(false);
+
+    // Ensure the selection is applied only once
+    m_sectionId = null;
+  }
+
+  private async void LoadTableData(PaginationEventArgs data)
+  {
+    await LoadData("", data).ConfigureAwait(false);
+
+  // Try set the persistent selection when changing the page
+    await SetSelection().ConfigureAwait(false);
+  }
+
+}

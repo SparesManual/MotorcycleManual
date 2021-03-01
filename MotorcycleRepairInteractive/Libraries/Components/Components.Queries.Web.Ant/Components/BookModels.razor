@@ -1,0 +1,26 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@inherits BaseItemComponent<IBookModelsViewModel, IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>>
+
+<ul>
+  @if (ViewModel?.Item is not null)
+  {
+    foreach (var (name, models) in ViewModel.Item)
+    {
+      <li>
+        <span>@name</span><span>: </span>
+        @foreach (var model in models.SkipLast(1))
+        {
+          <span>
+            <a href="@($"model/{model.Id}")">
+              @model.Year
+            </a>
+          </span>
+          <span>, </span>
+        }
+
+        <span><a href="@($"model/{models.Last().Id}")">@models.Last().Year</a></span>
+      </li>
+    }
+  }
+</ul>

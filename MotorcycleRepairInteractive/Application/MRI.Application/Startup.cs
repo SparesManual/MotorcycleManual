@@ -27,7 +27,7 @@ namespace MRI.Application
       services.AddScoped<HttpClient>();
       services.AddScoped<INavigator, Navigator>();
       services.AddAntDesign();
-      //services.AddManualViewModels().AddIdentityViewModels();
+      services.AddManualViewModels(); //.AddIdentityViewModels();
 
       services.AddScoped<IPagingManager, RadzenPagingManager>();
       //services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();

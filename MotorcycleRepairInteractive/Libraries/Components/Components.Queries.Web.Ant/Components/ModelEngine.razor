@@ -1,0 +1,10 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@inherits BaseItemComponent<IEngineViewModel, IEngine>
+
+<ul>
+  <li>Name: @ViewModel?.Item?.Name</li>
+  <li>Carburetors: <span>@ViewModel?.Item?.Carburetors</span>x <span>@ViewModel?.Item?.Carburetor</span></li>
+  <li>Displacement: <span>@ViewModel?.Item?.Displacement</span>cc</li>
+  <li>Transmission: @ViewModel?.Item?.Transmission</li>
+</ul>

@@ -1,0 +1,69 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@inherits BasePagedComponent<ISectionPartsViewModel, ISectionPart>
+@inject NavigationManager m_navigationManager
+
+<Table @ref="m_grid"
+       Total="ViewModel!.TotalItems"
+       PageIndex="ViewModel!.PageIndex"
+       PageSize="ViewModel!.PageSize"
+       Loading="ViewModel!.Loading"
+       DataSource="ViewModel!.Items"
+       TItem="ISectionPart"
+       SelectedRowsChanged="x => SelectPart(x.First())"
+       OnPageIndexChange="x => LoadData(string.Empty, x)"
+       TreeChildren="item => item.Children">
+  <Column Title="Part number" Fixed="Left" Field="@context.PartNumber"></Column>
+  <Column Title="Makers number" Field="@context.MakersPartNumber"></Column>
+  <Column Title="Page number" Field="@context.PageNumber"></Column>
+  <Column Title="Remarks" Field="@context.Remarks"></Column>
+</Table>
+
+@code {
+#nullable enable
+
+  private Table<ISectionPart>? m_grid;
+
+  /// <summary>
+  /// Currently selected section id
+  /// </summary>
+  [Parameter]
+  public int? SectionId
+  {
+    get => ViewModel?.SectionId;
+    set
+    {
+      if (ViewModel is not null) ViewModel.SectionId = value;
+    }
+  }
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+  {
+    
+  }
+
+  /// <summary>
+  /// Modify the current section
+  /// </summary>
+  /// <param name="section">Section number</param>
+  public async Task ChangeSectionAsync(int? section)
+  {
+    if (ViewModel is null)
+      return;
+
+    if (section is null)
+      ClearData();
+
+    if (SectionId == section)
+      return;
+
+    SectionId = section;
+
+    await ReloadData(ViewModel!.Search).ConfigureAwait(false);
+  }
+
+  private void SelectPart(ISectionPart sectionPart)
+    => m_navigationManager.NavigateTo("part/" + sectionPart.Id);
+
+}
