@@ -20,13 +20,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.3" PrivateAssets="all" />
+    <PackageReference Include="MudBlazor" Version="5.0.3" />
     <PackageReference Include="Radzen.Blazor" Version="3.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Web.Ant\Components.Auth.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Layout.Web.Ant\Components.Layout.Web.Ant.csproj" />
-    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web.Radzen\Components.Queries.Web.Radzen.csproj" />
+    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web.Ant\Components.Queries.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Auth\MRI.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
     <ProjectReference Include="..\..\Libraries\States\States.General\States.General.csproj" />

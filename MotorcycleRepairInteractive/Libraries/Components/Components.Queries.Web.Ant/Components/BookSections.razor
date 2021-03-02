@@ -2,12 +2,73 @@
 @namespace Comp
 @inherits BasePagedComponent<IBookSectionsViewModel, ISection>
 
+<Table @ref="m_grid"
+       TItem="Section"
+       Total="ViewModel!.TotalItems"
+       PageSize="ViewModel!.PageSize"
+       @bind-PageIndex="@ViewModel!.PageIndex"
+       DataSource="@m_sections"
+       OnRowClick="row => RowSelectedAsync(row.Data)"
+       OnPageIndexChange="LoadTableData">
+  <Column Title="Header" Field="context.Header"></Column>
+  <Column Title="Figure" Field="context.FigureNumber"></Column>
+  <Column Title="Pages" Field="context">
+    @if (context.StartPage == context.EndPage)
+    {
+      <span>@context.StartPage</span>
+    }
+    else
+    {
+      <span>@context.StartPage</span>
+      <span> - </span>
+      <span>@context.EndPage</span>
+    }
+  </Column>
+</Table>
+
 @code {
 #nullable enable
 
-  private Table<ISection>? m_grid;
+  private Table<Section>? m_grid;
   private int m_bookId;
   private int? m_sectionId;
+  private IReadOnlyCollection<Section> m_sections = Array.Empty<Section>();
+
+  private readonly struct Section
+    : ISection
+  {
+    /// <inheritdoc />
+    public int Id { get; }
+
+    /// <inheritdoc />
+    public int BookId { get; }
+
+    /// <inheritdoc />
+    public string Header { get; }
+
+    /// <inheritdoc />
+    public int StartPage { get; }
+
+    /// <inheritdoc />
+    public int EndPage { get; }
+
+    /// <inheritdoc />
+    public int FigureNumber { get; }
+
+    /// <inheritdoc />
+    public string FigureDescription { get; }
+
+    public Section(ISection section)
+    {
+      Id = section.Id;
+      BookId = section.BookId;
+      Header = section.Header;
+      StartPage = section.StartPage;
+      EndPage = section.EndPage;
+      FigureNumber = section.FigureNumber;
+      FigureDescription = section.FigureDescription;
+    }
+  }
 
   /// <summary>
   /// Parent book id
@@ -34,8 +95,7 @@
   {
     await base.OnInitializedAsync().ConfigureAwait(false);
 
-  // Try set the persistent selection when the component is initialized
-    await SetSelection().ConfigureAwait(false);
+    WrapData();
   }
 
   /// <inheritdoc />
@@ -43,53 +103,20 @@
   {
   }
 
-  private async Task RowSelected(ISection? section)
-    => await CurrentSectionChanged.InvokeAsync(section?.Id).ConfigureAwait(false);
-
-  /// <summary>
-  /// Sets the currently selected section id
-  /// </summary>
-  public Task SetSectionId(int id)
-  {
-    m_sectionId = id;
-
-    // Try set the persistent selection when the selection id is provided
-    return SetSelection();
-  }
-
-  private async Task SetSelection()
-  {
-    // If either there is no section to set,
-    // or the grid is not initialized,
-    // or the view model is not initialized,
-    // or there are no items provided by the view model..
-    if (m_sectionId is null
-        || m_grid is null
-        || ViewModel is null
-        || ViewModel.Items.Count == 0)
-      // Exit
-      return;
-
-    // Try find the section in the grid
-    var section = ViewModel.Items.FirstOrDefault(x => x.Id.Equals(m_sectionId));
-    // If no section is found..
-    if (section is null)
-      // Exit
-      return;
-
-    // Apply the selection
-    await InvokeAsync(() => m_grid!.SelectedRows = new []{ section }).ConfigureAwait(false);
-
-    // Ensure the selection is applied only once
-    m_sectionId = null;
-  }
+  private Task RowSelectedAsync(ISection? section)
+    => CurrentSectionChanged.InvokeAsync(section?.Id);
 
   private async void LoadTableData(PaginationEventArgs data)
   {
     await LoadData("", data).ConfigureAwait(false);
 
-  // Try set the persistent selection when changing the page
-    await SetSelection().ConfigureAwait(false);
+    WrapData();
+  }
+
+  private void WrapData()
+  {
+    if (ViewModel is not null)
+      m_sections = ViewModel.Items.Select(section => new Section(section)).ToReadOnlyCollection();
   }
 
 }

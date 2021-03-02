@@ -8,10 +8,10 @@
        PageIndex="ViewModel!.PageIndex"
        PageSize="ViewModel!.PageSize"
        Loading="ViewModel!.Loading"
-       DataSource="ViewModel!.Items"
-       TItem="ISectionPart"
+       DataSource="m_sectionParts"
+       TItem="SectionPart"
        SelectedRowsChanged="x => SelectPart(x.First())"
-       OnPageIndexChange="x => LoadData(string.Empty, x)"
+       OnPageIndexChange="LoadTableData"
        TreeChildren="item => item.Children">
   <Column Title="Part number" Fixed="Left" Field="@context.PartNumber"></Column>
   <Column Title="Makers number" Field="@context.MakersPartNumber"></Column>
@@ -22,7 +22,45 @@
 @code {
 #nullable enable
 
-  private Table<ISectionPart>? m_grid;
+  private Table<SectionPart>? m_grid;
+  private IReadOnlyCollection<SectionPart> m_sectionParts = Array.Empty<SectionPart>();
+
+  private readonly struct SectionPart
+  {
+    public int Id { get; }
+
+    public string PartNumber { get; }
+
+    public string MakersPartNumber { get; }
+
+    public string Description { get; }
+
+    public int PageNumber { get; }
+
+    public string Remarks { get; }
+
+    public string AdditionalInfo { get; }
+
+    public int Quantity { get; }
+
+    public IReadOnlyCollection<SectionPart> Children { get; }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public SectionPart(ISectionPart sectionPart)
+    {
+      Id = sectionPart.Id;
+      PartNumber = sectionPart.PartNumber;
+      MakersPartNumber = sectionPart.MakersPartNumber;
+      Description = sectionPart.Description;
+      PageNumber = sectionPart.PageNumber;
+      Remarks = sectionPart.Remarks;
+      AdditionalInfo = sectionPart.AdditionalInfo;
+      Quantity = sectionPart.Quantity;
+      Children = sectionPart.Children.Select(sp => new SectionPart(sp)).ToReadOnlyCollection();
+    }
+  }
 
   /// <summary>
   /// Currently selected section id
@@ -40,7 +78,6 @@
   /// <inheritdoc />
   protected override void GoToPage(int page)
   {
-    
   }
 
   /// <summary>
@@ -61,9 +98,21 @@
     SectionId = section;
 
     await ReloadData(ViewModel!.Search).ConfigureAwait(false);
+    WrapItems();
   }
 
-  private void SelectPart(ISectionPart sectionPart)
+  private void WrapItems()
+  {
+    m_sectionParts = ViewModel!.Items.Select(sp => new SectionPart(sp)).ToReadOnlyCollection();
+  }
+
+  private async Task LoadTableData(PaginationEventArgs pagination)
+  {
+    await LoadData(string.Empty, pagination).ConfigureAwait(false);
+    WrapItems();
+  }
+
+  private void SelectPart(SectionPart sectionPart)
     => m_navigationManager.NavigateTo("part/" + sectionPart.Id);
 
 }

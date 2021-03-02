@@ -11,6 +11,7 @@ using MRI.Db;
 using MRI.MVVM.Interfaces;
 using MRI.MVVM.Interfaces.Views.Managers;
 using MRI.MVVM.Web.Helpers.Managers;
+using MudBlazor.Services;
 using States.General;
 using Validators.Auth;
 using ViewModels.Auth;
@@ -29,6 +30,7 @@ namespace MRI.Client
       builder.RootComponents.Add<App>("app");
 
       builder.Services.AddAntDesign();
+      builder.Services.AddMudServices();
       builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
       builder.Services.AddSingleton<IAPIProvider, APIWebProvider>();
       builder.Services.AddBlazoredLocalStorage();

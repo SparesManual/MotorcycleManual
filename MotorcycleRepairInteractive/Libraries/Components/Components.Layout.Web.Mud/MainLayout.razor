@@ -1,0 +1,45 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager m_navigationManager
+@inject IAPIAuth m_authProvider
+
+@code {
+
+  private void LoginUser()
+  {
+    m_navigationManager.NavigateTo("/login");
+  }
+
+  private async Task LogoutUser()
+  {
+    await m_authProvider.LogoutUserAsync().ConfigureAwait(false);
+  }
+
+}
+
+<div class="sidebar">
+  <NavigationComponent />
+</div>
+
+<div class="main">
+  <div class="top-row px-4" style="z-index: 1000">
+    <AuthorizeView>
+      <Authorized>
+        <div class="top-row px-4 mr-3">
+          <MudMenu Icon="@Icons.Material.Filled.Face" Color="Color.Primary" Direction="Direction.Right">
+            <MudMenuItem>My account</MudMenuItem>
+            <MudMenuItem>Logout</MudMenuItem>
+          </MudMenu>
+        </div>
+      </Authorized>
+      <NotAuthorized>
+        <div class="top-row px-4">
+          <button class="btn btn-primary" @onclick="LoginUser">Login</button>
+        </div>
+      </NotAuthorized>
+    </AuthorizeView>
+  </div>
+
+  <div class="content px-4">
+    @Body
+  </div>
+</div>

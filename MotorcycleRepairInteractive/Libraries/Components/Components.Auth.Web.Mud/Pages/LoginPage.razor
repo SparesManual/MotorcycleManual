@@ -1,0 +1,64 @@
+@page "/login"
+@inherits BaseComponent<ILoginViewModel>
+@implements ILoginView
+
+@inject ILoginViewModelValidator m_validator
+
+@if (m_invalidCredentials)
+{
+  <span>Invalid email or password</span>
+}
+
+<EditForm Model="@ViewModel"
+          OnValidSubmit="ViewModel!.SubmitCommand.Execute">
+  <FluentValidator Validator="m_validator"/>
+  <div class="container w-25 align-middle">
+    <div class="row mb-2">
+      <div class="col">
+        <div class="row">
+          <MudTextField @bind-Value="ViewModel!.Email" Label="Email" InputType="InputType.Email" Variant="Variant.Outlined" Class="w-100"></MudTextField>
+        </div>
+        <div class="row">
+          <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col">
+        <div class="row">
+          <MudTextField @bind-Value="ViewModel!.Password" InputType="InputType.Password" Label="Password" Variant="Variant.Outlined" Class="w-100"></MudTextField>
+        </div>
+        <div class="row">
+          <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col align-content-start">
+        <MudCheckBox @bind-Checked="@ViewModel.RememberMe" Label="Remember me" Color="Color.Primary"></MudCheckBox>
+      </div>
+      <div class="col-sm align-content-end">
+        <a href="/forgotPassword" id="ForgotPassword">Forgot password</a>
+      </div>
+    </div>
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="row">Login</MudButton>
+    
+    <a href="/register">Not a member? Register</a>
+  </div>
+</EditForm>
+
+@code {
+
+  private bool m_invalidCredentials;
+
+  /// <inheritdoc />
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    m_invalidCredentials = false;
+  }
+
+}
