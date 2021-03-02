@@ -45,6 +45,16 @@ namespace Db.Interfaces
     ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Checks if a user with the given <paramref name="email"/> doesn't exist
+    /// </summary>
+    /// <param name="email">Email to check</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if doesn't exist</returns>
+    /// <see cref="UserExistsAsync"/>
+    public async ValueTask<bool> UserDoesNotExistAsync(string email, CancellationToken cancellationToken = default)
+      => !await UserExistsAsync(email, cancellationToken).ConfigureAwait(false);
+
+    /// <summary>
     /// Get the currently signed in user email
     /// </summary>
     /// <param name="cancellationToken">Cancellation</param>

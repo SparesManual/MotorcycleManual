@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Db.Infrastructure.Migrations.Manual
 {
-    [DbContext(typeof(ManualContext))]
+  /// <inheritdoc />
+  [DbContext(typeof(ManualContext))]
     [Migration("20210127160944_ManualInitial")]
     partial class ManualInitial
     {

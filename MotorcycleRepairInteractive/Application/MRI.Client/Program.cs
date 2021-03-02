@@ -11,6 +11,7 @@ using MRI.Db;
 using MRI.MVVM.Interfaces;
 using MRI.MVVM.Interfaces.Views.Managers;
 using MRI.MVVM.Web.Helpers.Managers;
+using MudBlazor.Services;
 using States.General;
 using Validators.Auth;
 using ViewModels.Auth;
@@ -28,14 +29,16 @@ namespace MRI.Client
       var builder = WebAssemblyHostBuilder.CreateDefault(args);
       builder.RootComponents.Add<App>("app");
 
+      builder.Services.AddAntDesign();
+      builder.Services.AddMudServices();
       builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
       builder.Services.AddSingleton<IAPIProvider, APIWebProvider>();
       builder.Services.AddBlazoredLocalStorage();
       builder.Services.AddScoped<IStorage, StorageProvider>();
       builder.Services.AddScoped<INavigator, Navigator>();
-      builder.Services.AddScoped<IPagingManager, RadzenPagingManager>();
+      builder.Services.AddScoped<IPagingManager, AntDesignPagingManager>();
       builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
-      builder.Services.AddHttpClient<IAPIAuth, APIRESTAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
+      builder.Services.AddHttpClient<IAPIAuth, APIWebAuth>("ServerClient", client => client.BaseAddress = new Uri("https://localhost:5001"));
       builder.Services.AddAuthorizationCore();
       builder.Services
         .AddScoped<IBooksViewModel, BooksViewModel>()

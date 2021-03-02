@@ -97,8 +97,8 @@ namespace MRI.Auth
     /// <inheritdoc />
     public async ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default)
     {
-      var response = await m_httpClient.PostAsJsonAsync("auth/UserExists", email, cancellationToken).ConfigureAwait(false);
-      return await response.Content.ReadFromJsonAsync<bool>(cancellationToken: cancellationToken).ConfigureAwait(false);
+      var response = await m_httpClient.PostAsync("auth/UserExists", new StringContent(email), cancellationToken).ConfigureAwait(false);
+      return response.IsSuccessStatusCode;
     }
 
     /// <inheritdoc />

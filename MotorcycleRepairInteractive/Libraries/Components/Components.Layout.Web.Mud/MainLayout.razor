@@ -1,34 +1,34 @@
-﻿@using global::Db.Interfaces
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 @inject NavigationManager m_navigationManager
 @inject IAPIAuth m_authProvider
 
 @code {
 
   private void LoginUser()
-    => m_navigationManager.NavigateTo("/login");
+  {
+    m_navigationManager.NavigateTo("/login");
+  }
 
   private async Task LogoutUser()
   {
-    await m_authProvider.LogoutUser().ConfigureAwait(false);
-    m_navigationManager.NavigateTo("/", true);
+    await m_authProvider.LogoutUserAsync().ConfigureAwait(false);
   }
 
 }
 
 <div class="sidebar">
-  <NavMenu/>
+  <NavigationComponent />
 </div>
 
 <div class="main">
   <div class="top-row px-4" style="z-index: 1000">
     <AuthorizeView>
       <Authorized>
-        <div class="top-row px-4">
-          <h4>
-            <b>Hello, @context.User.Identity!.Name</b>
-          </h4> &nbsp;
-          <button class="btn btn-danger" @onclick="LogoutUser">Logout</button>
+        <div class="top-row px-4 mr-3">
+          <MudMenu Icon="@Icons.Material.Filled.Face" Color="Color.Primary" Direction="Direction.Right">
+            <MudMenuItem>My account</MudMenuItem>
+            <MudMenuItem OnClick="LogoutUser">Logout</MudMenuItem>
+          </MudMenu>
         </div>
       </Authorized>
       <NotAuthorized>

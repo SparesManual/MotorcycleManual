@@ -18,6 +18,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\MRI.Client\Navigator.cs" Link="Navigator.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AntDesign" Version="0.6.0" />
     <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
     <PackageReference Include="Radzen.Blazor" Version="3.0.8" />
   </ItemGroup>
@@ -28,8 +33,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
-    <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Web.Radzen\Components.Auth.Web.Radzen.csproj" />
-    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web.Radzen\Components.Queries.Web.Radzen.csproj" />
+    <ProjectReference Include="..\..\Libraries\Components\Components.Layout.Web.Ant\Components.Layout.Web.Ant.csproj" />
+    <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web.Ant\Components.Queries.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Auth\MRI.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\Db\MRI.Db\MRI.Db.csproj" />
     <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
@@ -37,7 +42,6 @@
     <ProjectReference Include="..\..\Libraries\Validators\Validators.Auth\Validators.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Queries\ViewModels.Queries.csproj" />
-    <ProjectReference Include="..\MRI.Client\MRI.Client.csproj" />
   </ItemGroup>
 
 </Project>

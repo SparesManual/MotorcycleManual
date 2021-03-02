@@ -22,7 +22,7 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <RadzenTextBox id="Password" Placeholder="Password" Name="Password" @bind-Value="@ViewModel!.Password" Style="width: 100%" />
+          <RadzenPassword id="Password" Placeholder="Password" Name="Password" @bind-Value="@ViewModel!.Password" Style="width: 100%" />
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
@@ -33,7 +33,7 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <RadzenTextBox id="ConfirmPassword" Placeholder="Confirm password" Name="ConfirmPassword" @bind-Value="@ViewModel!.ConfirmPassword" Style="width: 100%" />
+          <RadzenPassword id="ConfirmPassword" Placeholder="Confirm password" Name="ConfirmPassword" @bind-Value="@ViewModel!.ConfirmPassword" Style="width: 100%" />
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.ConfirmPassword" class="mt-2"/>

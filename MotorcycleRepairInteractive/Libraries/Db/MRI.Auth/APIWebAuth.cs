@@ -1,6 +1,8 @@
 using System.Net.Http;
+using Db.Interfaces;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace MRI.Auth
 {
@@ -13,10 +15,10 @@ namespace MRI.Auth
     /// <summary>
     /// Default constructor
     /// </summary>
-    public APIWebAuth()
+    public APIWebAuth(HttpClient httpClient, IStorage storage, AuthenticationStateProvider stateProvider)
       : base(GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
       {
         HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler())
-      })) { }
+      }), httpClient, storage, stateProvider) { }
   }
 }

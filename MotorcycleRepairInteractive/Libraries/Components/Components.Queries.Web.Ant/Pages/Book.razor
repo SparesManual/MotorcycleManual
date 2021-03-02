@@ -1,0 +1,44 @@
+@page "/book/{itemId:int}"
+@inherits BaseItemComponent<IBookViewModel, IBook>
+
+<h2>@ViewModel?.Item?.Title</h2>
+
+<BookModels ItemId="ItemId"/>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <BookSections @ref="m_bookSections" BookId="ItemId" CurrentSectionChanged="@SectionChanged"/>
+    </div>
+    <div class="col">
+      <SectionParts @ref="m_sectionParts"/>
+    </div>
+  </div>
+</div>
+
+
+@code {
+#nullable enable
+
+  private SectionParts? m_sectionParts;
+  // ReSharper disable once NotAccessedField.Local
+  private BookSections? m_bookSections;
+
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync().ConfigureAwait(false);
+
+  // // If the section selection persisted..
+  //   if (m_sectionParts?.SectionId != null)
+  // // Propagate it to the sections grid
+  //     await m_bookSections!.SetSectionId((int) m_sectionParts.SectionId).ConfigureAwait(false);
+  }
+
+  private async void SectionChanged(int? section)
+  {
+    if (m_sectionParts != null)
+      await m_sectionParts.ChangeSectionAsync(section).ConfigureAwait(false);
+  }
+
+}
