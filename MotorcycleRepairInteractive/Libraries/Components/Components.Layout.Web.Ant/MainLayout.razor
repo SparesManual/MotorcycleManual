@@ -1,6 +1,6 @@
 @inherits LayoutComponentBase
 @inject NavigationManager m_navigationManager
-@*@inject IAPIAuth m_authProvider*@
+@inject IAPIAuth m_authProvider
 
 @code {
 
@@ -11,7 +11,7 @@
 
   private async Task LogoutUser()
   {
-    //await m_authProvider.LogoutUserAsync().ConfigureAwait(false);
+    await m_authProvider.LogoutUserAsync().ConfigureAwait(false);
   }
 
 }
