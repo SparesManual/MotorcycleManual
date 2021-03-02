@@ -4,6 +4,7 @@
 
 <Table @ref="m_grid"
        TItem="Section"
+       Loading="ViewModel!.Loading"
        Total="ViewModel!.TotalItems"
        PageSize="ViewModel!.PageSize"
        @bind-PageIndex="@ViewModel!.PageIndex"
