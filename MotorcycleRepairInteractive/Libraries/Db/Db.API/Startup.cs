@@ -78,7 +78,7 @@ namespace Db.API
           };
         });
 
-      services.AddMvc().AddNewtonsoftJson();
+      services.AddMvc();
       services.AddResponseCompression(opts =>
       {
         opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
