@@ -1,1 +1,94 @@
-@page "/partsAll"
+@page "/partsall"
+@inherits BasePagedComponent<IAllPartsViewModel, IPart>
+@inject NavigationManager m_navigationManager
+
+<h1>PartsAll</h1>
+
+@* <div> *@
+@*   <RadzenAutoComplete Data="ViewModel!.Autocomplete" LoadData="LoadAutocompleteData" Placeholder="Search..."/> *@
+@* </div> *@
+
+<Table @ref="m_grid"
+        Total="ViewModel!.TotalItems"
+        Loading="ViewModel!.Loading"
+        OnPageIndexChange="LoadTableData"
+        DataSource="m_parts"
+        PageSize="ViewModel!.PageSize"
+        SelectedRowsChanged="x => SelectPart(x.FirstOrDefault())"
+        TItem="Part">
+  <Column Field="@context.PartNumber" Title="Part number"/>
+  <Column Field="@context.MakersPartNumber" Title="Makers number"/>
+  <Column Field="@context.Description" Title="Description"/>
+</Table>
+
+@code {
+#nullable enable
+
+  private IReadOnlyCollection<Part> m_parts = Array.Empty<Part>();
+#pragma warning disable 649
+  private Table<Part>? m_grid;
+#pragma warning restore 649
+
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync().ConfigureAwait(false);
+
+    WrapData();
+  }
+
+  private class Part
+    : IPart
+  {
+    /// <inheritdoc />
+    public int Id { get; }
+
+    /// <inheritdoc />
+    public string PartNumber { get; }
+
+    /// <inheritdoc />
+    public string MakersPartNumber { get; }
+
+    /// <inheritdoc />
+    public string Description { get; }
+
+    public Part(IPart part)
+    {
+      Id = part.Id;
+      PartNumber = part.PartNumber;
+      MakersPartNumber = part.MakersPartNumber;
+      Description = part.Description;
+    }
+  }
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+  {
+  }
+
+  private async Task LoadTableData(PaginationEventArgs paging)
+  {
+    await LoadData(string.Empty, paging).ConfigureAwait(false);
+
+    WrapData();
+  }
+
+  private void WrapData()
+  {
+    if (ViewModel is not null)
+      m_parts = ViewModel.Items.Select(part => new Part(part)).ToReadOnlyCollection();
+  }
+
+  // private async void LoadAutocompleteData(PaginationEventArgs obj)
+  // {
+  //   if (ViewModel != null)
+  //     await ViewModel.UpdateAutocomplete(obj.Filter).ConfigureAwait(false);
+  // }
+
+  private void SelectPart(IPart? part)
+  {
+    if (part is not null)
+      m_navigationManager.NavigateTo("part/" + part.Id);
+  }
+
+}
