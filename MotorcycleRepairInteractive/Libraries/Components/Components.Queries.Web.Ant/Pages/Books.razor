@@ -1,1 +1,84 @@
 @page "/books"
+@inherits BasePagedComponent<IBooksViewModel, IBook>
+@inject NavigationManager m_navigationManager
+
+<h1>Books</h1>
+
+<AntList Grid="m_gutter" DataSource="@m_books">
+  <ListItem >
+    <Card Bordered Title="@context.Title">
+      <Body>
+      <Button OnClick="() => NavigateToBook(context.Id)">Open</Button>
+      </Body>
+    </Card>
+  </ListItem>
+</AntList>
+
+<Pagination PageIndex="@ViewModel!.PageIndex" Total="@ViewModel!.TotalItems" PageSize="@ViewModel!.PageSize" OnPageIndexChange="LoadListData"></Pagination>
+
+@code {
+#nullable enable
+
+  private IReadOnlyCollection<Book> m_books = Array.Empty<Book>();
+
+  private readonly ListGridType m_gutter = new()
+  {
+    Gutter = 16,
+    Xs = 1,
+    Sm = 2,
+    Md = 4,
+    Lg = 4,
+    Xl = 6,
+    Xxl = 3,
+    Column = 3
+  };
+
+  private class Book
+    : IBook
+  {
+    /// <inheritdoc />
+    public int Id { get; }
+
+    /// <inheritdoc />
+    public string Title { get; }
+
+    /// <summary>
+  /// Default constructor
+  /// </summary>
+    public Book(IBook book)
+    {
+      Id = book.Id;
+      Title = book.Title;
+    }
+  }
+
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync().ConfigureAwait(false);
+
+    WrapData();
+  }
+
+  private async Task LoadListData(PaginationEventArgs paging)
+  {
+    await LoadData(string.Empty, paging).ConfigureAwait(false);
+
+    WrapData();
+  }
+
+  private void WrapData()
+  {
+    if (ViewModel is not null)
+      m_books = ViewModel.Items.Select(book => new Book(book)).ToReadOnlyCollection();
+  }
+
+  private void NavigateToBook(int id)
+    => m_navigationManager.NavigateTo("book/" + id);
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+  {
+  }
+
+}
