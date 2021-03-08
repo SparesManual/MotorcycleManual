@@ -14,12 +14,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../bin/Debug/Libraries/Helpers</OutputPath>
-    <DocumentationFile>../../../bin/Debug/Libraries/Helpers/MRI.MVVM.WPF.Helpers.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/Helpers</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Helpers/MRI.MVVM.WPF.Helpers.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Libraries/Helpers</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/Helpers</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

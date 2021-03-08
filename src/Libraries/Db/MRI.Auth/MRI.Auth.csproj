@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../../../bin/Debug/Libraries/Db</OutputPath>
-    <DocumentationFile>..\..\..\bin\Debug\Libraries\Db\MRI.Auth.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/Db</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Db/MRI.Auth.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../../bin/Release/Libraries/Db</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

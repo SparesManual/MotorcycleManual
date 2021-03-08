@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../../bin/Debug/Interfaces/Components/Components.Auth.xml</DocumentationFile>
-    <OutputPath>../../../bin/Debug/Interfaces/Components</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Interfaces/Components/Components.Auth.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Interfaces/Components</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Interfaces/Components</OutputPath>
+    <OutputPath>../../../../bin/Release/Interfaces/Components</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

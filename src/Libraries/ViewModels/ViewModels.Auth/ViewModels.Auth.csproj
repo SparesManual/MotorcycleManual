@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../../../bin/Debug/Libraries/ViewModel</OutputPath>
-    <DocumentationFile>..\..\..\bin\Debug\Libraries\ViewModel\ViewModels.Auth.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/ViewModel</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/ViewModel/ViewModels.Auth.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../../bin/Release/Libraries/ViewModel\</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/ViewModel\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
