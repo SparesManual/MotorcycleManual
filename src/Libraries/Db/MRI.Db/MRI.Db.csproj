@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../../../bin/Debug/Libraries/Db</OutputPath>
+    <DocumentationFile>../../../bin/Debug/Libraries/Db/MRI.Db.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../../bin/Release/Libraries/Db</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.15.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.35.0" />
+    <PackageReference Include="Grpc.Net.Client.Web" Version="2.35.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.36.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Linq.Async" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
+    <ProjectReference Include="..\..\Helpers\MRI.Helpers\MRI.Helpers.csproj" />
+    <ProjectReference Include="..\..\Models\Models.Entities\Models.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\Db.API\Protos\provide.proto" GrpcServices="Client">
+      <Link>Protos\provide.proto</Link>
+    </Protobuf>
+  </ItemGroup>
+
+</Project>
