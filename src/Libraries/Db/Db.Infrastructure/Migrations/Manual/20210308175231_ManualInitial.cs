@@ -3,6 +3,7 @@
 
 namespace Db.Infrastructure.Migrations.Manual
 {
+    /// <inheritdoc />
     public partial class ManualInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +68,8 @@ namespace Db.Infrastructure.Migrations.Manual
                         .Annotation("Sqlite:Autoincrement", true),
                     PartNumber = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
                     MakersPartNumber = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false)
+                    Description = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Keywords = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,7 +101,8 @@ namespace Db.Infrastructure.Migrations.Manual
                     StartPage = table.Column<int>(type: "INTEGER", nullable: false),
                     EndPage = table.Column<int>(type: "INTEGER", nullable: false),
                     FigureNumber = table.Column<int>(type: "INTEGER", nullable: false),
-                    FigureDescription = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true)
+                    FigureDescription = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    Keywords = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

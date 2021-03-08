@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Db.Core\Db.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Manual" />
+  </ItemGroup>
+
 </Project>
