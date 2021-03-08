@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../../bin/Debug/Interfaces/Models/Models.Interfaces.Entities.xml</DocumentationFile>
-    <OutputPath>../../../bin/Debug/Interfaces/Models</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Interfaces/Models/Models.Interfaces.Entities.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Interfaces/Models</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Interfaces/Models</OutputPath>
+    <OutputPath>../../../../bin/Release/Interfaces/Models</OutputPath>
   </PropertyGroup>
 
 </Project>

@@ -2,16 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../../../bin/Debug/Libraries/States</OutputPath>
-    <DocumentationFile>..\..\..\bin\Debug\Libraries\States\States.General.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/States</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/States/States.General.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../../bin/Release/Libraries/States</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/States</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

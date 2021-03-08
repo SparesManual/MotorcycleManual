@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../bin/Debug/Libraries/ViewModel</OutputPath>
-    <DocumentationFile>../../../bin/Debug/Libraries/ViewModel/ViewModels.Queries.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/ViewModel</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/ViewModel/ViewModels.Queries.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Libraries/ViewModel</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/ViewModel</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
