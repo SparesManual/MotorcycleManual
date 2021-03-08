@@ -76,11 +76,10 @@ namespace MRI.MVVM.WPF.Helpers
 
     private static void HandlePasswordChanged(object sender, RoutedEventArgs e)
     {
-      var box = sender as PasswordBox;
+      if (sender is not PasswordBox box)
+        return;
 
-      // set a flag to indicate that we're updating the password
-      SetUpdatingPassword(box!, true);
-      // push the new password into the BoundPassword property
+      SetUpdatingPassword(box, true);
       SetBoundPassword(box, box.Password);
       SetUpdatingPassword(box, false);
     }
@@ -90,8 +89,8 @@ namespace MRI.MVVM.WPF.Helpers
     /// </summary>
     /// <param name="dp">Object of which the property value is to be set</param>
     /// <param name="value">Value type</param>
-    public static void SetBindPassword(DependencyObject dp, bool value)
-      => dp.SetValue(BindPassword, value);
+    public static void SetBindPassword(DependencyObject? dp, bool value)
+      => dp?.SetValue(BindPassword, value);
 
     /// <summary>
     /// Gets the value of the <see cref="BindPassword"/> property
@@ -114,8 +113,8 @@ namespace MRI.MVVM.WPF.Helpers
     /// </summary>
     /// <param name="dp">Object of which the property value is to be set</param>
     /// <param name="value">Value type</param>
-    public static void SetBoundPassword(DependencyObject dp, string value)
-      => dp.SetValue(BoundPassword, value);
+    public static void SetBoundPassword(DependencyObject? dp, string value)
+      => dp?.SetValue(BoundPassword, value);
 
     /// <summary>
     /// Gets the value of the <see cref="UpdatingPassword"/> property
@@ -130,7 +129,7 @@ namespace MRI.MVVM.WPF.Helpers
     /// </summary>
     /// <param name="dp">Object of which the property value is to be set</param>
     /// <param name="value">Value type</param>
-    private static void SetUpdatingPassword(DependencyObject dp, bool value)
-      => dp.SetValue(UpdatingPassword, value);
+    private static void SetUpdatingPassword(DependencyObject? dp, bool value)
+      => dp?.SetValue(UpdatingPassword, value);
   }
 }

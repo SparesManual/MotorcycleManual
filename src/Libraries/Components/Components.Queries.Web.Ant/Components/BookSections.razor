@@ -7,10 +7,11 @@
        Loading="ViewModel!.Loading"
        Total="ViewModel!.TotalItems"
        PageSize="ViewModel!.PageSize"
-       @bind-PageIndex="@ViewModel!.PageIndex"
+       RowClassName="x => x.Data.Id.Equals(m_sectionId) ? HIGHLIGHT : string.Empty"
        DataSource="@m_sections"
        OnRowClick="row => RowSelectedAsync(row.Data)"
        OnPageIndexChange="LoadTableData">
+  <Column Title="Id" Field="context.Id" DataIndex="Id"></Column>
   <Column Title="Header" Field="context.Header"></Column>
   <Column Title="Figure" Field="context.FigureNumber"></Column>
   <Column Title="Pages" Field="context">
@@ -27,15 +28,23 @@
   </Column>
 </Table>
 
+<style>
+  .sectionSelected {
+    background-color: #fff1f0;
+  }
+</style>
+
 @code {
 #nullable enable
 
+  private int m_currentPage;
+  private const string HIGHLIGHT = "sectionSelected";
   private Table<Section>? m_grid;
   private int m_bookId;
-  // private int? m_sectionId;
-  private IReadOnlyCollection<Section> m_sections = Array.Empty<Section>();
+  private int? m_sectionId;
+  private Section[] m_sections = Array.Empty<Section>();
 
-  private readonly struct Section
+  private class Section
     : ISection
   {
     /// <inheritdoc />
@@ -94,6 +103,7 @@
   /// <inheritdoc />
   protected override async Task OnInitializedAsync()
   {
+    m_currentPage = ViewModel?.PageIndex ?? 1;
     await base.OnInitializedAsync().ConfigureAwait(false);
 
     WrapData();
@@ -102,22 +112,34 @@
   /// <inheritdoc />
   protected override void GoToPage(int page)
   {
+    //m_currentPage = page;
+    //StateHasChanged();
   }
 
+  /// <summary>
+  /// Sets the currently selected section id
+  /// </summary>
+  public void SetSectionId(int id)
+    => m_sectionId = id;
+
   private Task RowSelectedAsync(ISection? section)
-    => CurrentSectionChanged.InvokeAsync(section?.Id);
+  {
+    m_sectionId = section?.Id;
+    return CurrentSectionChanged.InvokeAsync(section?.Id);
+  }
 
   private async void LoadTableData(PaginationEventArgs data)
   {
     await LoadData("", data).ConfigureAwait(false);
 
     WrapData();
+    StateHasChanged();
   }
 
   private void WrapData()
   {
     if (ViewModel is not null)
-      m_sections = ViewModel.Items.Select(section => new Section(section)).ToReadOnlyCollection();
+      m_sections = ViewModel.Items.Select(section => new Section(section)).ToArray();
   }
 
 }

@@ -5,7 +5,6 @@
 
 <Table @ref="m_grid"
        Total="ViewModel!.TotalItems"
-       @bind-PageIndex="ViewModel!.PageIndex"
        PageSize="ViewModel!.PageSize"
        Loading="ViewModel!.Loading"
        DataSource="m_sectionParts"
@@ -25,7 +24,7 @@
   private Table<SectionPart>? m_grid;
   private IReadOnlyCollection<SectionPart> m_sectionParts = Array.Empty<SectionPart>();
 
-  private readonly struct SectionPart
+  private class SectionPart
   {
     public int Id { get; }
 
@@ -102,7 +101,10 @@
   }
 
   private void WrapItems()
-    => m_sectionParts = ViewModel!.Items.Select(sp => new SectionPart(sp)).ToReadOnlyCollection();
+  {
+    m_sectionParts = ViewModel!.Items.Select(sp => new SectionPart(sp)).ToReadOnlyCollection();
+    StateHasChanged();
+  }
 
   private async Task LoadTableData(PaginationEventArgs pagination)
   {

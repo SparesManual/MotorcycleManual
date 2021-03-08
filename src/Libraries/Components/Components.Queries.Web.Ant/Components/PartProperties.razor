@@ -1,0 +1,30 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@inherits BasePagedComponent<IPartPropertiesViewModel, IProperty>
+
+@code {
+#nullable enable
+
+  private int m_partId;
+
+  /// <summary>
+  /// Parent part id
+  /// </summary>
+  [Parameter]
+  public int PartId
+  {
+    get => m_partId;
+    set
+    {
+      m_partId = value;
+      if (ViewModel != null) ViewModel.PartId = value;
+    }
+  }
+
+  /// <inheritdoc />
+  protected override void GoToPage(int page)
+  {
+
+  }
+
+}
