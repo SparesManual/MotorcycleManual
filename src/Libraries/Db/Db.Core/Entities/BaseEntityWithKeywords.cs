@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Db.Interfaces;
 
 namespace Db.Core.Entities
@@ -9,6 +10,7 @@ namespace Db.Core.Entities
     : BaseEntity, IHasKeywords
   {
     /// <inheritdoc />
-    public string Keywords { get; set; }
+    [Required]
+    public string Keywords { get; set; } = string.Empty;
   }
 }
