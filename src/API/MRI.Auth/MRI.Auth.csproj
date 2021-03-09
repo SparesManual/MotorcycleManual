@@ -9,22 +9,22 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../../../../bin/Debug/Libraries/Db</OutputPath>
-    <DocumentationFile>../../../../bin/Debug/Libraries/Db/MRI.Auth.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/API</OutputPath>
+    <DocumentationFile>../../../bin/Debug/API/MRI.Auth.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../../../bin/Release/Libraries/Db</OutputPath>
+    <OutputPath>../../../bin/Release/API</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
-    <ProjectReference Include="..\..\Models\Models.REST.Auth\Models.REST.Auth.csproj" />
-    <ProjectReference Include="..\..\States\States.General\States.General.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Libraries\Models\Models.REST.Auth\Models.REST.Auth.csproj" />
+    <ProjectReference Include="..\..\Libraries\States\States.General\States.General.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\Db.API\Protos\auth.proto" GrpcServices="Client">
+    <Protobuf Include="..\..\Libraries\Db\Db.API\Protos\auth.proto" GrpcServices="Client">
       <Link>Protos\auth.proto</Link>
     </Protobuf>
   </ItemGroup>
