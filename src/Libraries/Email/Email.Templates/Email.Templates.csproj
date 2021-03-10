@@ -1,14 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Nullable>enable</Nullable>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>../../../../bin/Debug/Libraries/Email</OutputPath>
-    <DocumentationFile>../../../../bin/Debug/Libraries/Email/Email.API.xml</DocumentationFile>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Email/Email.Templates.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -16,17 +17,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\mail.proto" GrpcServices="Server" />
+    <Content Remove="PasswordRecovery.cshtml" />
+    <Content Remove="RegistrationConfirmation.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentEmail.Razor" Version="3.0.0" />
-    <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.35.0" />
+    <EmbeddedResource Include="PasswordRecovery.cshtml" />
+    <EmbeddedResource Include="RegistrationConfirmation.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Email.Templates\Email.Templates.csproj" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>

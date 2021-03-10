@@ -125,6 +125,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{0540D1EF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.API", "Libraries\Email\Email.API\Email.API.csproj", "{454C1755-E6A6-450A-8817-982F89A0D7BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Templates", "Libraries\Email\Email.Templates\Email.Templates.csproj", "{D6B52DFE-27CE-4ABC-B6EC-AF8AE657B738}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +293,10 @@ Global
 		{454C1755-E6A6-450A-8817-982F89A0D7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{454C1755-E6A6-450A-8817-982F89A0D7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{454C1755-E6A6-450A-8817-982F89A0D7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B52DFE-27CE-4ABC-B6EC-AF8AE657B738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B52DFE-27CE-4ABC-B6EC-AF8AE657B738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B52DFE-27CE-4ABC-B6EC-AF8AE657B738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B52DFE-27CE-4ABC-B6EC-AF8AE657B738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -353,6 +359,7 @@ Global
 		{5AB9D18C-246F-4CF6-81D4-C7FADEC24DAB} = {C674D5ED-F233-4748-8055-3FCAA09C0004}
 		{0540D1EF-A09E-4E96-A80F-3B8B16B92EB6} = {A766BB6A-8A96-4C08-90A2-BC1412C498EC}
 		{454C1755-E6A6-450A-8817-982F89A0D7BB} = {0540D1EF-A09E-4E96-A80F-3B8B16B92EB6}
+		{D6B52DFE-27CE-4ABC-B6EC-AF8AE657B738} = {0540D1EF-A09E-4E96-A80F-3B8B16B92EB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB209151-52A5-4156-B92F-10FB84E38FDA}
