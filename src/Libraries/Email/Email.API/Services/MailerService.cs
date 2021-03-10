@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Email.Templates;
 using FluentEmail.Core;
 using Grpc.Core;
 
@@ -27,6 +28,7 @@ namespace Email.API.Services
       var response = await m_emailSender
         .To(request.Email)
         .Subject("Spares Manual - Password Recovery")
+        .UsingTemplateFromEmbedded($"{typeof(PasswordRecoveryModel).FullName}.cshtml", new PasswordRecoveryModel { Code = request.Code }, typeof(PasswordRecoveryModel).Assembly)
         .SendAsync(context.CancellationToken)
         .ConfigureAwait(false);
 
@@ -42,6 +44,7 @@ namespace Email.API.Services
       var response = await m_emailSender
         .To(request.Email)
         .Subject("Action required: Please confirm your email")
+        .UsingTemplateFromEmbedded($"{typeof(RegistrationConfirmationModel).FullName}.cshtml", new RegistrationConfirmationModel { Code = request.Code }, typeof(RegistrationConfirmationModel).Assembly)
         .SendAsync(context.CancellationToken)
         .ConfigureAwait(false);
 
