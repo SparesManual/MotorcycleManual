@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
+using FluentEmail.Core;
 using Grpc.Core;
-using Microsoft.Extensions.Logging;
 
 namespace Email.API.Services
 {
@@ -11,23 +11,44 @@ namespace Email.API.Services
   public class MailerService
     : Mailer.MailerBase
   {
-    private readonly ILogger<MailerService> m_logger;
+    private readonly IFluentEmail m_emailSender;
 
     /// <summary>
     /// Default constructor
     /// </summary>
-    public MailerService(ILogger<MailerService> logger)
+    public MailerService(IFluentEmail emailSender)
     {
-      m_logger = logger;
+      m_emailSender = emailSender;
     }
 
     /// <inheritdoc />
-    public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+    public override async Task<Boolean> SendPasswordRecovery(EmailAndCode request, ServerCallContext context)
     {
-      return Task.FromResult(new HelloReply
+      var response = await m_emailSender
+        .To(request.Email)
+        .Subject("Spares Manual - Password Recovery")
+        .SendAsync(context.CancellationToken)
+        .ConfigureAwait(false);
+
+      return new Boolean
       {
-        Message = "Hello " + request.Name
-      });
+        Success = response.Successful
+      };
+    }
+
+    /// <inheritdoc />
+    public override async Task<Boolean> SendRegistrationConfirmation(EmailAndCode request, ServerCallContext context)
+    {
+      var response = await m_emailSender
+        .To(request.Email)
+        .Subject("Action required: Please confirm your email")
+        .SendAsync(context.CancellationToken)
+        .ConfigureAwait(false);
+
+      return new Boolean
+      {
+        Success = response.Successful
+      };
     }
   }
 }

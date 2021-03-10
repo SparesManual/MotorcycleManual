@@ -38,6 +38,7 @@ namespace Email.API
       services.AddGrpc();
       services
         .AddFluentEmail(NO_REPLY_MAIL, SENDER_NAME)
+        .AddRazorRenderer()
         .AddSmtpSender(m_configuration.GetSection(CONFIG_SECTION)["Host"], int.Parse(m_configuration.GetSection(CONFIG_SECTION)["Port"]));
     }
 
