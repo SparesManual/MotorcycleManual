@@ -16,6 +16,9 @@ namespace Email.API
     #region Fields
 
     private readonly IConfiguration m_configuration;
+    private const string NO_REPLY_MAIL = "noreply@sparesmanual.com";
+    private const string SENDER_NAME = "Spares Manual";
+    private const string CONFIG_SECTION = "MailSettings";
 
     #endregion
 
@@ -30,9 +33,12 @@ namespace Email.API
     /// Configures the API server injected services
     /// </summary>
     /// <param name="services">Injected services library</param>
-    public static void ConfigureServices(IServiceCollection services)
+    public void ConfigureServices(IServiceCollection services)
     {
       services.AddGrpc();
+      services
+        .AddFluentEmail(NO_REPLY_MAIL, SENDER_NAME)
+        .AddSmtpSender(m_configuration.GetSection(CONFIG_SECTION)["Host"], int.Parse(m_configuration.GetSection(CONFIG_SECTION)["Port"]));
     }
 
     /// <summary>
