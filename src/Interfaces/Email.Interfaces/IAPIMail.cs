@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Email.Interfaces
@@ -12,13 +13,15 @@ namespace Email.Interfaces
     /// </summary>
     /// <param name="email">Recipients email</param>
     /// <param name="code">Confirmation code</param>
-    ValueTask SendRegistrationConfirmationAsync(string email, string code);
+    /// <param name="cancellationToken">Cancellation</param>
+    ValueTask SendRegistrationConfirmationAsync(string email, string code, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Sends an account recovery <paramref name="code"/> to a given <paramref name="email"/>
     /// </summary>
     /// <param name="email">Recipients email</param>
     /// <param name="code">Confirmation code</param>
-    ValueTask SendRecoveryCodeAsync(string email, string code);
+    /// <param name="cancellationToken">Cancellation</param>
+    ValueTask SendRecoveryCodeAsync(string email, string code, CancellationToken cancellationToken = default);
   }
 }
