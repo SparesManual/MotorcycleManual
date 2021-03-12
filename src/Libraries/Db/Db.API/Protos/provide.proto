@@ -50,6 +50,9 @@ service Provider {
   // Gets section part children based on the parent section id
   rpc GetSectionChildren(IdSearchAndPageParams) returns (stream SectionReply);
 
+  // Gets image points of parts in a given section
+  rpc GetSectionPartImagePoints(IdRequest) returns (stream PartImagePoint);
+  
   // Gets properties using full-text search with paging settings for a part of a given id
   rpc GetPartProperties (IdSearchAndPageParams) returns (stream PartPropertyReply);
   // Gets properties types with paging settings
@@ -103,6 +106,18 @@ message PageParams {
 message IdRequest {
   // Specific entity id
   int32 id = 1;
+}
+
+// Image points for a given part
+message PartImagePoint {
+  // Image point on the X axis
+  double positionX = 1;
+  // Image point on the Y axis
+  double positionY = 2;
+  // Part id
+  int32 partId = 3;
+  // Part number
+  string partNumber = 4;
 }
 
 // Book entity
