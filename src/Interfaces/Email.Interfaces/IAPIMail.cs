@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace Email.Interfaces
   /// Interface for email APIs
   /// </summary>
   public interface IAPIMail
+    : IDisposable
   {
     /// <summary>
     /// Sends an account registration <paramref name="code"/> to a given <paramref name="email"/>

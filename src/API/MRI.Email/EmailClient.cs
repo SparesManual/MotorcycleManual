@@ -1,7 +1,8 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Email.API;
 using Email.Interfaces;
+using Grpc.Net.Client;
 
 namespace MRI.Email
 {
@@ -11,16 +12,48 @@ namespace MRI.Email
   public class EmailClient
     : IAPIMail
   {
+    #region Fields
+
+    private readonly Mailer.MailerClient m_client;
+    private readonly GrpcChannel m_channel;
+
+    #endregion
+
+    #region Constructors
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public EmailClient()
+      : this(GrpcChannel.ForAddress("https://localhost:5003"))
+    {
+    }
+
+    /// <summary>
+    /// API constructor
+    /// </summary>
+    protected EmailClient(GrpcChannel channel)
+    {
+      m_channel = channel;
+      m_client = new Mailer.MailerClient(m_channel);
+    }
+
+    #endregion
+
     #region API Methods
 
     /// <inheritdoc />
-    public ValueTask SendRegistrationConfirmationAsync(string email, string code, CancellationToken cancellationToken = default)
-      => throw new NotImplementedException();
+    public async ValueTask SendRegistrationConfirmationAsync(string email, string code, CancellationToken cancellationToken = default)
+      => await m_client.SendRegistrationConfirmationAsync(new EmailAndCode {Code = code, Email = email}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
 
     /// <inheritdoc />
-    public ValueTask SendRecoveryCodeAsync(string email, string code, CancellationToken cancellationToken = default)
-      => throw new NotImplementedException();
+    public async ValueTask SendRecoveryCodeAsync(string email, string code, CancellationToken cancellationToken = default)
+      => await m_client.SendPasswordRecoveryAsync(new EmailAndCode {Code = code, Email = email}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
 
     #endregion
+
+    /// <inheritdoc />
+    public void Dispose()
+      => m_channel.Dispose();
   }
 }
