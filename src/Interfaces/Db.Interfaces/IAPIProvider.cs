@@ -162,6 +162,14 @@ namespace Db.Interfaces
     ValueTask<IPaging<ISection>> GetSectionsFromBookAsync(int bookId, int size, int index, string? search = null, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Gets all image points for a given section
+    /// </summary>
+    /// <param name="sectionId">Id of the section</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>Batch of image points</returns>
+    IAsyncEnumerable<IImagePoint> GetSectionImagePointsAsync(int sectionId, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Get all parts
     /// </summary>
     /// <param name="size">Page size</param>

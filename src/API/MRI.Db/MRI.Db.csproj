@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../bin/Debug/Libraries/Db</OutputPath>
-    <DocumentationFile>../../../bin/Debug/Libraries/Db/MRI.Db.xml</DocumentationFile>
+    <OutputPath>../../../bin/Debug/API</OutputPath>
+    <DocumentationFile>../../../bin/Debug/API/MRI.Db.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Libraries/Db</OutputPath>
+    <OutputPath>../../../bin/Release/API</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,14 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
-    <ProjectReference Include="..\..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
-    <ProjectReference Include="..\..\Helpers\MRI.Helpers\MRI.Helpers.csproj" />
-    <ProjectReference Include="..\..\Models\Models.Entities\Models.Entities.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
+    <ProjectReference Include="..\..\Libraries\Helpers\MRI.Helpers\MRI.Helpers.csproj" />
+    <ProjectReference Include="..\..\Libraries\Models\Models.Entities\Models.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\Db.API\Protos\provide.proto" GrpcServices="Client">
+    <Protobuf Include="..\..\Libraries\Db\Db.API\Protos\provide.proto" GrpcServices="Client">
       <Link>Protos\provide.proto</Link>
     </Protobuf>
   </ItemGroup>

@@ -16,6 +16,7 @@ namespace Db.Core.Specifications
     /// <param name="index">Page index</param>
     public SectionSpec(string? search, int size, int index)
       : base(section => string.IsNullOrEmpty(search)
+                        || !string.IsNullOrEmpty(section.Keywords) && section.Keywords.Contains(search)
                         || !string.IsNullOrEmpty(section.SectionHeader) && section.SectionHeader.Contains(search)
                         || !string.IsNullOrEmpty(section.FigureDescription) && section.FigureDescription.Contains(search)
                         || true)

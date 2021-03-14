@@ -220,6 +220,15 @@ namespace MRI.Db
         Displacement = reply.Displacement
       };
 
+    private static IImagePoint ToImagePoint(PartImagePoint reply)
+      => new ImagePointModel
+      {
+        PartId = reply.PartId,
+        PartNumber = reply.PartNumber,
+        PositionX = reply.PositionX,
+        PositionY = reply.PositionY
+      };
+
     #endregion
 
     #region API
@@ -241,8 +250,7 @@ namespace MRI.Db
       => ToMake(await m_client.GetMakeAsync(ToIdRequest(id), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false));
 
     /// <inheritdoc />
-    public async ValueTask<IPaging<IMake>> GetMakesAsync(int size, int index, string? search,
-      CancellationToken cancellationToken)
+    public async ValueTask<IPaging<IMake>> GetMakesAsync(int size, int index, string? search, CancellationToken cancellationToken)
       => await GetPagingAsync(client => client.GetAllMakes(ToSearchAndPageParams(search, size, index), cancellationToken: cancellationToken), ToMake, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc />
@@ -273,6 +281,10 @@ namespace MRI.Db
     /// <inheritdoc />
     public async ValueTask<IPaging<ISection>> GetSectionsFromBookAsync(int bookId, int size, int index, string? search = null, CancellationToken cancellationToken = default)
       => await GetPagingAsync(client => client.GetSectionsFromBook(ToIdSearchAndPageParams(bookId, search, size, index), cancellationToken: cancellationToken), ToSection, cancellationToken).ConfigureAwait(false);
+
+    /// <inheritdoc />
+    public IAsyncEnumerable<IImagePoint> GetSectionImagePointsAsync(int sectionId, CancellationToken cancellationToken = default)
+      => GetItemsAsync(client => client.GetSectionPartImagePoints(ToIdRequest(sectionId)), ToImagePoint, cancellationToken);
 
     /// <inheritdoc />
     public async ValueTask<IPaging<IPart>> GetPartsAsync(int size, int index, string? search = null, CancellationToken cancellationToken = default)

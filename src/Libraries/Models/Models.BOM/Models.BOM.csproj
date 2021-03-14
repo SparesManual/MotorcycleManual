@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DocumentationFile>..\..\..\bin\Debug\Libraries\Models\Models.BOM.xml</DocumentationFile>
-    <OutputPath>../../../bin/Debug/Libraries/Models\</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Models/Models.BOM.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/Models\</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../../bin/Release/Libraries/Models\</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/Models\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

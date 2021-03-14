@@ -8,6 +8,7 @@ using Db.Core.Specifications;
 using Db.Interfaces;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+
 // ReSharper disable AsyncConverter.AsyncMethodNamingHighlighting
 
 namespace Db.API
@@ -35,6 +36,7 @@ namespace Db.API
     private readonly IGenericRepository<Part> m_partRepository;
     private readonly IGenericRepository<Property> m_propertyRepository;
     private readonly IGenericRepository<PropertyType> m_propertyTypeRepository;
+    private readonly IGenericRepository<ImagePoint> m_imagePointRepository;
 
     #endregion
 
@@ -53,6 +55,7 @@ namespace Db.API
     /// <param name="engineRepository">Injected engine repository</param>
     /// <param name="makeRepository">Injected make repository</param>
     /// <param name="modelRepository">Injected model repository</param>
+    /// <param name="imagePointRepository">Injected image point repository</param>
     public ProviderService(ILogger<ProviderService> logger,
       IGenericRepository<Book> bookRepository,
       IGenericRepository<Carburetor> carburetorRepository,
@@ -64,7 +67,8 @@ namespace Db.API
       IGenericRepository<SectionPartParents> sectionPartParentsRepository,
       IGenericRepository<Part> partRepository,
       IGenericRepository<Property> propertyRepository,
-      IGenericRepository<PropertyType> propertyTypeRepository)
+      IGenericRepository<PropertyType> propertyTypeRepository,
+      IGenericRepository<ImagePoint> imagePointRepository)
     {
       m_logger = logger;
       m_bookRepository = bookRepository;
@@ -78,6 +82,7 @@ namespace Db.API
       m_partRepository = partRepository;
       m_propertyRepository = propertyRepository;
       m_propertyTypeRepository = propertyTypeRepository;
+      m_imagePointRepository = imagePointRepository;
     }
 
     #region Converters
@@ -166,6 +171,15 @@ namespace Db.API
         FigureNumber = section?.FigureNumber ?? -1,
         FigureDescription = section?.FigureDescription ?? string.Empty,
         Header = section?.SectionHeader ?? string.Empty
+      };
+
+    private static PartImagePoint ToPartImagePoint(ImagePoint? imagePoint)
+      => new()
+      {
+        PositionX = imagePoint?.PositionX ?? default,
+        PositionY = imagePoint?.PositionY ?? default,
+        PartId = imagePoint?.SectionParts.PartId ?? default,
+        PartNumber = imagePoint?.SectionParts.Part.PartNumber ?? string.Empty
       };
 
     private static SectionPartReply ToSectionPartReply(SectionParts? sectionParts)
@@ -411,6 +425,13 @@ namespace Db.API
     {
       var specification = new SectionChildrenSpec(pageRequest.Search, pageRequest.Id, pageRequest.Size, pageRequest.Index);
       await ProcessPagedStream(pageRequest.Size, pageRequest.Index, m_sectionPartParentsRepository, specification, responseStream, GetAllExAsync, ToSectionReply, context).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc />
+    public override async Task GetSectionPartImagePoints(IdRequest request, IServerStreamWriter<PartImagePoint> responseStream, ServerCallContext context)
+    {
+      var specification = new ImagePointsSpec(request.Id);
+      await ProcessItemsStream(m_imagePointRepository,  specification, responseStream, GetAllExAsync, ToPartImagePoint, context).ConfigureAwait(false);
     }
 
     /// <inheritdoc />

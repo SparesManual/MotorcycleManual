@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>../../../bin/Debug/Libraries/Validators</OutputPath>
-    <DocumentationFile>..\..\..\bin\Debug\Libraries\Validators\Validators.Auth.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/Validators</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Validators/Validators.Auth.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>../../../bin/Release/Libraries/Validators</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/Validators</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

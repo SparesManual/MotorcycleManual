@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "Email.API";
+
+package mail;
+
+service Mailer {
+  rpc SendRegistrationConfirmation(EmailAndCode) returns (Boolean);
+  rpc SendPasswordRecovery(EmailAndCode) returns (Boolean);
+}
+
+message Boolean {
+  bool success = 1;
+}
+
+message Email {
+  string email = 1;
+}
+
+message EmailAndCode {
+  string email = 1;
+  string code = 2;
+}

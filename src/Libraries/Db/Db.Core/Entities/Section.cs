@@ -8,7 +8,7 @@ namespace Db.Core.Entities
   /// </summary>
   // ReSharper disable once ClassNeverInstantiated.Global
   public class Section
-    : BaseEntity
+    : BaseEntityWithKeywords
   {
     /// <summary>
     /// Foreign key reference to the parent <see cref="Entities.Book"/> entity

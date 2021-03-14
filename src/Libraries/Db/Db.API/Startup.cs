@@ -2,6 +2,7 @@
 using System.Text;
 using Db.Infrastructure.Data;
 using Db.Interfaces;
+using Email.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using MRI.Email;
 
 namespace Db.API
 {
@@ -47,6 +49,7 @@ namespace Db.API
         .AddDbContext<IdentityContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultAuthConnection")))
         .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
+      services.AddScoped<IAPIMail, EmailWebClient>();
       services.AddDefaultIdentity<IdentityUser>()
         .AddEntityFrameworkStores<IdentityContext>();
 

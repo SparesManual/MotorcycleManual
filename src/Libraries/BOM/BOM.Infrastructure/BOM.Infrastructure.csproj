@@ -8,6 +8,15 @@
     <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>../../../../bin/Debug/Libraries/BOM</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/BOM/BOM.Infrastructure.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>../../../../bin/Release/Libraries/BOM</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.1" />
   </ItemGroup>

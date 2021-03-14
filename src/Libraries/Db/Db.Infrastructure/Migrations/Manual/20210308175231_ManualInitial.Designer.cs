@@ -8,9 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Db.Infrastructure.Migrations.Manual
 {
-  /// <inheritdoc />
-  [DbContext(typeof(ManualContext))]
-    [Migration("20210127160944_ManualInitial")]
+    [DbContext(typeof(ManualContext))]
+    [Migration("20210308175231_ManualInitial")]
     partial class ManualInitial
     {
         /// <inheritdoc />
@@ -18,7 +17,7 @@ namespace Db.Infrastructure.Migrations.Manual
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "5.0.3");
 
             modelBuilder.Entity("Db.Core.Entities.Book", b =>
                 {
@@ -178,6 +177,10 @@ namespace Db.Infrastructure.Migrations.Manual
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("MakersPartNumber")
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
@@ -260,6 +263,10 @@ namespace Db.Infrastructure.Migrations.Manual
 
                     b.Property<int>("FigureNumber")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SectionHeader")
                         .HasColumnType("TEXT");

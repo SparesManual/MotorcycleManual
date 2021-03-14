@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../../../bin/Debug/Libraries/Db/Db.API.xml</DocumentationFile>
-    <OutputPath>../../../bin/Debug/Libraries/Db</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Db/Db.API.xml</DocumentationFile>
+    <OutputPath>../../../../bin/Debug/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Libraries/Db</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/Db</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -56,6 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\API\MRI.Email\MRI.Email.csproj" />
     <ProjectReference Include="..\..\Models\Models.REST.Auth\Models.REST.Auth.csproj" />
     <ProjectReference Include="..\..\States\States.General\States.General.csproj" />
     <ProjectReference Include="..\Db.Infrastructure\Db.Infrastructure.csproj" />

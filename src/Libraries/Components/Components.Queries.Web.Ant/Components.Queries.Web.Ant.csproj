@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../bin/Debug/Libraries/Components</OutputPath>
+    <OutputPath>../../../../bin/Debug/Libraries/Components</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>../../../bin/Release/Libraries/Components</OutputPath>
+    <OutputPath>../../../../bin/Release/Libraries/Components</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,7 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
     <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Queries\ViewModels.Interfaces.Queries.csproj" />
-    <ProjectReference Include="..\..\Db\MRI.Db\MRI.Db.csproj" />
     <ProjectReference Include="..\..\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
   </ItemGroup>
 

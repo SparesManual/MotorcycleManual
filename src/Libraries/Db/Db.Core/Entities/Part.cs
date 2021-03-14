@@ -11,7 +11,7 @@ namespace Db.Core.Entities
   /// </remarks>
   // ReSharper disable once ClassNeverInstantiated.Global
   public class Part
-    : BaseEntity
+    : BaseEntityWithKeywords
   {
     /// <summary>
     /// Part number
