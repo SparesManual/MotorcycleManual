@@ -1,4 +1,5 @@
-﻿using Email.API.Services;
+﻿using System.Net.Mail;
+using Email.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -39,7 +40,13 @@ namespace Email.API
       services
         .AddFluentEmail(NO_REPLY_MAIL, SENDER_NAME)
         .AddRazorRenderer()
-        .AddSmtpSender(m_configuration.GetSection(CONFIG_SECTION)["Host"], int.Parse(m_configuration.GetSection(CONFIG_SECTION)["Port"]));
+        .AddSmtpSender(new SmtpClient
+        {
+          EnableSsl = bool.Parse(m_configuration.GetSection(CONFIG_SECTION)["SSL"]),
+          DeliveryMethod = SmtpDeliveryMethod.Network,
+          Host = m_configuration.GetSection(CONFIG_SECTION)["Host"],
+          Port = int.Parse(m_configuration.GetSection(CONFIG_SECTION)["Port"])
+        });
     }
 
     /// <summary>

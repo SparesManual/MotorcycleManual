@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\API\MRI.Email\MRI.Email.csproj" />
     <ProjectReference Include="..\..\Libraries\BOM\BOM.Infrastructure\BOM.Infrastructure.csproj" />
   </ItemGroup>
 
