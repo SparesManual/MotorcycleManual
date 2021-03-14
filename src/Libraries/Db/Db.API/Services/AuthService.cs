@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Email.Interfaces;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +23,7 @@ namespace Db.API
 
     private readonly UserManager<IdentityUser> m_userManager;
     private readonly SignInManager<IdentityUser> m_signInManager;
+    private readonly IAPIMail m_emailService;
     private readonly IConfiguration m_configuration;
 
     #endregion
@@ -29,10 +31,11 @@ namespace Db.API
     /// <summary>
     /// Default constructor
     /// </summary>
-    public AuthService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration)
+    public AuthService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IAPIMail emailService, IConfiguration configuration)
     {
       m_userManager = userManager;
       m_signInManager = signInManager;
+      m_emailService = emailService;
       m_configuration = configuration;
     }
 
@@ -87,7 +90,9 @@ namespace Db.API
       {
         UserName = request.Email
       };
+
       await m_userManager.CreateAsync(user, request.Password).ConfigureAwait(false);
+      await m_emailService.SendRegistrationConfirmationAsync(request.Email, Guid.NewGuid().ToString()).ConfigureAwait(false);
 
       return new BooleanReply
       {

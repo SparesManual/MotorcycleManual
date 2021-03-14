@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Nullable>enable</Nullable>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>../../../../bin/Debug/Libraries/Email</OutputPath>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Email/Email.Templates.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>../../../../bin/Release/Libraries/Email</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="PasswordRecovery.cshtml" />
+    <Content Remove="RegistrationConfirmation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="PasswordRecovery.cshtml" />
+    <EmbeddedResource Include="RegistrationConfirmation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>
