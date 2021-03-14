@@ -16,7 +16,7 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <Input Id="Email" Placeholder="Email" Value="@ViewModel!.Email" Class="w-100" Size="large" />
+          <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100" Size="large" />
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
@@ -27,7 +27,7 @@
     <div class="row mb-4">
       <div class="col">
         <div class="row">
-          <InputPassword Id="Password" Placeholder="Password" Value="@ViewModel!.Password" Size="large" Class="w-100" Type="string"></InputPassword>
+          <InputPassword Id="Password" Placeholder="Password" @bind-Value="@ViewModel!.Password" Size="large" Class="w-100" Type="string"></InputPassword>
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <Button Type="submit" Id="Login" Class="row mb-2 w-100" Size="large">
+    <Button HtmlType="submit" Id="Login" Class="row mb-2 w-100" Size="large">
       Login
     </Button>
     
