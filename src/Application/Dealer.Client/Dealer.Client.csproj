@@ -23,8 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ControlzEx" Version="4.4.0" />
-    <PackageReference Include="MahApps.Metro" Version="2.4.3" />
+    <PackageReference Include="ControlzEx" Version="5.0.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.4" />
   </ItemGroup>
 
   <ItemGroup>
