@@ -45,7 +45,7 @@
     </style>
     <div style="position:absolute; top:40vh; width:100%; text-align:center">
       <img src="logo.svg" style="max-width: 600px" alt="Spares Manual"/>
-      <p style="color: white; margin-top: 50px">The application is loading...</p>
+      <p style="color: white; margin-top: 50px">The application is loading... <span id="wasmprogress"></span></p>
     </div>
   </div>
 </app>
@@ -56,7 +56,51 @@
   <a href="" class="reload">Reload</a>
   <a class="dismiss">🗙</a>
 </div>
-<script src="_framework/blazor.webassembly.js"></script>
+<script src="_framework/blazor.webassembly.js" autostart="false"></script>
+<script>
+    let i = 0;
+    const allResourcesBeingLoaded = [];
+    Blazor.start({
+        loadBootResource: function(type,name,defaultUri,integrity) {
+            if(type === "dotnetjs")
+                return defaultUri;
+
+            const f = fetch(defaultUri, {
+                cache: 'no-cache',
+                integrity: integrity,
+                headers: {'MyCustomHeader': 'My custom value'}
+            });
+
+            function rounder (num, places, mode) {
+                const mult = parseInt("1" + "0".repeat(places));
+                num *= mult;
+
+                switch (mode) {
+                    case 1:
+                        num = Math.ceil(num);
+                        break;
+                    case 0:
+                        num = Math.floor(num);
+                        break;
+                    default:
+                        num = Math.round(num);
+                        break;
+                }
+
+                return num / mult;
+            }
+
+            allResourcesBeingLoaded.push(f);
+            f.then(_ => {
+                i++;
+                const progress = document.getElementById("wasmprogress");
+                const l = allResourcesBeingLoaded.length;
+                progress.innerHTML = rounder(100 * i / l, 2) + "%";
+            });
+            return f;
+        }
+    });
+</script>
 <script>navigator.serviceWorker.register('service-worker.js');</script>
 
 <!-- Start MudBlazor -->
