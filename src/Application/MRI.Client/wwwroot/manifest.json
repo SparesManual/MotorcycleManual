@@ -1,6 +1,6 @@
 {
-  "name": "MRI.Client",
-  "short_name": "MRI.Client",
+  "name": "Spares Manual",
+  "short_name": "Spares Manual",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
