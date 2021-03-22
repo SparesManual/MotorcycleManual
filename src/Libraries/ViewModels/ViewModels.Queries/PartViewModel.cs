@@ -25,7 +25,7 @@ namespace ViewModels.Queries
     }
 
     /// <inheritdoc />
-    protected override async Task<IPart> GetItem(int id, CancellationToken cancellationToken = default)
-      => await m_provider.GetPartAsync(id, cancellationToken).ConfigureAwait(false);
+    protected override async Task<IPart> GetItem(string id, CancellationToken cancellationToken = default)
+      => await m_provider.GetPartAsync(IdToInt(id), cancellationToken).ConfigureAwait(false);
   }
 }

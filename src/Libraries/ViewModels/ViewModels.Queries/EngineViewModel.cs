@@ -22,7 +22,7 @@ namespace ViewModels.Queries
     }
 
     /// <inheritdoc />
-    protected override async Task<IEngine> GetItem(int id, CancellationToken cancellationToken = default)
-      => await m_provider.GetModelEngineAsync(id, cancellationToken).ConfigureAwait(false);
+    protected override async Task<IEngine> GetItem(string id, CancellationToken cancellationToken = default)
+      => await m_provider.GetModelEngineAsync(IdToInt(id), cancellationToken).ConfigureAwait(false);
   }
 }

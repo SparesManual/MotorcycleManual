@@ -28,12 +28,12 @@ namespace ViewModels.Queries
     }
 
     /// <inheritdoc />
-    protected override async Task<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>> GetItem(int id, CancellationToken cancellationToken = default)
+    protected override async Task<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>> GetItem(string id, CancellationToken cancellationToken = default)
     {
       // Get the models
       var models = await m_provider
         // Query the models from a given book
-        .GetBookModelsAsync(id, cancellationToken)
+        .GetBookModelsAsync(IdToInt(id), cancellationToken)
         // Materialize the result
         .ToListAsync(cancellationToken)
         .ConfigureAwait(false);

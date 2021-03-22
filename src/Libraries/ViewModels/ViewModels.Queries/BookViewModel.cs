@@ -28,7 +28,7 @@ namespace ViewModels.Queries
     }
 
     /// <inheritdoc />
-    protected override async Task<IBook> GetItem(int id, CancellationToken cancellationToken = default)
-      => await m_provider.GetBookAsync(id, cancellationToken).ConfigureAwait(false);
+    protected override async Task<IBook> GetItem(string id, CancellationToken cancellationToken = default)
+      => await m_provider.GetBookAsync(IdToInt(id), cancellationToken).ConfigureAwait(false);
   }
 }

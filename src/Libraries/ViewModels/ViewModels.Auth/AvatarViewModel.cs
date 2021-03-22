@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using GravatarHelper.NetStandard;
 using MRI.MVVM.Helpers;
 
 namespace ViewModels.Auth
@@ -11,9 +12,11 @@ namespace ViewModels.Auth
     : BaseItemViewModel<string>
   {
     /// <inheritdoc />
-    protected override async Task<string> GetItem(int id, CancellationToken cancellationToken = default)
+    protected override Task<string> GetItem(string id, CancellationToken cancellationToken = default)
     {
-      return await Task.FromResult("");
+      var url = Gravatar.GetSecureGravatarImageUrl(id);
+
+      return Task.FromResult(url);
     }
   }
 }

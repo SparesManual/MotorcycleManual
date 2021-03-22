@@ -17,9 +17,9 @@ namespace MRI.MVVM.Web.Helpers
     /// Id of the item to display
     /// </summary>
     [Parameter]
-    public int ItemId
+    public string ItemId
     {
-      get => ViewModel?.Id ?? -1;
+      get => ViewModel?.Id ?? string.Empty;
       set
       {
         // If the view model is not null..
