@@ -13,10 +13,12 @@ namespace ViewModels.Queries
   public class ModelViewModel
     : BaseItemViewModel<IModel>, IModelViewModel
   {
+    private readonly IAPIProvider m_provider;
+
     /// <inheritdoc />
     public ModelViewModel(IAPIProvider provider)
-      : base(provider)
     {
+      m_provider = provider;
     }
 
     /// <inheritdoc />

@@ -13,10 +13,12 @@ namespace ViewModels.Queries
   public class EngineViewModel
     : BaseItemViewModel<IEngine>, IEngineViewModel
   {
+    private readonly IAPIProvider m_provider;
+
     /// <inheritdoc />
     public EngineViewModel(IAPIProvider provider)
-      : base(provider)
     {
+      m_provider = provider;
     }
 
     /// <inheritdoc />

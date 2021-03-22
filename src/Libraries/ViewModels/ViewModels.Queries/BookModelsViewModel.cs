@@ -16,10 +16,15 @@ namespace ViewModels.Queries
   public class BookModelsViewModel
     : BaseItemViewModel<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>>, IBookModelsViewModel
   {
-    /// <inheritdoc />
+    private readonly IAPIProvider m_provider;
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider instance</param>
     public BookModelsViewModel(IAPIProvider provider)
-      : base(provider)
     {
+      m_provider = provider;
     }
 
     /// <inheritdoc />

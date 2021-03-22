@@ -22,4 +22,8 @@
     <ProjectReference Include="..\..\Helpers\MRI.MVVM.Helpers\MRI.MVVM.Helpers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="GravatarHelper.NetStandard" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>

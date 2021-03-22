@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Db.Interfaces;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace MRI.MVVM.Helpers
@@ -14,10 +13,6 @@ namespace MRI.MVVM.Helpers
   {
     #region Fields
 
-    /// <summary>
-    /// API provider instance
-    /// </summary>
-    protected readonly IAPIProvider m_provider;
     private bool m_loading;
 
     #endregion
@@ -42,13 +37,6 @@ namespace MRI.MVVM.Helpers
     public T? Item { get; protected set; }
 
     #endregion
-
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    /// <param name="provider">Injected API provider</param>
-    protected BaseItemViewModel(IAPIProvider provider)
-      => m_provider = provider;
 
     /// <summary>
     /// Queries the item

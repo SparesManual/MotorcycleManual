@@ -13,9 +13,16 @@ namespace ViewModels.Queries
   public class PartViewModel
     : BaseItemViewModel<IPart>, IPartViewModel
   {
-    /// <inheritdoc />
+    private readonly IAPIProvider m_provider;
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider instance</param>
     public PartViewModel(IAPIProvider provider)
-      : base(provider) { }
+    {
+      m_provider = provider;
+    }
 
     /// <inheritdoc />
     protected override async Task<IPart> GetItem(int id, CancellationToken cancellationToken = default)
