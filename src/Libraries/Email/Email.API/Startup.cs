@@ -10,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 namespace Email.API
 {
   /// <summary>
-  /// API Client startup class
+  /// API Server startup class
   /// </summary>
   public class Startup
   {
