@@ -1,9 +1,12 @@
 ﻿<!DOCTYPE html>
-<html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
 
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="description" content="Interactive manual for locating classic British motorcycle parts">
+  
   <title>Spares Manual</title>
   <base href="/"/>
   <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
@@ -31,6 +34,7 @@
 <body>
 <app>
   <div id="root">
+    <!--suppress HtmlUnknownTag -->
     <style>
         html, body, #root {
             height: 100%;
@@ -45,7 +49,7 @@
     </style>
     <div style="position:absolute; top:40vh; width:100%; text-align:center">
       <img src="logo.svg" style="max-width: 600px" alt="Spares Manual"/>
-      <p style="color: white; margin-top: 50px">The application is loading... <span id="wasmprogress"></span></p>
+      <p style="color: white; margin-top: 50px">The application is loading... <span id="WASMProgress"></span></p>
     </div>
   </div>
 </app>
@@ -57,6 +61,7 @@
   <a class="dismiss">🗙</a>
 </div>
 <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+<!--suppress SpellCheckingInspection -->
 <script>
     let i = 0;
     const allResourcesBeingLoaded = [];
@@ -72,8 +77,8 @@
             });
 
             function rounder (num, places, mode) {
-                const mult = parseInt("1" + "0".repeat(places));
-                num *= mult;
+                const m = parseInt("1" + "0".repeat(places));
+                num *= m;
 
                 switch (mode) {
                     case 1:
@@ -87,13 +92,13 @@
                         break;
                 }
 
-                return num / mult;
+                return num / m;
             }
 
             allResourcesBeingLoaded.push(f);
             f.then(_ => {
                 i++;
-                const progress = document.getElementById("wasmprogress");
+                const progress = document.getElementById("WASMProgress");
                 const l = allResourcesBeingLoaded.length;
                 progress.innerHTML = rounder(100 * i / l, 2) + "%";
             });
