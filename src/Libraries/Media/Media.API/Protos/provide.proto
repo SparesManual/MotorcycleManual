@@ -5,9 +5,6 @@ option csharp_namespace = "Media.API";
 package provide;
 
 service MediaProvider {
-  // Retrieves the profile image of a given user
-  rpc GetUserProfile(StringMessage) returns (StringMessage);
-  
   // Retrieves the image of a given section
   rpc GetSectionImage(IntMessage) returns (StringMessage);
 }
