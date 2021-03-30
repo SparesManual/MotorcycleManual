@@ -31,13 +31,17 @@
   /// Parent part id
   /// </summary>
   [Parameter]
-  public int PartId
+  public string PartId
   {
-    get => m_partId;
+    get => m_partId.ToString();
     set
     {
-      m_partId = value;
-      if (ViewModel != null) ViewModel.PartId = value;
+      if (!int.TryParse(value, out var id))
+        return;
+
+      m_partId = id;
+      if (ViewModel != null)
+        ViewModel.PartId = id;
     }
   }
 
