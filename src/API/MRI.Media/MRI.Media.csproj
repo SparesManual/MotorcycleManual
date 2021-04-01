@@ -18,7 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MD5" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\Media.Interfaces\Media.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Libraries\Helpers\MRI.Helpers\MRI.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

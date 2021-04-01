@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\API\MRI.Auth\MRI.Auth.csproj" />
     <ProjectReference Include="..\..\API\MRI.Db\MRI.Db.csproj" />
+    <ProjectReference Include="..\..\API\MRI.Media\MRI.Media.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Web.Ant\Components.Auth.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.General.Web.Ant\Components.General.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Layout.Web.Ant\Components.Layout.Web.Ant.csproj" />

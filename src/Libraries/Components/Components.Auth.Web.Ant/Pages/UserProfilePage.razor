@@ -1,5 +1,24 @@
 @page "/userProfile"
 @inherits BaseComponent<IUserProfileViewModel>
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
 @implements IUserProfileView
+@inject AuthenticationStateProvider m_authProvider
 
-<h3>UserProfilePage</h3>
+@code {
+
+  ClaimsPrincipal m_user;
+
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    var state = await m_authProvider.GetAuthenticationStateAsync().ConfigureAwait(false);
+    m_user = state.User;
+  }
+
+}
+
+@if (m_user is not null)
+{
+  <AvatarComponent Size="64" ItemId="@m_user.Identity?.Name"></AvatarComponent>
+}

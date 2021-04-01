@@ -18,12 +18,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Interfaces\Media.Interfaces\Media.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
     <ProjectReference Include="..\..\Helpers\MRI.MVVM.Helpers\MRI.MVVM.Helpers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="GravatarHelper.NetStandard" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

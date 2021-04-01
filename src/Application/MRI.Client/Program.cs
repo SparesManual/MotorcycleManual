@@ -3,11 +3,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Db.Interfaces;
+using Media.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MRI.Auth;
 using MRI.Db;
+using MRI.Media;
 using MRI.MVVM.Interfaces;
 using MRI.MVVM.Interfaces.Views.Managers;
 using MRI.MVVM.Web.Helpers.Managers;
@@ -33,6 +35,7 @@ namespace MRI.Client
       builder.Services.AddMudServices();
       builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
       builder.Services.AddSingleton<IAPIProvider, APIWebProvider>();
+      builder.Services.AddSingleton<IMediaAPI, MediaAPI>();
       builder.Services.AddBlazoredLocalStorage();
       builder.Services.AddScoped<IStorage, StorageProvider>();
       builder.Services.AddScoped<INavigator, Navigator>();
@@ -52,6 +55,8 @@ namespace MRI.Client
         .AddScoped<IModelViewModel, ModelViewModel>()
         .AddScoped<IEngineViewModel, EngineViewModel>();
       builder.Services
+        .AddScoped<IAvatarViewModel, AvatarViewModel>()
+        .AddScoped<IUserProfileViewModel, UserProfileViewModel>()
         .AddScoped<ILoginViewModel, LoginViewModel>()
         .AddScoped<IRegisterViewModel, RegisterViewModel>()
         .AddScoped<IForgotPasswordViewModel, ForgotPasswordViewModel>()
