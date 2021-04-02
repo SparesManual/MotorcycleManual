@@ -1,13 +1,12 @@
 @page "/userProfile"
 @inherits BaseComponent<IUserProfileViewModel>
-@using Microsoft.AspNetCore.Components.Authorization
-@using System.Security.Claims
 @implements IUserProfileView
 @inject AuthenticationStateProvider m_authProvider
 
 @code {
+  #nullable enable
 
-  ClaimsPrincipal m_user;
+  ClaimsPrincipal? m_user;
 
   /// <inheritdoc />
   protected override async Task OnInitializedAsync()
@@ -20,5 +19,64 @@
 
 @if (m_user is not null)
 {
-  <AvatarComponent Size="64" ItemId="@m_user.Identity?.Name"></AvatarComponent>
+  <div>
+    <div class="row">
+      <div class="col-auto">
+        <AvatarComponent Size="64" ItemId="@m_user?.Identity?.Name"></AvatarComponent>
+      </div>
+      <div class="col ml-1 align-self-center">
+        <div class="row">
+          <h2 style="margin: 0">Your account</h2>
+        </div>
+        <div class="row">
+          <span>@m_user?.Identity?.Name</span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <Tabs DefaultActiveKey="1" TabPosition="@TabPosition.Left">
+        <ChildContent>
+          <TabPane Key="1">
+            <Tab>
+              <span>
+                <Icon Type="user" />
+                General
+              </span>
+            </Tab>
+            <ChildContent>
+              <h3>
+                General
+              </h3>
+            </ChildContent>
+          </TabPane>
+          <TabPane Key="2">
+            <Tab>
+              <span>
+                <Icon Type="bell" />
+                Notifications
+              </span>
+            </Tab>
+            <ChildContent>
+              <h3>
+                Notifications
+              </h3>
+            </ChildContent>
+          </TabPane>
+          <TabPane Key="3">
+            <Tab>
+              <span>
+                <Icon Type="key" />
+                Account
+              </span>
+            </Tab>
+            <ChildContent>
+              <h3>
+                Account
+              </h3>
+            </ChildContent>
+          </TabPane>
+        </ChildContent>
+      </Tabs>
+    </div>
+  </div>
 }
