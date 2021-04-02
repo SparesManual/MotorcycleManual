@@ -6,13 +6,17 @@
 @code {
   #nullable enable
 
-  ClaimsPrincipal? m_user;
+  private ClaimsPrincipal? m_user;
+  private string m_email = string.Empty;
 
   /// <inheritdoc />
   protected override async Task OnInitializedAsync()
   {
     var state = await m_authProvider.GetAuthenticationStateAsync().ConfigureAwait(false);
     m_user = state.User;
+
+    if (m_user?.Identity?.Name is not null)
+      m_email = m_user.Identity.Name;
   }
 
 }
@@ -22,14 +26,14 @@
   <div>
     <div class="row">
       <div class="col-auto">
-        <AvatarComponent Size="64" ItemId="@m_user?.Identity?.Name"></AvatarComponent>
+        <AvatarComponent Size="64" ItemId="@m_email"></AvatarComponent>
       </div>
       <div class="col ml-1 align-self-center">
         <div class="row">
           <h2 style="margin: 0">Your account</h2>
         </div>
         <div class="row">
-          <span>@m_user?.Identity?.Name</span>
+          <span>@m_email</span>
         </div>
       </div>
     </div>

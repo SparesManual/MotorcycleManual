@@ -38,6 +38,7 @@ namespace MRI.Helpers
            MD5Helper.ReverseByte(m_d).ToString("x8");
     }
 
+    // ReSharper disable once ClassNeverInstantiated.Local
     private class MD5Helper
     {
       /// <summary>
@@ -259,9 +260,9 @@ namespace MRI.Helpers
       for (uint j = 0; j < 61; j += 4)
       {
         m_x[j >> 2] = ((uint)bMsg[block + j + 3] << 24) |
-                ((uint)bMsg[block + j + 2] << 16) |
-                ((uint)bMsg[block + j + 1] << 8) |
-                bMsg[block + j];
+                      ((uint)bMsg[block + j + 2] << 16) |
+                      ((uint)bMsg[block + j + 1] << 8) |
+                      bMsg[block + j];
       }
     }
 
