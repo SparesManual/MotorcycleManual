@@ -1,6 +1,7 @@
 @page "/userProfile"
 @inherits BaseComponent<IUserProfileViewModel>
 @implements IUserProfileView
+
 @inject AuthenticationStateProvider m_authProvider
 
 @code {
@@ -18,7 +19,6 @@
     if (m_user?.Identity?.Name is not null)
       m_email = m_user.Identity.Name;
   }
-
 }
 
 @if (m_user is not null)
@@ -48,9 +48,7 @@
               </span>
             </Tab>
             <ChildContent>
-              <h3>
-                General
-              </h3>
+              <SettingsGeneralComponent></SettingsGeneralComponent>
             </ChildContent>
           </TabPane>
           <TabPane Key="2">
@@ -61,9 +59,7 @@
               </span>
             </Tab>
             <ChildContent>
-              <h3>
-                Notifications
-              </h3>
+              <SettingsNotificationsComponent></SettingsNotificationsComponent>
             </ChildContent>
           </TabPane>
           <TabPane Key="3">
@@ -74,9 +70,7 @@
               </span>
             </Tab>
             <ChildContent>
-              <h3>
-                Account
-              </h3>
+              <SettingsAccountComponent></SettingsAccountComponent>
             </ChildContent>
           </TabPane>
         </ChildContent>

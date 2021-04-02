@@ -127,15 +127,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.API", "Libraries\Emai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.Templates", "Libraries\Email\Email.Templates\Email.Templates.csproj", "{D6B52DFE-27CE-4ABC-B6EC-AF8AE657B738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.General.Web.Ant", "Libraries\Components\Components.General.Web.Ant\Components.General.Web.Ant.csproj", "{4FDF9B8A-6244-42C3-90EB-8BFBDA816663}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components.General.Web.Ant", "Libraries\Components\Components.General.Web.Ant\Components.General.Web.Ant.csproj", "{4FDF9B8A-6244-42C3-90EB-8BFBDA816663}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media", "Media", "{6604D2C8-8A0F-4997-8FEA-A7F9A1A95D37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media.API", "Libraries\Media\Media.API\Media.API.csproj", "{0ED3FEB1-88C1-44AB-9EA9-5A51A253E20D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Media.API", "Libraries\Media\Media.API\Media.API.csproj", "{0ED3FEB1-88C1-44AB-9EA9-5A51A253E20D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media.Interfaces", "Interfaces\Media.Interfaces\Media.Interfaces.csproj", "{786BAB27-7A57-4992-B5DE-F5621ACCFA5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Media.Interfaces", "Interfaces\Media.Interfaces\Media.Interfaces.csproj", "{786BAB27-7A57-4992-B5DE-F5621ACCFA5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRI.Media", "API\MRI.Media\MRI.Media.csproj", "{BADFDCA4-A014-4681-8931-F2CFA3FA4477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRI.Media", "API\MRI.Media\MRI.Media.csproj", "{BADFDCA4-A014-4681-8931-F2CFA3FA4477}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
