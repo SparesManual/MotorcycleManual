@@ -91,13 +91,47 @@ namespace Db.API
         UserName = request.Email
       };
 
-      await m_userManager.CreateAsync(user, request.Password).ConfigureAwait(false);
-      await m_emailService.SendRegistrationConfirmationAsync(request.Email, Guid.NewGuid().ToString()).ConfigureAwait(false);
+      var result = await m_userManager.CreateAsync(user, request.Password).ConfigureAwait(false);
+      if (!result.Succeeded)
+        return new BooleanReply
+        {
+          Reply = false,
+          Error = 503
+        };
+
+      var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+      await m_emailService.SendRegistrationConfirmationAsync(request.Email, user.Id, code).ConfigureAwait(false);
 
       return new BooleanReply
       {
         Reply = true,
         Error = 0
+      };
+    }
+
+    /// <inheritdoc />
+    public override async Task<BooleanReply> VerifyEmail(VerifyMailRequest request, ServerCallContext context)
+    {
+      var user = await m_userManager.FindByIdAsync(request.UserId).ConfigureAwait(false);
+      if (user is null)
+        return new BooleanReply
+        {
+          Error = 404,
+          Reply = false
+        };
+
+      var result = await m_userManager.ConfirmEmailAsync(user, request.Code).ConfigureAwait(false);
+      if (result.Succeeded)
+        return new BooleanReply
+        {
+          Error = 0,
+          Reply = true
+        };
+
+      return new BooleanReply
+      {
+        Error = 404,
+        Reply = false
       };
     }
 

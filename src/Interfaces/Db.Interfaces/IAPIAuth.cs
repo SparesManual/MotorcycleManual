@@ -37,6 +37,15 @@ namespace Db.Interfaces
     ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Attempts to verify a users email
+    /// </summary>
+    /// <param name="userId">User id</param>
+    /// <param name="token">Verification token</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if verified</returns>
+    ValueTask<bool> VerifyEmailAsync(string userId, string token, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Checks if a user with the given <paramref name="email"/> exists
     /// </summary>
     /// <param name="email">Email to check</param>
