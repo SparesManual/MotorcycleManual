@@ -1,0 +1,36 @@
+@page "/registered/{userId}"
+@using Db.Interfaces
+@inject IAPIAuth m_auth
+
+@code {
+
+  /// <summary>
+  /// User id
+  /// </summary>
+  [Parameter]
+  public string UserId { get; set; } = string.Empty;
+
+  private DateTime m_lastResend = DateTime.Now;
+
+  private async Task ResendVerificationAsync()
+  {
+    var now = DateTime.Now;
+    if (now - m_lastResend <= TimeSpan.FromSeconds(5))
+      return;
+
+    m_lastResend = now;
+    await m_auth.ResendVerificationAsync(UserId).ConfigureAwait(false);
+  }
+
+}
+
+<Alert Type="@AlertType.Success"
+       Message="You've been registered!"
+       Description="An account confirmation request has been sent to your email."
+       ShowIcon>
+</Alert>
+
+<p>
+  @* ReSharper disable once Html.AttributeValueNotResolved *@
+  No email? <Button Type="link" OnClick="ResendVerificationAsync">Resend it</Button>.
+</p>

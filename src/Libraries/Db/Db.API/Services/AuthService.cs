@@ -100,7 +100,28 @@ namespace Db.API
         };
 
       var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
-      await m_emailService.SendRegistrationConfirmationAsync(request.Email, user.Id, code).ConfigureAwait(false);
+      await m_emailService.SendRegistrationConfirmationAsync(request.Email, user.Id, code, context.CancellationToken).ConfigureAwait(false);
+
+      return new BooleanReply
+      {
+        Reply = true,
+        Error = 0
+      };
+    }
+
+    /// <inheritdoc />
+    public override async Task<BooleanReply> ResendVerification(SingleString request, ServerCallContext context)
+    {
+      var user = await m_userManager.FindByIdAsync(request.Content).ConfigureAwait(false);
+      if (user is null)
+        return new BooleanReply
+        {
+          Reply = false,
+          Error = 404
+        };
+
+      var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+      await m_emailService.SendRegistrationConfirmationAsync(user.Email, user.Id, code, context.CancellationToken);
 
       return new BooleanReply
       {

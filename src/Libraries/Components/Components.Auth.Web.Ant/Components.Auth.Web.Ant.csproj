@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\Components\Components.Auth\Components.Auth.csproj" />
     <ProjectReference Include="..\..\..\Interfaces\Db.Interfaces\Db.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Interfaces\Email.Interfaces\Email.Interfaces.csproj" />
     <ProjectReference Include="..\..\..\Interfaces\ViewModels\ViewModels.Interfaces.Auth\ViewModels.Interfaces.Auth.csproj" />
     <ProjectReference Include="..\..\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
   </ItemGroup>

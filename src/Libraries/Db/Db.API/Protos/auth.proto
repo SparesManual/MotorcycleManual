@@ -9,6 +9,8 @@ service Auth {
   rpc LoginUser(LoginRequest) returns (LoginResult);
   // Registers a new user
   rpc RegisterUser(RegistrationRequest) returns (BooleanReply);
+  // Resends the email verification request
+  rpc ResendVerification(SingleString) returns (BooleanReply);
   // Verifies user email
   rpc VerifyEmail(VerifyMailRequest) returns (BooleanReply);
   // Verifies whether a user with a given email exists
