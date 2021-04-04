@@ -24,13 +24,17 @@
 
 }
 
-<Alert Type="@AlertType.Success"
-       Message="You've been registered!"
-       Description="An account confirmation request has been sent to your email."
-       ShowIcon>
-</Alert>
+<div class="row justify-content-center">
+  <div class="col-4">
+    <Alert Type="@AlertType.Success"
+           Message="You've been registered!"
+           Description="An account confirmation request has been sent to your email."
+           ShowIcon>
+    </Alert>
 
-<p>
-  @* ReSharper disable once Html.AttributeValueNotResolved *@
-  No email? <Button Type="link" OnClick="ResendVerificationAsync">Resend it</Button>.
-</p>
+    <p class="ml-2">
+      @* ReSharper disable once Html.AttributeValueNotResolved *@
+      No email? <Button Type="link" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
+    </p>
+  </div>
+</div>
