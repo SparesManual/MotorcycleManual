@@ -1,5 +1,6 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,10 @@ using Grpc.Core;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+
+// ReSharper disable PositionalPropertyUsedProblem
 
 namespace Db.API
 {
@@ -21,6 +25,7 @@ namespace Db.API
   {
     #region Field
 
+    private readonly ILogger<AuthService> m_logger;
     private readonly UserManager<IdentityUser> m_userManager;
     private readonly SignInManager<IdentityUser> m_signInManager;
     private readonly IAPIMail m_emailService;
@@ -31,8 +36,9 @@ namespace Db.API
     /// <summary>
     /// Default constructor
     /// </summary>
-    public AuthService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IAPIMail emailService, IConfiguration configuration)
+    public AuthService(ILogger<AuthService> logger, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IAPIMail emailService, IConfiguration configuration)
     {
+      m_logger = logger;
       m_userManager = userManager;
       m_signInManager = signInManager;
       m_emailService = emailService;
@@ -42,13 +48,18 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task<LoginResult> LoginUser(LoginRequest request, ServerCallContext context)
     {
+      m_logger.LogDebug("Received login request for {0}", request.Email);
       var result = await m_signInManager.PasswordSignInAsync(request.Email, request.Password, request.RememberMe, false).ConfigureAwait(false);
 
       if (!result.Succeeded)
+      {
+        m_logger.LogWarning("Login request for {0} was not successful", request.Email);
+
         return new LoginResult
         {
           Success = false, Token = string.Empty
         };
+      }
 
       var claims = new[]
       {
@@ -69,6 +80,8 @@ namespace Db.API
 
       var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
+      m_logger.LogInformation("Login request for {0} was successful", request.Email);
+
       return new LoginResult
       {
         Success = true,
@@ -79,11 +92,16 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task<StringReply> RegisterUser(RegistrationRequest request, ServerCallContext context)
     {
-      if (await m_userManager.FindByNameAsync(request.Email).ConfigureAwait(false) is null)
+      m_logger.LogDebug("Received registration request for {0}", request.Email);
+      if (await m_userManager.FindByNameAsync(request.Email).ConfigureAwait(false) is not null)
+      {
+        m_logger.LogWarning("Could not register user {0} because an account already exists", request.Email);
+
         return new StringReply
         {
           Reply = string.Empty
         };
+      }
 
       var user = new IdentityUser
       {
@@ -92,35 +110,46 @@ namespace Db.API
 
       var result = await m_userManager.CreateAsync(user, request.Password).ConfigureAwait(false);
       if (!result.Succeeded)
+      {
+        m_logger.LogWarning("Could not register user {0}. Errors: {1}", request.Email, string.Join(", ", result.Errors.Select(error => error.Code)));
+
         return new StringReply
         {
           Reply = string.Empty
         };
+      }
+
+      m_logger.LogInformation("Registered new user {0}", request.Email);
 
       var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
       await m_emailService.SendRegistrationConfirmationAsync(request.Email, user.Id, code, context.CancellationToken).ConfigureAwait(false);
 
-      var createdUser = await m_userManager.FindByEmailAsync(user.Email).ConfigureAwait(false);
       return new StringReply
       {
-        Reply = createdUser.Id
+        Reply = user.Id
       };
     }
 
     /// <inheritdoc />
     public override async Task<BooleanReply> ResendVerification(SingleString request, ServerCallContext context)
     {
+      m_logger.LogDebug("Received resend verification request for {0}", request.Content);
       var user = await m_userManager.FindByIdAsync(request.Content).ConfigureAwait(false);
       if (user is null)
+      {
+        m_logger.LogWarning("Resending verification request failed as no user exists for {0}", request.Content);
+
         return new BooleanReply
         {
           Reply = false,
           Error = 404
         };
+      }
 
       var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
       await m_emailService.SendRegistrationConfirmationAsync(user.Email, user.Id, code, context.CancellationToken);
 
+      m_logger.LogInformation("Verification request sent for {0}", request.Content);
       return new BooleanReply
       {
         Reply = true,
@@ -131,32 +160,43 @@ namespace Db.API
     /// <inheritdoc />
     public override async Task<BooleanReply> VerifyEmail(VerifyMailRequest request, ServerCallContext context)
     {
+      m_logger.LogDebug("Received email verification request for {0}", request.UserId);
       var user = await m_userManager.FindByIdAsync(request.UserId).ConfigureAwait(false);
       if (user is null)
+      {
+        m_logger.LogWarning("Email verification failed as no user exists for {0}", request.UserId);
+
         return new BooleanReply
         {
           Error = 404,
           Reply = false
         };
+      }
 
       var result = await m_userManager.ConfirmEmailAsync(user, request.Code).ConfigureAwait(false);
-      if (result.Succeeded)
+      if (!result.Succeeded)
+      {
+        m_logger.LogWarning("Email verification failed for {0}. Errors: {1}", request.UserId, string.Join(", ", result.Errors.Select(err => err.Code)));
+
         return new BooleanReply
         {
-          Error = 0,
-          Reply = true
+          Error = 404,
+          Reply = false
         };
+      }
 
+      m_logger.LogInformation("Email verified for {0}", request.UserId);
       return new BooleanReply
       {
-        Error = 404,
-        Reply = false
+        Error = 0,
+        Reply = true
       };
     }
 
     /// <inheritdoc />
     public override async Task<BooleanReply> UserExists(SingleString request, ServerCallContext context)
     {
+      m_logger.LogDebug("Received user exists request for {0}", request.Content);
       var user = await m_userManager.FindByNameAsync(request.Content).ConfigureAwait(false);
 
       return new BooleanReply
