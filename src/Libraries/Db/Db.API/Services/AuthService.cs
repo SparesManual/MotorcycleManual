@@ -77,13 +77,12 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task<BooleanReply> RegisterUser(RegistrationRequest request, ServerCallContext context)
+    public override async Task<StringReply> RegisterUser(RegistrationRequest request, ServerCallContext context)
     {
       if (await m_userManager.FindByNameAsync(request.Email).ConfigureAwait(false) is null)
-        return new BooleanReply
+        return new StringReply
         {
-          Reply = false,
-          Error = 403
+          Reply = string.Empty
         };
 
       var user = new IdentityUser
@@ -93,19 +92,18 @@ namespace Db.API
 
       var result = await m_userManager.CreateAsync(user, request.Password).ConfigureAwait(false);
       if (!result.Succeeded)
-        return new BooleanReply
+        return new StringReply
         {
-          Reply = false,
-          Error = 503
+          Reply = string.Empty
         };
 
       var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
       await m_emailService.SendRegistrationConfirmationAsync(request.Email, user.Id, code, context.CancellationToken).ConfigureAwait(false);
 
-      return new BooleanReply
+      var createdUser = await m_userManager.FindByEmailAsync(user.Email).ConfigureAwait(false);
+      return new StringReply
       {
-        Reply = true,
-        Error = 0
+        Reply = createdUser.Id
       };
     }
 

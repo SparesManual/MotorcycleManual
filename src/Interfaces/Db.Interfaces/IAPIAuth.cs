@@ -33,8 +33,8 @@ namespace Db.Interfaces
     /// <param name="email">New users email</param>
     /// <param name="password">New users password</param>
     /// <param name="cancellationToken">Cancellation</param>
-    /// <returns>True if registered</returns>
-    ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default);
+    /// <returns>Registered user id</returns>
+    ValueTask<string> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Attempts to resend the email verification code

@@ -4,6 +4,19 @@
 
 @inject IRegisterViewModelValidator m_validator
 
+@if (ViewModel?.RegistrationFailed == true)
+{
+<div class="row justify-content-center">
+  <div class="col-4">
+    <Alert Type="@AlertType.Error"
+           Message="Registration failed!"
+           Description="Your account was not created, something went wrong."
+           ShowIcon>
+    </Alert>
+  </div>
+</div>
+}
+
 <EditForm Model="@ViewModel"
           OnValidSubmit="@ViewModel!.SubmitCommand.Execute">
   <FluentValidator Validator="m_validator"/>
@@ -11,7 +24,7 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <Input Id="Email" Placeholder="Email" Value="@ViewModel!.Email" Class="w-100" />
+          <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100" />
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
@@ -22,7 +35,7 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <InputPassword Id="Password" Placeholder="Password" Value="@ViewModel!.Password" Class="w-100" Type="string"></InputPassword>
+          <InputPassword Id="Password" Placeholder="Password" @bind-Value="@ViewModel!.Password" Class="w-100" Type="string"></InputPassword>
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
@@ -33,7 +46,7 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <InputPassword Id="ConfirmPassword" Placeholder="Confirm password" Value="@ViewModel!.ConfirmPassword" Class="w-100" Type="string"></InputPassword>
+          <InputPassword Id="ConfirmPassword" Placeholder="Confirm password" @bind-Value="@ViewModel!.ConfirmPassword" Class="w-100" Type="string"></InputPassword>
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.ConfirmPassword" class="mt-2"/>
@@ -41,7 +54,7 @@
       </div>
     </div>
 
-    <Button Type="submit" Id="Register" class="row" Size="large">
+    <Button HtmlType="submit" Id="Register" class="row" Size="large">
       Register
     </Button>
   </div>

@@ -1,6 +1,7 @@
 using System.Windows.Input;
 using Db.Interfaces;
 using MRI.MVVM.Helpers;
+using MRI.MVVM.Interfaces;
 using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
 
@@ -14,14 +15,27 @@ namespace ViewModels.Auth
   {
     #region Fields
 
+    private readonly INavigator m_navigator;
     private readonly IAPIAuth m_apiAuth;
     private string m_email = string.Empty;
     private string m_password = string.Empty;
     private string m_confirmPassword = string.Empty;
+    private bool m_registrationFailed;
 
     #endregion
 
     #region Properties
+
+    /// <inheritdoc />
+    public bool RegistrationFailed
+    {
+      get => m_registrationFailed;
+      set
+      {
+        m_registrationFailed = value;
+        OnPropertyChanged();
+      }
+    }
 
     /// <inheritdoc />
     public string Username { get; set; } = string.Empty;
@@ -65,13 +79,27 @@ namespace ViewModels.Auth
 
     /// <inheritdoc />
     public ICommand SubmitCommand
-      => new RelayCommand(async () => await m_apiAuth.RegisterUserAsync(Email, Password));
+      => new RelayCommand(async () =>
+      {
+        var userId = await m_apiAuth.RegisterUserAsync(Email, Password).ConfigureAwait(false);
+        if (string.IsNullOrEmpty(userId))
+        {
+          RegistrationFailed = true;
+          return;
+        }
+
+        RegistrationFailed = false;
+        m_navigator.NavigateTo("/registered", userId);
+      });
 
     #endregion
 
     /// <inheritdoc />
-    public RegisterViewModel(IRegisterViewModelValidator validator, IAPIAuth apiAuth)
+    public RegisterViewModel(IRegisterViewModelValidator validator, INavigator navigator, IAPIAuth apiAuth)
       : base(validator)
-      => m_apiAuth = apiAuth;
+    {
+      m_navigator = navigator;
+      m_apiAuth = apiAuth;
+    }
   }
 }

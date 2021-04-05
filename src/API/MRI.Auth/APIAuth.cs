@@ -86,7 +86,7 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default)
+    public async ValueTask<string> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default)
     {
       var result = await m_client.RegisterUserAsync(new RegistrationRequest {Email = email, Password = password}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
