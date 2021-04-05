@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Components;
 using MRI.MVVM.Interfaces;
 
@@ -18,13 +20,27 @@ namespace MRI.Client
     }
 
     /// <inheritdoc />
-    public event EventHandler<string>? NavigationChanged;
+    public event EventHandler<INavigator.ViewData>? NavigationChanged;
 
     /// <inheritdoc />
     public void NavigateTo(string name)
     {
-      NavigationChanged?.Invoke(null, name);
+      NavigationChanged?.Invoke(this, new INavigator.ViewData(name));
       m_manager.NavigateTo(name);
+    }
+
+    /// <inheritdoc />
+    public void NavigateTo(string name, params string[] arguments)
+    {
+      NavigationChanged?.Invoke(this, new INavigator.ViewData(name, arguments));
+      m_manager.NavigateTo($"{name}/{string.Join("/", arguments)}");
+    }
+
+    /// <inheritdoc />
+    public void Navigate(string name, IReadOnlyDictionary<string, string> arguments)
+    {
+      NavigationChanged?.Invoke(this, new INavigator.ViewData(name, arguments));
+      m_manager.NavigateTo($"{name}?{string.Join("&", arguments.Select(arg => $"{arg.Key}={arg.Value}"))}");
     }
   }
 }
