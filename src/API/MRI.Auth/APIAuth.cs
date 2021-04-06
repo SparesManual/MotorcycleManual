@@ -102,7 +102,7 @@ namespace MRI.Auth
     /// <inheritdoc />
     public async ValueTask<bool> VerifyEmailAsync(string userId, string token, CancellationToken cancellationToken = default)
     {
-      var result = await m_client.VerifyEmailAsync(new VerifyMailRequest() {Code = token, UserId = userId}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      var result = await m_client.VerifyEmailAsync(new VerifyMailRequest {Code = token, UserId = userId}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
     }
 

@@ -1,4 +1,4 @@
-@page "/verifyEmail/{userId}/{token}"
+@page "/verify"
 @using Db.Interfaces
 @inject NavigationManager m_navigationManager
 @inject IAPIAuth m_auth
@@ -22,6 +22,13 @@
   {
     await base.OnParametersSetAsync().ConfigureAwait(false);
 
+    var qs= m_navigationManager.ToAbsoluteUri(m_navigationManager.Uri).Query;
+    var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(qs);
+    if (query.TryGetValue("usr", out var userId))
+      UserId = userId;
+    if (query.TryGetValue("token", out var token))
+      Token = token;
+
     var result = await m_auth.VerifyEmailAsync(UserId, Token).ConfigureAwait(false);
     // If the verification was a success
     if (result)
@@ -38,7 +45,7 @@
 
 }
 
-@if (!string.IsNullOrEmpty(UserId?.Trim()) || !string.IsNullOrEmpty(Token?.Trim()))
+@if (!string.IsNullOrEmpty(UserId) && !string.IsNullOrEmpty(Token?.Trim()))
 {
   <h2>Thank you for verifying your email</h2>
 }

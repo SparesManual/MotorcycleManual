@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Email.Interfaces;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authentication;
@@ -147,7 +148,7 @@ namespace Db.API
       }
 
       var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
-      await m_emailService.SendRegistrationConfirmationAsync(user.Email, user.Id, code, context.CancellationToken);
+      await m_emailService.SendRegistrationConfirmationAsync(user.Email, user.Id, code, context.CancellationToken).ConfigureAwait(false);
 
       m_logger.LogInformation("Verification request sent for {0}", request.Content);
       return new BooleanReply
@@ -173,10 +174,12 @@ namespace Db.API
         };
       }
 
-      var result = await m_userManager.ConfirmEmailAsync(user, request.Code).ConfigureAwait(false);
+      var code = HttpUtility.UrlDecode(request.Code).Replace(' ', '+');
+
+      var result = await m_userManager.ConfirmEmailAsync(user, code).ConfigureAwait(false);
       if (!result.Succeeded)
       {
-        m_logger.LogWarning("Email verification failed for {0}. Errors: {1}", request.UserId, string.Join(", ", result.Errors.Select(err => err.Code)));
+        m_logger.LogWarning("Email verification failed for {0} {1}. Errors: {2}", request.UserId, code, string.Join(", ", result.Errors.Select(err => err.Code)));
 
         return new BooleanReply
         {

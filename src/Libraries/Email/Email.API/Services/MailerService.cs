@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Web;
 using Email.Templates;
 using FluentEmail.Core;
 using Grpc.Core;
@@ -44,7 +45,7 @@ namespace Email.API.Services
       var response = await m_emailSender
         .To(request.Email)
         .Subject("Action required: Please confirm your email")
-        .UsingTemplateFromEmbedded("Email.Templates.RegistrationConfirmation.cshtml", new RegistrationConfirmationModel { Url = $"https://localhost/verifyEmail/{request.UserId}/{request.Code}" }, typeof(RegistrationConfirmationModel).Assembly)
+        .UsingTemplateFromEmbedded("Email.Templates.RegistrationConfirmation.cshtml", new RegistrationConfirmationModel { Url = $"https://localhost:5468/verify?usr={request.UserId}&token={HttpUtility.UrlEncode(request.Code)}" }, typeof(RegistrationConfirmationModel).Assembly)
         .SendAsync(context.CancellationToken)
         .ConfigureAwait(false);
 
