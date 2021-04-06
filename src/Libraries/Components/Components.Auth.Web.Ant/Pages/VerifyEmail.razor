@@ -1,5 +1,4 @@
 @page "/verify"
-@using Db.Interfaces
 @inject NavigationManager m_navigationManager
 @inject IAPIAuth m_auth
 
@@ -34,7 +33,7 @@
     if (result)
     {
       await Task.Delay(5000).ConfigureAwait(false);
-      m_navigationManager.NavigateTo("/login");
+      m_navigationManager.NavigateTo($"/login/{UserId}");
     }
     // Otherwise..
     else

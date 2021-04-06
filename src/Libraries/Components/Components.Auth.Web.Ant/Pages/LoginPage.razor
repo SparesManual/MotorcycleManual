@@ -1,6 +1,8 @@
 @page "/login"
+@page "/login/{userId:guid}"
 @inherits BaseComponent<ILoginViewModel>
 @implements ILoginView
+@inject IAPIAuth m_auth
 
 @inject ILoginViewModelValidator m_validator
 
@@ -58,11 +60,31 @@
 
   private bool m_invalidCredentials;
 
+  /// <summary>
+  /// Registered user id
+  /// </summary>
+  [Parameter]
+  public Guid? UserId { get; set; }
+
   /// <inheritdoc />
   protected override void OnInitialized()
   {
     base.OnInitialized();
     m_invalidCredentials = false;
+  }
+
+  /// <inheritdoc />
+  protected override async Task OnParametersSetAsync()
+  {
+    await base.OnParametersSetAsync().ConfigureAwait(false);
+    if (UserId is not null && ViewModel is not null)
+    {
+      var email = await m_auth.GetUserEmailAsync(UserId.ToString()).ConfigureAwait(false);
+      if (string.IsNullOrEmpty(email))
+        return;
+
+      ViewModel.Email = email;
+    }
   }
 
 }

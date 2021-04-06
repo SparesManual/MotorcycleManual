@@ -209,6 +209,16 @@ namespace Db.API
     }
 
     /// <inheritdoc />
+    public override async Task<StringReply> GetUserEmail(SingleString request, ServerCallContext context)
+    {
+      var user = await m_userManager.FindByIdAsync(request.Content).ConfigureAwait(false);
+      return new StringReply
+      {
+        Reply = user.UserName ?? string.Empty
+      };
+    }
+
+    /// <inheritdoc />
     public override async Task<BooleanReply> Logout(Nothing request, ServerCallContext context)
     {
       await context.GetHttpContext().SignOutAsync().ConfigureAwait(false);

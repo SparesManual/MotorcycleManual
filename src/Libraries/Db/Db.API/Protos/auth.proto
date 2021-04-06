@@ -15,6 +15,8 @@ service Auth {
   rpc VerifyEmail(VerifyMailRequest) returns (BooleanReply);
   // Verifies whether a user with a given email exists
   rpc UserExists(SingleString) returns (BooleanReply);
+  // Gets a users email based on their user id
+  rpc GetUserEmail(SingleString) returns (StringReply);
   // Logs out the current user
   rpc Logout(Nothing) returns (BooleanReply);
   rpc LoggedInEmail(Nothing) returns (StringReply);
