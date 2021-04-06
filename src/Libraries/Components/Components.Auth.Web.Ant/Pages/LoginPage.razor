@@ -5,74 +5,86 @@
 @inject IAPIAuth m_auth
 
 @inject ILoginViewModelValidator m_validator
+@inject INavigator m_navigator
 
-@if (ViewModel!.RequiresConfirmation)
-{
-  <div class="row justify-content-center">
-    <div class="col-4">
-      <Alert Type="@AlertType.Error"
-             Message="You need to confirm your account first!"
-             Description="An account confirmation request has been sent to your email."
-             ShowIcon>
-      </Alert>
+<AuthorizeView>
+  <Authorized>
 
-      <p class="ml-2">
-        @* ReSharper disable once Html.AttributeValueNotResolved *@
-        No email? <Button Type="link" Disabled="@ViewModel.Email.Length.Equals(0)" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
-      </p>
-    </div>
-  </div>
-}
+    @{
+      m_navigator.NavigateTo("/userProfile");
+    }
+    
+  </Authorized>
+  <NotAuthorized Context="_">
+    @if (ViewModel!.RequiresConfirmation)
+    {
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <Alert Type="@AlertType.Error"
+                 Message="You need to confirm your account first!"
+                 Description="An account confirmation request has been sent to your email."
+                 ShowIcon>
+          </Alert>
 
-@if (ViewModel!.InvalidCredentials)
-{
-  <span>Invalid email or password</span>
-}
-
-<EditForm Model="@ViewModel"
-          OnValidSubmit="ViewModel!.SubmitCommand.Execute">
-  <FluentValidator Validator="m_validator"/>
-  <div class="container w-25 align-middle">
-    <div class="row mb-2">
-      <div class="col">
-        <div class="row">
-          <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100" Size="large"/>
-        </div>
-        <div class="row">
-          <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
+          <p class="ml-2">
+            @* ReSharper disable once Html.AttributeValueNotResolved *@
+            No email? <Button Type="link" Disabled="@ViewModel.Email.Length.Equals(0)" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
+          </p>
         </div>
       </div>
-    </div>
+    }
 
-    <div class="row mb-4">
-      <div class="col">
-        <div class="row">
-          <InputPassword Id="Password" Placeholder="Password" @bind-Value="@ViewModel!.Password" Size="large" Class="w-100" Type="string"></InputPassword>
+    @if (ViewModel!.InvalidCredentials)
+    {
+      <span>Invalid email or password</span>
+    }
+
+    <EditForm Model="@ViewModel"
+              OnValidSubmit="ViewModel!.SubmitCommand.Execute">
+      <FluentValidator Validator="m_validator"/>
+      <div class="container w-25 align-middle">
+        <div class="row mb-2">
+          <div class="col">
+            <div class="row">
+              <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100" Size="large"/>
+            </div>
+            <div class="row">
+              <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
+
+        <div class="row mb-4">
+          <div class="col">
+            <div class="row">
+              <InputPassword Id="Password" Placeholder="Password" @bind-Value="@ViewModel!.Password" Size="large" Class="w-100" Type="string"></InputPassword>
+            </div>
+            <div class="row">
+              <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row mb-4">
-      <div class="col align-content-start">
-        <Checkbox Id="RememberMe" Checked="ViewModel!.RememberMe">
-          Remember me
-        </Checkbox>
-      </div>
-      <div class="col-sm align-content-end text-right">
-        <a href="/forgotPassword" id="ForgotPassword">Forgot password</a>
-      </div>
-    </div>
+        <div class="row mb-4">
+          <div class="col align-content-start">
+            <Checkbox Id="RememberMe" Checked="ViewModel!.RememberMe">
+              Remember me
+            </Checkbox>
+          </div>
+          <div class="col-sm align-content-end text-right">
+            <a href="/forgotPassword" id="ForgotPassword">Forgot password</a>
+          </div>
+        </div>
 
-    <Button HtmlType="submit" Id="Login" Class="row mb-2 w-100" Size="large">
-      Login
-    </Button>
+        <Button HtmlType="submit" Id="Login" Class="row mb-2 w-100" Size="large">
+          Login
+        </Button>
 
-    <a href="/register" class="row">Not a member? Register</a>
-  </div>
-</EditForm>
+        <a href="/register" class="row">Not a member? Register</a>
+      </div>
+    </EditForm>
+  </NotAuthorized>
+</AuthorizeView>
 
 @code {
 
@@ -102,7 +114,7 @@
     if (UserId.HasValue
         && ViewModel is not null)
     {
-      var email = await m_auth.GetUserEmailAsync(UserId?.ToString()).ConfigureAwait(false);
+      var email = await m_auth.GetUserEmailAsync(UserId.Value.ToString()).ConfigureAwait(false);
       if (string.IsNullOrEmpty(email))
         return;
 

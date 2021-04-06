@@ -3,59 +3,71 @@
 @implements IRegisterView
 
 @inject IRegisterViewModelValidator m_validator
+@inject INavigator m_navigator
 
-@if (ViewModel?.RegistrationFailed == true)
-{
-<div class="row justify-content-center">
-  <div class="col-4">
-    <Alert Type="@AlertType.Error"
-           Message="Registration failed!"
-           Description="Your account was not created, something went wrong."
-           ShowIcon>
-    </Alert>
-  </div>
-</div>
-}
+<AuthorizeView>
+  <Authorized>
 
-<EditForm Model="@ViewModel"
-          OnValidSubmit="@ViewModel!.SubmitCommand.Execute">
-  <FluentValidator Validator="m_validator"/>
-  <div class="container w-25 align-middle">
-    <div class="row mb-2">
-      <div class="col">
-        <div class="row">
-          <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100" />
-        </div>
-        <div class="row">
-          <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
+    @{
+      m_navigator.NavigateTo("/userProfile");
+    }
+
+  </Authorized>
+  <NotAuthorized Context="_">
+    @if (ViewModel?.RegistrationFailed == true)
+    {
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <Alert Type="@AlertType.Error"
+                 Message="Registration failed!"
+                 Description="Your account was not created, something went wrong."
+                 ShowIcon>
+          </Alert>
         </div>
       </div>
-    </div>
-    
-    <div class="row mb-2">
-      <div class="col">
-        <div class="row">
-          <InputPassword Id="Password" Placeholder="Password" @bind-Value="@ViewModel!.Password" Class="w-100" Type="string"></InputPassword>
-        </div>
-        <div class="row">
-          <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
-        </div>
-      </div>
-    </div>
+    }
 
-    <div class="row mb-2">
-      <div class="col">
-        <div class="row">
-          <InputPassword Id="ConfirmPassword" Placeholder="Confirm password" @bind-Value="@ViewModel!.ConfirmPassword" Class="w-100" Type="string"></InputPassword>
+    <EditForm Model="@ViewModel"
+              OnValidSubmit="@ViewModel!.SubmitCommand.Execute">
+      <FluentValidator Validator="m_validator"/>
+      <div class="container w-25 align-middle">
+        <div class="row mb-2">
+          <div class="col">
+            <div class="row">
+              <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100"/>
+            </div>
+            <div class="row">
+              <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <ValidationMessage For="() => ViewModel!.ConfirmPassword" class="mt-2"/>
-        </div>
-      </div>
-    </div>
 
-    <Button HtmlType="submit" Id="Register" class="row" Size="large">
-      Register
-    </Button>
-  </div>
-</EditForm>
+        <div class="row mb-2">
+          <div class="col">
+            <div class="row">
+              <InputPassword Id="Password" Placeholder="Password" @bind-Value="@ViewModel!.Password" Class="w-100" Type="string"></InputPassword>
+            </div>
+            <div class="row">
+              <ValidationMessage For="() => ViewModel!.Password" class="mt-2"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <div class="row">
+              <InputPassword Id="ConfirmPassword" Placeholder="Confirm password" @bind-Value="@ViewModel!.ConfirmPassword" Class="w-100" Type="string"></InputPassword>
+            </div>
+            <div class="row">
+              <ValidationMessage For="() => ViewModel!.ConfirmPassword" class="mt-2"/>
+            </div>
+          </div>
+        </div>
+
+        <Button HtmlType="submit" Id="Register" class="row" Size="large">
+          Register
+        </Button>
+      </div>
+    </EditForm>
+  </NotAuthorized>
+</AuthorizeView>

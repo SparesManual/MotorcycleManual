@@ -21,7 +21,7 @@
   {
     await base.OnParametersSetAsync().ConfigureAwait(false);
 
-    var qs= m_navigationManager.ToAbsoluteUri(m_navigationManager.Uri).Query;
+    var qs = m_navigationManager.ToAbsoluteUri(m_navigationManager.Uri).Query;
     var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(qs);
     if (query.TryGetValue("usr", out var userId))
       UserId = userId;
@@ -29,13 +29,13 @@
       Token = token;
 
     var result = await m_auth.VerifyEmailAsync(UserId, Token).ConfigureAwait(false);
-    // If the verification was a success
+  // If the verification was a success
     if (result)
     {
       await Task.Delay(5000).ConfigureAwait(false);
       m_navigationManager.NavigateTo($"/login/{UserId}");
     }
-    // Otherwise..
+  // Otherwise..
     else
     {
       m_navigationManager.NavigateTo("/");
@@ -44,11 +44,23 @@
 
 }
 
-@if (!string.IsNullOrEmpty(UserId) && !string.IsNullOrEmpty(Token?.Trim()))
-{
-  <h2>Thank you for verifying your email</h2>
-}
-else
-{
-  m_navigationManager.NavigateTo("/");
-}
+<AuthorizeView>
+  <Authorized>
+
+    @{
+      m_navigationManager.NavigateTo("/");
+    }
+
+  </Authorized>
+  <NotAuthorized>
+    @if (!string.IsNullOrEmpty(UserId)
+         && !string.IsNullOrEmpty(Token?.Trim()))
+    {
+      <h2>Thank you for verifying your email</h2>
+    }
+    else
+    {
+      m_navigationManager.NavigateTo("/");
+    }
+  </NotAuthorized>
+</AuthorizeView>

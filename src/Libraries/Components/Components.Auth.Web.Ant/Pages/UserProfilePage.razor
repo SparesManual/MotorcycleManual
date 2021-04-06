@@ -3,9 +3,10 @@
 @implements IUserProfileView
 
 @inject AuthenticationStateProvider m_authProvider
+@inject INavigator m_navigator
 
 @code {
-  #nullable enable
+#nullable enable
 
   private ClaimsPrincipal? m_user;
   private string m_email = string.Empty;
@@ -19,62 +20,74 @@
     if (m_user?.Identity?.Name is not null)
       m_email = m_user.Identity.Name;
   }
+
 }
 
-@if (m_user is not null)
-{
-  <div>
-    <div class="row">
-      <div class="col-auto">
-        <AvatarComponent Size="64" ItemId="@m_email"></AvatarComponent>
-      </div>
-      <div class="col ml-1 align-self-center">
+<AuthorizeView>
+  <Authorized Context="_">
+    @if (m_user is not null)
+    {
+      <div>
         <div class="row">
-          <h2 style="margin: 0">Your account</h2>
+          <div class="col-auto">
+            <AvatarComponent Size="64" ItemId="@m_email"></AvatarComponent>
+          </div>
+          <div class="col ml-1 align-self-center">
+            <div class="row">
+              <h2 style="margin: 0">Your account</h2>
+            </div>
+            <div class="row">
+              <span>@m_email</span>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <span>@m_email</span>
+        <div class="row mt-3">
+          <Tabs DefaultActiveKey="1" TabPosition="@TabPosition.Left">
+            <ChildContent>
+              <TabPane Key="1">
+                <Tab>
+                  <span>
+                    <Icon Type="user"/>
+                    General
+                  </span>
+                </Tab>
+                <ChildContent>
+                  <SettingsGeneralComponent></SettingsGeneralComponent>
+                </ChildContent>
+              </TabPane>
+              <TabPane Key="2">
+                <Tab>
+                  <span>
+                    <Icon Type="bell"/>
+                    Notifications
+                  </span>
+                </Tab>
+                <ChildContent>
+                  <SettingsNotificationsComponent></SettingsNotificationsComponent>
+                </ChildContent>
+              </TabPane>
+              <TabPane Key="3">
+                <Tab>
+                  <span>
+                    <Icon Type="key"/>
+                    Account
+                  </span>
+                </Tab>
+                <ChildContent>
+                  <SettingsAccountComponent></SettingsAccountComponent>
+                </ChildContent>
+              </TabPane>
+            </ChildContent>
+          </Tabs>
         </div>
       </div>
-    </div>
-    <div class="row mt-3">
-      <Tabs DefaultActiveKey="1" TabPosition="@TabPosition.Left">
-        <ChildContent>
-          <TabPane Key="1">
-            <Tab>
-              <span>
-                <Icon Type="user" />
-                General
-              </span>
-            </Tab>
-            <ChildContent>
-              <SettingsGeneralComponent></SettingsGeneralComponent>
-            </ChildContent>
-          </TabPane>
-          <TabPane Key="2">
-            <Tab>
-              <span>
-                <Icon Type="bell" />
-                Notifications
-              </span>
-            </Tab>
-            <ChildContent>
-              <SettingsNotificationsComponent></SettingsNotificationsComponent>
-            </ChildContent>
-          </TabPane>
-          <TabPane Key="3">
-            <Tab>
-              <span>
-                <Icon Type="key" />
-                Account
-              </span>
-            </Tab>
-            <ChildContent>
-              <SettingsAccountComponent></SettingsAccountComponent>
-            </ChildContent>
-          </TabPane>
-        </ChildContent>
-      </Tabs>
-    </div>
-  </div>
-}
+    }
+  </Authorized>
+  <NotAuthorized>
+    
+    @{
+      m_navigator.NavigateTo("/login");
+    }
+    
+  </NotAuthorized>
+</AuthorizeView>

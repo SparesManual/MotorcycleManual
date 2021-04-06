@@ -1,5 +1,6 @@
 @page "/registered/{userId}"
 @inject IAPIAuth m_auth
+@inject INavigator m_navigator
 
 @code {
 
@@ -21,19 +22,39 @@
     await m_auth.ResendVerificationUserIdAsync(UserId).ConfigureAwait(false);
   }
 
+  /// <inheritdoc />
+  protected override void OnParametersSet()
+  {
+    base.OnParametersSet();
+
+    if (string.IsNullOrEmpty(UserId))
+      m_navigator.NavigateTo("/");
+  }
+
 }
 
-<div class="row justify-content-center">
-  <div class="col-4">
-    <Alert Type="@AlertType.Success"
-           Message="You've been registered!"
-           Description="An account confirmation request has been sent to your email."
-           ShowIcon>
-    </Alert>
+<AuthorizeView>
+  <Authorized>
 
-    <p class="ml-2">
-      @* ReSharper disable once Html.AttributeValueNotResolved *@
-      No email? <Button Type="link" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
-    </p>
-  </div>
-</div>
+    @{
+      m_navigator.NavigateTo("/");
+    }
+
+  </Authorized>
+  <NotAuthorized>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <Alert Type="@AlertType.Success"
+               Message="You've been registered!"
+               Description="An account confirmation request has been sent to your email."
+               ShowIcon>
+        </Alert>
+
+        <p class="ml-2">
+          @* ReSharper disable once Html.AttributeValueNotResolved *@
+          No email? <Button Type="link" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
+        </p>
+      </div>
+    </div>
+  </NotAuthorized>
+</AuthorizeView>
