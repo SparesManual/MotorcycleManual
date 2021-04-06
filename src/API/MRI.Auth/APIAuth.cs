@@ -66,7 +66,7 @@ namespace MRI.Auth
       var result = await m_client.LoginUserAsync(new LoginRequest {Email = email, Password = password, RememberMe = rememberMe}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
 
       if (!result.Success || result.Token is null)
-        return (false, 403);
+        return (false, result.Confirmed ? 403 : 404);
 
       await m_storage.SetItemAsync("authToken", result.Token).ConfigureAwait(false);
       ((IAPIAuthenticationStateProvider) m_stateProvider).MarkUserAsAuthenticated(email);

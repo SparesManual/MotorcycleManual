@@ -42,6 +42,11 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// </summary>
     ICommand ForgotPasswordCommand { get; }
 
+    /// <summary>
+    /// User attempted to login without confirming their email
+    /// </summary>
+    bool RequiresConfirmation { get; set; }
+
     #endregion
 
     /// <summary>

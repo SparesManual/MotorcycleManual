@@ -36,6 +36,8 @@ message LoginResult {
   string token = 1;
   // Login success status
   bool success = 2;
+  // Email confirmed
+  bool confirmed = 3;
 }
 
 // Message containing a single string

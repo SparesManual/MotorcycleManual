@@ -54,11 +54,12 @@ namespace Db.API
 
       if (!result.Succeeded)
       {
+        var user = await m_userManager.FindByNameAsync(request.Email).ConfigureAwait(false);
         m_logger.LogWarning("Login request for {0} was not successful", request.Email);
 
         return new LoginResult
         {
-          Success = false, Token = string.Empty
+          Success = false, Token = string.Empty, Confirmed = user.EmailConfirmed
         };
       }
 

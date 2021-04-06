@@ -6,6 +6,21 @@
 
 @inject ILoginViewModelValidator m_validator
 
+<div class="row justify-content-center">
+  <div class="col-4">
+    <Alert Type="@AlertType.Error"
+           Message="You need to confirm your account first!"
+           Description="An account confirmation request has been sent to your email."
+           ShowIcon>
+    </Alert>
+
+    @* <p class="ml-2"> *@
+    @*   $1$ ReSharper disable once Html.AttributeValueNotResolved #1# *@
+    @*   No email? <Button Type="link" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>. *@
+    @* </p> *@
+  </div>
+</div>
+
 @if (m_invalidCredentials)
 {
   <span>Invalid email or password</span>
@@ -65,6 +80,18 @@
   /// </summary>
   [Parameter]
   public Guid? UserId { get; set; }
+
+  // private DateTime m_lastResend = DateTime.Now;
+
+  // private async Task ResendVerificationAsync()
+  // {
+  //   var now = DateTime.Now;
+  //   if (now - m_lastResend <= TimeSpan.FromSeconds(5))
+  //     return;
+  //
+  //   m_lastResend = now;
+  //   await m_auth.ResendVerificationAsync(UserId).ConfigureAwait(false);
+  // }
 
   /// <inheritdoc />
   protected override void OnInitialized()
