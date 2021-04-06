@@ -6,22 +6,25 @@
 
 @inject ILoginViewModelValidator m_validator
 
-<div class="row justify-content-center">
-  <div class="col-4">
-    <Alert Type="@AlertType.Error"
-           Message="You need to confirm your account first!"
-           Description="An account confirmation request has been sent to your email."
-           ShowIcon>
-    </Alert>
+@if (ViewModel!.RequiresConfirmation)
+{
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <Alert Type="@AlertType.Error"
+             Message="You need to confirm your account first!"
+             Description="An account confirmation request has been sent to your email."
+             ShowIcon>
+      </Alert>
 
-    @* <p class="ml-2"> *@
-    @*   $1$ ReSharper disable once Html.AttributeValueNotResolved #1# *@
-    @*   No email? <Button Type="link" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>. *@
-    @* </p> *@
+      <p class="ml-2">
+        @* ReSharper disable once Html.AttributeValueNotResolved *@
+        No email? <Button Type="link" Disabled="@ViewModel.Email.Length.Equals(0)" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
+      </p>
+    </div>
   </div>
-</div>
+}
 
-@if (m_invalidCredentials)
+@if (ViewModel!.InvalidCredentials)
 {
   <span>Invalid email or password</span>
 }
@@ -33,14 +36,14 @@
     <div class="row mb-2">
       <div class="col">
         <div class="row">
-          <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100" Size="large" />
+          <Input Id="Email" Placeholder="Email" @bind-Value="@ViewModel!.Email" Class="w-100" Size="large"/>
         </div>
         <div class="row">
           <ValidationMessage For="() => ViewModel!.Email" class="mt-2"/>
         </div>
       </div>
     </div>
-    
+
     <div class="row mb-4">
       <div class="col">
         <div class="row">
@@ -51,7 +54,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row mb-4">
       <div class="col align-content-start">
         <Checkbox Id="RememberMe" Checked="ViewModel!.RememberMe">
@@ -66,14 +69,12 @@
     <Button HtmlType="submit" Id="Login" Class="row mb-2 w-100" Size="large">
       Login
     </Button>
-    
+
     <a href="/register" class="row">Not a member? Register</a>
   </div>
 </EditForm>
 
 @code {
-
-  private bool m_invalidCredentials;
 
   /// <summary>
   /// Registered user id
@@ -81,32 +82,27 @@
   [Parameter]
   public Guid? UserId { get; set; }
 
-  // private DateTime m_lastResend = DateTime.Now;
+  private DateTime m_lastResend = DateTime.Now;
 
-  // private async Task ResendVerificationAsync()
-  // {
-  //   var now = DateTime.Now;
-  //   if (now - m_lastResend <= TimeSpan.FromSeconds(5))
-  //     return;
-  //
-  //   m_lastResend = now;
-  //   await m_auth.ResendVerificationAsync(UserId).ConfigureAwait(false);
-  // }
-
-  /// <inheritdoc />
-  protected override void OnInitialized()
+  private async Task ResendVerificationAsync()
   {
-    base.OnInitialized();
-    m_invalidCredentials = false;
+    var now = DateTime.Now;
+    if (ViewModel is null
+        || now - m_lastResend <= TimeSpan.FromSeconds(5))
+      return;
+
+    m_lastResend = now;
+    await m_auth.ResendVerificationUserEmailAsync(ViewModel.Email).ConfigureAwait(false);
   }
 
   /// <inheritdoc />
   protected override async Task OnParametersSetAsync()
   {
     await base.OnParametersSetAsync().ConfigureAwait(false);
-    if (UserId is not null && ViewModel is not null)
+    if (UserId.HasValue
+        && ViewModel is not null)
     {
-      var email = await m_auth.GetUserEmailAsync(UserId.ToString()).ConfigureAwait(false);
+      var email = await m_auth.GetUserEmailAsync(UserId?.ToString()).ConfigureAwait(false);
       if (string.IsNullOrEmpty(email))
         return;
 

@@ -42,7 +42,15 @@ namespace Db.Interfaces
     /// <param name="userId">User id</param>
     /// <param name="cancellationToken">Cancellation</param>
     /// <returns>True if resent</returns>
-    ValueTask<bool> ResendVerificationAsync(string userId, CancellationToken cancellationToken = default);
+    ValueTask<bool> ResendVerificationUserIdAsync(string userId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Attempts to resend the email verification code
+    /// </summary>
+    /// <param name="email">User email</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if resent</returns>
+    ValueTask<bool> ResendVerificationUserEmailAsync(string email, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Attempts to verify a users email

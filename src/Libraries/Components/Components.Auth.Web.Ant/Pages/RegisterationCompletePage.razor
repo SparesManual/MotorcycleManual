@@ -18,7 +18,7 @@
       return;
 
     m_lastResend = now;
-    await m_auth.ResendVerificationAsync(UserId).ConfigureAwait(false);
+    await m_auth.ResendVerificationUserIdAsync(UserId).ConfigureAwait(false);
   }
 
 }

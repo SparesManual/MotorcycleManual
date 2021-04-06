@@ -132,14 +132,20 @@ namespace Db.API
       };
     }
 
+    private delegate Task<IdentityUser?> UserSearch(string identity);
+
     /// <inheritdoc />
-    public override async Task<BooleanReply> ResendVerification(SingleString request, ServerCallContext context)
+    public override async Task<BooleanReply> ResendVerification(IdAndEmail request, ServerCallContext context)
     {
-      m_logger.LogDebug("Received resend verification request for {0}", request.Content);
-      var user = await m_userManager.FindByIdAsync(request.Content).ConfigureAwait(false);
+      (UserSearch methodName, string identity) = string.IsNullOrEmpty(request.Email)
+        ? ((UserSearch)m_userManager.FindByIdAsync!, request.Id)
+        : ((UserSearch)m_userManager.FindByNameAsync!, request.Email);
+
+      m_logger.LogDebug("Received resend verification request for {0}", identity);
+      var user = await methodName(identity).ConfigureAwait(false);
       if (user is null)
       {
-        m_logger.LogWarning("Resending verification request failed as no user exists for {0}", request.Content);
+        m_logger.LogWarning("Resending verification request failed as no user exists for {0}", identity);
 
         return new BooleanReply
         {
@@ -149,9 +155,9 @@ namespace Db.API
       }
 
       var code = await m_userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
-      await m_emailService.SendRegistrationConfirmationAsync(user.Email, user.Id, code, context.CancellationToken).ConfigureAwait(false);
+      await m_emailService.SendRegistrationConfirmationAsync(user.UserName, user.Id, code, context.CancellationToken).ConfigureAwait(false);
 
-      m_logger.LogInformation("Verification request sent for {0}", request.Content);
+      m_logger.LogInformation("Verification request sent for {0}", identity);
       return new BooleanReply
       {
         Reply = true,

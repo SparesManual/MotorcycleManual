@@ -47,6 +47,11 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// </summary>
     bool RequiresConfirmation { get; set; }
 
+    /// <summary>
+    /// Login failed
+    /// </summary>
+    bool InvalidCredentials { get; set; }
+
     #endregion
 
     /// <summary>

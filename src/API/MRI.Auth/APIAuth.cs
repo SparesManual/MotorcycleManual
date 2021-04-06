@@ -66,7 +66,7 @@ namespace MRI.Auth
       var result = await m_client.LoginUserAsync(new LoginRequest {Email = email, Password = password, RememberMe = rememberMe}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
 
       if (!result.Success || result.Token is null)
-        return (false, result.Confirmed ? 403 : 404);
+        return (false, result.Confirmed ? 404 : 403);
 
       await m_storage.SetItemAsync("authToken", result.Token).ConfigureAwait(false);
       ((IAPIAuthenticationStateProvider) m_stateProvider).MarkUserAsAuthenticated(email);
@@ -93,9 +93,16 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<bool> ResendVerificationAsync(string userId, CancellationToken cancellationToken = default)
+    public async ValueTask<bool> ResendVerificationUserIdAsync(string userId, CancellationToken cancellationToken = default)
     {
-      var result = await m_client.ResendVerificationAsync(new SingleString() {Content = userId}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      var result = await m_client.ResendVerificationAsync(new IdAndEmail {Email = string.Empty, Id = userId}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      return result.Reply;
+    }
+
+    /// <inheritdoc />
+    public async ValueTask<bool> ResendVerificationUserEmailAsync(string email, CancellationToken cancellationToken = default)
+    {
+      var result = await m_client.ResendVerificationAsync(new IdAndEmail {Email = email, Id = string.Empty}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
     }
 

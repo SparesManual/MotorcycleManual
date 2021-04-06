@@ -10,7 +10,7 @@ service Auth {
   // Registers a new user
   rpc RegisterUser(RegistrationRequest) returns (StringReply);
   // Resends the email verification request
-  rpc ResendVerification(SingleString) returns (BooleanReply);
+  rpc ResendVerification(IdAndEmail) returns (BooleanReply);
   // Verifies user email
   rpc VerifyEmail(VerifyMailRequest) returns (BooleanReply);
   // Verifies whether a user with a given email exists
@@ -44,6 +44,11 @@ message LoginResult {
 message SingleString {
   // String content
   string content = 1;
+}
+
+message IdAndEmail {
+  string id = 1;
+  string email = 2;
 }
 
 // User registration request
