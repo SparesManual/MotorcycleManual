@@ -25,7 +25,6 @@
   <ItemGroup>
     <PackageReference Include="AntDesign" Version="0.7.2" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-    <PackageReference Include="Radzen.Blazor" Version="3.1.6" />
   </ItemGroup>
 
 </Project>
