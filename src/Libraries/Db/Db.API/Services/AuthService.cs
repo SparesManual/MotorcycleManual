@@ -138,8 +138,8 @@ namespace Db.API
     public override async Task<BooleanReply> ResendVerification(IdAndEmail request, ServerCallContext context)
     {
       (UserSearch methodName, string identity) = string.IsNullOrEmpty(request.Email)
-        ? ((UserSearch)m_userManager.FindByIdAsync!, request.Id)
-        : ((UserSearch)m_userManager.FindByNameAsync!, request.Email);
+        ? ((UserSearch) m_userManager.FindByIdAsync!, request.Id)
+        : ((UserSearch) m_userManager.FindByNameAsync!, request.Email);
 
       m_logger.LogDebug("Received resend verification request for {0}", identity);
       var user = await methodName(identity).ConfigureAwait(false);
@@ -166,7 +166,7 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task<BooleanReply> VerifyEmail(VerifyMailRequest request, ServerCallContext context)
+    public override async Task<BooleanReply> VerifyEmail(VerifyTokenRequest request, ServerCallContext context)
     {
       m_logger.LogDebug("Received email verification request for {0}", request.UserId);
       var user = await m_userManager.FindByIdAsync(request.UserId).ConfigureAwait(false);
@@ -204,6 +204,25 @@ namespace Db.API
     }
 
     /// <inheritdoc />
+    public override async Task<BooleanReply> VerifyPasswordReset(VerifyTokenRequest request, ServerCallContext context)
+    {
+      var user = await m_userManager.FindByIdAsync(request.UserId).ConfigureAwait(false);
+      if (user is null)
+        return new BooleanReply
+        {
+          Error = 0,
+          Reply = false
+        };
+
+      var result = await m_userManager.VerifyUserTokenAsync(user, m_userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", request.Code).ConfigureAwait(false);
+      return new BooleanReply
+      {
+        Error = 0,
+        Reply = result
+      };
+    }
+
+    /// <inheritdoc />
     public override async Task<BooleanReply> RequestPasswordReset(SingleString request, ServerCallContext context)
     {
       m_logger.LogDebug("Received password reset request for {0}", request.Content);
@@ -223,6 +242,25 @@ namespace Db.API
       {
         Error = 0,
         Reply = true
+      };
+    }
+
+    /// <inheritdoc />
+    public override async Task<BooleanReply> ResetPassword(NewPasswordRequest request, ServerCallContext context)
+    {
+      var user = await m_userManager.FindByIdAsync(request.UserId).ConfigureAwait(false);
+      if (user is null)
+        return new BooleanReply
+        {
+          Error = 0,
+          Reply = false
+        };
+
+      var result = await m_userManager.ResetPasswordAsync(user, request.Code, request.Password).ConfigureAwait(false);
+      return new BooleanReply
+      {
+        Error = 0,
+        Reply = result?.Succeeded ?? false
       };
     }
 

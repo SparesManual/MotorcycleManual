@@ -14,7 +14,11 @@ service Auth {
   // Requests a password reset
   rpc RequestPasswordReset(SingleString) returns (BooleanReply);
   // Verifies user email
-  rpc VerifyEmail(VerifyMailRequest) returns (BooleanReply);
+  rpc VerifyEmail(VerifyTokenRequest) returns (BooleanReply);
+  // Verifies user password reset
+  rpc VerifyPasswordReset(VerifyTokenRequest) returns (BooleanReply);
+  // Resets a users password
+  rpc ResetPassword(NewPasswordRequest) returns (BooleanReply);
   // Verifies whether a user with a given email exists
   rpc UserExists(SingleString) returns (BooleanReply);
   // Gets a users email based on their user id
@@ -27,9 +31,15 @@ service Auth {
 // Empty message
 message Nothing { }
 
-message VerifyMailRequest {
+message VerifyTokenRequest {
   string userId = 1;
   string code = 2;
+}
+
+message NewPasswordRequest {
+  string userId = 1;
+  string code = 2;
+  string password = 3;
 }
 
 // Login request reply
