@@ -204,6 +204,29 @@ namespace Db.API
     }
 
     /// <inheritdoc />
+    public override async Task<BooleanReply> RequestPasswordReset(SingleString request, ServerCallContext context)
+    {
+      m_logger.LogDebug("Received password reset request for {0}", request.Content);
+      var user = await m_userManager.FindByNameAsync(request.Content).ConfigureAwait(false);
+      if (user is null)
+        // The client shouldn't know if the email is registered
+        return new BooleanReply
+        {
+          Error = 0,
+          Reply = true
+        };
+
+      var token = await m_userManager.GeneratePasswordResetTokenAsync(user).ConfigureAwait(false);
+      await m_emailService.SendRecoveryCodeAsync(request.Content, token, context.CancellationToken).ConfigureAwait(false);
+
+      return new BooleanReply
+      {
+        Error = 0,
+        Reply = true
+      };
+    }
+
+    /// <inheritdoc />
     public override async Task<BooleanReply> UserExists(SingleString request, ServerCallContext context)
     {
       m_logger.LogDebug("Received user exists request for {0}", request.Content);
