@@ -37,7 +37,7 @@
     
     <div class="row mb-4">
       <div class="col align-content-start">
-        <MudCheckBox @bind-Checked="@ViewModel.RememberMe" Label="Remember me" Color="Color.Primary"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@ViewModel!.RememberMe" Label="Remember me" Color="Color.Primary"></MudCheckBox>
       </div>
       <div class="col-sm align-content-end">
         <a href="/forgotPassword" id="ForgotPassword">Forgot password</a>

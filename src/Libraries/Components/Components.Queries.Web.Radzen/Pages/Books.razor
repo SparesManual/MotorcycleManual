@@ -4,7 +4,7 @@
 
 <h1>Books</h1>
 
-<RadzenDataList @ref="m_list" WrapItems="true" LoadData="x => LoadData(x.Filter, x)" AllowPaging="true" Count="@ViewModel!.TotalItems" PageSize="@ViewModel.PageSize" Data="@ViewModel.Items" TItem="Models.Interfaces.Entities.IBook">
+<RadzenDataList @ref="m_list" WrapItems="true" LoadData="x => LoadData(x.Filter, x)" AllowPaging="true" Count="@ViewModel!.TotalItems" PageSize="@ViewModel!.PageSize" Data="@ViewModel!.Items" TItem="Models.Interfaces.Entities.IBook">
   <Template Context="book">
     <RadzenCard Style="width:300px; padding-left: 25px; padding-top: 10px">
       <div class="row mb-auto">

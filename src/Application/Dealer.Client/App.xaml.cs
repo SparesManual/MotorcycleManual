@@ -5,6 +5,7 @@ using Components.Auth;
 using Components.Auth.WPF.Pages;
 using Db.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
+using MRI.Auth;
 using MRI.MVVM.Interfaces;
 using MRI.MVVM.WPF.Helpers;
 using States.General;
@@ -30,7 +31,7 @@ namespace Dealer.Client
 
       builder.RegisterInstance(httpClient).SingleInstance();
       builder.RegisterType<ApiAuthenticationStateProvider>().As<AuthenticationStateProvider>().SingleInstance();
-      //builder.RegisterType<APIRESTAuth>().As<IAPIAuth>();
+      builder.RegisterType<APIAuth>().As<IAPIAuth>();
       builder.RegisterType<WPFStorage>().As<IStorage>();
 
       builder.RegisterType<LoginPage>().As<ILoginView>();

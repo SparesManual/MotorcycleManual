@@ -28,7 +28,7 @@
 
           <p class="ml-2">
             @* ReSharper disable once Html.AttributeValueNotResolved *@
-            No email? <Button Type="link" Disabled="@ViewModel.Email.Length.Equals(0)" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
+            No email? <Button Type="link" Disabled="@ViewModel!.Email.Length.Equals(0)" OnClick="ResendVerificationAsync" Style="margin: 0; padding: 0">Resend it</Button>.
           </p>
         </div>
       </div>

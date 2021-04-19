@@ -54,7 +54,7 @@
   </Authorized>
   <NotAuthorized>
     @if (!string.IsNullOrEmpty(UserId)
-         && !string.IsNullOrEmpty(Token?.Trim()))
+         && !string.IsNullOrEmpty(Token.Trim()))
     {
       <h2>Thank you for verifying your email</h2>
     }
