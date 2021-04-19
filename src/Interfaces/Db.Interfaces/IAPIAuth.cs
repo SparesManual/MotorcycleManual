@@ -62,6 +62,25 @@ namespace Db.Interfaces
     ValueTask<bool> VerifyEmailAsync(string userId, string token, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Verifies the password reset request
+    /// </summary>
+    /// <param name="userId">User id</param>
+    /// <param name="token">Verification token</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if verified</returns>
+    ValueTask<bool> VerifyPasswordResetAsync(string userId, string token, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Resets the users <paramref name="password"/> to a new one
+    /// </summary>
+    /// <param name="userId">User id</param>
+    /// <param name="token">Verification token</param>
+    /// <param name="password">New password</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if password was reset</returns>
+    ValueTask<bool> ResetPasswordAsync(string userId, string token, string password, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Checks if a user with the given <paramref name="email"/> exists
     /// </summary>
     /// <param name="email">Email to check</param>
