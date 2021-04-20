@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Security;
 using System.Windows.Input;
 using Db.Interfaces;
 using MRI.MVVM.Helpers;

@@ -1,4 +1,3 @@
-using System.Security;
 using System.Windows.Input;
 using MRI.MVVM.Interfaces.ViewModels;
 
