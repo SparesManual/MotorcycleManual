@@ -81,6 +81,14 @@ namespace Db.Interfaces
     ValueTask<bool> ResetPasswordAsync(string userId, string token, string password, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Requests a password reset for a user with the given <paramref name="email"/>
+    /// </summary>
+    /// <param name="email">User email</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if requested</returns>
+    ValueTask<bool> RequestPasswordResetAsync(string email, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Checks if a user with the given <paramref name="email"/> exists
     /// </summary>
     /// <param name="email">Email to check</param>

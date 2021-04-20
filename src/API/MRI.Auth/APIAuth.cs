@@ -128,6 +128,13 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
+    public async ValueTask<bool> RequestPasswordResetAsync(string email, CancellationToken cancellationToken = default)
+    {
+      var result = await m_client.RequestPasswordResetAsync(new SingleString {Content = email}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      return result.Reply;
+    }
+
+    /// <inheritdoc />
     public async ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default)
     {
       var result = await m_client.UserExistsAsync(new SingleString {Content = email}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
