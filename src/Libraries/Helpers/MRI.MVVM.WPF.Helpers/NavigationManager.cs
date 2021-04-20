@@ -71,7 +71,7 @@ namespace MRI.MVVM.WPF.Helpers
     }
 
     /// <inheritdoc />
-    public void Navigate(string name, IReadOnlyDictionary<string, string> arguments)
+    public void NavigateTo(string name, IReadOnlyDictionary<string, string> arguments)
     {
       if (!m_types.ContainsKey(name))
         return;

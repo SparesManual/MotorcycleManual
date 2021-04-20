@@ -37,7 +37,7 @@ namespace MRI.Client
     }
 
     /// <inheritdoc />
-    public void Navigate(string name, IReadOnlyDictionary<string, string> arguments)
+    public void NavigateTo(string name, IReadOnlyDictionary<string, string> arguments)
     {
       NavigationChanged?.Invoke(this, new INavigator.ViewData(name, arguments));
       m_manager.NavigateTo($"{name}?{string.Join("&", arguments.Select(arg => $"{arg.Key}={arg.Value}"))}");

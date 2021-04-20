@@ -1,4 +1,5 @@
 using System.Security;
+using System.Windows.Input;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace ViewModels.Interfaces.Auth.ViewModels
@@ -14,13 +15,28 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// <summary>
     /// Password
     /// </summary>
-    SecureString Password { get; set; }
+    string Password { get; set; }
 
     /// <summary>
     /// Password confirmation
     /// </summary>
-    SecureString ConfirmPassword { get; set; }
+    string ConfirmPassword { get; set; }
+
+    /// <summary>
+    /// User id
+    /// </summary>
+    string UserId { get; set; }
+
+    /// <summary>
+    /// Password reset token
+    /// </summary>
+    string Token { get; set; }
 
     #endregion
+
+    /// <summary>
+    /// Submits the password reset
+    /// </summary>
+    ICommand SubmitCommand { get; }
   }
 }

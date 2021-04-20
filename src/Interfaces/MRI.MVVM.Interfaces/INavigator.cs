@@ -96,6 +96,6 @@ namespace MRI.MVVM.Interfaces
     /// </summary>
     /// <param name="name">View name</param>
     /// <param name="arguments">View named arguments</param>
-    void Navigate(string name, IReadOnlyDictionary<string, string> arguments);
+    void NavigateTo(string name, IReadOnlyDictionary<string, string> arguments);
   }
 }
