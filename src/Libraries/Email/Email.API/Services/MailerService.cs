@@ -29,7 +29,7 @@ namespace Email.API.Services
       var response = await m_emailSender
         .To(request.Email)
         .Subject("Spares Manual - Password Recovery")
-        .UsingTemplateFromEmbedded("Email.Templates.PasswordRecovery.cshtml", new PasswordRecoveryModel { Url = $"https://localhost:5468/verify?usr={request.UserId}&token={HttpUtility.UrlEncode(request.Code)}" }, typeof(PasswordRecoveryModel).Assembly)
+        .UsingTemplateFromEmbedded("Email.Templates.PasswordRecovery.cshtml", new PasswordRecoveryModel { Url = $"https://localhost:5468/reset?usr={request.UserId}&token={HttpUtility.UrlEncode(request.Code)}" }, typeof(PasswordRecoveryModel).Assembly)
         .SendAsync(context.CancellationToken)
         .ConfigureAwait(false);
 
