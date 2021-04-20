@@ -47,8 +47,8 @@ namespace MRI.Email
       => await m_client.SendRegistrationConfirmationAsync(new IdAndCode {Code = code, Email = email, UserId = userId}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
 
     /// <inheritdoc />
-    public async ValueTask SendRecoveryCodeAsync(string email, string code, CancellationToken cancellationToken = default)
-      => await m_client.SendPasswordRecoveryAsync(new IdAndCode {Code = code, Email = email}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+    public async ValueTask SendRecoveryCodeAsync(string email, string userId, string code, CancellationToken cancellationToken = default)
+      => await m_client.SendPasswordRecoveryAsync(new IdAndCode {Code = code, Email = email, UserId = userId}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
 
     #endregion
 

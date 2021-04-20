@@ -42,7 +42,11 @@ namespace ViewModels.Auth
 
     /// <inheritdoc />
     public ICommand SubmitCommand
-      => new RelayCommand(async () => { await m_apiAuth.RequestPasswordResetAsync(Email).ConfigureAwait(false); }, () => !Requested);
+      => new RelayCommand(async () =>
+      {
+        await m_apiAuth.RequestPasswordResetAsync(Email).ConfigureAwait(false);
+        Requested = true;
+      }, () => !Requested);
 
     /// <inheritdoc />
     public ICommand BackToLoginCommand

@@ -236,7 +236,7 @@ namespace Db.API
         };
 
       var token = await m_userManager.GeneratePasswordResetTokenAsync(user).ConfigureAwait(false);
-      await m_emailService.SendRecoveryCodeAsync(request.Content, token, context.CancellationToken).ConfigureAwait(false);
+      await m_emailService.SendRecoveryCodeAsync(request.Content, user.Id, token, context.CancellationToken).ConfigureAwait(false);
 
       return new BooleanReply
       {
