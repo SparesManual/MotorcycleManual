@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using Db.Interfaces;
 using MRI.MVVM.Helpers;
 using MRI.MVVM.Interfaces;
 using ViewModels.Interfaces.Auth.Validators;
@@ -13,7 +14,20 @@ namespace ViewModels.Auth
     : BaseFormViewModel<IForgotPasswordViewModelValidator>, IForgotPasswordViewModel
   {
     private readonly INavigator m_navigator;
+    private readonly IAPIAuth m_apiAuth;
     private string m_email = string.Empty;
+    private bool m_requested;
+
+    /// <inheritdoc />
+    public bool Requested
+    {
+      get => m_requested;
+      set
+      {
+        m_requested = value;
+        OnPropertyChanged();
+      }
+    }
 
     /// <inheritdoc />
     public string Email
@@ -28,17 +42,18 @@ namespace ViewModels.Auth
 
     /// <inheritdoc />
     public ICommand SubmitCommand
-      => new RelayCommand(() => { });
+      => new RelayCommand(async () => { await m_apiAuth.RequestPasswordResetAsync(Email).ConfigureAwait(false); }, () => !Requested);
 
     /// <inheritdoc />
     public ICommand BackToLoginCommand
       => new RelayCommand(() => m_navigator.NavigateTo("/login"));
 
     /// <inheritdoc />
-    public ForgotPasswordViewModel(INavigator navigator, IForgotPasswordViewModelValidator validator)
+    public ForgotPasswordViewModel(INavigator navigator, IAPIAuth apiAuth, IForgotPasswordViewModelValidator validator)
       : base(validator)
     {
       m_navigator = navigator;
+      m_apiAuth = apiAuth;
     }
   }
 }
