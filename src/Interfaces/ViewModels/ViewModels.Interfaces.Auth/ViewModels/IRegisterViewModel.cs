@@ -12,6 +12,11 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     #region Properties
 
     /// <summary>
+    /// Determines whether registration was successful
+    /// </summary>
+    bool RegistrationFailed { get; set; }
+
+    /// <summary>
     /// User name
     /// </summary>
     string Username { get; set; }

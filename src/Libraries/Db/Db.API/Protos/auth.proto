@@ -8,16 +8,38 @@ service Auth {
   // Logs in a given user
   rpc LoginUser(LoginRequest) returns (LoginResult);
   // Registers a new user
-  rpc RegisterUser(RegistrationRequest) returns (BooleanReply);
+  rpc RegisterUser(RegistrationRequest) returns (StringReply);
+  // Resends the email verification request
+  rpc ResendVerification(IdAndEmail) returns (BooleanReply);
+  // Requests a password reset
+  rpc RequestPasswordReset(SingleString) returns (BooleanReply);
+  // Verifies user email
+  rpc VerifyEmail(VerifyTokenRequest) returns (BooleanReply);
+  // Verifies user password reset
+  rpc VerifyPasswordReset(VerifyTokenRequest) returns (BooleanReply);
+  // Resets a users password
+  rpc ResetPassword(NewPasswordRequest) returns (BooleanReply);
   // Verifies whether a user with a given email exists
   rpc UserExists(SingleString) returns (BooleanReply);
-  // Logs out the current user
-  rpc Logout(Nothing) returns (BooleanReply);
-  rpc LoggedInEmail(Nothing) returns (StringReply);
+  // Gets a users email based on their user id
+  rpc GetUserEmail(SingleString) returns (StringReply);
+  // Deletes a user based on their id
+  rpc DeleteUser(SingleString) returns (BooleanReply);
 }
 
 // Empty message
 message Nothing { }
+
+message VerifyTokenRequest {
+  string userId = 1;
+  string code = 2;
+}
+
+message NewPasswordRequest {
+  string userId = 1;
+  string code = 2;
+  string password = 3;
+}
 
 // Login request reply
 message LoginResult {
@@ -25,12 +47,19 @@ message LoginResult {
   string token = 1;
   // Login success status
   bool success = 2;
+  // Email confirmed
+  bool confirmed = 3;
 }
 
 // Message containing a single string
 message SingleString {
   // String content
   string content = 1;
+}
+
+message IdAndEmail {
+  string id = 1;
+  string email = 2;
 }
 
 // User registration request

@@ -22,10 +22,34 @@ namespace ViewModels.Auth
     private string m_email = string.Empty;
     private string m_password = string.Empty;
     private bool m_rememberMe;
+    private bool m_requiresConfirmation;
+    private bool m_invalidCredentials;
 
     #endregion
 
     #region Properties
+
+    /// <inheritdoc />
+    public bool InvalidCredentials
+    {
+      get => m_invalidCredentials;
+      set
+      {
+        m_invalidCredentials = value;
+        OnPropertyChanged();
+      }
+    }
+
+    /// <inheritdoc />
+    public bool RequiresConfirmation
+    {
+      get => m_requiresConfirmation;
+      set
+      {
+        m_requiresConfirmation = value;
+        OnPropertyChanged();
+      }
+    }
 
     /// <inheritdoc />
     public string Email
@@ -91,6 +115,7 @@ namespace ViewModels.Auth
       return result switch
       {
         (false, 404) => LoginResult.InvalidCredentials,
+        (false, 403) => LoginResult.RequiresConfirmation,
         (true, _) => LoginResult.Success,
         _ => LoginResult.ServerError
       };
@@ -105,6 +130,12 @@ namespace ViewModels.Auth
           m_navigator.NavigateTo("/");
           break;
         case LoginResult.InvalidCredentials:
+          InvalidCredentials = true;
+          RequiresConfirmation = false;
+          break;
+        case LoginResult.RequiresConfirmation:
+          InvalidCredentials = false;
+          RequiresConfirmation = true;
           break;
       }
     }

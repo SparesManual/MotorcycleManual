@@ -84,13 +84,17 @@
   /// Parent book id
   /// </summary>
   [Parameter]
-  public int BookId
+  public string BookId
   {
-    get => m_bookId;
+    get => m_bookId.ToString();
     set
     {
-      m_bookId = value;
-      if (ViewModel != null) ViewModel.BookId = value;
+      if (!int.TryParse(value, out var id))
+        return;
+
+      m_bookId = id;
+      if (ViewModel != null)
+        ViewModel.BookId = id;
     }
   }
 

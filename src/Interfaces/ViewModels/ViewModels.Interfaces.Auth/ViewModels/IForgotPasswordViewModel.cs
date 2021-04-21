@@ -27,6 +27,11 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// </summary>
     ICommand BackToLoginCommand { get; }
 
+    /// <summary>
+    /// Determines whether a password reset was requested
+    /// </summary>
+    bool Requested { get; set; }
+
     // Task ResetAsync(CancellationToken cancellationToken = default);
   }
 }

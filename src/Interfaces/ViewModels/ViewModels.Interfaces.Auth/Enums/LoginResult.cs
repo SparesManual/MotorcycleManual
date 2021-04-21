@@ -14,6 +14,10 @@ namespace ViewModels.Interfaces.Auth.Enums
     /// </summary>
     InvalidCredentials,
     /// <summary>
+    /// The account requires email confirmation
+    /// </summary>
+    RequiresConfirmation,
+    /// <summary>
     /// Failed with server error
     /// </summary>
     ServerError

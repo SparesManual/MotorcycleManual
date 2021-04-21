@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Media.Interfaces;
+using MRI.Helpers;
 
 namespace MRI.Media
 {
@@ -18,15 +18,8 @@ namespace MRI.Media
       if (string.IsNullOrEmpty(email))
         return new ValueTask<string>(string.Empty);
 
-      using var md5 = MD5.Create();
-      var inputBytes = Encoding.ASCII.GetBytes(email);
-      var hashBytes = md5.ComputeHash(inputBytes);
-
-      var builder = new StringBuilder();
-      foreach (var b in hashBytes)
-        builder.Append(b.ToString("X2"));
-
-      return new ValueTask<string>($"https://www.gravatar.com/avatar/{builder.ToString().ToLower()}?s={256}");
+      var md5 = new MD5(Encoding.ASCII.GetBytes(email));
+      return new ValueTask<string>($"https://www.gravatar.com/avatar/{md5.HexDigest.ToLower()}?s={256}&d=mm&r=g");
     }
 
     /// <inheritdoc />

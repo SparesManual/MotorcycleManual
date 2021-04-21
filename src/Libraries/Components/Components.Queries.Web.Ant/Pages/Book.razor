@@ -1,14 +1,14 @@
-@page "/book/{itemId:int}"
+@page "/book/{itemId}"
 @inherits BaseItemComponent<IBookViewModel, IBook>
 
 <h2>@ViewModel?.Item?.Title</h2>
 
-<BookModels ItemId="ItemId"/>
+<BookModels ItemId="@ItemId"/>
 
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <BookSections @ref="m_bookSections" BookId="ItemId" CurrentSectionChanged="@SectionChanged"/>
+      <BookSections @ref="m_bookSections" BookId="@ItemId" CurrentSectionChanged="@SectionChanged"/>
     </div>
     <div class="col">
       <SectionParts @ref="m_sectionParts"/>

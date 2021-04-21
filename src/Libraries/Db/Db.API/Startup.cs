@@ -49,8 +49,8 @@ namespace Db.API
         .AddDbContext<IdentityContext>(options => options.UseSqlite(m_configuration.GetConnectionString("DefaultAuthConnection")))
         .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-      services.AddScoped<IAPIMail, EmailWebClient>();
-      services.AddDefaultIdentity<IdentityUser>()
+      services.AddScoped<IAPIMail, EmailClient>();
+      services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedEmail = true)
         .AddEntityFrameworkStores<IdentityContext>();
 
       services.AddCors(options =>

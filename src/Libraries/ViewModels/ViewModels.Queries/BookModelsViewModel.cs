@@ -16,19 +16,24 @@ namespace ViewModels.Queries
   public class BookModelsViewModel
     : BaseItemViewModel<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>>, IBookModelsViewModel
   {
-    /// <inheritdoc />
+    private readonly IAPIProvider m_provider;
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider instance</param>
     public BookModelsViewModel(IAPIProvider provider)
-      : base(provider)
     {
+      m_provider = provider;
     }
 
     /// <inheritdoc />
-    protected override async Task<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>> GetItem(int id, CancellationToken cancellationToken = default)
+    protected override async Task<IReadOnlyDictionary<string, IReadOnlyCollection<IModel>>> GetItem(string id, CancellationToken cancellationToken = default)
     {
       // Get the models
       var models = await m_provider
         // Query the models from a given book
-        .GetBookModelsAsync(id, cancellationToken)
+        .GetBookModelsAsync(IdToInt(id), cancellationToken)
         // Materialize the result
         .ToListAsync(cancellationToken)
         .ConfigureAwait(false);
