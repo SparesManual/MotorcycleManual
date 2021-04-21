@@ -14,7 +14,7 @@ namespace MRI.MVVM.WPF.Helpers
     private readonly Dictionary<string, Type> m_types;
 
     /// <inheritdoc />
-    public event EventHandler<string>? NavigationChanged;
+    public event EventHandler<INavigator.ViewData>? NavigationChanged;
 
     /// <summary>
     /// The currently displayed page
@@ -53,7 +53,33 @@ namespace MRI.MVVM.WPF.Helpers
       if (NavigationChanged is null)
         throw new EntryPointNotFoundException("The application is not configured correctly as there is no-one to send the request to");
 
-      NavigationChanged.Invoke(null, name);
+      NavigationChanged.Invoke(this, new INavigator.ViewData(name));
+      CurrentPage = name;
+    }
+
+    /// <inheritdoc />
+    public void NavigateTo(string name, params string[] arguments)
+    {
+      if (!m_types.ContainsKey(name))
+        return;
+
+      if (NavigationChanged is null)
+        throw new EntryPointNotFoundException("The application is not configured correctly as there is no-one to send the request to");
+
+      NavigationChanged.Invoke(this, new INavigator.ViewData(name, arguments));
+      CurrentPage = name;
+    }
+
+    /// <inheritdoc />
+    public void NavigateTo(string name, IReadOnlyDictionary<string, string> arguments)
+    {
+      if (!m_types.ContainsKey(name))
+        return;
+
+      if (NavigationChanged is null)
+        throw new EntryPointNotFoundException("The application is not configured correctly as there is no-one to send the request to");
+
+      NavigationChanged.Invoke(this, new INavigator.ViewData(name, arguments));
       CurrentPage = name;
     }
 

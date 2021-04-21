@@ -16,7 +16,7 @@ namespace Validators.Auth
     public ResetPasswordValidator()
     {
       RuleFor(x => x.Password).NotEmpty();
-      RuleFor(x => x.ConfirmPassword).NotEmpty().NotEqual(x => x.Password);
+      RuleFor(x => x.ConfirmPassword).NotEmpty().Equal(x => x.Password);
     }
   }
 }

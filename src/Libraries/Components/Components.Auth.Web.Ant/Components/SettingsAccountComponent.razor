@@ -1,0 +1,40 @@
+﻿@using System.Threading
+@* ReSharper disable once CheckNamespace *@
+@namespace Comp
+@inject INavigator m_navigator
+@inject IAPIAuth m_apiAuth
+@inject AuthenticationStateProvider m_authProvider
+
+<h3 style="color: #BC3531">Delete account</h3>
+
+<p>This operation is irreversable and will delete your account along with all of your data.</p>
+
+<Popconfirm Title="Are you sure you want to delete your account?"
+            OnConfirm="DeleteAccountAsync"
+            OkText="Yes"
+            CancelText="No">
+  <Button Danger>Delete your account</Button>
+</Popconfirm>
+
+@code {
+
+  private string m_userName = string.Empty;
+
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    var state = await m_authProvider.GetAuthenticationStateAsync().ConfigureAwait(false);
+    var user = state.User;
+
+    if (user?.Identity?.Name is not null)
+      m_userName = user.Identity.Name;
+  }
+
+  private async Task DeleteAccountAsync()
+  {
+    await m_apiAuth.LogoutUserAsync().ConfigureAwait(false);
+    await m_apiAuth.DeleteUserAsync(m_userName).ConfigureAwait(false);
+    m_navigator.NavigateTo("/");
+  }
+
+}

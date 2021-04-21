@@ -15,7 +15,7 @@ namespace MRI.MVVM.Web.Helpers.Managers
     {
       var data = (PaginationEventArgs) paging;
 
-      return data.PageIndex;
+      return data.Page;
     }
   }
 }

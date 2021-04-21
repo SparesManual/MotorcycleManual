@@ -5,8 +5,8 @@ option csharp_namespace = "Email.API";
 package mail;
 
 service Mailer {
-  rpc SendRegistrationConfirmation(EmailAndCode) returns (Boolean);
-  rpc SendPasswordRecovery(EmailAndCode) returns (Boolean);
+  rpc SendRegistrationConfirmation(IdAndCode) returns (Boolean);
+  rpc SendPasswordRecovery(IdAndCode) returns (Boolean);
 }
 
 message Boolean {
@@ -17,7 +17,8 @@ message Email {
   string email = 1;
 }
 
-message EmailAndCode {
+message IdAndCode {
   string email = 1;
-  string code = 2;
+  string userId = 2;
+  string code = 3;
 }

@@ -1,0 +1,30 @@
+ @* ReSharper disable once CheckNamespace *@
+ @namespace Comp
+ @inherits BaseItemComponent<IAvatarViewModel, string>
+ @implements Components.Auth.IAvatarView
+ 
+ @code {
+
+   /// <summary>
+   /// Avatar size
+   /// </summary>
+   [Parameter]
+   public int Size { get; set; } = 128;
+
+ }
+ 
+ @if (ViewModel is null || ViewModel.Loading)
+ {
+   <Avatar Size="@Size.ToString()" Icon="user" />
+ }
+ else
+ {
+   if (string.IsNullOrEmpty(ViewModel.Item))
+   {
+     <Avatar Size="@Size.ToString()" Icon="user" />
+   }
+   else
+   {
+     <Avatar Size="@Size.ToString()" Src="@ViewModel?.Item" />
+   }
+ }

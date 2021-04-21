@@ -1,108 +1,109 @@
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using Db.Interfaces;
-using Microsoft.AspNetCore.Components.Authorization;
-using MRI.MVVM.Interfaces;
-using States.General;
+// using System.Net.Http;
+// using System.Net.Http.Headers;
+// using System.Net.Http.Json;
+// using System.Text;
+// using System.Text.Json;
+// using System.Threading;
+// using System.Threading.Tasks;
+// using Db.Interfaces;
+// using Microsoft.AspNetCore.Components.Authorization;
+// using MRI.MVVM.Interfaces;
+// using States.General;
 
 // ReSharper disable StringLiteralTypo
 
+// ReSharper disable once EmptyNamespace
 namespace MRI.Auth
 {
-  /// <summary>
-  /// Provider of API method calls to the Identity database via REST
-  /// </summary>
-  public class APIRESTAuth
-    : IAPIAuth
-  {
-    #region Fields
-
-    private readonly HttpClient m_httpClient;
-    private readonly IStorage m_storage;
-    private readonly AuthenticationStateProvider m_stateProvider;
-
-    #endregion
-
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    /// <param name="httpClient">Injected http client instance</param>
-    /// <param name="storage">Injected storage manager</param>
-    /// <param name="stateProvider">Injected authentication state instance</param>
-    public APIRESTAuth(HttpClient httpClient, IStorage storage, AuthenticationStateProvider stateProvider)
-    {
-      m_httpClient = httpClient;
-      m_storage = storage;
-      m_stateProvider = stateProvider;
-    }
-
-    /// <inheritdoc />
-    // ReSharper disable once CA1816
-    public void Dispose()
-    {
-    }
-
-    /// <inheritdoc />
-    public async ValueTask<(bool, int)> LoginUserAsync(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default)
-    {
-      var data = JsonSerializer.Serialize(new Models.REST.Auth.LoginRequest
-      {
-        Email = email,
-        Password = password,
-        RememberMe = rememberMe
-      });
-
-      var response = await m_httpClient.PostAsync("auth/SignInUser", new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
-      var loginResult = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-      if (!response.IsSuccessStatusCode || loginResult is null)
-        return (false, 403);
-
-      await m_storage.SetItemAsync("authToken", loginResult).ConfigureAwait(false);
-      ((ApiAuthenticationStateProvider)m_stateProvider).MarkUserAsAuthenticated(email);
-      m_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult);
-
-      return (response.IsSuccessStatusCode, (int)response.StatusCode);
-    }
-
-    /// <inheritdoc />
-    public async ValueTask<bool> LogoutUserAsync(CancellationToken cancellationToken = default)
-    {
-      await m_storage.RemoveItemAsync("authToken").ConfigureAwait(false);
-      ((IAPIAuthenticationStateProvider)m_stateProvider).MarkUserAsLoggedOut();
-      m_httpClient.DefaultRequestHeaders.Authorization = null;
-
-      return true;
-    }
-
-    /// <inheritdoc />
-    public async ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default)
-    {
-      var data = JsonSerializer.Serialize(new Models.REST.Auth.RegistrationRequest()
-      {
-        Email = email,
-        Password = password
-      });
-
-      var response = await m_httpClient.PostAsync("auth/RegisterUser", new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
-
-      return response.IsSuccessStatusCode;
-    }
-
-    /// <inheritdoc />
-    public async ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default)
-    {
-      var response = await m_httpClient.PostAsync("auth/UserExists", new StringContent(email), cancellationToken).ConfigureAwait(false);
-      return response.IsSuccessStatusCode;
-    }
-
-    /// <inheritdoc />
-    public async ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default)
-      => await m_httpClient.GetFromJsonAsync<string>("auth/signedinemail", cancellationToken).ConfigureAwait(false) ?? string.Empty;
-  }
+  // /// <summary>
+  // /// Provider of API method calls to the Identity database via REST
+  // /// </summary>
+  // public class APIRESTAuth
+  //   : IAPIAuth
+  // {
+  //   #region Fields
+  //
+  //   private readonly HttpClient m_httpClient;
+  //   private readonly IStorage m_storage;
+  //   private readonly AuthenticationStateProvider m_stateProvider;
+  //
+  //   #endregion
+  //
+  //   /// <summary>
+  //   /// Default constructor
+  //   /// </summary>
+  //   /// <param name="httpClient">Injected http client instance</param>
+  //   /// <param name="storage">Injected storage manager</param>
+  //   /// <param name="stateProvider">Injected authentication state instance</param>
+  //   public APIRESTAuth(HttpClient httpClient, IStorage storage, AuthenticationStateProvider stateProvider)
+  //   {
+  //     m_httpClient = httpClient;
+  //     m_storage = storage;
+  //     m_stateProvider = stateProvider;
+  //   }
+  //
+  //   /// <inheritdoc />
+  //   // ReSharper disable once CA1816
+  //   public void Dispose()
+  //   {
+  //   }
+  //
+  //   /// <inheritdoc />
+  //   public async ValueTask<(bool, int)> LoginUserAsync(string email, string password, bool rememberMe = default, CancellationToken cancellationToken = default)
+  //   {
+  //     var data = JsonSerializer.Serialize(new Models.REST.Auth.LoginRequest
+  //     {
+  //       Email = email,
+  //       Password = password,
+  //       RememberMe = rememberMe
+  //     });
+  //
+  //     var response = await m_httpClient.PostAsync("auth/SignInUser", new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
+  //     var loginResult = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+  //
+  //     if (!response.IsSuccessStatusCode || loginResult is null)
+  //       return (false, 403);
+  //
+  //     await m_storage.SetItemAsync("authToken", loginResult).ConfigureAwait(false);
+  //     ((ApiAuthenticationStateProvider)m_stateProvider).MarkUserAsAuthenticated(email);
+  //     m_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult);
+  //
+  //     return (response.IsSuccessStatusCode, (int)response.StatusCode);
+  //   }
+  //
+  //   /// <inheritdoc />
+  //   public async ValueTask<bool> LogoutUserAsync(CancellationToken cancellationToken = default)
+  //   {
+  //     await m_storage.RemoveItemAsync("authToken").ConfigureAwait(false);
+  //     ((IAPIAuthenticationStateProvider)m_stateProvider).MarkUserAsLoggedOut();
+  //     m_httpClient.DefaultRequestHeaders.Authorization = null;
+  //
+  //     return true;
+  //   }
+  //
+  //   /// <inheritdoc />
+  //   public async ValueTask<bool> RegisterUserAsync(string email, string password, CancellationToken cancellationToken = default)
+  //   {
+  //     var data = JsonSerializer.Serialize(new Models.REST.Auth.RegistrationRequest()
+  //     {
+  //       Email = email,
+  //       Password = password
+  //     });
+  //
+  //     var response = await m_httpClient.PostAsync("auth/RegisterUser", new StringContent(data, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
+  //
+  //     return response.IsSuccessStatusCode;
+  //   }
+  //
+  //   /// <inheritdoc />
+  //   public async ValueTask<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default)
+  //   {
+  //     var response = await m_httpClient.PostAsync("auth/UserExists", new StringContent(email), cancellationToken).ConfigureAwait(false);
+  //     return response.IsSuccessStatusCode;
+  //   }
+  //
+  //   /// <inheritdoc />
+  //   public async ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default)
+  //     => await m_httpClient.GetFromJsonAsync<string>("auth/signedinemail", cancellationToken).ConfigureAwait(false) ?? string.Empty;
+  // }
 }

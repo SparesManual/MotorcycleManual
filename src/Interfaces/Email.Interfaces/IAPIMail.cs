@@ -14,16 +14,18 @@ namespace Email.Interfaces
     /// Sends an account registration <paramref name="code"/> to a given <paramref name="email"/>
     /// </summary>
     /// <param name="email">Recipients email</param>
+    /// <param name="userId">User identification</param>
     /// <param name="code">Confirmation code</param>
     /// <param name="cancellationToken">Cancellation</param>
-    ValueTask SendRegistrationConfirmationAsync(string email, string code, CancellationToken cancellationToken = default);
+    ValueTask SendRegistrationConfirmationAsync(string email, string userId, string code, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Sends an account recovery <paramref name="code"/> to a given <paramref name="email"/>
     /// </summary>
     /// <param name="email">Recipients email</param>
+    /// <param name="userId"></param>
     /// <param name="code">Confirmation code</param>
     /// <param name="cancellationToken">Cancellation</param>
-    ValueTask SendRecoveryCodeAsync(string email, string code, CancellationToken cancellationToken = default);
+    ValueTask SendRecoveryCodeAsync(string email, string userId, string code, CancellationToken cancellationToken = default);
   }
 }

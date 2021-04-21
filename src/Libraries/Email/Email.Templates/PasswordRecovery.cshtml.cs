@@ -8,6 +8,6 @@ namespace Email.Templates
     /// <summary>
     /// Password recovery URL code
     /// </summary>
-    public string Code { get; set; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
   }
 }

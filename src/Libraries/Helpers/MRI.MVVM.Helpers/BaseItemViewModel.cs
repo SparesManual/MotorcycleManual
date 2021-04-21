@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Db.Interfaces;
 using MRI.MVVM.Interfaces.ViewModels;
 
 namespace MRI.MVVM.Helpers
@@ -14,10 +13,6 @@ namespace MRI.MVVM.Helpers
   {
     #region Fields
 
-    /// <summary>
-    /// API provider instance
-    /// </summary>
-    protected readonly IAPIProvider m_provider;
     private bool m_loading;
 
     #endregion
@@ -36,7 +31,7 @@ namespace MRI.MVVM.Helpers
     }
 
     /// <inheritdoc />
-    public int Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 
     /// <inheritdoc />
     public T? Item { get; protected set; }
@@ -44,19 +39,12 @@ namespace MRI.MVVM.Helpers
     #endregion
 
     /// <summary>
-    /// Default constructor
-    /// </summary>
-    /// <param name="provider">Injected API provider</param>
-    protected BaseItemViewModel(IAPIProvider provider)
-      => m_provider = provider;
-
-    /// <summary>
     /// Queries the item
     /// </summary>
     /// <param name="id">Item id</param>
     /// <param name="cancellationToken">Process cancellation</param>
     /// <returns>Queried item</returns>
-    protected abstract Task<T> GetItem(int id, CancellationToken cancellationToken = default);
+    protected abstract Task<T> GetItem(string id, CancellationToken cancellationToken = default);
 
     /// <inheritdoc />
     public async Task LoadItem()
@@ -73,5 +61,15 @@ namespace MRI.MVVM.Helpers
       // Notify the view of data update
       OnPropertyChanged(nameof(Item));
     }
+
+    /// <summary>
+    /// Parses the Id to an integer
+    /// </summary>
+    /// <param name="id">Value to parse</param>
+    /// <returns>Parsed value</returns>
+    protected static int IdToInt(string? id)
+      => id is null || int.TryParse(id, out var intId)
+        ? -1
+        : intId;
   }
 }

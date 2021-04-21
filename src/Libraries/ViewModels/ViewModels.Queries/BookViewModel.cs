@@ -13,14 +13,22 @@ namespace ViewModels.Queries
   public class BookViewModel
     : BaseItemViewModel<IBook>, IBookViewModel
   {
-    /// <inheritdoc />
+    /// <summary>
+    /// API provider instance
+    /// </summary>
+    private readonly IAPIProvider m_provider;
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    /// <param name="provider">Injected API provider instance</param>
     public BookViewModel(IAPIProvider provider)
-      : base(provider)
     {
+      m_provider = provider;
     }
 
     /// <inheritdoc />
-    protected override async Task<IBook> GetItem(int id, CancellationToken cancellationToken = default)
-      => await m_provider.GetBookAsync(id, cancellationToken).ConfigureAwait(false);
+    protected override async Task<IBook> GetItem(string id, CancellationToken cancellationToken = default)
+      => await m_provider.GetBookAsync(IdToInt(id), cancellationToken).ConfigureAwait(false);
   }
 }

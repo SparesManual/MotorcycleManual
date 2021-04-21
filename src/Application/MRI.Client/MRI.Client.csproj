@@ -15,19 +15,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AntDesign" Version="0.6.0" />
+    <PackageReference Include="AntDesign" Version="0.8.0" />
     <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.3" PrivateAssets="all" />
-    <PackageReference Include="MudBlazor" Version="5.0.3" />
-    <PackageReference Include="Radzen.Blazor" Version="3.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.5" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\API\MRI.Auth\MRI.Auth.csproj" />
     <ProjectReference Include="..\..\API\MRI.Db\MRI.Db.csproj" />
+    <ProjectReference Include="..\..\API\MRI.Media\MRI.Media.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Web.Ant\Components.Auth.Web.Ant.csproj" />
+    <ProjectReference Include="..\..\Libraries\Components\Components.General.Web.Ant\Components.General.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Layout.Web.Ant\Components.Layout.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Queries.Web.Ant\Components.Queries.Web.Ant.csproj" />
     <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Web.Helpers\MRI.MVVM.Web.Helpers.csproj" />
@@ -39,6 +39,10 @@
 
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Index.razor" />
   </ItemGroup>
 
 </Project>

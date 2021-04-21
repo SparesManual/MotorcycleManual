@@ -22,7 +22,7 @@ namespace Dealer.Client
       m_navigator.NavigateTo("/login");
     }
 
-    private void OnNavigationChanged(object? sender, string name)
-      => MainContent.Content = m_navigator.ResolveView(name);
+    private void OnNavigationChanged(object? sender, INavigator.ViewData data)
+      => MainContent.Content = m_navigator.ResolveView(data.Name);
   }
 }

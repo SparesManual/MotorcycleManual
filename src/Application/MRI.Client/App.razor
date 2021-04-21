@@ -15,10 +15,6 @@
 
 <AntContainer />
 
-<MudThemeProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
-
 @code {
 
   /// <summary>
@@ -27,7 +23,8 @@
   private static readonly Assembly[] COMPONENT_ASSEMBLIES =
   {
     typeof(Components.Auth.Web._Imports).Assembly,
-    typeof(Components.Queries.Web._Imports).Assembly
+    typeof(Components.Queries.Web._Imports).Assembly,
+    typeof(Components.General.Web._Imports).Assembly
   };
 
 }

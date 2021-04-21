@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Media.API";
+
+package provide;
+
+service MediaProvider {
+  // Retrieves the image of a given section
+  rpc GetSectionImage(IntMessage) returns (StringMessage);
+}
+
+message StringMessage {
+  string content = 1;
+}
+
+message IntMessage {
+  int32 content = 1;
+}

@@ -18,6 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Helpers\MRI.Helpers\MRI.Helpers.csproj" />
     <ProjectReference Include="..\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
   </ItemGroup>
 

@@ -17,7 +17,7 @@ namespace MRI.MVVM.Interfaces.ViewModels
     /// <summary>
     /// Item id
     /// </summary>
-    int Id { get; set; }
+    string Id { get; set; }
 
     /// <summary>
     /// View model item
