@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Web;
 using Email.Interfaces;
 using Grpc.Core;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -287,32 +286,19 @@ namespace Db.API
     }
 
     /// <inheritdoc />
-    public override async Task<BooleanReply> Logout(Nothing request, ServerCallContext context)
+    public override async Task<BooleanReply> DeleteUser(SingleString request, ServerCallContext context)
     {
-      await context.GetHttpContext().SignOutAsync().ConfigureAwait(false);
-
-      return new BooleanReply
-      {
-        Reply = true,
-        Error = 0
-      };
-    }
-
-    /// <inheritdoc />
-    public override async Task<StringReply> LoggedInEmail(Nothing request, ServerCallContext context)
-    {
-      var http = context.GetHttpContext();
-
-      if (http.User.Identity?.IsAuthenticated is not true)
-        return new StringReply
+      var user = await m_userManager.FindByNameAsync(request.Content).ConfigureAwait(false);
+      if (user is null)
+        return new BooleanReply
         {
-          Reply = ""
+          Reply = false
         };
 
-      var user = await m_userManager.GetUserAsync(http.User).ConfigureAwait(false);
-      return new StringReply
+      var result = await m_userManager.DeleteAsync(user).ConfigureAwait(false);
+      return new BooleanReply
       {
-        Reply = user.Email
+        Reply = result?.Succeeded ?? false
       };
     }
   }

@@ -107,13 +107,6 @@ namespace Db.Interfaces
       => !await UserExistsAsync(email, cancellationToken).ConfigureAwait(false);
 
     /// <summary>
-    /// Get the currently signed in user email
-    /// </summary>
-    /// <param name="cancellationToken">Cancellation</param>
-    /// <returns>The signed in user email. Null if not signed in</returns>
-    ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default);
-
-    /// <summary>
     /// Gets users email based on their <paramref name="id"/>
     /// </summary>
     /// <param name="id">User id</param>
@@ -129,5 +122,13 @@ namespace Db.Interfaces
     /// <returns>User id. Empty if <paramref name="id"/> matches no user</returns>
     ValueTask<string> GetUserEmailAsync(Guid id, CancellationToken cancellationToken = default)
       => GetUserEmailAsync(id.ToString(), cancellationToken);
+
+    /// <summary>
+    /// Deletes a user with the given <paramref name="username"/>
+    /// </summary>
+    /// <param name="username">Name of the user</param>
+    /// <param name="cancellationToken">Cancellation</param>
+    /// <returns>True if deleted</returns>
+    ValueTask<bool> DeleteUserAsync(string username, CancellationToken cancellationToken = default);
   }
 }

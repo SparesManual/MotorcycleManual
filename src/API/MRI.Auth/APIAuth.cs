@@ -142,16 +142,16 @@ namespace MRI.Auth
     }
 
     /// <inheritdoc />
-    public async ValueTask<string> GetUserAsync(CancellationToken cancellationToken = default)
+    public async ValueTask<string> GetUserEmailAsync(string id, CancellationToken cancellationToken = default)
     {
-      var result = await m_client.LoggedInEmailAsync(new Nothing(), cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      var result = await m_client.GetUserEmailAsync(new SingleString {Content = id}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
     }
 
     /// <inheritdoc />
-    public async ValueTask<string> GetUserEmailAsync(string id, CancellationToken cancellationToken = default)
+    public async ValueTask<bool> DeleteUserAsync(string username, CancellationToken cancellationToken = default)
     {
-      var result = await m_client.GetUserEmailAsync(new SingleString {Content = id}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
+      var result = await m_client.DeleteUserAsync(new SingleString {Content = username}, cancellationToken: cancellationToken).ResponseAsync.ConfigureAwait(false);
       return result.Reply;
     }
   }
