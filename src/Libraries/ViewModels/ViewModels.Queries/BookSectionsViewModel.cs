@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
+using Microsoft.Extensions.Logging;
 using Models.Interfaces.Entities;
 using MRI.MVVM.Helpers;
 using ViewModels.Interfaces.Queries;
@@ -17,8 +18,8 @@ namespace ViewModels.Queries
     public int BookId { get; set; }
 
     /// <inheritdoc />
-    public BookSectionsViewModel(IAPIProvider provider)
-      : base(provider)
+    public BookSectionsViewModel(IAPIProvider provider, ILogger<BookSectionsViewModel> logger)
+      : base(provider, logger)
     {
     }
 

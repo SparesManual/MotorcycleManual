@@ -2,7 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
+using Microsoft.Extensions.Logging;
 using MRI.MVVM.Interfaces.ViewModels;
+// ReSharper disable TemplateIsNotCompileTimeConstantProblem
 
 namespace MRI.MVVM.Helpers
 {
@@ -19,6 +21,8 @@ namespace MRI.MVVM.Helpers
     /// API provider instance
     /// </summary>
     protected readonly IAPIProvider m_provider;
+
+    private readonly ILogger<BasePagedViewModel<T>> m_logger;
     private int m_pageIndex = 1;
     private int m_pageSize = 10;
     private int m_pageItems;
@@ -40,6 +44,7 @@ namespace MRI.MVVM.Helpers
       set
       {
         m_pageIndex = value;
+        m_logger.LogDebug($"Page Index changed to {value}");
         OnPropertyChanged();
       }
     }
@@ -53,6 +58,8 @@ namespace MRI.MVVM.Helpers
       set
       {
         m_pageSize = value;
+        m_logger.LogDebug($"Page size changed to {value}");
+        LoadItemsAsync().RunSynchronously();
         OnPropertyChanged();
       }
     }
@@ -66,6 +73,7 @@ namespace MRI.MVVM.Helpers
       set
       {
         m_pageItems = value;
+        m_logger.LogDebug($"Page items changed to {value}");
         OnPropertyChanged();
       }
     }
@@ -79,6 +87,7 @@ namespace MRI.MVVM.Helpers
       set
       {
         m_totalItems = value;
+        m_logger.LogDebug($"Page total items changed to {value}");
         OnPropertyChanged();
       }
     }
@@ -92,6 +101,7 @@ namespace MRI.MVVM.Helpers
       set
       {
         m_loading = value;
+        m_logger.LogDebug($"Loading changed to {value}");
         OnPropertyChanged();
       }
     }
@@ -105,6 +115,7 @@ namespace MRI.MVVM.Helpers
       set
       {
         m_search = value;
+        m_logger.LogDebug($"Search changed to {value}");
         OnPropertyChanged();
       }
     }
@@ -120,8 +131,12 @@ namespace MRI.MVVM.Helpers
     /// Default constructor
     /// </summary>
     /// <param name="provider">Injected API provider</param>
-    protected BasePagedViewModel(IAPIProvider provider)
-      => m_provider = provider;
+    /// <param name="logger">Logger instance</param>
+    protected BasePagedViewModel(IAPIProvider provider, ILogger<BasePagedViewModel<T>> logger)
+    {
+      m_provider = provider;
+      m_logger = logger;
+    }
 
     /// <summary>
     /// Queries the items
@@ -131,14 +146,14 @@ namespace MRI.MVVM.Helpers
     /// <param name="search">Optional search filter</param>
     /// <param name="cancellationToken">Process cancellation</param>
     /// <returns>Queried items</returns>
-    protected abstract ValueTask<IPaging<T>> GetItemsAsync(int pageSize, int pageIndex, string? search,
-      CancellationToken cancellationToken = default);
+    protected abstract ValueTask<IPaging<T>> GetItemsAsync(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Loads items
     /// </summary>
     public async Task LoadItemsAsync()
     {
+      m_logger.LogDebug("Loading items started...");
       // Remove old items
       //ClearItems();
 
@@ -163,6 +178,8 @@ namespace MRI.MVVM.Helpers
 
       // Notify the view of the data update
       OnPropertyChanged(nameof(Items));
+
+      m_logger.LogDebug("Loading items ended...");
     }
 
     /// <inheritdoc />

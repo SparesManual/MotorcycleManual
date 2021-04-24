@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
+using Microsoft.Extensions.Logging;
 using Models.Interfaces.Entities;
 using MRI.MVVM.Helpers;
 using ViewModels.Interfaces.Queries;
@@ -17,8 +18,8 @@ namespace ViewModels.Queries
     public int? SectionId { get; set; }
 
     /// <inheritdoc />
-    public SectionPartsViewModel(IAPIProvider provider)
-      : base(provider)
+    public SectionPartsViewModel(IAPIProvider provider, ILogger<SectionPartsViewModel> logger)
+      : base(provider, logger)
     {
     }
 

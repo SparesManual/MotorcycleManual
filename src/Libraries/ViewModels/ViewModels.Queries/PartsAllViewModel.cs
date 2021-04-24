@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Db.Interfaces;
+using Microsoft.Extensions.Logging;
 using Models.Interfaces.Entities;
 using MRI.MVVM.Helpers;
 using ViewModels.Interfaces.Queries;
@@ -18,8 +19,8 @@ namespace ViewModels.Queries
     public ObservableCollection<string> Autocomplete { get; } = new();
 
     /// <inheritdoc />
-    public PartsAllViewModel(IAPIProvider provider)
-      : base(provider)
+    public PartsAllViewModel(IAPIProvider provider, ILogger<PartsAllViewModel> logger)
+      : base(provider, logger)
     {
     }
 

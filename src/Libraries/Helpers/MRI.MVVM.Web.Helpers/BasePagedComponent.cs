@@ -31,7 +31,8 @@ namespace MRI.MVVM.Web.Helpers
     /// </summary>
     /// <param name="filter">Full-text filter string</param>
     /// <param name="paging">Paging data</param>
-    protected async Task LoadData(string filter, object paging)
+    /// <param name="sizeChanged">Determines whether the page size had changed</param>
+    protected async Task LoadData(string filter, object paging, bool sizeChanged = false)
     {
       // If the view model is null..
       if (ViewModel is null)
@@ -42,7 +43,8 @@ namespace MRI.MVVM.Web.Helpers
       var newPage = PagingManager.GetPageIndex(ViewModel, paging);
       // If the filter and page index are unchanged..
       if (ViewModel.Search.Equals(filter)
-          && ViewModel.PageIndex == newPage)
+          && ViewModel.PageIndex == newPage
+          && !sizeChanged)
         // Exit
         return;
 

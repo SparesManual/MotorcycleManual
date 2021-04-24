@@ -11,9 +11,10 @@
 <Table @ref="m_grid"
         Total="ViewModel!.TotalItems"
         Loading="ViewModel!.Loading"
-        OnPageIndexChange="LoadTableData"
+        OnPageIndexChange="x => LoadTableData(x)"
         DataSource="m_parts"
-        PageSize="ViewModel!.PageSize"
+        @bind-PageSize="@ViewModel!.PageSize"
+        OnPageSizeChange="x => LoadTableData(x, true)"
         OnRowClick="x => SelectPart(x.Data)"
         TItem="Part">
   <Column Field="@context.PartNumber" Title="Part number"/>
@@ -66,9 +67,9 @@
   {
   }
 
-  private async Task LoadTableData(PaginationEventArgs paging)
+  private async Task LoadTableData(PaginationEventArgs paging, bool sizeChanged = false)
   {
-    await LoadData(string.Empty, paging).ConfigureAwait(false);
+    await LoadData(string.Empty, paging, sizeChanged).ConfigureAwait(false);
 
     WrapData();
   }
