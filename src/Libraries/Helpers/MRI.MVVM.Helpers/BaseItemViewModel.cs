@@ -68,7 +68,7 @@ namespace MRI.MVVM.Helpers
     /// <param name="id">Value to parse</param>
     /// <returns>Parsed value</returns>
     protected static int IdToInt(string? id)
-      => id is null || int.TryParse(id, out var intId)
+      => id is null || !int.TryParse(id, out var intId)
         ? -1
         : intId;
   }

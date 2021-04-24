@@ -14,7 +14,7 @@ namespace ViewModels.Queries
     : BasePagedViewModel<IProperty>, IPartPropertiesViewModel
   {
     /// <inheritdoc />
-    public int PartId { get; set; }
+    public string PartId { get; set; } = string.Empty;
 
     /// <inheritdoc />
     public PartPropertiesViewModel(IAPIProvider provider)
@@ -23,8 +23,7 @@ namespace ViewModels.Queries
     }
 
     /// <inheritdoc />
-    protected override ValueTask<IPaging<IProperty>> GetItemsAsync(int pageSize, int pageIndex, string? search,
-      CancellationToken cancellationToken = default)
-      => m_provider.GetPartPropertiesAsync(PartId, pageSize, pageIndex, search, cancellationToken);
+    protected override ValueTask<IPaging<IProperty>> GetItemsAsync(int pageSize, int pageIndex, string? search, CancellationToken cancellationToken = default)
+      => m_provider.GetPartPropertiesAsync(IdToInt(PartId), pageSize, pageIndex, search, cancellationToken);
   }
 }

@@ -14,7 +14,7 @@
         OnPageIndexChange="LoadTableData"
         DataSource="m_parts"
         PageSize="ViewModel!.PageSize"
-        SelectedRowsChanged="x => SelectPart(x.FirstOrDefault())"
+        OnRowClick="x => SelectPart(x.Data)"
         TItem="Part">
   <Column Field="@context.PartNumber" Title="Part number"/>
   <Column Field="@context.MakersPartNumber" Title="Makers number"/>

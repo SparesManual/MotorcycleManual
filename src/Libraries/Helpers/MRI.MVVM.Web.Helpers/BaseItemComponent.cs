@@ -34,8 +34,11 @@ namespace MRI.MVVM.Web.Helpers
     {
       // If the view model is not null..
       if (ViewModel is not null)
+      {
         // Load the view items
         await ViewModel.LoadItem().ConfigureAwait(false);
+        StateHasChanged();
+      }
     }
   }
 }

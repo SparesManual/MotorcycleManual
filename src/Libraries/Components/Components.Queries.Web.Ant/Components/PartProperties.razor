@@ -2,10 +2,50 @@
 @namespace Comp
 @inherits BasePagedComponent<IPartPropertiesViewModel, IProperty>
 
+<Table @ref="m_grid"
+       Total="ViewModel!.TotalItems"
+       Loading="ViewModel!.Loading"
+       OnPageIndexChange="LoadTableData"
+       DataSource="m_properties"
+       PageSize="ViewModel!.PageSize"
+       TItem="Property">
+  <Column Field="@context.PropertyName" Title="Name"/>
+  <Column Field="@context.PropertyValue" Title="Value"/>
+</Table>
+
 @code {
 #nullable enable
 
-  private int m_partId;
+  private IReadOnlyCollection<Property> m_properties = Array.Empty<Property>();
+  private Table<Property>? m_grid;
+
+  public class Property
+    : IProperty
+  {
+    /// <inheritdoc />
+    public int PropertyTypeId { get; }
+
+    /// <inheritdoc />
+    public string PropertyName { get; }
+
+    /// <inheritdoc />
+    public string PropertyValue { get; }
+
+    /// <inheritdoc />
+    public string Type { get; }
+
+    /// <inheritdoc />
+    public string Unit { get; }
+
+    public Property(IProperty entity)
+    {
+      PropertyTypeId = entity.PropertyTypeId;
+      PropertyName = entity.PropertyName;
+      PropertyValue = entity.PropertyValue + (string.IsNullOrEmpty(entity.Unit) ? string.Empty : entity.Unit);
+      Unit = entity.Unit;
+      Type = entity.Type;
+    }
+  }
 
   /// <summary>
   /// Parent part id
@@ -13,22 +53,33 @@
   [Parameter]
   public string PartId
   {
-    get => m_partId.ToString();
-    set
-    {
-      if (!int.TryParse(value, out var id))
-        return;
+    get => ViewModel!.PartId;
+    set => ViewModel!.PartId = value;
+  }
 
-      m_partId = id;
-      if (ViewModel != null)
-        ViewModel.PartId = id;
-    }
+  /// <inheritdoc />
+  protected override async Task OnInitializedAsync()
+  {
+    await base.OnInitializedAsync().ConfigureAwait(false);
+
+    WrapData();
+  }
+
+  private async Task LoadTableData(PaginationEventArgs paging)
+  {
+    await LoadData(string.Empty, paging).ConfigureAwait(false);
+
+    WrapData();
+  }
+
+  private void WrapData()
+  {
+    if (ViewModel is not null)
+      m_properties = ViewModel.Items.Select(property => new Property(property)).ToReadOnlyCollection();
   }
 
   /// <inheritdoc />
   protected override void GoToPage(int page)
   {
-
   }
-
 }

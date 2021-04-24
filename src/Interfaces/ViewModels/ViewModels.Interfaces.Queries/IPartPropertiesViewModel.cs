@@ -12,6 +12,6 @@ namespace ViewModels.Interfaces.Queries
     /// <summary>
     /// Parent part id
     /// </summary>
-    public int PartId { get; set; }
+    string PartId { get; set; }
   }
 }

@@ -173,5 +173,15 @@ namespace MRI.MVVM.Helpers
       // Notify the view of the data update
       OnPropertyChanged(nameof(Items));
     }
+
+    /// <summary>
+    /// Parses the Id to an integer
+    /// </summary>
+    /// <param name="id">Value to parse</param>
+    /// <returns>Parsed value</returns>
+    protected static int IdToInt(string? id)
+      => id is null || !int.TryParse(id, out var intId)
+        ? -1
+        : intId;
   }
 }
