@@ -33,7 +33,7 @@ namespace MRI.Dealer
       builder.RegisterInstance(httpClient).SingleInstance();
       builder.RegisterType<ApiAuthenticationStateProvider>().As<AuthenticationStateProvider>().SingleInstance();
       builder.RegisterType<APIAuth>().As<IAPIAuth>();
-      builder.RegisterType<AVALStorage>().As<IStorage>();
+      builder.RegisterType<AvaloniaStorage>().As<IStorage>();
 
       builder.RegisterType<LoginView>().As<ILoginView>();
       //builder.RegisterType<ForgotPasswordPage>().As<IForgotPasswordView>();
