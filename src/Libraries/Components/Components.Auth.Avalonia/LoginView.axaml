@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Components.Auth.Avalonia.LoginView">
+  <Grid Margin="15" MaxWidth="350" VerticalAlignment="Center">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <TextBox Grid.Row="0" Text="{Binding Email}" Watermark="Email" />
+    <TextBox Grid.Row="1" Text="{Binding Password}" PasswordChar="*"  Watermark="Password" Margin="0, 15, 0, 0"/>
+    <DockPanel Grid.Row="2" Margin="0 15 0 0">
+      <CheckBox DockPanel.Dock="Left" IsChecked="{Binding RememberMe, FallbackValue=false}">Remember me</CheckBox>
+      <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Text="Forgot password">
+      </TextBlock>
+    </DockPanel>
+    <Button Grid.Row="3" Margin="0 15 0 0" Command="{Binding SubmitCommand}">Login</Button>
+  </Grid>
+</UserControl>
