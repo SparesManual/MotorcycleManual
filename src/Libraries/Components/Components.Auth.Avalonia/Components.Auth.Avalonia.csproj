@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\Components\Components.Auth\Components.Auth.csproj" />
+    <ProjectReference Include="..\..\Helpers\MRI.MVVM.Avalonia.Helpers\MRI.MVVM.Avalonia.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

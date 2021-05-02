@@ -24,6 +24,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.2" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.2" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
   
   <ItemGroup>
@@ -31,7 +32,23 @@
     <ProjectReference Include="..\..\API\MRI.Media\MRI.Media.csproj" />
     <ProjectReference Include="..\..\Interfaces\Components\Components.Auth\Components.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\Components\Components.Auth.Avalonia\Components.Auth.Avalonia.csproj" />
+    <ProjectReference Include="..\..\Libraries\Helpers\MRI.MVVM.Avalonia.Helpers\MRI.MVVM.Avalonia.Helpers.csproj" />
     <ProjectReference Include="..\..\Libraries\Validators\Validators.Auth\Validators.Auth.csproj" />
     <ProjectReference Include="..\..\Libraries\ViewModels\ViewModels.Auth\ViewModels.Auth.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

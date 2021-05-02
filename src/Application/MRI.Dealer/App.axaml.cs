@@ -10,6 +10,7 @@ using Db.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using MRI.Auth;
 using MRI.Dealer.Views;
+using MRI.MVVM.Avalonia.Helpers;
 using MRI.MVVM.Interfaces;
 using States.General;
 using Validators.Auth;

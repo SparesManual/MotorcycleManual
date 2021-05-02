@@ -1,38 +1,31 @@
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Configuration;
 using System.Threading.Tasks;
 using Db.Interfaces;
+using MRI.Dealer.Properties;
 
 namespace MRI.Dealer
 {
-  [DataContract]
   public class AvaloniaStorage
     : IStorage
   {
-    [DataMember]
-    public ConcurrentDictionary<string, object> Storage { get; set; } = new ConcurrentDictionary<string, object>();
-
     /// <inheritdoc />
     public ValueTask SetItemAsync(string key, object value)
     {
-      Storage.AddOrUpdate(key, _ => value, (_, __) => value);
+      Settings.Default.Properties.Add(new SettingsProperty(key) { PropertyType = value.GetType(), DefaultValue = value, Name = key});
+      Settings.Default.Save();
 
       return new ValueTask();
     }
 
     /// <inheritdoc />
     public ValueTask<T> GetItemAsync<T>(string key)
-    {
-      Storage.TryGetValue(key, out var val);
-
-      return new ValueTask<T>((T)val!);
-    }
+      => new((T)Settings.Default.Properties[key].DefaultValue);
 
     /// <inheritdoc />
     public ValueTask RemoveItemAsync(string key)
     {
-      Storage.TryRemove(key, out _);
+      Settings.Default.Properties.Remove(key);
+      Settings.Default.Save();
 
       return new ValueTask();
     }

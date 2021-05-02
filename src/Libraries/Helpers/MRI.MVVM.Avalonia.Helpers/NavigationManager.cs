@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using MRI.MVVM.Interfaces;
 
-namespace MRI.Dealer
+namespace MRI.MVVM.Avalonia.Helpers
 {
   /// <summary>
   /// Helper class for managing transitions between views

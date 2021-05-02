@@ -3,7 +3,7 @@ using Autofac;
 using MRI.MVVM.Interfaces.ViewModels;
 using MRI.MVVM.Interfaces.Views;
 
-namespace MRI.Dealer
+namespace MRI.MVVM.Avalonia.Helpers
 {
   /// <summary>
   /// Helper class for resolving types

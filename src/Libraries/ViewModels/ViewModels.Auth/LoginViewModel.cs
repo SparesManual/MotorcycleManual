@@ -1,8 +1,10 @@
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Db.Interfaces;
 using MRI.MVVM.Helpers;
 using MRI.MVVM.Interfaces;
+using ReactiveUI;
 using ViewModels.Interfaces.Auth.Enums;
 using ViewModels.Interfaces.Auth.Validators;
 using ViewModels.Interfaces.Auth.ViewModels;
@@ -89,12 +91,10 @@ namespace ViewModels.Auth
     #region Commands
 
     /// <inheritdoc />
-    public ICommand SubmitCommand
-      => new RelayCommand(async () => await Submit().ConfigureAwait(false));
+    public ICommand SubmitCommand { get; }
 
     /// <inheritdoc />
-    public ICommand ForgotPasswordCommand
-      => new RelayCommand(() => m_navigator.NavigateTo("/forgotPassword"));
+    public ICommand ForgotPasswordCommand { get; }
 
     #endregion
 
@@ -104,14 +104,16 @@ namespace ViewModels.Auth
     {
       m_navigator = navigator;
       m_authProvider = authProvider;
+      SubmitCommand = ReactiveCommand.CreateFromTask(Submit);
+      ForgotPasswordCommand = ReactiveCommand.Create(() => m_navigator.NavigateTo("/forgotPassword"));
 
       ClearErrors();
     }
 
     /// <inheritdoc />
-    public async Task<LoginResult> LoginUser()
+    public async Task<LoginResult> LoginUser(CancellationToken cancellation)
     {
-      var result = await m_authProvider.LoginUserAsync(Email, Password).ConfigureAwait(false);
+      var result = await m_authProvider.LoginUserAsync(Email, Password, cancellationToken: cancellation).ConfigureAwait(false);
       return result switch
       {
         (false, 404) => LoginResult.InvalidCredentials,
@@ -121,9 +123,9 @@ namespace ViewModels.Auth
       };
     }
 
-    private async Task Submit()
+    private async Task Submit(CancellationToken cancellation)
     {
-      var result = await LoginUser().ConfigureAwait(false);
+      var result = await LoginUser(cancellation).ConfigureAwait(false);
       switch (result)
       {
         case LoginResult.Success:

@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MRI.MVVM.Interfaces.ViewModels;
@@ -57,7 +58,8 @@ namespace ViewModels.Interfaces.Auth.ViewModels
     /// <summary>
     /// Attempts to login the user
     /// </summary>
+    /// <param name="cancellation"></param>
     /// <returns>True if logged in successfully</returns>
-    Task<LoginResult> LoginUser();
+    Task<LoginResult> LoginUser(CancellationToken cancellation);
   }
 }

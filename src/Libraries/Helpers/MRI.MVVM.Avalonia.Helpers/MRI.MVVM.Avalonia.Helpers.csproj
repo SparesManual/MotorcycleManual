@@ -1,21 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <UseWPF>true</UseWPF>
-    <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
-    <Authors>Denis Akopyan</Authors>
-    <Product>MRI</Product>
-    <NeutralLanguage>en</NeutralLanguage>
-    <RepositoryUrl>https://github.com/DicksHalfwayInnTeam/MotorcycleManual</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>../../../../bin/Debug/Libraries/Helpers</OutputPath>
-    <DocumentationFile>../../../../bin/Debug/Libraries/Helpers/MRI.MVVM.WPF.Helpers.xml</DocumentationFile>
+    <DocumentationFile>../../../../bin/Debug/Libraries/Helpers/MRI.MVVM.Avalonia.Helpers.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

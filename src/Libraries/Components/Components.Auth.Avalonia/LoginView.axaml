@@ -16,8 +16,11 @@
     <TextBox Grid.Row="1" Text="{Binding Password}" PasswordChar="*"  Watermark="Password" Margin="0, 15, 0, 0"/>
     <DockPanel Grid.Row="2" Margin="0 15 0 0">
       <CheckBox DockPanel.Dock="Left" IsChecked="{Binding RememberMe, FallbackValue=false}">Remember me</CheckBox>
-      <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Text="Forgot password">
-      </TextBlock>
+      <Button VerticalAlignment="Center"
+              HorizontalAlignment="Right"
+              DockPanel.Dock="Right"
+              Content="Forgot password"
+              Command="{Binding ForgotPasswordCommand}"/>
     </DockPanel>
     <Button Grid.Row="3" Margin="0 15 0 0" Command="{Binding SubmitCommand}">Login</Button>
   </Grid>

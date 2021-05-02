@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Markup.Xaml;
+using MRI.MVVM.Avalonia.Helpers;
 using MRI.MVVM.Interfaces;
 
 namespace MRI.Dealer.Views
@@ -10,7 +11,7 @@ namespace MRI.Dealer.Views
     : Window
   {
     private readonly NavigationManager m_navigator;
-    private ContentPresenter m_mainContent;
+    private ContentPresenter? m_mainContent;
 
     public MainWindow()
     {
@@ -26,7 +27,7 @@ namespace MRI.Dealer.Views
 
     private void OnNavigationChanged(object? sender, INavigator.ViewData data)
     {
-      m_mainContent.Content = m_navigator.ResolveView(data.Name);
+      m_mainContent!.Content = m_navigator.ResolveView(data.Name);
     }
 
     private void InitializeComponent()
