@@ -1,6 +1,7 @@
-![build](https://github.com/DicksHalfwayInnTeam/MotorcycleManual/workflows/.NET/badge.svg)
+![build](https://github.com/DicksHalfwayInnTeam/MotorcycleManual/workflows/.NET/badge.svg) [![CodeFactor](https://www.codefactor.io/repository/github/hailstorm75/sparesmanual/badge)](https://www.codefactor.io/repository/github/hailstorm75/sparesmanual)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/hailstorm75/SparesManual)
 
-# MotorcycleManual
+# Spares Manual
 Interactive software that allows a user to search and identify motorcycle parts from a Motorcycle Parts Manual
 
 ## Setting everything up
