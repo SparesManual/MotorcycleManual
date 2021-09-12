@@ -19,7 +19,7 @@ namespace Validators.Auth
       RuleFor(x => x.Email)
         .NotEmpty()
         .EmailAddress()
-        .MustAsync((x, y, z) => authProvider.UserDoesNotExistAsync(x.Email, z).AsTask())
+        .MustAsync((x, _, z) => authProvider.UserDoesNotExistAsync(x.Email, z).AsTask())
         .WithMessage("A user with this email exists");
       RuleFor(x => x.Password).NotEmpty();
       RuleFor(x => x.ConfirmPassword).NotEmpty().Equal(x => x.Password);

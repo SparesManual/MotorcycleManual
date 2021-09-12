@@ -76,23 +76,23 @@ namespace States.General
       var jsonBytes = ParseBase64WithoutPadding(payload);
       var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
 
-      keyValuePairs.TryGetValue(ClaimTypes.Role, out object roles);
+      keyValuePairs!.TryGetValue(ClaimTypes.Role, out var roles);
 
-      if (roles != null)
+      if (roles is not null)
       {
-        if (roles.ToString().Trim().StartsWith("[", StringComparison.InvariantCultureIgnoreCase))
+        if (roles.ToString()!.Trim().StartsWith("[", StringComparison.InvariantCultureIgnoreCase))
         {
-          var parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString());
+          var parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString()!);
 
-          claims.AddRange(parsedRoles.Select(parsedRole => new Claim(ClaimTypes.Role, parsedRole)));
+          claims.AddRange(parsedRoles!.Select(parsedRole => new Claim(ClaimTypes.Role, parsedRole)));
         }
         else
-          claims.Add(new Claim(ClaimTypes.Role, roles.ToString()));
+          claims.Add(new Claim(ClaimTypes.Role, roles.ToString()!));
 
         keyValuePairs.Remove(ClaimTypes.Role);
       }
 
-      claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString())));
+      claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString()!)));
 
       return claims;
     }

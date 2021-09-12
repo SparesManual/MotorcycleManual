@@ -52,14 +52,14 @@ namespace MRI.MVVM.Helpers
     /// </summary>
     /// <param name="parameter">This parameter will always be ignored.</param>
     /// <returns>true if this command can be executed; otherwise, false.</returns>
-    public bool CanExecute(object parameter)
+    public bool CanExecute(object? parameter)
       => m_canExecute();
 
     /// <summary>
     /// Defines the method to be called when the command is invoked.
     /// </summary>
     /// <param name="parameter">This parameter will always be ignored.</param>
-    public virtual void Execute(object parameter)
+    public virtual void Execute(object? parameter)
     {
       if (CanExecute(parameter))
         m_execute.Invoke();
@@ -118,15 +118,15 @@ namespace MRI.MVVM.Helpers
     /// </summary>
     /// <param name="parameter">This parameter will always be ignored.</param>
     /// <returns>true if this command can be executed; otherwise, false.</returns>
-    public bool CanExecute(object parameter)
+    public bool CanExecute(object? parameter)
       => m_canExecute();
 
     /// <summary>
     /// Defines the method to be called when the command is invoked.
     /// </summary>
-    public virtual void Execute(object parameter)
+    public virtual void Execute(object? parameter)
     {
-      if (CanExecute(parameter))
+      if (CanExecute(parameter) && parameter is not null)
         m_execute.Invoke((T)parameter);
     }
 

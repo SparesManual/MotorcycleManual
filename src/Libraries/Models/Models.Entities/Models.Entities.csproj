@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>9</LangVersion>
     <Nullable>disable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
@@ -19,10 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Interfaces\Models\Models.Interfaces.Entities\Models.Interfaces.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="IsExternalInit.System.Runtime.CompilerServices" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

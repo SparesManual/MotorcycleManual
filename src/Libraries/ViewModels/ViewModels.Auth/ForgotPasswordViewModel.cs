@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Db.Interfaces;
 using MRI.MVVM.Helpers;
@@ -42,11 +43,7 @@ namespace ViewModels.Auth
 
     /// <inheritdoc />
     public ICommand SubmitCommand
-      => new RelayCommand(async () =>
-      {
-        await m_apiAuth.RequestPasswordResetAsync(Email).ConfigureAwait(false);
-        Requested = true;
-      }, () => !Requested);
+      => new RelayCommand(async () => await RequestPasswordResetAsync(), () => !Requested);
 
     /// <inheritdoc />
     public ICommand BackToLoginCommand
@@ -58,6 +55,12 @@ namespace ViewModels.Auth
     {
       m_navigator = navigator;
       m_apiAuth = apiAuth;
+    }
+
+    private async ValueTask RequestPasswordResetAsync()
+    {
+      await m_apiAuth.RequestPasswordResetAsync(Email).ConfigureAwait(false);
+      Requested = true;
     }
   }
 }

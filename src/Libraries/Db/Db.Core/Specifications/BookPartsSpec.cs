@@ -31,8 +31,7 @@ namespace Db.Core.Specifications
           .Select(section => section.SectionParts)
           .SelectMany(mapList => mapList.Select(sp => sp))
           .Include(sp => sp.Part)
-          .Select(sp => sp.Part!)
-          .Where(part => part != null)
+          .Select(sp => sp.Part)
       );
 
       SetOrderBy(part => part.PartNumber);

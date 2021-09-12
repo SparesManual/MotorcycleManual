@@ -18,7 +18,7 @@ namespace Db.Core.Specifications
     public PartPropertiesSpec(int id, string? search, int size, int index)
       : base(property => property.PartId.Equals(id) && (string.IsNullOrEmpty(search) || property.PropertyName.Contains(search)))
     {
-      AddInclude(property => property.PropertyType!);
+      AddInclude(property => property.PropertyType);
       SetOrderBy(property => property.PropertyName);
       ApplyPaging(size, index);
     }

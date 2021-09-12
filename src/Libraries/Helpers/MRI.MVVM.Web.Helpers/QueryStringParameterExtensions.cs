@@ -87,7 +87,7 @@ namespace MRI.MVVM.Web.Helpers
     }
 
     private static object ConvertValue(StringValues value, Type type)
-      => Convert.ChangeType(value[0], type, CultureInfo.InvariantCulture)!;
+      => Convert.ChangeType(value[0], type, CultureInfo.InvariantCulture);
 
     private static string? ConvertToString(object value)
       => Convert.ToString(value, CultureInfo.InvariantCulture);

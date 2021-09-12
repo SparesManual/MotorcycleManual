@@ -27,7 +27,7 @@ namespace Db.Core.Specifications
       SetExtractor(sections =>
         sections
           .Where(sp => sp.SectionId == id)
-          .Include(sp => sp.Part!)
+          .Include(sp => sp.Part)
           .Include(sectionPart => sectionPart.ChildSections)
           .ThenInclude(x => x.Child)
           .Include(sectionPart => sectionPart.ChildSections)

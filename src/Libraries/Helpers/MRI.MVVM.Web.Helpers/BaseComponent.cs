@@ -74,7 +74,7 @@ namespace MRI.MVVM.Web.Helpers
         property.PropertyChanged += ViewModelOnPropertyChanged;
     }
 
-    private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void ViewModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
       => StateHasChanged();
 
     /// <inheritdoc />

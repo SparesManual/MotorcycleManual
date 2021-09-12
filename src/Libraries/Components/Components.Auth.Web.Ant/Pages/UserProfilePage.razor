@@ -43,41 +43,39 @@
         </div>
         <div class="row mt-3">
           <Tabs DefaultActiveKey="1" TabPosition="@TabPosition.Left">
-            <ChildContent>
-              <TabPane Key="1">
-                <Tab>
-                  <span>
-                    <Icon Type="user"/>
+            <TabPane Key="1">
+              <TabTemplate>
+                <span>
+                  <Icon Type="user"/>
                     General
-                  </span>
-                </Tab>
-                <ChildContent>
-                  <SettingsGeneralComponent></SettingsGeneralComponent>
-                </ChildContent>
-              </TabPane>
-              @* <TabPane Key="2"> *@
-              @*   <Tab> *@
-              @*     <span> *@
-              @*       <Icon Type="bell"/> *@
-              @*       Notifications *@
-              @*     </span> *@
-              @*   </Tab> *@
-              @*   <ChildContent> *@
-              @*     <SettingsNotificationsComponent></SettingsNotificationsComponent> *@
-              @*   </ChildContent> *@
-              @* </TabPane> *@
-              <TabPane Key="2">
-                <Tab>
-                  <span>
-                    <Icon Type="key"/>
-                    Account
-                  </span>
-                </Tab>
-                <ChildContent>
-                  <SettingsAccountComponent></SettingsAccountComponent>
-                </ChildContent>
-              </TabPane>
-            </ChildContent>
+                </span>
+              </TabTemplate>
+              <ChildContent>
+                <SettingsGeneralComponent></SettingsGeneralComponent>
+              </ChildContent>
+            </TabPane>
+            @* <TabPane Key="2"> *@
+            @*   <Tab> *@
+            @*     <span> *@
+            @*       <Icon Type="bell"/> *@
+            @*       Notifications *@
+            @*     </span> *@
+            @*   </Tab> *@
+            @*   <ChildContent> *@
+            @*     <SettingsNotificationsComponent></SettingsNotificationsComponent> *@
+            @*   </ChildContent> *@
+            @* </TabPane> *@
+            <TabPane Key="2">
+              <TabTemplate>
+                <span>
+                  <Icon Type="key"/>
+                  Account
+                </span>
+              </TabTemplate>
+              <ChildContent>
+                <SettingsAccountComponent></SettingsAccountComponent>
+              </ChildContent>
+            </TabPane>
           </Tabs>
         </div>
       </div>

@@ -14,7 +14,6 @@ namespace Db.Core.Entities
     /// <summary>
     /// Foreign key reference to the <see cref="Entities.Book"/> entity covering this model
     /// </summary>
-    [AllowNull]
     public int? BookId { get; set; } = null;
 
     /// <summary>
